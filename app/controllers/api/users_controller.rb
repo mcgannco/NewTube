@@ -9,19 +9,19 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      render "api/users/show"
+      render :show
     else
       render json: @user.errors.full_messages, status: 422
     end
   end
 
   def update
-  unless params[:id].to_i == current_user.id
+    unless params[:id].to_i == current_user.id
     render json: ['access denied'], status: 401
     return nil
   end
 
-  @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
 
     if @user.update(user_params)
       render :show
