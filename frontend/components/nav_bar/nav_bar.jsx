@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Search from '../search/search';
 const NavBar = ({currentUser, logout}) => {
 
   const loggedOut = () => {
     return(
-      <header class="main-nav">
-      	<nav class="left-nav">
+      <header className="main-nav">
+      	<nav className="left-nav">
       		<ul>
       			<li id="sections-sidebar-btn">
-      				<i class="fa fa-bars"></i>
+      				<i className="fa fa-bars"></i>
       			</li>
       			<li id="search-modal-btn">
       				<img id="nav-bar-logo" src={window.logo}></img>
@@ -17,7 +17,12 @@ const NavBar = ({currentUser, logout}) => {
       			</li>
       		</ul>
       	</nav>
-      	<nav class="right-nav">
+
+        <nav className="nav-search">
+          <Search />
+        </nav>
+
+      	<nav className="right-nav">
       		<ul>
       			<li>
       				<button>Subscribe Now</button>
@@ -27,7 +32,7 @@ const NavBar = ({currentUser, logout}) => {
               <Link to='/signup'>Signup</Link>
       			</li>
       			<li id="gear-dropdown-btn">
-      				<i class="fas fa-cog"></i>
+      				<i className="fas fa-cog"></i>
       			</li>
       		</ul>
       	</nav>
@@ -37,20 +42,20 @@ const NavBar = ({currentUser, logout}) => {
 
   const loggedIn = () => {
     return(
-      <header class="main-nav">
-      	<nav class="left-nav">
+      <header className="main-nav">
+      	<nav className="left-nav">
       		<ul>
       			<li id="sections-sidebar-btn">
-      				<i class="fa fa-bars"></i>
+      				<i className="fa fa-bars"></i>
       				<span>sections</span>
       			</li>
       			<li id="search-modal-btn">
-      				<i class="fa fa-search"></i>
+      				<i className="fa fa-search"></i>
       				<span>search</span>
       			</li>
       		</ul>
       	</nav>
-      	<nav class="right-nav">
+      	<nav className="right-nav">
       		<ul>
       			<li>
       				<button>Subscribe Now</button>
@@ -59,7 +64,7 @@ const NavBar = ({currentUser, logout}) => {
               <a href="#"onClick={logout}>Logout</a>
       			</li>
       			<li id="gear-dropdown-btn">
-      				<i class="fas fa-cog"></i>
+      				<i className="fas fa-cog"></i>
       			</li>
       		</ul>
       	</nav>
