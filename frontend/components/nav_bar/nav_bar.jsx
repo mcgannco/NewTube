@@ -19,7 +19,7 @@ const NavBar = ({currentUser, logout}) => {
       			</li>
       			<li id="search-modal-btn">
       				<img id="nav-bar-logo" src={window.logo}></img>
-      				<span>NewTube</span>
+      				<p>NewTube</p>
       			</li>
       		</ul>
       	</nav>

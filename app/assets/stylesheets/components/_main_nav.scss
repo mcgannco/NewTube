@@ -1,20 +1,29 @@
 .main-nav {
   display: flex;
-  padding: 10px 0px;
+  padding: 15px 0px;
   justify-content: space-between;
   border-bottom: 2px solid #f8f8f8;
+}
+
+.main-nav span {
+  font-size: 18px;
+  color: #989898;
 }
 
 .left-nav > ul,
 .right-nav > ul {
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+.left-nav {
+  width: 15%;
 }
 
 .left-nav > ul > li {
 	margin-left: 20px;
 	cursor: pointer;
-	text-transform: uppercase;
 	font-family: sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -34,6 +43,12 @@
 .right-nav {
   display: flex;
   align-items: center;
+  width: 25%;
+}
+
+.right-nav ul {
+  display: flex;
+  justify-content: flex-end;
 }
 .right-nav > ul > li {
 	margin-right: 20px;
@@ -45,7 +60,7 @@
   border: 1px solid #ccc;
   display: flex;
   align-items: center;
-  width: 40%;
+  width: 45%;
   border-radius: 3px;
 }
 
@@ -67,7 +82,7 @@
 }
 
 .search-container input:focus {
-  border: 0.5px solid #0000CD;
+  border: 0.3px solid #0000CD;
 }
 
 .search-container input::placeholder {
