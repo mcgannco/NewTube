@@ -13,7 +13,6 @@ import {
 
 const App = () => (
   <div>
-    <h1>New Tube App Component</h1>
     <NavBarContainer />
     <AuthRoute exact path="/login" component={LoginFormContainer} />
     <AuthRoute exact path="/signup" component={SignupFormContainer} />
