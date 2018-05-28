@@ -5,8 +5,7 @@ const NavBar = ({currentUser, logout}) => {
   let loggedin;
   if (!currentUser) {
     loggedin = <li>
-      <Link to='/login'>Login</Link>
-      <Link to='/signup'>Signup</Link>
+      <Link to='/login'>Sign In</Link>
     </li>} else {
       loggedin = <li onClick={logout}>LogOut</li>
     }
@@ -20,6 +19,7 @@ const NavBar = ({currentUser, logout}) => {
       			<li id="search-modal-btn">
       				<Link to="/"><img id="nav-bar-logo" src={window.logo}></img></Link>
       				<Link to="/"><p>NewTube</p></Link>
+              <nav className="hometext">NewTube Home</nav>
       			</li>
       		</ul>
       	</nav>
