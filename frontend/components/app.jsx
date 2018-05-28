@@ -2,6 +2,7 @@ import React from 'react';
 import NavBarContainer from './nav_bar/nav_bar_container';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/sign_up_form_container';
+import {AuthRoute} from '../util/route_util';
 import {
   Route,
   Redirect,
@@ -14,9 +15,8 @@ const App = () => (
   <div>
     <h1>New Tube App Component</h1>
     <NavBarContainer />
-    <Route path="/login" component={LoginFormContainer} />
-    <Route path="/signup" component={SignupFormContainer} />
-
+    <AuthRoute exact path="/login" component={LoginFormContainer} />
+    <AuthRoute exact path="/signup" component={SignupFormContainer} />
   </div>
 );
 

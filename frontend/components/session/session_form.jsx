@@ -49,6 +49,7 @@ class SessionForm extends React.Component {
         <h1>{formType}</h1>
         <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter Username"></input>
         {formType === "Login" ? errors["Invalid username/password combination"] : errors["Username can't be blank"]}
+        {errors["Username has already been taken"]}
         <input onInput={this.updatePassword} value={this.state.password} placeholder="Enter Password"></input>
         {errors["Password is too short (minimum is 6 characters)"]}
         <button onClick={this.handleSubmit}>{formType}</button>
