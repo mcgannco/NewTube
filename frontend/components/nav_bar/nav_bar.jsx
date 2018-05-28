@@ -5,19 +5,15 @@ const NavBar = ({currentUser, logout}) => {
 
   const loggedOut = () => {
     return(
-      <div className="signIn">
-
-
       <header class="main-nav">
       	<nav class="left-nav">
       		<ul>
       			<li id="sections-sidebar-btn">
       				<i class="fa fa-bars"></i>
-      				<span>sections</span>
       			</li>
       			<li id="search-modal-btn">
-      				<i class="fa fa-search"></i>
-      				<span>search</span>
+      				<img id="nav-bar-logo" src={window.logo}></img>
+      				<span>NewTube</span>
       			</li>
       		</ul>
       	</nav>
@@ -36,7 +32,6 @@ const NavBar = ({currentUser, logout}) => {
       		</ul>
       	</nav>
       </header>
-      </div>
     )
   }
 
