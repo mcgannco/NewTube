@@ -18,8 +18,8 @@ const NavBar = ({currentUser, logout}) => {
       				<span><i className="fa fa-bars"></i></span>
       			</li>
       			<li id="search-modal-btn">
-      				<img id="nav-bar-logo" src={window.logo}></img>
-      				<p>NewTube</p>
+      				<Link to="/"><img id="nav-bar-logo" src={window.logo}></img></Link>
+      				<Link to="/"><p>NewTube</p></Link>
       			</li>
       		</ul>
       	</nav>
