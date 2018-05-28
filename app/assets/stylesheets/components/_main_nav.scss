@@ -1,0 +1,38 @@
+.main-nav {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-between;
+  border-bottom: 2px solid #f8f8f8;
+}
+
+.right-nav {
+  display: flex;
+  align-items: center;
+}
+
+.left-nav > ul,
+.right-nav > ul {
+	display: flex;
+	align-items: center;
+}
+
+.left-nav > ul > li {
+	margin-left: 20px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 7px 9px;
+	transition: background-color 0.3s;
+}
+
+.right-nav > ul > li {
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+.left-nav li {
+  display: flex;
+  align-items: center;
+}
