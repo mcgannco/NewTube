@@ -3,11 +3,35 @@
   padding: 15px 0px;
   justify-content: space-between;
   border-bottom: 3px solid #F5F5F5;
+  font-family: 'Roboto', 'Noto', sans-serif;
 }
 
 .main-nav span {
   font-size: 18px;
   color: #989898;
+}
+
+.main-nav li .tooltiptext {
+  visibility: hidden;
+  background-color: #696969;
+  color: #fff;
+  text-align: center;
+  padding: 9px 7px;
+  border-radius: 4px;
+  position: absolute;
+  margin-top: 15px;
+  z-index: 1;
+  font-size: 12px;
+  font-weight: 100;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+}
+
+.main-nav li:hover .tooltiptext {
+  transition-delay: 1s;
+  background-color: #696969;
+  visibility: visible;
+  opacity: 1;
 }
 
 .left-nav > ul,
@@ -79,7 +103,6 @@
   width: 90%;
   height: 100%;
   padding-left: 10px;
-  font-family: 'Roboto', 'Noto', sans-serif;
   font-size: 16px;
   font-weight: 200;
   color: black;

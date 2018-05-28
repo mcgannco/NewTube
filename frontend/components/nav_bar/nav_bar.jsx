@@ -29,15 +29,19 @@ const NavBar = ({currentUser, logout}) => {
       	<nav className="right-nav">
       		<ul>
       			<li>
-              <span><i className="fas fa-video"></i></span>
+              <span>
+                <i className="fas fa-video"></i>
+              </span>
+              <nav className="tooltiptext">Create a video or post</nav>
       			</li>
             <li>
             <span>  <i className="fas fa-th"></i></span>
+            <nav className="tooltiptext">NewTube Apps</nav>
             </li>
             <li>
               <span><i className="fas fa-ellipsis-v"></i></span>
+              <nav className="tooltiptext">Settings</nav>
             </li>
-
       			{loggedin}
       		</ul>
       	</nav>
