@@ -7,7 +7,7 @@ const Search = () => {
       <button>
         <i className="fas fa-search"></i>
         <nav className="searchtiptext">Search</nav>
-    </button>
+      </button>
     </div>
   )
 };

@@ -184,3 +184,39 @@
 .search-container button:hover {
   background: #F0F0F0;
 }
+
+@media (max-width: 990px) {
+  .right-nav {
+    width: 30%;
+  }
+  .left-nav {
+    width: 25%;
+  }
+
+  .nav-search {
+    width: 33%;
+  }
+}
+
+@media (max-width: 850px) {
+  .nav-search {
+    width: 30%;
+  }
+  .right-nav {
+    width: 35%;
+  }
+}
+
+@media (max-width: 705px) {
+  .nav-search {
+    width: 30%;
+  }
+
+  .right-nav {
+    width: 40%;
+  }
+
+  .left-nav ul li {
+    margin-left: 5px;
+  }
+}
