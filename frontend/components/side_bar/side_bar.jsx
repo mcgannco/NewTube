@@ -1,10 +1,10 @@
 import React from 'react';
 
-const SideBar = () => {
+const SideBar = ({closeModal}) => {
   return(
     <div className="side-bar">
       <ul>
-        <li>Home</li>
+        <li><span onClick={closeModal}><i className="fa fa-bars"></i></span> Home</li>
         <li>Trending</li>
 
       </ul>

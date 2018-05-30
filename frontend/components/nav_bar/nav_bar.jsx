@@ -14,7 +14,7 @@ const NavBar = ({currentUser, logout, openModal}) => {
       <header className="main-nav">
       	<nav className="left-nav">
       		<ul>
-      			<li onClick={() => openModal('sidebar')} id="sections-sidebar-btn">
+      			<li id="nav-button" onClick={() => openModal('sidebar')}>
       				<span><i className="fa fa-bars"></i></span>
       			</li>
       			<li id="search-modal-btn">
@@ -29,17 +29,17 @@ const NavBar = ({currentUser, logout, openModal}) => {
         </nav>
       	<nav className="right-nav">
       		<ul>
-      			<li>
+      			<li id="nav-button">
               <span>
                 <i className="fas fa-video"></i>
               </span>
               <nav className="tooltiptext">Create a video or post</nav>
       			</li>
-            <li>
+            <li id="nav-button">
             <span>  <i className="fas fa-th"></i></span>
             <nav className="tooltiptext">NewTube Apps</nav>
             </li>
-            <li>
+            <li id="nav-button">
               <span><i className="fas fa-ellipsis-v"></i></span>
               <nav className="tooltiptext">Settings</nav>
             </li>

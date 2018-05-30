@@ -2,7 +2,9 @@
   display: flex;
 	opacity: 1;
 	width: 200px;
-	overflow: visible;
+  height: 100vh;
+  background-color: white;
+  overflow: scroll;
 }
 
 .side-bar ul {
@@ -11,6 +13,7 @@
 	text-align: left;
   background: white;
   position: relative;
+  cursor: pointer;
 }
 
 .side-bar ul li {
