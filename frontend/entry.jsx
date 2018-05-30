@@ -8,6 +8,9 @@ import { signup, login, logout } from './actions/session_actions';
 window.signup = signup;
 window.login = login;
 window.logout = logout;
+import { openModal, closeModal } from './actions/modal_actions';
+window.openModal = openModal;
+window.closeModal = closeModal;
 //
 
 

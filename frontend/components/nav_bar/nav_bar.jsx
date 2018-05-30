@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../search/search';
-const NavBar = ({currentUser, logout}) => {
+const NavBar = ({currentUser, logout, openModal}) => {
   let loggedin;
   if (!currentUser) {
     loggedin = <li>
@@ -9,11 +9,12 @@ const NavBar = ({currentUser, logout}) => {
     </li>} else {
       loggedin = <li onClick={logout}>LogOut</li>
     }
+
     return(
       <header className="main-nav">
       	<nav className="left-nav">
       		<ul>
-      			<li id="sections-sidebar-btn">
+      			<li onClick={() => openModal('sidebar')} id="sections-sidebar-btn">
       				<span><i className="fa fa-bars"></i></span>
       			</li>
       			<li id="search-modal-btn">

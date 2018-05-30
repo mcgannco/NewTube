@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import sideBarReducer from './side_bar_reducer';
+import modalReducer from './modal_reducer';
 
 const uiReducer = combineReducers({
-  side_bar: sideBarReducer,
+  modal: modalReducer,
 });
 
 export default uiReducer;
