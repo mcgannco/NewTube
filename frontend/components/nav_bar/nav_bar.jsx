@@ -5,7 +5,7 @@ const NavBar = ({currentUser, logout, openModal}) => {
   let loggedin;
   if (!currentUser) {
     loggedin = <li>
-      <Link to='/login'>Sign In</Link>
+      <Link to='/signin'>Sign In</Link>
     </li>} else {
       loggedin = <li onClick={logout}>LogOut</li>
     }
