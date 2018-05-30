@@ -1,17 +1,14 @@
 .modal-background {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   background: rgba(242,242,242,.9);
-  z-index: 100000000000000000000;
-
+  z-index: 1;
+  display: inline-block;
 }
 
 .modal-child {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

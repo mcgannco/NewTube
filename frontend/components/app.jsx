@@ -14,8 +14,8 @@ import {
 
 const App = () => (
   <div>
-    <Modal />
     <NavBarContainer />
+    <Modal />
     <AuthRoute exact path="/login" component={LoginFormContainer} />
     <AuthRoute exact path="/signup" component={SignupFormContainer} />
   </div>

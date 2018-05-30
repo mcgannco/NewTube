@@ -2,8 +2,12 @@ import React from 'react';
 
 const SideBar = () => {
   return(
-    <div>
-      <h1>Side Bar!!!</h1>
+    <div className="side-bar">
+      <ul>
+        <li>Home</li>
+        <li>Trending</li>
+
+      </ul>
     </div>
   )
 };

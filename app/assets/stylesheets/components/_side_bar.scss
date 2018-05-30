@@ -1,0 +1,21 @@
+.side-bar {
+  display: flex;
+	opacity: 1;
+	width: 200px;
+	overflow: visible;
+}
+
+.side-bar ul {
+	padding: 10px 20px 20px 20px;
+	width: 100%;
+	text-align: left;
+  background: white;
+  position: relative;
+}
+
+.side-bar ul li {
+	margin: 0;
+	padding: 5px;
+	border-radius: 5px;
+	position: relative;
+}
