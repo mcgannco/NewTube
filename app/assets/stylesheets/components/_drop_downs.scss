@@ -1,0 +1,11 @@
+.video-drop-down {
+  position: absolute;
+}
+
+.video-drop-down ul {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: red;
+  margin-top: 20%;
+}
