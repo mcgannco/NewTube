@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../search/search';
 import VideoDropDown from './video_dropdown';
+import AppDropDown from './app_dropdown';
 
 class NavBar extends React.Component {
 
@@ -9,8 +10,10 @@ class NavBar extends React.Component {
     super(props)
     this.state = {
       videoDropDown: false,
+      appsDropDown: false,
     }
     this.vidDropDown = this.vidDropDown.bind(this);
+    this.appDropDown = this.appDropDown.bind(this);
     this.closeDropDowns = this.closeDropDowns.bind(this);
   }
 
@@ -21,9 +24,16 @@ class NavBar extends React.Component {
    });
   }
 
+  appDropDown(e) {
+    e.preventDefault();
+    this.setState({ appsDropDown: true }, () => {
+    document.addEventListener('click', this.closeDropDowns);
+   });
+  }
+
   closeDropDowns(e) {
     e.preventDefault();
-    this.setState({ videoDropDown: false }, () => {
+    this.setState({ videoDropDown: false, appsDropDown: false }, () => {
      document.removeEventListener('click', this.closeDropDowns);
    });
   }
@@ -40,8 +50,12 @@ class NavBar extends React.Component {
       }
 
     let vid;
+    let app;
     if (this.state.videoDropDown) {
       vid = <VideoDropDown />
+    }
+    if (this.state.appsDropDown) {
+      vid = <AppDropDown />
     }
 
       return(
@@ -70,7 +84,7 @@ class NavBar extends React.Component {
                 <nav className="tooltiptext">Create a video or post</nav>
               </li>
               {vid}
-              <li id="nav-button">
+              <li onClick={this.appDropDown} id="nav-button">
                 <span>  <i className="fas fa-th"></i></span>
                 <nav className="tooltiptext">NewTube Apps</nav>
               </li>
