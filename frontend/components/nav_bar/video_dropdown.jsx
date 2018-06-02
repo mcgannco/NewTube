@@ -3,21 +3,31 @@ import { Link } from 'react-router-dom';
 
 const VideoDropDown = () => {
   return(
-    <div className="video-drop-down">
-      <ul>
-        <li>
-          <div>
-            <span>
-              <i className="fas fa-video"></i>
-            </span>
+      <ul className="video-drop-down">
+        <Link to='/signin'>
+          <li>
+            <div>
+              <span>
+                <i className="fas fa-play"></i>
+              </span>
+              <div>Upload Video</div>
+            </div>
+            </li>
+          </Link>
 
-            <Link to='/signin'>Upload Video </Link>
-          </div>
-          </li>
+          <Link to='/signin'>
+            <li>
+              <div>
+                <span>
+                  <i className="fas fa-podcast"></i>
+                </span>
+                <div>Go live</div>
+              </div>
+              </li>
+            </Link>
 
-        <li>Go live</li>
+
       </ul>
-    </div>
   )
 };
 

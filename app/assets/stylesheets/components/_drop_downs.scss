@@ -1,26 +1,51 @@
+
 .video-drop-down {
   position: absolute;
   z-index: 2;
-  top: 4%;
-  right: 15%;
-}
-
-.video-drop-down ul {
+  top: 3rem;
+  right: 6rem;
   display: flex;
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  margin-top: 30%;
-  float: right;
+  width: 15%;
+  padding: 0.5rem 0rem;
 }
 
-.video-drop-down ul div {
-  width: 100%;
-  padding: 20px 10px;
+.video-drop-down li {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
-.video-drop-down ul li:hover {
+.video-drop-down li:hover {
   background: #F0F0F0;
+}
+
+.video-drop-down li a {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.video-drop-down li div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-size: 14px;
+  color: #505050;
+}
+
+.video-drop-down li span {
+  margin-right: 18%;
+}
+
+.video-drop-down li div span {
+  color: blue;
+  border: 2px solid #989898;
+  border-radius: 3px;
+  font-size: 10px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
 }
