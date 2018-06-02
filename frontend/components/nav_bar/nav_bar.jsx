@@ -68,8 +68,8 @@ class NavBar extends React.Component {
                   <i className="fas fa-video"></i>
                 </span>
                 <nav className="tooltiptext">Create a video or post</nav>
-                {vid}
               </li>
+              {vid}
               <li id="nav-button">
                 <span>  <i className="fas fa-th"></i></span>
                 <nav className="tooltiptext">NewTube Apps</nav>
