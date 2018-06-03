@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserDropDown = () => {
+const UserDropDown = (props) => {
   return(
       <ul className="video-drop-down">
         <Link to='/signin'>
