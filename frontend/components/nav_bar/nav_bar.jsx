@@ -92,9 +92,11 @@ class NavBar extends React.Component {
                   <Link to='/signin'>Sign In</Link>
                 </li>
       } else {
-        loggedin = <span className="user-profile-span" onClick={this.userDropDown}>
-          <i className="fas fa-user"></i>
-        </span>
+        loggedin = <div className="user-profile-div" onClick={this.userDropDown}>
+          <span>
+            {currentUser.username[0]}
+          </span>
+        </div>
       }
 
     let dd;

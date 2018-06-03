@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserDropDown = (props) => {
+const UserDropDown = ({currentUser, logout}) => {
+
   return(
       <ul className="video-drop-down">
         <Link to='/signin'>
@@ -10,21 +11,21 @@ const UserDropDown = (props) => {
               <span>
                 <i className="fas fa-play"></i>
               </span>
-              <div>Upload Profile</div>
+              <div>{currentUser.username}</div>
             </div>
             </li>
           </Link>
 
-          <Link to='/signin'>
+          <div onClick={logout}>
             <li className="drop-down-list-item">
               <div>
                 <span>
                   <i className="fas fa-podcast"></i>
                 </span>
-                <div>User</div>
+                <div>Sign out</div>
               </div>
               </li>
-            </Link>
+            </div>
 
 
       </ul>
