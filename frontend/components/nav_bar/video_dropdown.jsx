@@ -5,7 +5,7 @@ const VideoDropDown = () => {
   return(
       <ul className="video-drop-down">
         <Link to='/signin'>
-          <li>
+          <li className="drop-down-list-item">
             <div>
               <span>
                 <i className="fas fa-play"></i>
@@ -16,7 +16,7 @@ const VideoDropDown = () => {
           </Link>
 
           <Link to='/signin'>
-            <li>
+            <li className="drop-down-list-item">
               <div>
                 <span>
                   <i className="fas fa-podcast"></i>

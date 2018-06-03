@@ -1,9 +1,8 @@
-
 .video-drop-down {
   position: absolute;
   z-index: 2;
   top: 3rem;
-  right: 6rem;
+  right: 7rem;
   display: flex;
   flex-direction: column;
   background: white;
@@ -12,23 +11,43 @@
   padding: 0.5rem 0rem;
 }
 
-.video-drop-down li {
+.app-drop-down {
+  position: absolute;
+  z-index: 2;
+  top: 3rem;
+  right: 13.5rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  width: 15%;
+  padding: 0.5rem 0rem;
+}
+
+.setting-drop-down {
+  position: absolute;
+  z-index: 2;
+  top: 3rem;
+  right: 9rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  width: 15%;
+  padding: 0.5rem 0rem;
+}
+
+.drop-down-list-item {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
 }
 
-.video-drop-down li:hover {
+.drop-down-list-item:hover {
   background: #F0F0F0;
 }
 
-.video-drop-down li a {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.video-drop-down li div {
+.drop-down-list-item div {
   display: flex;
   width: 100%;
   align-items: center;
@@ -36,11 +55,11 @@
   color: #505050;
 }
 
-.video-drop-down li span {
+.drop-down-list-item span {
   margin-right: 18%;
 }
 
-.video-drop-down li div span {
+.drop-down-list-item div span {
   color:   #0099ff;
   border: 2px solid #989898;
   border-radius: 3px;

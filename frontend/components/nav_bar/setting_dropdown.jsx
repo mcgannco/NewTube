@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const SettingDropDown = () => {
   return(
-      <ul className="video-drop-down">
+      <ul className="setting-drop-down">
         <Link to='/signin'>
-          <li>
+          <li className="drop-down-list-item">
             <div>
               <span>
                 <i className="fas fa-play"></i>
@@ -16,7 +16,7 @@ const SettingDropDown = () => {
           </Link>
 
           <Link to='/signin'>
-            <li>
+            <li className="drop-down-list-item">
               <div>
                 <span>
                   <i className="fas fa-podcast"></i>

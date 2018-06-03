@@ -4,6 +4,7 @@ import Search from '../search/search';
 import VideoDropDown from './video_dropdown';
 import AppDropDown from './app_dropdown';
 import SettingDropDown from './setting_dropdown';
+import UserDropDown from './user_dropdown';
 
 class NavBar extends React.Component {
 
@@ -13,6 +14,7 @@ class NavBar extends React.Component {
       videoDropDown: false,
       appsDropDown: false,
       settingsDropDown: false,
+      usersDropDown: false,
     }
     this.vidDropDown = this.vidDropDown.bind(this);
     this.closeVid = this.closeVid.bind(this);
@@ -20,6 +22,8 @@ class NavBar extends React.Component {
     this.closeApp = this.closeApp.bind(this);
     this.settingDropDown = this.settingDropDown.bind(this);
     this.closeSetting = this.closeSetting.bind(this);
+    this.userDropDown = this.userDropDown.bind(this);
+    this.closeUser = this.closeUser.bind(this);
   }
 
   vidDropDown(e) {
@@ -64,16 +68,33 @@ class NavBar extends React.Component {
     });
   }
 
+  userDropDown(e) {
+    e.preventDefault();
+    this.setState({ usersDropDown: true }, () => {
+    document.addEventListener('click', this.closeUser);
+    });
+  }
+
+  closeUser(e) {
+    e.preventDefault();
+    this.setState({ usersDropDown: false }, () => {
+      document.removeEventListener('click', this.closeUser);
+    });
+  }
+
 
   render() {
-
     const {currentUser, logout, openModal} = this.props
     let loggedin;
+    let userDropDown;
     if (!currentUser) {
       loggedin = <li>
-        <Link to='/signin'>Sign In</Link>
-      </li>} else {
-        loggedin = <li onClick={logout}>LogOut</li>
+                  <Link to='/signin'>Sign In</Link>
+                </li>
+      } else {
+        loggedin = <span onClick={this.userDropDown}>
+          <i className="fas fa-user"></i>
+        </span>
       }
 
     let dd;
@@ -85,6 +106,10 @@ class NavBar extends React.Component {
     }
     if (this.state.settingsDropDown) {
       dd = <SettingDropDown />
+    }
+
+    if (this.state.usersDropDown) {
+      dd = <UserDropDown />
     }
 
       return(
