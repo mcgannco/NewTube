@@ -37,6 +37,19 @@
   padding: 0.5rem 0rem;
 }
 
+.user-drop-down {
+  position: absolute;
+  z-index: 2;
+  top: 3rem;
+  right: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  width: 21%;
+  padding: 0.5rem 0rem;
+}
+
 .drop-down-list-item {
   display: flex;
   justify-content: space-between;

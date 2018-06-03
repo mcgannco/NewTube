@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const UserDropDown = ({currentUser, logout}) => {
 
   return(
-      <ul className="video-drop-down">
+      <ul className="user-drop-down">
         <Link to='/signin'>
           <li className="drop-down-list-item">
             <div>
