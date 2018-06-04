@@ -89,7 +89,7 @@ class NavBar extends React.Component {
     let userDropDown;
     if (!currentUser) {
       loggedin = <li>
-                  <Link to='/signin'>Sign In</Link>
+                  <Link to='/signin'>SIGN IN</Link>
                 </li>
       } else {
         loggedin = <div className="user-profile-div" onClick={this.userDropDown}>
