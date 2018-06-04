@@ -1,5 +1,6 @@
 .side-bar {
   display: flex;
+  flex-direction: column;
 	opacity: 1;
 	width: 255px;
   height: 100vh;
@@ -7,18 +8,17 @@
   overflow: scroll;
 }
 
-.side-bar ul {
-	padding: 10px 20px 20px 20px;
-	width: 100%;
+.side-bar span {
+	padding: 15px;
 	text-align: left;
   background: white;
   position: relative;
   cursor: pointer;
+
 }
 
-.side-bar ul li {
-	margin: 0;
-	padding: 5px;
-	border-radius: 5px;
-	position: relative;
+.side-bar span svg {
+  font-size: 18px;
+  color: #989898;
+  margin-left: 20px;
 }
