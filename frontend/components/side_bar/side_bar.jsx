@@ -9,7 +9,27 @@ const SideBar = ({closeModal}) => {
               <Link to="/"><img id="nav-bar-logo" src={window.logo}></img></Link>
               <p>NewTube</p>
           </span>
-          <div>Trending</div>
+
+          <div className="side-bar-section-one">
+            <div>
+              <i class="fas fa-home"></i>
+              <p>Home</p>
+            </div>
+
+            <div>
+              <i class="fas fa-fire"></i>
+              <p>Trending</p>
+            </div>
+
+            <div>
+              <i class="far fa-folder-open"></i>
+              <p>Subscriptions</p>
+            </div>
+          </div>
+
+
+
+
 
     </div>
   )

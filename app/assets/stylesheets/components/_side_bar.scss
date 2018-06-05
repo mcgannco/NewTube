@@ -4,7 +4,7 @@
 	opacity: 1;
 	width: 255px;
   height: 100vh;
-  background-color: white;
+  background-color: #fafafa;
   overflow: scroll;
   font-family: 'Roboto', 'Noto', sans-serif;
 }
@@ -37,4 +37,28 @@
 
 .side-bar span img {
   margin-right: 5px;
+}
+
+.side-bar-section-one {
+  padding-top: 10px;
+}
+.side-bar-section-one div {
+  display: flex;
+  padding: 20px 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.side-bar-section-one div:hover {
+  background: #F0F0F0;
+}
+
+.side-bar-section-one svg {
+  margin-right: 10px;
+  color: #989898;
+  margin-left: 15px;
+}
+
+.side-bar-section-one p {
+  font-size: 13px;
 }
