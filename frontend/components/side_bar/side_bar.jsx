@@ -12,17 +12,17 @@ const SideBar = ({closeModal}) => {
 
           <div className="side-bar-section-one">
             <div>
-              <i class="fas fa-home"></i>
+              <nav><i class="fas fa-home"></i></nav>
               <p>Home</p>
             </div>
 
             <div>
-              <i class="fas fa-fire"></i>
+              <nav><i class="fas fa-fire"></i></nav>
               <p>Trending</p>
             </div>
 
             <div>
-              <i class="far fa-folder-open"></i>
+              <nav><i class="far fa-folder-open"></i></nav>
               <p>Subscriptions</p>
             </div>
           </div>
