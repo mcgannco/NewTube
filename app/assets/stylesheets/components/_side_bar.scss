@@ -6,19 +6,35 @@
   height: 100vh;
   background-color: white;
   overflow: scroll;
+  font-family: 'Roboto', 'Noto', sans-serif;
 }
 
 .side-bar span {
-	padding: 15px;
+	padding: 17.5px 0px;
 	text-align: left;
   background: white;
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F5F5F5;
+}
 
+.side-bar span p {
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .side-bar span svg {
   font-size: 18px;
   color: #989898;
-  margin-left: 20px;
+  margin-left: 30px;
+}
+
+.side-bar span a {
+  margin-left: 39px;
+}
+
+.side-bar span img {
+  margin-right: 5px;
 }
