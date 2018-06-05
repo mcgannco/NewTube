@@ -26,13 +26,8 @@ const SideBar = ({closeModal}) => {
               <p>Subscriptions</p>
             </div>
           </div>
-
-
-
-
-
-    </div>
-  )
+        </div>
+    )
 };
 
 export default SideBar;
