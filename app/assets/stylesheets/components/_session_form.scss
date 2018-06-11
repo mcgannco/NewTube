@@ -12,6 +12,8 @@
 }
 
 .sessionForm {
+  display: flex;
+  flex-direction: column;
   background: white;
   min-height: 500px;
   min-width: 400px;

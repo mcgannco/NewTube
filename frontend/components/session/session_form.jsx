@@ -47,10 +47,10 @@ class SessionForm extends React.Component {
       <div className="sessionContainer">
       <div className="sessionForm">
         <h1>{formType}</h1>
-        <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter Username"></input>
+        <input onInput={this.updateUserName} value={this.state.username} placeholder="username"></input>
         {formType === "Login" ? errors["Invalid username/password combination"] : errors["Username can't be blank"]}
         {errors["Username has already been taken"]}
-        <input onInput={this.updatePassword} value={this.state.password} placeholder="Enter Password"></input>
+        <input onInput={this.updatePassword} value={this.state.password} placeholder="password"></input>
         {errors["Password is too short (minimum is 6 characters)"]}
         <button onClick={this.handleSubmit}>{formType}</button>
       </div>
