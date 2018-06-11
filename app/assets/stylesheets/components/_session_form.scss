@@ -15,9 +15,62 @@
   display: flex;
   flex-direction: column;
   background: white;
-  min-height: 500px;
-  min-width: 400px;
-  padding: 20px;
+  min-height: 420px;
+  min-width: 350px;
+  padding: 50px;
   border-radius: 5px;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.sessionForm-logo {
+  display: flex;
+  padding-top: 40px;
+}
+
+.sessionForm-logo p {
+  font-size: 15px;
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.sessionForm-instructions {
+  padding: 50px 0px;
+}
+
+.sessionForm-instructions h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.sessionForm-instructions p {
+  font-size: 15px;
+}
+
+.sessionForm-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+}
+
+.sessionForm-input input  {
+  border-bottom: 2px solid grey;
+}
+
+.sessionForm-input input:focus {
+  border-bottom: 2px solid #0099ff;
+}
+
+.sessionForm-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  align-items: flex-start;
+}
+
+.sessionForm-buttons button:last-of-type {
+    background: #0099ff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
 }
