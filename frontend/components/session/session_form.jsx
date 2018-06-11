@@ -34,8 +34,12 @@ class SessionForm extends React.Component {
 
 
   render() {
-    let {formType} = this.props;
+    let { formType } = this.props;
+    let otherformType;
+    let otherformTypelink;
     formType === "login" ? formType = "Sign In" : formType = "Sign Up"
+    this.props.match.path === "/signin" ? otherformType = "Sign Up" : otherformType = "Sign In"
+    this.props.match.path === "/signin" ? otherformTypelink = "/signup" : otherformTypelink = "/signin"
     let errors = {};
     if (this.props.errors) {
       this.props.errors.forEach(err => {
@@ -64,11 +68,15 @@ class SessionForm extends React.Component {
         </div>
 
         <div className="sessionForm-buttons">
-          <button onClick={this.handleSubmit}>{formType}</button>
+          <Link to={otherformTypelink}>{otherformType}</Link>
           <button>Next</button>
         </div>
 
-      </div>
+        <div className="sessionForm-demo">
+          <button>Demo</button>
+        </div>
+
+        </div>
       </div>
     )
   }

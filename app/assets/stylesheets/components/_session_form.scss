@@ -64,13 +64,36 @@
 .sessionForm-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 64px;
   align-items: flex-start;
 }
 
-.sessionForm-buttons button:last-of-type {
+.sessionForm-buttons button {
     background: #0099ff;
     color: white;
-    padding: 8px 15px;
+    padding: 8px 22px;
     border-radius: 5px;
+    font-size: 17px;
+    width: 40px;
+}
+
+.sessionForm-buttons a {
+    color: #0099ff;
+    padding-top: 8px;
+    font-size: 17px;
+}
+
+.sessionForm-demo {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.sessionForm-demo button {
+    background: #0099ff;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 5px;
+    font-size: 17px;
+    width: 40px;
 }
