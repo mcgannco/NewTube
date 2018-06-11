@@ -14,6 +14,7 @@ class SessionForm extends React.Component {
     this.updatePassword = this.updatePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
+    this.processInput = this.processInput.bind(this);
   }
 
   updateUserName(e) {
@@ -38,7 +39,24 @@ class SessionForm extends React.Component {
     this.props.login(demo);
   }
 
+  processInput() {
+    let path;
+    let {verifyUsername, formType, receiveSessionErrors}  = this.props;
+    formType === "login" ? path = "/signin" : path = "/signup"
+    if (!this.state.userVerified) {
+      verifyUsername({username: this.state.username, path: path }).then(
+        username => {
+          this.setState({userVerified: true});
+        },
+        errors => {
+          receiveSessionErrors(errors.responseJSON);
+        }
 
+      )
+
+    }
+
+  }
 
   render() {
     let { formType } = this.props;
@@ -76,7 +94,7 @@ class SessionForm extends React.Component {
 
         <div className="sessionForm-buttons">
           <Link to={otherformTypelink}>{otherformType}</Link>
-          <button>Next</button>
+          <button onClick={this.processInput}>Next</button>
         </div>
 
         <div className="sessionForm-demo">
