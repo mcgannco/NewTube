@@ -51,10 +51,23 @@
   display: flex;
   flex-direction: column;
   margin-top: 12px;
+  margin-bottom: 64px;
 }
 
 .sessionForm-input input  {
   border-bottom: 2px solid grey;
+}
+
+.sessionForm-input-errors input  {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  border-bottom: 2px solid #d50000;
+  width: 100%;
+}
+
+.sessionForm-input-errors {
+  margin-bottom: 64px;
 }
 
 .sessionForm-input input:focus {
@@ -64,7 +77,6 @@
 .sessionForm-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 64px;
   align-items: flex-start;
 }
 
@@ -81,6 +93,7 @@
     color: #0099ff;
     padding-top: 8px;
     font-size: 17px;
+    cursor: pointer;
 }
 
 .sessionForm-demo {
@@ -96,4 +109,9 @@
     border-radius: 5px;
     font-size: 17px;
     width: 40px;
+}
+
+.error-messages {
+  color: #d50000;
+  position: absolute;
 }
