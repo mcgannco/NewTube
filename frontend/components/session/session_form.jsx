@@ -17,6 +17,10 @@ class SessionForm extends React.Component {
     this.processInput = this.processInput.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    debugger
+  }
+
   updateUserName(e) {
     e.preventDefault();
     this.setState({username: e.currentTarget.value})
@@ -41,19 +45,20 @@ class SessionForm extends React.Component {
 
   processInput() {
     let path;
-    let {verifyUsername, formType, receiveSessionErrors}  = this.props;
+    let {verifyUsername, formType, receiveSessionErrors, clearSessionErrors, processForm}  = this.props;
     formType === "login" ? path = "/signin" : path = "/signup"
     if (!this.state.userVerified) {
       verifyUsername({username: this.state.username, path: path }).then(
         username => {
           this.setState({userVerified: true});
+          clearSessionErrors()
         },
         errors => {
           receiveSessionErrors(errors.responseJSON);
         }
-
       )
-
+    } else {
+      processForm({username: this.state.username, password: this.state.password})
     }
 
   }
@@ -62,15 +67,12 @@ class SessionForm extends React.Component {
     let { formType } = this.props;
     let otherformType;
     let otherformTypelink;
+    let input;
+    !this.state.userVerified ? input = <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter your username"></input> :
+      input = <input onInput={this.updatePassword} value={this.state.password} placeholder="Enter your password"></input>
     formType === "login" ? formType = "Sign In" : formType = "Sign Up"
     this.props.match.path === "/signin" ? otherformType = "Sign Up" : otherformType = "Sign In"
     this.props.match.path === "/signin" ? otherformTypelink = "/signup" : otherformTypelink = "/signin"
-    let errors = {};
-    if (this.props.errors) {
-      this.props.errors.forEach(err => {
-        errors[err] = err
-      })
-    }
 
     return(
       <div className="sessionContainer">
@@ -87,9 +89,8 @@ class SessionForm extends React.Component {
 
 
         <div className="sessionForm-input">
-          <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter your username"></input>
-          {formType === "Login" ? errors["Invalid username/password combination"] : errors["Username can't be blank"]}
-          {errors["Username has already been taken"]}
+          {input}
+          {this.props.errors[0]}
         </div>
 
         <div className="sessionForm-buttons">
