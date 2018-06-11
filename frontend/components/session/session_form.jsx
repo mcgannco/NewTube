@@ -7,11 +7,13 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      userVerified: false
     };
     this.updateUserName = this.updateUserName.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   updateUserName(e) {
@@ -29,6 +31,11 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     processForm(user);
+  }
+
+  demoLogin() {
+    const demo = {username: "DemoUser", password: "123456"};
+    this.props.login(demo);
   }
 
 
@@ -73,7 +80,7 @@ class SessionForm extends React.Component {
         </div>
 
         <div className="sessionForm-demo">
-          <button>Demo</button>
+          <button onClick={this.demoLogin}>Demo</button>
         </div>
 
         </div>

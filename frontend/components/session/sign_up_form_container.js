@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { signup } from '../../actions/session_actions';
+import { signup, login } from '../../actions/session_actions';
 import SessionFrom from './session_form';
 
 const msp = state => {
@@ -11,7 +11,8 @@ const msp = state => {
 
 const mdp = dispatch => {
   return({
-    processForm: (user) => dispatch(signup(user))
+    processForm: (user) => dispatch(signup(user)),
+    login: (user) => dispatch(login(user))
   })
 };
 
