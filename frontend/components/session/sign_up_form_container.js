@@ -5,7 +5,8 @@ import SessionFrom from './session_form';
 const msp = state => {
   return({
     errors: state.errors.session,
-    formType: 'signup'
+    formType: 'signup',
+    loading: state.ui.loading.usernameLoading
   })
 };
 

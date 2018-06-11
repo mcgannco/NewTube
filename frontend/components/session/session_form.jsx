@@ -72,6 +72,12 @@ class SessionForm extends React.Component {
     let otherformType;
     let otherformTypelink;
     let input;
+    let loader;
+    if (this.props.loading) {
+      loader = <div className="session-loader"></div>
+    } else {
+      loader = <div className="session-loader-empty"></div>
+    }
     !this.state.userVerified ? input = <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter your username"></input> :
       input = <input onInput={this.updatePassword} type ="password"value={this.state.password} placeholder="Enter your password"></input>
     formType === "login" ? formType = "Sign In" : formType = "Sign Up"
@@ -80,7 +86,7 @@ class SessionForm extends React.Component {
 
     return(
       <div className="sessionContainer">
-        <div className="session-loader"></div>
+        {loader}
           <div className="sessionForm">
             <div className="sessionForm-logo">
               <p>NewTube</p>

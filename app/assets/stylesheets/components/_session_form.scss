@@ -120,7 +120,6 @@
 .session-loader {
   height: 4px;
   min-width: 450px;
-  position: relative;
   overflow: hidden;
   background: #ddd;
   border-radius: 10px;
@@ -129,7 +128,7 @@
 }
 .session-loader:before{
   display: block;
-  position: absolute;
+  position: relative;
   content: "";
   left: -200px;
   width: 200px;
@@ -145,4 +144,9 @@
     80% { left: 50%;}
     95% {left: 120%;}
     to {left: 100%;}
+}
+
+.session-loader-empty {
+  height: 4px;
+  width: 450px;
 }

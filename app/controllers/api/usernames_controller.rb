@@ -1,5 +1,6 @@
 class Api::UsernamesController < ApplicationController
   def create
+    sleep 2
     @user = User.find_by(username: params[:user][:username])
     path = params[:user][:path]
 
