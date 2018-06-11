@@ -73,39 +73,39 @@ class SessionForm extends React.Component {
     let otherformTypelink;
     let input;
     !this.state.userVerified ? input = <input onInput={this.updateUserName} value={this.state.username} placeholder="Enter your username"></input> :
-      input = <input onInput={this.updatePassword} value={this.state.password} placeholder="Enter your password"></input>
+      input = <input onInput={this.updatePassword} type ="password"value={this.state.password} placeholder="Enter your password"></input>
     formType === "login" ? formType = "Sign In" : formType = "Sign Up"
     this.props.match.path === "/signin" ? otherformType = "Sign Up" : otherformType = "Sign In"
     this.props.match.path === "/signin" ? otherformTypelink = "/signup" : otherformTypelink = "/signin"
 
     return(
       <div className="sessionContainer">
-      <div className="sessionForm">
-        <div className="sessionForm-logo">
-          <p>NewTube</p>
-          <img id="nav-bar-logo" src={window.logo}></img>
-        </div>
+        <div className="session-loader"></div>
+          <div className="sessionForm">
+            <div className="sessionForm-logo">
+              <p>NewTube</p>
+              <img id="nav-bar-logo" src={window.logo}></img>
+            </div>
 
-        <div className="sessionForm-instructions">
-          <h1>{formType}</h1>
-          <p>to continue to NewTube</p>
-        </div>
+            <div className="sessionForm-instructions">
+              <h1>{this.state.userVerified ? `Welcome,` : formType}</h1>
+              <p>{ this.state.userVerified ? this.state.username : "to continue to NewTube"}</p>
+            </div>
 
 
-        <div className={this.props.errors[0] ? "sessionForm-input-errors" : "sessionForm-input"}>
-          {input}
-          <p className="error-messages">{this.props.errors[0]}</p>
-        </div>
+            <div className={this.props.errors[0] ? "sessionForm-input-errors" : "sessionForm-input"}>
+              {input}
+              <p className="error-messages">{this.props.errors[0]}</p>
+            </div>
 
-        <div className="sessionForm-buttons">
-          <a onClick={this.otherForm}>{otherformType}</a>
-          <button onClick={this.processInput}>Next</button>
-        </div>
+            <div className="sessionForm-buttons">
+              <a onClick={this.otherForm}>{otherformType}</a>
+              <button onClick={this.processInput}>Next</button>
+            </div>
 
-        <div className="sessionForm-demo">
-          <button onClick={this.demoLogin}>Demo</button>
-        </div>
-
+            <div className="sessionForm-demo">
+              <button onClick={this.demoLogin}>Demo</button>
+            </div>
         </div>
       </div>
     )
