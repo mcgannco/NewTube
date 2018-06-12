@@ -1,0 +1,186 @@
+.sessionContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: white;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sessionForm {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  min-height: 420px;
+  min-width: 350px;
+  padding: 50px;
+  border-radius: 5px;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.sessionForm-logo {
+  display: flex;
+  padding-top: 40px;
+}
+
+.sessionForm-logo p {
+  font-size: 15px;
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.sessionForm-instructions {
+  padding: 50px 0px;
+}
+
+.sessionForm-instructions h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.sessionForm-instructions p {
+  font-size: 15px;
+}
+
+.sessionForm-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  margin-bottom: 64px;
+}
+
+.sessionForm-input input  {
+  border-bottom: 2px solid grey;
+}
+
+.sessionForm-input-errors input  {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  border-bottom: 2px solid #d50000;
+  width: 100%;
+}
+
+.sessionForm-input-errors {
+  margin-bottom: 64px;
+}
+
+.sessionForm-input input:focus {
+  border-bottom: 2px solid #0099ff;
+}
+
+.sessionForm-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.sessionForm-buttons button {
+    background: #0099ff;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 5px;
+    font-size: 17px;
+    width: 40px;
+}
+
+.sessionForm-buttons a {
+    color: #0099ff;
+    padding-top: 8px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.sessionForm-demo {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.sessionForm-demo button {
+    background: #0099ff;
+    color: white;
+    padding: 8px 22px;
+    border-radius: 5px;
+    font-size: 17px;
+    width: 40px;
+}
+
+.error-messages {
+  color: #d50000;
+  position: absolute;
+}
+
+.session-loader {
+  height: 4px;
+  min-width: 450px;
+  overflow: hidden;
+  background: #ddd;
+  border-radius: 10px;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 80px;
+}
+.session-loader:before{
+  display: block;
+  position: relative;
+  content: "";
+  left: -200px;
+  width: 200px;
+  height: 4px;
+  background-color: #FFD700;
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    from {left: -200px; width: 30%;}
+    50% {width: 30%;}
+    70% {width: 70%;}
+    80% { left: 50%;}
+    95% {left: 120%;}
+    to {left: 100%;}
+}
+
+.session-loader-empty {
+  height: 4px;
+  width: 450px;
+}
+
+
+// .bar {
+//   position: relative;
+//   display: block;
+// }
+//
+// .bar:before,
+// .bar:after {
+//   content: '';
+//   height: 2px;
+//   width: 0;
+//   bottom: 1px;
+//   position: absolute;
+//   background: #2196F3;
+//   transition: 0.2s ease all;
+// }
+//
+// .bar:before {
+//   left: 50%;
+// }
+//
+// .bar:after {
+//   right: 50%;
+// }
+//
+// .mui-form-control:focus {
+//   border-color: transparent;
+// }
+//
+// .mui-form-control:focus ~ .bar:before,
+// .mui-form-control:focus ~ .bar:after {
+//   width: 50%;
+// }
