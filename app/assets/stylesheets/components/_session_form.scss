@@ -150,3 +150,37 @@
   height: 4px;
   width: 450px;
 }
+
+
+// .bar {
+//   position: relative;
+//   display: block;
+// }
+//
+// .bar:before,
+// .bar:after {
+//   content: '';
+//   height: 2px;
+//   width: 0;
+//   bottom: 1px;
+//   position: absolute;
+//   background: #2196F3;
+//   transition: 0.2s ease all;
+// }
+//
+// .bar:before {
+//   left: 50%;
+// }
+//
+// .bar:after {
+//   right: 50%;
+// }
+//
+// .mui-form-control:focus {
+//   border-color: transparent;
+// }
+//
+// .mui-form-control:focus ~ .bar:before,
+// .mui-form-control:focus ~ .bar:after {
+//   width: 50%;
+// }

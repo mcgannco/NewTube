@@ -50,11 +50,12 @@ class SessionForm extends React.Component {
 
   processInput() {
     let path;
-    let {verifyUsername, formType, receiveSessionErrors, processForm}  = this.props;
+    let {verifyUsername, formType, receiveSessionErrors, processForm, clearSessionErrors}  = this.props;
     formType === "login" ? path = "/signin" : path = "/signup"
     if (!this.state.userVerified) {
       verifyUsername({username: this.state.username, path: path }).then(
         username => {
+          clearSessionErrors()
           this.setState({userVerified: true});
         },
         errors => {
