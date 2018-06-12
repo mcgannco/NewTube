@@ -9,6 +9,7 @@ class SessionForm extends React.Component {
       username: "",
       password: "",
       userVerified: false,
+      formType: "",
     };
     this.updateUserName = this.updateUserName.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -16,6 +17,13 @@ class SessionForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
     this.processInput = this.processInput.bind(this);
     this.otherForm = this.otherForm.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.state.formType != this.props.formType) {
+      this.props.clearSessionErrors()
+      this.setState({formType: this.props.formType})
+    }
   }
 
   updateUserName(e) {
@@ -42,13 +50,13 @@ class SessionForm extends React.Component {
 
   processInput() {
     let path;
-    let {verifyUsername, formType, receiveSessionErrors, clearSessionErrors, processForm}  = this.props;
+    let {verifyUsername, formType, receiveSessionErrors, processForm, clearSessionErrors}  = this.props;
     formType === "login" ? path = "/signin" : path = "/signup"
     if (!this.state.userVerified) {
       verifyUsername({username: this.state.username, path: path }).then(
         username => {
-          this.setState({userVerified: true});
           clearSessionErrors()
+          this.setState({userVerified: true});
         },
         errors => {
           receiveSessionErrors(errors.responseJSON);
@@ -63,7 +71,6 @@ class SessionForm extends React.Component {
   otherForm() {
     let path;
     this.props.match.path === "/signin" ? path = "/signup" : path = "/signin"
-    this.props.clearSessionErrors()
     this.props.history.push(path);
   }
 
