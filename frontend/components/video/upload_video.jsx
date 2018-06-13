@@ -51,6 +51,7 @@ class UploadVideo extends React.Component {
             type="file"
             onChange={this.updateFile}
             />
+      
         </div>
       )
     }
