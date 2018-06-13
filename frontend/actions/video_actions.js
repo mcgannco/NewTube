@@ -10,13 +10,12 @@ export const receiveAllVideos = (videos) => (
   }
 );
 
-export const receiveVideo = (payload) => {
-  debugger
-return({
-  type: RECEIVE_VIDEO,
-  video: payload.video,
-})
-};
+export const receiveVideo = (video) => (
+  {
+    type: RECEIVE_VIDEO,
+    video,
+  }
+);
 
 export const receiveErrors = errors => {
   return({
