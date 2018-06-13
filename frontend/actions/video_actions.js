@@ -10,10 +10,10 @@ export const receiveAllVideos = (videos) => (
   }
 );
 
-export const receiveVideo = (video) => (
+export const receiveVideo = (payload) => (
   {
     type: RECEIVE_VIDEO,
-    video
+    video: payload.video,
   }
 );
 
@@ -34,7 +34,7 @@ export const requestAllVideos = () => dispatch => {
 
 export const createVideo = (video) => dispatch => {
   return(
-    APIUtil.createVideo().then(video => dispatch(receiveVideo(video)),
+    APIUtil.createVideo(video).then(video => dispatch(receiveVideo(video)),
   err => {
     dispatch(receiveErrors(err.responseJSON));
   }));
