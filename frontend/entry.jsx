@@ -5,8 +5,9 @@ import configureStore from './store/store';
 
 // testing
 import { signup, login, logout } from './actions/session_actions';
-import { requestAllVideos } from './actions/video_actions';
+import { requestAllVideos, createVideo } from './actions/video_actions';
 window.requestAllVideos = requestAllVideos;
+window.createVideo = createVideo;
 window.signup = signup;
 window.login = login;
 window.logout = logout;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const VideoDropDown = () => {
   return(
       <ul className="video-drop-down">
-        <Link to='/signin'>
+        <Link to='/upload'>
           <li className="drop-down-list-item">
             <div>
               <span>

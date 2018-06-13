@@ -4,3 +4,11 @@ export const fetchAllVideos = () => (
     url: 'api/videos',
   })
 );
+
+export const createVideo = (video) => (
+  $.ajax({
+    method: 'POST',
+    url: '/api/videos',
+    data: video
+  })
+);

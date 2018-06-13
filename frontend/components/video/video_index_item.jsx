@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const VideoIndexItem = ({ video }) => {
-debugger
   return(
     <li>
       <span>{video.title}</span>
