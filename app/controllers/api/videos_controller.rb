@@ -1,4 +1,4 @@
-class VideosController < ApplicationController
+class Api::VideosController < ApplicationController
 
   def index
     @videos = Video.all
@@ -12,9 +12,7 @@ class VideosController < ApplicationController
     else
       render json: @video.errors.full_messages, status: 422
     end
-
   end
-
 
   private
   def video_params
