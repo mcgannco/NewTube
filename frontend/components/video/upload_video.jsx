@@ -24,13 +24,15 @@ class UploadVideo extends React.Component {
   updateFile(e) {
     const { createVideo} = this.props;
     const vFile = e.currentTarget.files[0];
-    const videoForm = new FormData();
-    let params = {"clip": vFile, "title": this.state.title, "description": this.state.description}
-    videoForm["video"] = params;
+    let params = {clip: vFile, title: this.state.title, description: this.state.description}
+    videoForm.append("video[clip]", vFile);
+    videoForm.append("video[title]", this.state.title);
+    videoForm.append("video[description]", this.state.description);
     debugger
     createVideo(videoForm).then( action => {
       this.props.history.push(`/`);
     });
+    debugger
 
   }
 
