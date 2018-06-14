@@ -15,7 +15,7 @@ import {
 } from 'react-router-dom';
 
 const App = () => (
-  <div>
+  <div id="app">
     <NavBarContainer />
     <Modal />
      <Switch>

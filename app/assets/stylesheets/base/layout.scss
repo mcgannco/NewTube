@@ -8,7 +8,7 @@ body {
 	margin: 0 auto;
 	font-family: serif;
 	font-size: 12px;
-
+	height: 100%;
 }
 
 img {
@@ -18,4 +18,12 @@ img {
 
 header {
 	background: #FFFFFF;
+}
+
+#root {
+	height: 100%;
+}
+
+#app {
+	height: 100%;
 }

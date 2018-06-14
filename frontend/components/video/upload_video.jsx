@@ -36,22 +36,24 @@ class UploadVideo extends React.Component {
 
   render() {
       return(
-        <div>
-          <h1>Upload</h1>
+        <div className = "upload-container">
+          <div className="upload-field">
+            <h1>Upload</h1>
             <label>Title
             </label>
             <input id="title" onChange={this.updateInput}type="text"></input>
 
-              <label>description
-              </label>
-              <input id="description" onChange={this.updateInput} type="text"></input>
+            <label>description
+            </label>
+            <input id="description" onChange={this.updateInput} type="text"></input>
 
             <input
-            className="upload-video-input"
-            type="file"
-            onChange={this.updateFile}
-            />
-      
+              className="upload-video-input"
+              type="file"
+              onChange={this.updateFile}
+              />
+          </div>
+
         </div>
       )
     }
