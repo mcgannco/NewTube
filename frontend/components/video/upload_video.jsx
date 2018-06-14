@@ -60,7 +60,7 @@ class UploadVideo extends React.Component {
                       <div className="upload-details-video">
                         <span>
                           <video src={this.state.videoUrl}  width="250" height="150"  />
-                          <h1>{this.state.videoFile.name}</h1>
+                          <h1>Upload Status</h1>
                         </span>
 
                         <span>
@@ -75,6 +75,7 @@ class UploadVideo extends React.Component {
                       <form>
                         <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
                         <input id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></input>
+                        <input id ="description" placeholder= "Tags" value={this.state.description} onChange={this.updateInput}></input>
                       </form>
                     </div>
                   </div>
