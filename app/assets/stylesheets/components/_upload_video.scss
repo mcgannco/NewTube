@@ -19,6 +19,44 @@
   margin-top: 1rem;
 }
 
+.upload-details-video {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload-details-video span button {
+  background: #0099ff;
+  padding: 10px 37px;
+  color: white;
+  border-radius: 2px;
+}
+
+.upload-details-details {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload-details-details form {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 250px);
+  border-top: 1px solid lightgrey;
+  justify-content: space-around;
+  height: 200px;
+}
+
+.upload-details-details form input {
+  background: white;
+  border: 1px solid grey;
+}
+
+.upload-details-details div {
+  width: 250px;
+}
+
 .upload-video-input {
   width: 500px;
   height: 300px;

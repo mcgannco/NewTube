@@ -13,6 +13,7 @@ class UploadVideo extends React.Component {
     }
     this.updateFile = this.updateFile.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
+    this.updateInput = this.updateInput.bind(this);
   }
 
   updateInput(e) {
@@ -56,7 +57,26 @@ class UploadVideo extends React.Component {
     let uploadForm;
     if (this.state.videoFile) {
       uploadForm = <div onClick={this.test} className="upload-field">
-                    <video src={this.state.videoUrl}  width="480" height="270"  />
+                      <div className="upload-details-video">
+                        <span>
+                          <video src={this.state.videoUrl}  width="250" height="150"  />
+                          <h1>{this.state.videoFile.name}</h1>
+                        </span>
+
+                        <span>
+                          <button>Publish</button>
+                        </span>
+                    </div>
+
+                    <div className="upload-details-details">
+                      <div>
+                        <h1>Loading Status</h1>
+                      </div>
+                      <form>
+                        <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
+                        <input id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></input>
+                      </form>
+                    </div>
                   </div>
     } else {
       uploadForm =   <div className="upload-field">
