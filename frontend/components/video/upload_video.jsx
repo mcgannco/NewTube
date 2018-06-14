@@ -7,7 +7,9 @@ class UploadVideo extends React.Component {
     this.state = {
       title: "",
       description: "",
-      file: ""
+      videoFile: "",
+      vThumb: "",
+      videoUrl: ""
     }
     this.updateFile = this.updateFile.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
@@ -23,7 +25,18 @@ class UploadVideo extends React.Component {
   }
 
   updateFile(e) {
-    this.setState({file: e.currentTarget.files[0]})
+    let file    = e.currentTarget.files[0];
+    this.setState({videoFile: file})
+    let reader  = new FileReader();
+    reader.onloadend = function () {
+      this.setState({ vThumb: reader.result });
+    }.bind(this);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+    this.setState({ videoUrl: window.URL.createObjectURL(file)});
   }
 
   uploadVideo(e) {
@@ -41,9 +54,9 @@ class UploadVideo extends React.Component {
 
   render() {
     let uploadForm;
-    if (this.state.file) {
-      uploadForm = <div className="upload-field">
-                    <h1>{this.state.file.name}</h1>
+    if (this.state.videoFile) {
+      uploadForm = <div onClick={this.test} className="upload-field">
+                    <video src={this.state.videoUrl}  width="480" height="270"  />
                   </div>
     } else {
       uploadForm =   <div className="upload-field">
