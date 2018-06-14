@@ -6,10 +6,11 @@ class UploadVideo extends React.Component {
     super(props)
     this.state = {
       title: "",
-      description: ""
+      description: "",
+      file: ""
     }
     this.updateFile = this.updateFile.bind(this);
-    this.updateInput = this.updateInput.bind(this);
+    this.uploadVideo = this.uploadVideo.bind(this);
   }
 
   updateInput(e) {
@@ -22,6 +23,10 @@ class UploadVideo extends React.Component {
   }
 
   updateFile(e) {
+    this.setState({file: e.currentTarget.files[0]})
+  }
+
+  uploadVideo(e) {
     const { createVideo} = this.props;
     let videoForm = new FormData();
     const vFile = e.currentTarget.files[0];
@@ -35,23 +40,28 @@ class UploadVideo extends React.Component {
   }
 
   render() {
+    let uploadForm;
+    if (this.state.file) {
+      uploadForm = <div className="upload-field">
+                    <h1>{this.state.file.name}</h1>
+                  </div>
+    } else {
+      uploadForm =   <div className="upload-field">
+                      <form className="upload-video-input">
+                        <span><i className="fas fa-cloud-upload-alt"></i>
+                        <p>Select files to upload</p>
+                        <p>Or drag and drop files</p>
+                        </span>
+                        <input
+                          type="file"
+                          onChange={this.updateFile}
+                          />
+                      </form>
+                  </div>
+    }
       return(
         <div className = "upload-container">
-          <div className="upload-field">
-              <form className="upload-video-input">
-                <span><i className="fas fa-cloud-upload-alt"></i>
-                <p>Select files to upload</p>
-                <p>Or drag and drop files</p>
-                </span>
-                <input
-                  type="file"
-                  onChange={this.updateFile}
-                  />
-
-              </form>
-
-          </div>
-
+          {uploadForm}
         </div>
       )
     }
