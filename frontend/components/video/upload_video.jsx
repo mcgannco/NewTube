@@ -38,18 +38,8 @@ class UploadVideo extends React.Component {
       return(
         <div className = "upload-container">
           <div className="upload-field">
-            <h1>Upload</h1>
-            <label>Title
-            </label>
-            <input id="title" onChange={this.updateInput}type="text"></input>
-
-            <label>description
-            </label>
-
-            <input id="description" onChange={this.updateInput} type="text"></input>
-
               <form className="upload-video-input">
-                <span><i className="fas fa-upload"></i>
+                <span><i className="fas fa-cloud-upload-alt"></i>
                 <p>Select files to upload</p>
                 <p>Or drag and drop files</p>
                 </span>

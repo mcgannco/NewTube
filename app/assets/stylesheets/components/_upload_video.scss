@@ -31,12 +31,14 @@
   height: 100%;
   cursor: pointer;
   position: absolute;
+  opacity:0;
 }
 
 .upload-video-input span {
   position: absolute;
   position: absolute;
-  left: 35%;
+  left: 28%;
+  top: 20%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -45,5 +47,18 @@
 
 .upload-video-input span svg {
   color: #0099ff;
-  font-size: 150px;
+  font-size: 180px;
+}
+
+.upload-video-input span p:first-of-type {
+  color: #0099ff;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.upload-video-input span p:last-of-type {
+  color: #0099ff;
+  font-size: 16px;
+  margin-top: 6px;
 }
