@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 const VideoIndexItem = ({ video }) => {
   return(
     <li>
-      <span>{video.title}</span>
-      <video src={video.video_url} width="320" height="240" controls />
+      <div>
+        <video src={video.video_url} width="250" height="150"  />
+        <p>{video.title}</p>
+      </div>
     </li>
   )
 

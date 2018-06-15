@@ -44,13 +44,11 @@ class UploadVideo extends React.Component {
       reader.readAsDataURL(file);
     }
 
-
     this.setState({ videoUrl: window.URL.createObjectURL(file)});
     this.setState({ title: e.currentTarget.files[0].name.slice(0,e.currentTarget.files[0].name.length - 4)})
   }
 
   uploadVideo(e) {
-    debugger
     this.setState({status: "Loading. Please keep window open."})
     const { createVideo} = this.props;
     let videoForm = new FormData();
@@ -67,12 +65,13 @@ class UploadVideo extends React.Component {
 
   render() {
     let uploadForm;
+    let {errors} = this.props;
     let selectedForm;
     if (this.state.sub === "Basic Info") {
       selectedForm = <form>
         <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
+        {errors[0]}
         <textarea id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
-        <input id ="tags" placeholder= "Tags"></input>
       </form>
     } else {
       selectedForm = <form><input value=""placeholder="TBD"></input></form>

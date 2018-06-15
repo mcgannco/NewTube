@@ -1,0 +1,24 @@
+.video-index {
+}
+
+.video-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.video-index ul li {
+  display: flex;
+  margin-top: 40px;
+}
+
+.video-index ul li video {
+  background: black;
+}
+
+.video-index ul li p {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+}

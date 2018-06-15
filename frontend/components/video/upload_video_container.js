@@ -4,7 +4,8 @@ import UploadVideo from './upload_video';
 
 const msp = state => {
   return({
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    errors: state.errors.videos
   })
 };
 
