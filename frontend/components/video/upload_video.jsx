@@ -50,6 +50,7 @@ class UploadVideo extends React.Component {
   }
 
   uploadVideo(e) {
+    debugger
     this.setState({status: "Loading. Please keep window open."})
     const { createVideo} = this.props;
     let videoForm = new FormData();
