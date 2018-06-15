@@ -9,11 +9,18 @@ class UploadVideo extends React.Component {
       description: "",
       videoFile: "",
       vThumb: "",
-      videoUrl: ""
+      videoUrl: "",
+      status: "",
+      sub: "Basic Info"
     }
     this.updateFile = this.updateFile.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
     this.updateInput = this.updateInput.bind(this);
+    this.subForm = this.subForm.bind(this);
+  }
+
+  subForm(e) {
+    this.setState({sub: e.currentTarget.innerText})
   }
 
   updateInput(e) {
@@ -30,24 +37,28 @@ class UploadVideo extends React.Component {
     this.setState({videoFile: file})
     let reader  = new FileReader();
     reader.onloadend = function () {
-      this.setState({ vThumb: reader.result });
+      this.setState({ vThumb: reader.result, status: "Pending.  Complete video detail form." });
     }.bind(this);
 
     if (file) {
       reader.readAsDataURL(file);
     }
 
+
     this.setState({ videoUrl: window.URL.createObjectURL(file)});
+    this.setState({ title: e.currentTarget.files[0].name.slice(0,e.currentTarget.files[0].name.length - 4)})
   }
 
   uploadVideo(e) {
+
     const { createVideo} = this.props;
     let videoForm = new FormData();
-    const vFile = e.currentTarget.files[0];
+    const vFile = this.state.videoFile;
     videoForm.append("video[clip]", vFile);
     videoForm.append("video[title]", this.state.title);
     videoForm.append("video[description]", this.state.description);
     createVideo(videoForm).then( action => {
+      this.setState({videoFile: "", vThumb: "", title: "", description: "", status: "", videoUrl: ""  })
       this.props.history.push(`/`);
     });
 
@@ -61,21 +72,27 @@ class UploadVideo extends React.Component {
                         <span>
                           <video src={this.state.videoUrl}  width="250" height="150"  />
                           <h1>Upload Status</h1>
+                          <p>{this.state.status}</p>
                         </span>
 
-                        <span>
-                          <button>Publish</button>
-                        </span>
+                        <div>
+                          <span><button onClick={this.uploadVideo}>Publish</button></span>
+                          <nav>
+                            <p className={this.state.sub === "Basic Info" ? "selectedTab" : ""} onClick={this.subForm}>Basic Info</p>
+                            <p className={this.state.sub === "Additional Info" ? "selectedTab" : ""} onClick={this.subForm}>Additional Info</p>
+                            <p className={this.state.sub === "Other" ? "selectedTab" : ""} onClick={this.subForm}>Other</p>
+                          </nav>
+                        </div>
                     </div>
 
                     <div className="upload-details-details">
                       <div>
-                        <h1>Loading Status</h1>
+                        <h1></h1>
                       </div>
                       <form>
                         <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
-                        <input id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></input>
-                        <input id ="description" placeholder= "Tags" value={this.state.description} onChange={this.updateInput}></input>
+                        <textarea id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
+                        <input id ="tags" placeholder= "Tags"></input>
                       </form>
                     </div>
                   </div>

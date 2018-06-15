@@ -25,16 +25,53 @@
   justify-content: space-between;
 }
 
-.upload-details-video span button {
+.upload-details-video div {
+  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.upload-details-video div span {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upload-details-video div nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.upload-details-video div nav p{
+  font-weight: 900;
+  cursor: pointer;
+  width: 85px;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-details-video div span button {
   background: #0099ff;
   padding: 10px 37px;
   color: white;
   border-radius: 2px;
 }
 
+.upload-details-video span video {
+  background: black;
+  border: 2px solid grey;
+  display: flex;
+  justify-content: center;
+}
+
 .upload-details-video span h1 {
   font-size: 20px;
   color: black;
+}
+
+.upload-details-video span p {
+  color: #989898;
+  font-size: 12px;;
 }
 
 .upload-details-details {
@@ -44,6 +81,10 @@
   justify-content: space-between;
 }
 
+.upload-details-details h1 {
+  border-top: 1px solid lightgrey;
+}
+
 .upload-details-details form {
   display: flex;
   flex-direction: column;
@@ -51,11 +92,23 @@
   border-top: 1px solid lightgrey;
   justify-content: space-around;
   height: 200px;
+  padding-top: 2%;
 }
 
 .upload-details-details form input {
   background: white;
   border: 1px solid grey;
+  padding-left: 5px;
+  padding: 10px;
+  margin-top: 4%;
+}
+
+.upload-details-details form textarea {
+  background: white;
+  border: 1px solid grey;
+  padding-left: 5px;
+  resize: vertical; max-height: 300px; min-height: 100px;
+  margin-top: 4%;
 }
 
 .upload-details-details div {
@@ -104,4 +157,13 @@
   color: #0099ff;
   font-size: 16px;
   margin-top: 6px;
+}
+
+.selectedTab {
+  color: red;
+  margin-bottom: -2%;
+  border-bottom: 2px solid red;
+  width: 85px;
+  display: flex;
+  justify-content: center;
 }

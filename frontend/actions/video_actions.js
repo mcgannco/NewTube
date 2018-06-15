@@ -17,12 +17,12 @@ export const receiveVideo = (video) => (
   }
 );
 
-export const receiveErrors = errors => {
-  return({
+export const receiveErrors = (errors) => (
+  {
     type: RECEIVE_VIDEO_ERRORS,
     errors
-  });
-};
+  }
+);
 
 export const requestAllVideos = () => dispatch => {
   return(
@@ -32,10 +32,10 @@ export const requestAllVideos = () => dispatch => {
   }));
 };
 
-export const createVideo = (video) => dispatch => {
-  return(
-    APIUtil.createVideo(video).then(video => dispatch(receiveVideo(video)),
-  err => {
-    dispatch(receiveErrors(err.responseJSON));
-  }));
-};
+export const createVideo = video => dispatch => (
+  APIUtil.createVideo(video).then(video => (
+    dispatch(receiveVideo(video))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+);
