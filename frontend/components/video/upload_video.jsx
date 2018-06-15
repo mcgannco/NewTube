@@ -50,7 +50,7 @@ class UploadVideo extends React.Component {
   }
 
   uploadVideo(e) {
-
+    this.setState({status: "Loading. Please keep window open."})
     const { createVideo} = this.props;
     let videoForm = new FormData();
     const vFile = this.state.videoFile;
@@ -66,6 +66,16 @@ class UploadVideo extends React.Component {
 
   render() {
     let uploadForm;
+    let selectedForm;
+    if (this.state.sub === "Basic Info") {
+      selectedForm = <form>
+        <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
+        <textarea id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
+        <input id ="tags" placeholder= "Tags"></input>
+      </form>
+    } else {
+      selectedForm = <form><input value=""placeholder="TBD"></input></form>
+    }
     if (this.state.videoFile) {
       uploadForm = <div onClick={this.test} className="upload-field">
                       <div className="upload-details-video">
@@ -89,11 +99,7 @@ class UploadVideo extends React.Component {
                       <div>
                         <h1></h1>
                       </div>
-                      <form>
-                        <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
-                        <textarea id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
-                        <input id ="tags" placeholder= "Tags"></input>
-                      </form>
+                      {selectedForm}
                     </div>
                   </div>
     } else {
