@@ -138,16 +138,19 @@ class NavBar extends React.Component {
                   <i className="fas fa-video"></i>
                 </span>
                 <nav className="tooltiptext">Create a video or post</nav>
+                  {this.state.videoDropDown ? dd : ""}
               </li>
-              {dd}
               <li onClick={this.appDropDown} id="nav-button">
                 <span>  <i className="fas fa-th"></i></span>
                 <nav className="tooltiptext">NewTube Apps</nav>
+                  {this.state.appsDropDown ? dd : ""}
               </li>
               <li onClick={this.settingDropDown} id="nav-button">
                 <span><i className="fas fa-ellipsis-v"></i></span>
                 <nav className="tooltiptext">Settings</nav>
+                {this.state.settingsDropDown ? dd : ""}
               </li>
+
               {loggedin}
             </ul>
           </nav>
