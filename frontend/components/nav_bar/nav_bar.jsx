@@ -24,6 +24,7 @@ class NavBar extends React.Component {
     this.closeSetting = this.closeSetting.bind(this);
     this.userDropDown = this.userDropDown.bind(this);
     this.closeUser = this.closeUser.bind(this);
+    this.smallSearch = this.smallSearch.bind(this);
   }
 
   vidDropDown(e) {
@@ -82,6 +83,10 @@ class NavBar extends React.Component {
     });
   }
 
+  smallSearch(e) {
+    debugger
+  }
+
 
   render() {
     const {currentUser, logout, openModal} = this.props
@@ -136,7 +141,7 @@ class NavBar extends React.Component {
           <nav className="right-nav">
 
             <ul>
-              <li id="nav-button">
+              <li onClick={this.smallSearch} id="nav-button">
                 <span>
                   <i className="fas fa-search"></i>
                 </span>
