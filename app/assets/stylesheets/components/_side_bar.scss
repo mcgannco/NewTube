@@ -10,7 +10,7 @@
 }
 
 .side-bar span {
-	padding: 17px 0px;
+	padding: 10px 0px;
 	text-align: left;
   background: white;
   position: relative;
@@ -20,9 +20,11 @@
   border-bottom: 1px solid #F5F5F5;
 }
 
-.side-bar span div {
+.side-bar-logo {
   display: flex;
   align-items: center;
+  padding: 7px 9px;
+  margin-left: 20px;
 }
 
 .side-bar span p {
@@ -33,16 +35,24 @@
 .side-bar span svg {
   font-size: 18px;
   color: #989898;
-  margin-left: 30px;
-}
-
-.side-bar span a {
-  margin-left: 39px;
 }
 
 .side-bar span img {
   margin-right: 5px;
   margin-top: 0.5px;
+}
+
+.side-bar span nav:active {
+  background: #ccc;
+  border-radius: 20px;
+}
+
+.side-bar span nav {
+  padding: 8px 9px;
+  width: 18px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .side-bar-section-one {

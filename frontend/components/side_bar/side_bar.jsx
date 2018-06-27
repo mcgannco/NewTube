@@ -5,11 +5,13 @@ const SideBar = ({closeModal}) => {
   return(
     <div className="side-bar">
           <span onClick={closeModal}>
-              <i className="fa fa-bars"></i>
-              <div>
+            <nav><i className="fa fa-bars"></i></nav>
+
+              <div className="side-bar-logo">
                 <Link to="/"><img id="nav-bar-logo" src={window.logo}></img></Link>
                 <p>NewTube</p>
               </div>
+              
           </span>
 
           <div className="side-bar-section-one">
