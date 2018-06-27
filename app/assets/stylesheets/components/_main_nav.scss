@@ -5,7 +5,7 @@
   border-bottom: 3px solid #F5F5F5;
   font-family: 'Roboto', 'Noto', sans-serif;
   width: 100%;
-  position: fixed;
+  position: absolute;
 }
 
 .main-nav span {
@@ -265,5 +265,9 @@
 @media (max-width: 450px) {
   .left-nav > ul > li:last-of-type {
     margin-left: 0px;
+  }
+
+  .right-nav > ul > li {
+    margin: 0px;
   }
 }
