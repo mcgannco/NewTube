@@ -111,3 +111,17 @@
   justify-content: center;
   background: white
 }
+
+@media (max-width: 700px) {
+  .video-drop-down-container {
+    justify-content: flex-start;
+  }
+  .app-drop-down-container {
+    justify-content: flex-start;
+  }
+
+  .user-drop-down-container {
+    width: 465px;
+  }
+
+}
