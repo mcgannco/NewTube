@@ -1,53 +1,82 @@
 .video-drop-down {
   position: absolute;
   z-index: 2;
-  top: 3rem;
-  right: 7rem;
   display: flex;
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 15%;
+  width: 200px;
   padding: 0.5rem 0rem;
+}
+
+.video-drop-down-container {
+  width: 350px;
+  height: 300px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .app-drop-down {
   position: absolute;
   z-index: 2;
-  top: 3rem;
-  right: 13.5rem;
   display: flex;
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 15%;
+  width: 200px;
   padding: 0.5rem 0rem;
+}
+
+.app-drop-down-container {
+  width: 350px;
+  height: 300px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .setting-drop-down {
   position: absolute;
   z-index: 2;
-  top: 3rem;
-  right: 9rem;
   display: flex;
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 15%;
+  width: 200px;
   padding: 0.5rem 0rem;
+}
+
+.setting-drop-down-container {
+  width: 350px;
+  height: 300px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .user-drop-down {
   position: absolute;
   z-index: 2;
-  top: 3rem;
-  right: 2.5rem;
+  top: 10px;
   display: flex;
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 21%;
+  width: 250px;
   padding: 0.5rem 0rem;
+}
+
+.user-drop-down-container {
+  width: 450px;
+  height: 300px;
+  position: absolute;
+  top: 50px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .drop-down-list-item {
@@ -80,4 +109,5 @@
   padding: 3px;
   display: flex;
   justify-content: center;
+  background: white
 }

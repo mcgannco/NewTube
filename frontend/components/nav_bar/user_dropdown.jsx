@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const UserDropDown = ({currentUser, logout}) => {
-
   return(
+    <div className="user-drop-down-container">
       <ul className="user-drop-down">
         <Link to='/signin'>
           <li className="drop-down-list-item">
@@ -26,9 +26,8 @@ const UserDropDown = ({currentUser, logout}) => {
               </div>
               </li>
             </div>
-
-
       </ul>
+    </div>
   )
 };
 

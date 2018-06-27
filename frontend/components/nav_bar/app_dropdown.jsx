@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AppDropDown = () => {
   return(
+    <div className="app-drop-down-container">
       <ul className="app-drop-down">
         <Link to='/signin'>
           <li className="drop-down-list-item">
@@ -25,9 +26,8 @@ const AppDropDown = () => {
               </div>
               </li>
             </Link>
-
-
       </ul>
+    </div>
   )
 };
 

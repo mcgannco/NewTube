@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const SettingDropDown = () => {
   return(
+    <div className="setting-drop-down-container">
       <ul className="setting-drop-down">
         <Link to='/signin'>
           <li className="drop-down-list-item">
@@ -25,9 +26,8 @@ const SettingDropDown = () => {
               </div>
               </li>
             </Link>
-
-
       </ul>
+    </div>
   )
 };
 

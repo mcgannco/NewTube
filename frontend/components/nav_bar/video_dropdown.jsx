@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const VideoDropDown = () => {
   return(
+    <div className="video-drop-down-container">
       <ul className="video-drop-down">
         <Link to='/upload'>
           <li className="drop-down-list-item">
@@ -25,9 +26,8 @@ const VideoDropDown = () => {
               </div>
               </li>
             </Link>
-
-
       </ul>
+    </div>
   )
 };
 

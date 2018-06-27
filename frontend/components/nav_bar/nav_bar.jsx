@@ -87,17 +87,6 @@ class NavBar extends React.Component {
     const {currentUser, logout, openModal} = this.props
     let loggedin;
     let userDropDown;
-    if (!currentUser) {
-      loggedin = <li>
-                  <Link to='/signin'>SIGN IN</Link>
-                </li>
-      } else {
-        loggedin = <div className="user-profile-div" onClick={this.userDropDown}>
-          <span>
-            {currentUser.username[0]}
-          </span>
-        </div>
-      }
 
     let dd;
     if (this.state.videoDropDown) {
@@ -113,6 +102,19 @@ class NavBar extends React.Component {
     if (this.state.usersDropDown && currentUser) {
       dd = <UserDropDown currentUser={currentUser} logout={logout}/>
     }
+
+    if (!currentUser) {
+      loggedin = <li>
+                  <Link to='/signin'>SIGN IN</Link>
+                </li>
+      } else {
+        loggedin = <div className="user-profile-div" onClick={this.userDropDown}>
+          <span>
+            {currentUser.username[0]}
+          </span>
+          {this.state.usersDropDown ? dd : ""}
+        </div>
+      }
 
       return(
         <header className="main-nav">
@@ -150,7 +152,6 @@ class NavBar extends React.Component {
                 <nav className="tooltiptext">Settings</nav>
                 {this.state.settingsDropDown ? dd : ""}
               </li>
-
               {loggedin}
             </ul>
           </nav>
