@@ -1,3 +1,11 @@
+.side-bar-container {
+  position: relative;
+  overflow: hidden;
+  background: green;
+  width: 255px;
+}
+
+
 .side-bar {
   display: flex;
   flex-direction: column;
@@ -81,4 +89,10 @@
 
 .side-bar-section-one p {
   font-size: 13px;
+}
+
+@media (max-width: 450px) {
+  .side-bar-logo {
+    margin-left: 0px;
+  }
 }

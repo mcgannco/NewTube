@@ -134,7 +134,15 @@ class NavBar extends React.Component {
             <Search />
           </nav>
           <nav className="right-nav">
+
             <ul>
+              <li id="nav-button">
+                <span>
+                  <i className="fas fa-search"></i>
+                </span>
+                <nav className="tooltiptext">Search</nav>
+              </li>
+
               <li onClick={this.vidDropDown} id="nav-button">
                 <span>
                   <i className="fas fa-video"></i>

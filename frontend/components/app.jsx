@@ -24,6 +24,9 @@ const App = () => (
        <ProtectedRoute exact path='/upload' component={UploadVideoContainer} />
        <Route path="/" component={VideoIndexContainer} />
      </Switch>
+
+
+
   </div>
 );
 

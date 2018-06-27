@@ -5,13 +5,12 @@
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 200px;
+  width: 165px;
   padding: 0.5rem 0rem;
 }
 
 .video-drop-down-container {
-  width: 350px;
-  height: 300px;
+  width: 305px;
   position: absolute;
   top: 50px;
   display: flex;
@@ -25,17 +24,16 @@
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 200px;
+  width: 165px;
   padding: 0.5rem 0rem;
 }
 
 .app-drop-down-container {
-  width: 350px;
-  height: 300px;
+  width: 305px;
   position: absolute;
   top: 50px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .setting-drop-down {
@@ -45,13 +43,12 @@
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
-  width: 200px;
+  width: 165px;
   padding: 0.5rem 0rem;
 }
 
 .setting-drop-down-container {
-  width: 350px;
-  height: 300px;
+  width: 305px;
   position: absolute;
   top: 50px;
   display: flex;
