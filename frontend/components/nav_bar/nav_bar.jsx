@@ -15,6 +15,7 @@ class NavBar extends React.Component {
       appsDropDown: false,
       settingsDropDown: false,
       usersDropDown: false,
+      smallSearch: false,
     }
     this.vidDropDown = this.vidDropDown.bind(this);
     this.closeVid = this.closeVid.bind(this);
@@ -84,7 +85,7 @@ class NavBar extends React.Component {
   }
 
   smallSearch(e) {
-    debugger
+    this.setState({smallSearch: true})
   }
 
 
@@ -136,7 +137,7 @@ class NavBar extends React.Component {
             </ul>
           </nav>
           <nav className="nav-search">
-            <Search />
+            <Search smallSearch={this.state.smallSearch}/>
           </nav>
           <nav className="right-nav">
 
