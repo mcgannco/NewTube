@@ -86,11 +86,15 @@
   opacity: 1;
 }
 
-.left-nav > ul,
-.right-nav > ul {
+.left-nav > ul {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.right-nav > ul {
+  display: flex;
+  align-items: center;
 }
 
 .left-nav {
