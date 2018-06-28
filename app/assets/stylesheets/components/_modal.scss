@@ -1,7 +1,6 @@
 #modal-background {
-  transform: translateX(-100%);
-  transition: transform 00ms ease-in;
-
+  transition: max-height 300ms ease-out;
+  height: 0px;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -12,16 +11,16 @@
 }
 
 #modal-background.modal-id-y {
-  transform: translateX(-100%);
+  min-height: 0px;
 }
 
 #modal-background.modal-id-n {
-  transform: translateX(0);
+  height: 100%;
 }
 
 #modal-child {
   transform: translateX(-255px);
-  transition: transform 150ms ease-in;
+  transition: transform 200ms ease-in;
   position: absolute;
 }
 
