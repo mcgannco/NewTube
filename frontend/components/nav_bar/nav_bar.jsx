@@ -16,6 +16,11 @@ class NavBar extends React.Component {
       settingsDropDown: false,
       usersDropDown: false,
       smallSearch: false,
+      width: 0,
+      height: 0,
+      hideBigSearch: false,
+      expandlittleSearch: false,
+      hidelittleSearch: false
     }
     this.vidDropDown = this.vidDropDown.bind(this);
     this.closeVid = this.closeVid.bind(this);
@@ -26,6 +31,24 @@ class NavBar extends React.Component {
     this.userDropDown = this.userDropDown.bind(this);
     this.closeUser = this.closeUser.bind(this);
     this.smallSearch = this.smallSearch.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    if (window.innerWidth <= 660) {
+      this.setState({ width: window.innerWidth, height: window.innerHeight, hideBigSearch: true });
+    } else {
+      this.setState({ width: window.innerWidth, height: window.innerHeight, hideBigSearch: false });
+    }
   }
 
   vidDropDown(e) {
@@ -136,8 +159,8 @@ class NavBar extends React.Component {
               </li>
             </ul>
           </nav>
-          <nav className="nav-search">
-            <Search smallSearch={this.state.smallSearch}/>
+          <nav className={this.state.hideBigSearch ? "nav-search-hide" : "nav-search"}>
+            <Search hideBigSearch={this.state.hideBigSearch}/>
           </nav>
           <nav className="right-nav">
 
