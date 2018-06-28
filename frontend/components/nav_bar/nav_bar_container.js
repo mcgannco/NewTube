@@ -5,7 +5,7 @@ import NavBar from './nav_bar';
 
 const msp = state => {
   return({
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
   })
 };
 

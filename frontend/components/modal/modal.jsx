@@ -3,25 +3,53 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import SideBar from '../side_bar/side_bar';
 
-function Modal({modal, closeModal}) {
-  if(!modal) {
-    return null;
+class Modal extends React.Component {
+  constructor(props) {
+    super(props)
   }
-  let component;
-  switch (modal) {
-    case 'sidebar':
-      component = <SideBar closeModal={closeModal}/>;
-      break;
-    default:
-      return null;
-  }
+
+  render() {
+    let {modal, closeModal} = this.props
+
+    let modalClass;
+    let modalid;
+    let classN;
+    let click;
+    let clickChild;
+    let component;
+
+    if (!modal) {
+      modalid= "modal-background"
+      modalClass = "modal-id-y"
+      classN = "modal-child-n";
+      click = null;
+      clickChild = null;
+      component = <SideBar status={"close"} closeModal={closeModal} />;
+
+    } else {
+      modalid= "modal-background"
+      modalClass = "modal-id-n"
+      classN = "modal-child-y";
+      click = closeModal;
+      clickChild = e => e.stopPropagation();
+
+      switch (modal) {
+        case 'sidebar':
+        component = <SideBar status={"open"} closeModal={closeModal} />;
+        break;
+        default:
+        return null;
+      }
+    }
+
   return(
-    <div className="modal-background" onClick={closeModal}>
-      <div className="modal-child" onClick={e => e.stopPropagation()}>
+    <div id={modalid} className={modalClass}  onClick={click}>
+      <div id="modal-child" className ={classN} onClick={clickChild}>
         { component }
       </div>
     </div>
   );
+}
 }
 
 const msp = state => {

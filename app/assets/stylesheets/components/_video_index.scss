@@ -1,4 +1,6 @@
 .video-index {
+  display: flex;
+  padding-top: 5%;
 }
 
 .video-index ul {
@@ -10,7 +12,6 @@
 
 .video-index ul li {
   display: flex;
-  margin-top: 40px;
 }
 
 .video-index ul li video {

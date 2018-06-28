@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const SideBar = ({closeModal}) => {
+const SideBar = ({status, closeModal}) => {
+
   return(
-    <div className="side-bar-container">
-
-
-    <div className="side-bar">
+    <div className ="side-bar">
           <span onClick={closeModal}>
             <nav><i className="fa fa-bars"></i></nav>
 
@@ -33,7 +31,6 @@ const SideBar = ({closeModal}) => {
               <p>Subscriptions</p>
             </div>
           </div>
-      </div>
         </div>
     )
 };

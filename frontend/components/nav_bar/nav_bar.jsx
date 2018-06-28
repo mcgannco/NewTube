@@ -84,7 +84,7 @@ class NavBar extends React.Component {
   }
 
   smallSearch(e) {
-    
+
   }
 
 
@@ -120,7 +120,7 @@ class NavBar extends React.Component {
           {this.state.usersDropDown ? dd : ""}
         </div>
       }
-
+      
       return(
         <header className="main-nav">
           <nav className="left-nav">

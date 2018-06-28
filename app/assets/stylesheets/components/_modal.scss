@@ -1,4 +1,7 @@
-.modal-background {
+#modal-background {
+  transform: translateX(-100%);
+  transition: transform 00ms ease-in;
+
   position: fixed;
   top: 0;
   bottom: 0;
@@ -8,6 +11,24 @@
   z-index: 1;
 }
 
-.modal-child {
+#modal-background.modal-id-y {
+  transform: translateX(-100%);
+}
+
+#modal-background.modal-id-n {
+  transform: translateX(0);
+}
+
+#modal-child {
+  transform: translateX(-255px);
+  transition: transform 150ms ease-in;
   position: absolute;
+}
+
+#modal-child.modal-child-y {
+  transform: translateX(0);
+}
+
+#modal-child.modal-child-n {
+  transform: translateX(-255px);
 }
