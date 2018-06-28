@@ -84,7 +84,7 @@ class NavBar extends React.Component {
   }
 
   smallSearch(e) {
-    debugger
+    
   }
 
 
