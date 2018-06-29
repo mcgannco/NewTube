@@ -5,7 +5,6 @@
 	width: 255px;
   height: 100vh;
   background-color: #fafafa;
-  overflow: scroll;
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
@@ -58,6 +57,7 @@
 
 .side-bar-section-one {
   padding-top: 10px;
+  overflow: scroll;
 }
 .side-bar-section-one div {
   display: flex;

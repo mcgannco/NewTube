@@ -117,7 +117,7 @@ class UploadVideo extends React.Component {
                   </div>
     }
       return(
-        <div className = "upload-container">
+        <div className = "upload-container" id='body'>
           {uploadForm}
         </div>
       )

@@ -109,11 +109,18 @@ class NavBar extends React.Component {
   }
 
   smallSearch(e) {
-    this.setState({smallSearch: true})
+
+    e.preventDefault();
+    this.setState({ smallSearch: true }, () => {
+    document.getElementById('body').addEventListener('click', this.closeSmallSearch);
+    });
   }
 
-  closeSmallSearch() {
-    this.setState({smallSearch: false})
+  closeSmallSearch(e) {
+    e.preventDefault();
+    this.setState({ smallSearch: false }, () => {
+      document.getElementById('body').removeEventListener('click', this.closeSmallSearch);
+    });
   }
 
 

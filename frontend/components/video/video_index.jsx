@@ -16,7 +16,7 @@ class VideoIndex extends React.Component {
   render() {
     let {videos} = this.props;
       return(
-        <div className='video-index'>
+        <div className='video-index' id='body'>
           <ul>
           {videos.map(video => <VideoIndexItem key={video.id} video={video} />)}
           </ul>
