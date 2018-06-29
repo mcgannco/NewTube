@@ -32,6 +32,7 @@ class NavBar extends React.Component {
     this.closeUser = this.closeUser.bind(this);
     this.smallSearch = this.smallSearch.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.closeSmallSearch = this.closeSmallSearch.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +48,7 @@ class NavBar extends React.Component {
     if (window.innerWidth <= 660) {
       this.setState({ width: window.innerWidth, height: window.innerHeight, hideBigSearch: true });
     } else {
-      this.setState({ width: window.innerWidth, height: window.innerHeight, hideBigSearch: false });
+      this.setState({ width: window.innerWidth, height: window.innerHeight, hideBigSearch: false, smallSearch: false });
     }
   }
 
@@ -111,6 +112,10 @@ class NavBar extends React.Component {
     this.setState({smallSearch: true})
   }
 
+  closeSmallSearch() {
+    this.setState({smallSearch: false})
+  }
+
 
   render() {
     const {currentUser, logout, openModal} = this.props
@@ -144,10 +149,18 @@ class NavBar extends React.Component {
           {this.state.usersDropDown ? dd : ""}
         </div>
       }
+      let navsearch;
+      if(this.state.smallSearch) {
+        navsearch = "small-search"
+      } else if (this.state.hideBigSearch) {
+        navsearch = "nav-search-hide"
+      } else {
+        navsearch = "nav-search"
+      }
 
       return(
-        <header className="main-nav">
-          <nav className="left-nav">
+        <header className={ this.state.smallSearch ? "small-search-main-nav" : "main-nav"}>
+          <nav className={ this.state.smallSearch ? "no-left-nav" : "left-nav"}>
             <ul>
               <li id="nav-button" onClick={() => openModal('sidebar')}>
                 <span><i className="fa fa-bars"></i></span>
@@ -159,10 +172,13 @@ class NavBar extends React.Component {
               </li>
             </ul>
           </nav>
-          <nav className={this.state.hideBigSearch ? "nav-search-hide" : "nav-search"}>
-            <Search hideBigSearch={this.state.hideBigSearch}/>
+          <span onClick={this.closeSmallSearch} className={this.state.smallSearch ? "back-button-small-search" : "no-back-button-small-search"}>
+            <i className="fas fa-arrow-left"></i>
+          </span>
+          <nav className={navsearch}>
+            <Search hideBigSearch={this.state.hideBigSearch} smallSearch={this.state.smallSearch}/>
           </nav>
-          <nav className="right-nav">
+          <nav className={ this.state.smallSearch ? "no-left-nav" : "right-nav"}>
 
             <ul>
               <li onClick={this.smallSearch} id="nav-button">
