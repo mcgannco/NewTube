@@ -172,9 +172,14 @@ class NavBar extends React.Component {
               </li>
             </ul>
           </nav>
-          <span onClick={this.closeSmallSearch} className={this.state.smallSearch ? "back-button-small-search" : "no-back-button-small-search"}>
-            <i className="fas fa-arrow-left"></i>
-          </span>
+
+          <div onClick={this.closeSmallSearch} className={this.state.smallSearch ? "back-button-small-search" : "no-back-button-small-search"}>
+            <span>
+              <i className="fas fa-arrow-left"></i>
+            </span>
+            <nav className="tooltiptext">Back</nav>
+          </div>
+
           <nav className={navsearch}>
             <Search hideBigSearch={this.state.hideBigSearch} smallSearch={this.state.smallSearch}/>
           </nav>
