@@ -17,6 +17,7 @@ import {
 const App = () => (
   <div id="app">
     <NavBarContainer />
+    <div className="nav-bar-anchor"></div>
     <Modal />
      <Switch>
        <AuthRoute exact path="/signin" component={LoginFormContainer} />
