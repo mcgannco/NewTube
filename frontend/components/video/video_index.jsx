@@ -59,7 +59,13 @@ class VideoIndex extends React.Component {
       return(
         <div className='video-index-container' id='body'>
           <div className='video-index'>
-            <h1 style={{marginLeft: marg + 'px', width: header + 'px'}}>Recommended</h1>
+            <div className="video-header" style={{marginLeft: marg + 'px', width: header + 'px'}}>
+              <h1>Recommended</h1>
+              <div>
+                <button>Subscribe</button>
+                <span><i className="fas fa-times"></i></span>
+              </div>
+              </div>
             <ul>
             {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} video={video} />)}
             </ul>

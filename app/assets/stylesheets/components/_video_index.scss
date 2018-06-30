@@ -42,11 +42,42 @@
 .video-index h1 {
   display: flex;
   font-family: 'Roboto', 'Noto', sans-serif;
+  color: var(--yt-primary-color);
+  max-height: 2rem;
+  overflow: hidden;
+  font-size: 18px;
   font-weight: 900;
-  font-size: 14px;
+  line-height: 2rem;
 }
 
-.video-index-header {
+.video-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.video-header button {
+  background: #0099ff;;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.video-header div {
+  display: flex;
+  align-items: center;
+}
+
+.video-header span {
+  color: #989898;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+@media (max-width: 449px) {
+  .video-header span {
+    margin-left: 0px;
+
+ }
+
 }
