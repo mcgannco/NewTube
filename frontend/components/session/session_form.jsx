@@ -17,6 +17,7 @@ class SessionForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this);
     this.processInput = this.processInput.bind(this);
     this.otherForm = this.otherForm.bind(this);
+    this.uploadRedirect = this.uploadRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -44,8 +45,13 @@ class SessionForm extends React.Component {
   }
 
   demoLogin() {
+    debugger
     const demo = {username: "DemoUser", password: "123456"};
-    this.props.login(demo);
+    if (this.props.history.action === 'REPLACE') {
+      this.props.login(demo).then(this.uploadRedirect);
+    } else {
+      this.props.login(demo);
+    }
   }
 
   processInput() {
@@ -63,7 +69,11 @@ class SessionForm extends React.Component {
         }
       )
     } else {
-      processForm({username: this.state.username, password: this.state.password})
+      if(this.props.history.action === 'REPLACE') {
+        processForm({username: this.state.username, password: this.state.password}).then(this.uploadRedirect)
+      } else {
+        processForm({username: this.state.username, password: this.state.password})
+      }
     }
 
   }
@@ -72,6 +82,10 @@ class SessionForm extends React.Component {
     let path;
     this.props.match.path === "/signin" ? path = "/signup" : path = "/signin"
     this.props.history.push(path);
+  }
+
+  uploadRedirect() {
+    this.props.history.push('/upload')
   }
 
   render() {
