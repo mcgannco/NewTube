@@ -19,7 +19,8 @@
 
 .video-index ul li {
   display: flex;
-  margin-left: 5px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
   margin-top: 15px;
   flex-direction: column;
 }
@@ -43,4 +44,9 @@
   font-family: 'Roboto', 'Noto', sans-serif;
   font-weight: 900;
   font-size: 14px;
+}
+
+.video-index-header {
+  display: flex;
+  justify-content: center;
 }
