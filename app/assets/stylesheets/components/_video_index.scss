@@ -1,26 +1,37 @@
+.video-index-container {
+  display: flex;
+  width: 100%;
+}
+
 .video-index {
   display: flex;
+  margin-top: 1.5rem;
+  justify-content: center;
+  width: 100%;
 }
 
 .video-index ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 1.5rem;
+  justify-content: center;
 }
 
 .video-index ul li {
   display: flex;
+  margin-left: 5px;
+  margin-top: 15px;
 }
 
 .video-index ul li video {
   background: black;
   cursor: pointer;
+  width: 220px;
+  height: 130px;
 }
 
 .video-index ul li p {
   font-family: 'Roboto', 'Noto', sans-serif;
   font-weight: 900;
   font-size: 14px;
+  width: 200px;
 }

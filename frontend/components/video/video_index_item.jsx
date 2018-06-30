@@ -5,7 +5,7 @@ const VideoIndexItem = ({ video }) => {
   return(
     <li>
       <div>
-        <video src={video.video_url} width="250" height="150"  />
+        <video id='video' src={video.video_url} width="250" height="150"  />
         <p>{video.title}</p>
       </div>
     </li>
