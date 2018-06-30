@@ -13,7 +13,6 @@ class SessionForm extends React.Component {
     };
     this.updateUserName = this.updateUserName.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
     this.processInput = this.processInput.bind(this);
     this.otherForm = this.otherForm.bind(this);
@@ -21,6 +20,9 @@ class SessionForm extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.history.action === 'REPLACE') {
+      this.props.redirectToUpload()
+    }
     if (this.state.formType != this.props.formType) {
       this.props.clearSessionErrors()
       this.setState({formType: this.props.formType})
@@ -37,17 +39,9 @@ class SessionForm extends React.Component {
     this.setState({password: e.currentTarget.value})
   }
 
-  handleSubmit(e) {
-    const { processForm } = this.props;
-    e.preventDefault();
-    const user = Object.assign({}, this.state);
-    processForm(user);
-  }
-
   demoLogin() {
-    debugger
     const demo = {username: "DemoUser", password: "123456"};
-    if (this.props.history.action === 'REPLACE') {
+    if (this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
       this.props.login(demo).then(this.uploadRedirect);
     } else {
       this.props.login(demo);
@@ -69,7 +63,7 @@ class SessionForm extends React.Component {
         }
       )
     } else {
-      if(this.props.history.action === 'REPLACE') {
+      if(this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
         processForm({username: this.state.username, password: this.state.password}).then(this.uploadRedirect)
       } else {
         processForm({username: this.state.username, password: this.state.password})
@@ -85,6 +79,7 @@ class SessionForm extends React.Component {
   }
 
   uploadRedirect() {
+    this.props.resetRedirect()
     this.props.history.push('/upload')
   }
 
