@@ -311,7 +311,23 @@
 .back-button-small-search {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  width: 18px;
+  padding: 7px 9px;
+  border-radius: 20px;
 }
+
+.back-button-small-search:active {
+  background: #ccc;
+  border-radius: 20px;
+}
+
+.back-button-small-search span {
+  margin: 0px;
+}
+
+
 
 .no-back-button-small-search {
   display: none;

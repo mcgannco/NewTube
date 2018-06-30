@@ -37,6 +37,8 @@
   font-weight: 900;
   font-size: 14px;
   width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .video-index h1 {
