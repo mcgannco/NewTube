@@ -8,6 +8,7 @@
   margin-top: 1.5rem;
   justify-content: center;
   width: 100%;
+  flex-direction: column;
 }
 
 .video-index ul {
@@ -20,6 +21,7 @@
   display: flex;
   margin-left: 5px;
   margin-top: 15px;
+  flex-direction: column;
 }
 
 .video-index ul li video {
@@ -34,4 +36,11 @@
   font-weight: 900;
   font-size: 14px;
   width: 200px;
+}
+
+.video-index h1 {
+  display: flex;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
 }
