@@ -70,7 +70,7 @@ class VideoIndex extends React.Component {
               </div>
               </div>
             <ul>
-            {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+            {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
           </div>
         </div>
