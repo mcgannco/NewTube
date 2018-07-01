@@ -46,9 +46,26 @@
   font-size: 13px;
   color: grey;
   font-weight: 400;
-  padding-top: 5px;
+  padding-top: 8px;
   display: flex;
   flex-direction: column;
+  width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-author-views div {
+  display: flex;
+  align-items: center;
+}
+
+.dot-seperator {
+  display: flex;
+  margin: 0px 5px;
+}
+
+.video-author-views svg {
+  font-size: 5px;
 }
 
 .video-index h1 {
