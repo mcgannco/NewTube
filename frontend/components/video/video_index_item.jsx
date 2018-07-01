@@ -19,7 +19,9 @@ const VideoIndexItem = ({ video,idx, author, timeAgo }) => {
               <i className="fas fa-circle"></i>
             </span>
 
-            <span><TimeAgo date={date} minPeriod='60' /></span>
+            <span>
+              <TimeAgo date={date} minPeriod='60' />
+            </span>
 
           </div>
           </nav>
