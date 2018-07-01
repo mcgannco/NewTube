@@ -9,13 +9,7 @@ class UserDropDown extends React.Component {
   }
 
   logoutUser() {
-    let { logout } = this.props
-    let path = this.props.history.location.pathname
-    if(path === '/upload') {
-      logout().then(this.props.history.push('/'))
-    } else {
-      logout();
-    }
+    this.props.logout().then(this.props.history.push('/'))
   }
 
 

@@ -17,6 +17,7 @@ class SessionForm extends React.Component {
     this.processInput = this.processInput.bind(this);
     this.otherForm = this.otherForm.bind(this);
     this.uploadRedirect = this.uploadRedirect.bind(this);
+    this.load = this.load.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,12 @@ class SessionForm extends React.Component {
     if (this.state.formType != this.props.formType) {
       this.props.clearSessionErrors()
       this.setState({formType: this.props.formType})
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.history.loaction !== '/signup' || this.props.history.loaction !== '/signup') {
+      this.props.resetRedirect()
     }
   }
 
@@ -83,6 +90,10 @@ class SessionForm extends React.Component {
     this.props.history.push('/upload')
   }
 
+  load() {
+    return null
+  }
+
   render() {
     let { formType } = this.props;
     let otherformType;
@@ -122,11 +133,11 @@ class SessionForm extends React.Component {
 
             <div className="sessionForm-buttons">
               <a onClick={this.otherForm}>{otherformType}</a>
-              <button onClick={this.processInput}>Next</button>
+              <button onClick={this.props.loading ? this.load : this.processInput}>Next</button>
             </div>
 
             <div className="sessionForm-demo">
-              <button onClick={this.demoLogin}>Demo</button>
+              <button onClick={this.props.loading ? this.load : this.demoLogin}>Demo</button>
             </div>
         </div>
       </div>
