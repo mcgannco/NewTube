@@ -44,17 +44,17 @@ class VideoIndexItem extends React.Component {
     return(
       <li>
         <div>
-          <div className="video-thumb">
-          <video
-            onMouseEnter={this.preview}
-            onLoadedMetadata={this.getDuration}
-            className={idx}
-            id='video'
-            src={video.video_url}
-            width="250"
-            height="150"
-            />
-          <nav className="video-duration">{this.state.videoLength}</nav>
+          <div className="video-thumb" id={"video-" + idx}>
+            <video
+              onMouseEnter={this.preview}
+              onLoadedMetadata={this.getDuration}
+              className={idx}
+              id='video'
+              src={video.video_url}
+              width="250"
+              height="150"
+              />
+            <nav className="video-duration">{this.state.videoLength}</nav>
           </div>
 
           <p>{video.title}</p>
