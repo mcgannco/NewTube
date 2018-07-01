@@ -127,6 +127,14 @@
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
+.play-button {
+  background: red;
+}
+
+.no-play-button {
+  display: none;
+}
+
 @media (max-width: 449px) {
   .video-header span {
     margin-left: 0px;

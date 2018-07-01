@@ -7,13 +7,34 @@ class VideoIndexItem extends React.Component {
     super(props)
     this.state = {
       videoLength: "",
+      currentTime: 0,
+      playicon: false,
+      preview: false
     }
     this.preview = this.preview.bind(this);
+    this.closePreview = this.closePreview.bind(this);
     this.getDuration = this.getDuration.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
   preview(e) {
+    this.setState({preview: true})
+    e.currentTarget.muted = true;
+    e.currentTarget.play()
+  }
 
+  closePreview(e) {
+    this.setState({preview: false, currentTime: 0})
+    e.currentTarget.pause()
+    e.currentTarget.currentTime = 0
+  }
+
+  tick(e) {
+    let video = e.currentTarget
+    this.setState({currentTime: video.currentTime})
+    if(!this.state.preview || this.state.currentTime > 4) {
+      this.closePreview(e);
+    }
   }
 
   getDuration(e) {
@@ -47,6 +68,8 @@ class VideoIndexItem extends React.Component {
           <div className="video-thumb" id={"video-" + idx}>
             <video
               onMouseEnter={this.preview}
+              onTimeUpdate={this.tick}
+              onMouseLeave={this.closePreview}
               onLoadedMetadata={this.getDuration}
               className={idx}
               id='video'
@@ -55,6 +78,7 @@ class VideoIndexItem extends React.Component {
               height="150"
               />
             <nav className="video-duration">{this.state.videoLength}</nav>
+            <nav className={this.state.playicon ? "play-button" : "no-play-button"}>PlayIcon</nav>
           </div>
 
           <p>{video.title}</p>
