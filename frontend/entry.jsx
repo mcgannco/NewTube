@@ -6,11 +6,13 @@ import configureStore from './store/store';
 // testing
 import { signup, login, logout } from './actions/session_actions';
 import { requestAllVideos, createVideo } from './actions/video_actions';
+import { requestAllUsers } from './actions/user_actions';
 window.requestAllVideos = requestAllVideos;
 window.createVideo = createVideo;
 window.signup = signup;
 window.login = login;
 window.logout = logout;
+window.requestAllUsers = requestAllUsers;
 import { openModal, closeModal } from './actions/modal_actions';
 window.openModal = openModal;
 window.closeModal = closeModal;

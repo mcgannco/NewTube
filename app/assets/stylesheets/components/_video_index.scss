@@ -41,6 +41,16 @@
   text-overflow: ellipsis;
 }
 
+.video-author-views {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 13px;
+  color: grey;
+  font-weight: 400;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
 .video-index h1 {
   display: flex;
   font-family: 'Roboto', 'Noto', sans-serif;

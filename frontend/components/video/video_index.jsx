@@ -14,7 +14,7 @@ class VideoIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestAllVideos().then(this.updateWindowDimensions());
+    this.props.requestAllVideos().then(this.props.requestAllUsers()).then(this.updateWindowDimensions());
     window.addEventListener('resize', this.updateWindowDimensions);
     let margin;
     let width = window.innerWidth;
@@ -43,7 +43,7 @@ class VideoIndex extends React.Component {
   }
 
   render() {
-    let {videos} = this.props;
+    let {videos, users} = this.props;
     let marg;
     if (document.getElementsByClassName("0")[0]) {
       marg = document.getElementsByClassName("0")[0].offsetLeft.toString();
@@ -56,6 +56,9 @@ class VideoIndex extends React.Component {
       header = this.state.headerwidth
     }
 
+    if (!users) {
+      return null;
+    }
       return(
         <div className='video-index-container' id='body'>
           <div className='video-index'>
@@ -67,7 +70,7 @@ class VideoIndex extends React.Component {
               </div>
               </div>
             <ul>
-            {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} video={video} />)}
+            {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
           </div>
         </div>
