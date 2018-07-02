@@ -125,10 +125,25 @@
   opacity: 0.8;
   border-radius: 2px;
   font-family: 'Roboto', 'Noto', sans-serif;
+  cursor: pointer;
+}
+
+.no-video-duration {
+  display: none;
 }
 
 .play-button {
-  background: red;
+  position: absolute;
+  right: 88px;
+  bottom: 38px;
+  color: white;
+  font-size: 35px;
+  font-weight: 500;
+  padding: 2px 4px;
+  margin: 4px;
+  color: white;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .no-play-button {
