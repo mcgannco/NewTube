@@ -5,7 +5,7 @@ class VideoShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      
     }
   }
   componentDidMount() {
@@ -26,10 +26,14 @@ class VideoShow extends React.Component {
     }
       return(
         <section className="video-show-container" id='body'>
-        	<section className="main-story col col-2-3">
-
-              <video className="video-player" src={video.video_url} allowFullScreen></video>
-          
+        	<section className="video-player-container col col-2-3">
+            <nav className="video-container">
+              <video
+                className="video-player"
+                src={video.video_url}
+                />
+            </nav>
+              <h1>{video.title}</h1>
         	</section>
         	<section className="col col-1-3">
   					<ul className="opinions-list">
