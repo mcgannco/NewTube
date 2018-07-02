@@ -24,3 +24,18 @@
   width: 100%;
   height: 100%;
 }
+
+.video-stats {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+  align-items: center;
+}
+
+.video-stats div {
+  display: flex;
+}
+
+.video-stats div span {
+  display: flex;
+}
