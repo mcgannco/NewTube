@@ -19,14 +19,14 @@ class VideoIndexItem extends React.Component {
   }
 
   preview(e) {
-    let video = e.currentTarget.children["video"];
+    let video = e.currentTarget.children[0].children['video']
     this.setState({preview: true, showTime: false})
     video.muted = true;
     video.play()
   }
 
   closePreview(e) {
-    let video = e.currentTarget.children["video"];
+    let video = e.currentTarget.children[0].children['video']
     this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
     video.pause()
     video.currentTime = 0
@@ -73,11 +73,10 @@ class VideoIndexItem extends React.Component {
     let date = new Date(timeAgo);
     return(
       <li>
-        <Link to={`/videos/${video.id}`}><div>
-          <div
-            onMouseEnter={this.preview}
-            onMouseLeave={this.closePreview}
-            className="video-thumb" id={"video-" + idx}>
+        <Link to={`/videos/${video.id}`}>
+          <div onMouseEnter={this.preview}
+          onMouseLeave={this.closePreview}>
+          <div className="video-thumb" id={"video-" + idx}>
             <video
               onTimeUpdate={this.tick}
               onLoadedMetadata={this.getDuration}
@@ -89,9 +88,15 @@ class VideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
             <nav className={this.state.playButton ? "play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
+            <nav className={this.state.preview ? "clock" : "no-clock"}><i class="far fa-clock"></i></nav>
           </div>
 
-          <p>{video.title}</p>
+          <div className="video-index-title">
+            <p>{video.title}</p>
+            <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
+              <i className="fas fa-ellipsis-v"></i>
+            </span>
+          </div>
           <nav className="video-author-views">
             <Link to={`/users/${video.author_id}`}><span className="video-index-author">{author}</span></Link>
 

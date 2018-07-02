@@ -168,6 +168,48 @@
   color:black;
 }
 
+.video-index-title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.video-index-options-dd {
+  width: 20px;
+  color: grey;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.video-index-options-dd-hidden {
+  display: none;
+}
+
+.clock {
+  position: absolute;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  right: 0;
+  bottom: 98px;
+  color: white;
+  letter-spacing: .5px;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 2px 4px;
+  margin: 4px;
+  background: #111111;
+  color: white;
+  opacity: 0.8;
+  border-radius: 2px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  cursor: pointer;
+}
+
+.no-clock {
+  display: none;
+}
+
 @media (max-width: 449px) {
   .video-header span {
     margin-left: 0px;
