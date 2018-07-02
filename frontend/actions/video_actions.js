@@ -10,7 +10,7 @@ export const receiveAllVideos = (videos) => (
   }
 );
 
-export const receiveVideo = (video) => (
+export const receiveSingleVideo = (video) => (
   {
     type: RECEIVE_VIDEO,
     video,
@@ -27,6 +27,14 @@ export const receiveErrors = (errors) => (
 export const requestAllVideos = () => dispatch => {
   return(
     APIUtil.fetchAllVideos().then(videos => dispatch(receiveAllVideos(videos)),
+  err => {
+    dispatch(receiveErrors(err.responseJSON));
+  }));
+};
+
+export const requestSingleVideo = (id) => dispatch => {
+  return(
+    APIUtil.fetchSingleVideo(id).then(video => dispatch(receiveSingleVideo(video)),
   err => {
     dispatch(receiveErrors(err.responseJSON));
   }));

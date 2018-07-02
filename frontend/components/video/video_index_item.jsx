@@ -88,7 +88,7 @@ class VideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
             <nav className={this.state.playButton ? "play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-            <nav className={this.state.preview ? "clock" : "no-clock"}><i class="far fa-clock"></i></nav>
+            <nav className={this.state.preview ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
           </div>
 
           <div className="video-index-title">

@@ -4,6 +4,11 @@ class Api::VideosController < ApplicationController
     @videos = Video.all
   end
 
+  def show
+    @video = Video.find(params[:id])
+    render "api/videos/show"
+  end
+
   def create
     @video = Video.new(video_params)
     @video.author_id = current_user.id
