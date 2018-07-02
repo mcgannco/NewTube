@@ -73,7 +73,7 @@ class VideoIndexItem extends React.Component {
     let date = new Date(timeAgo);
     return(
       <li>
-        <div>
+        <Link to={`/videos/${video.id}`}><div>
           <div
             onMouseEnter={this.preview}
             onMouseLeave={this.closePreview}
@@ -93,7 +93,7 @@ class VideoIndexItem extends React.Component {
 
           <p>{video.title}</p>
           <nav className="video-author-views">
-            <span>{author}</span>
+            <Link to='/upload'><span className="video-index-author">{author}</span></Link>
 
             <div>
               <span>100K views</span>
@@ -109,6 +109,7 @@ class VideoIndexItem extends React.Component {
             </div>
           </nav>
         </div>
+        </Link>
       </li>
     )
 
