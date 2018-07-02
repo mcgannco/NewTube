@@ -57,6 +57,20 @@
 .video-author-views div {
   display: flex;
   align-items: center;
+  width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-author-views a {
+  min-width: 50px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video-author-views a:hover {
+  color: black
 }
 
 .dot-seperator {

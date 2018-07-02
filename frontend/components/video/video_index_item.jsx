@@ -93,7 +93,7 @@ class VideoIndexItem extends React.Component {
 
           <p>{video.title}</p>
           <nav className="video-author-views">
-            <Link to='/upload'><span className="video-index-author">{author}</span></Link>
+            <Link to={`/users/${video.author_id}`}><span className="video-index-author">{author}</span></Link>
 
             <div>
               <span>100K views</span>
