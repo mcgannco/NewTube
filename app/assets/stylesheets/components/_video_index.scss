@@ -28,8 +28,7 @@
 .video-index ul li video {
   background: black;
   cursor: pointer;
-  width: 220px;
-  height: 130px;
+  object-fit: cover;
 }
 
 .video-index ul li p {
@@ -119,6 +118,9 @@
 
 .video-thumb{
   position: relative;
+  overflow: hidden;
+  width: 220px;
+  height: 130px;
 }
 
 .video-duration {

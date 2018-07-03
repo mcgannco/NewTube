@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import VideoIndexItem from './video_index_item';
+import RelatedVideoIndexItem from './related_video_index_item';
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -53,7 +53,7 @@ class VideoShow extends React.Component {
         	</section>
         	<section className="col col-1-3">
             <ul>
-            {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+            {videos.map((video,idx) => <RelatedVideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
     			</section>
         </section>
