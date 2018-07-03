@@ -51,9 +51,11 @@ class VideoShow extends React.Component {
                 </div>
               </div>
               <section>
-                <div>
+
+                <div className="video-description">
                   <p>{video.description}</p>
                 </div>
+
               </section>
         	</section>
 

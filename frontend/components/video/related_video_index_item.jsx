@@ -80,7 +80,7 @@ class RelatedVideoIndexItem extends React.Component {
     let date = new Date(timeAgo);
     return(
       <li>
-        <Link to={`/videos/${video.id}`}>
+        <Link to={`/video/${video.id}`}>
           <div className="related-video-container" onMouseEnter={this.preview}
             onMouseLeave={this.closePreview}>
           <div className="related-video-thumb" id={"video-" + idx}>
