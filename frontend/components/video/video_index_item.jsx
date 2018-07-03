@@ -20,23 +20,31 @@ class VideoIndexItem extends React.Component {
 
   preview(e) {
     let video = e.currentTarget.children[0].children['video']
-    this.setState({preview: true, showTime: false})
     video.muted = true;
-    video.play()
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      this.setState({preview: true, showTime: false})
+    })
+    .catch(error => {
+      return null
+    });
   }
+}
 
   closePreview(e) {
     let video = e.currentTarget.children[0].children['video']
-    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
     video.pause()
+    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
     video.currentTime = 0
   }
 
   resetPreview(e) {
-    this.setState({currentTime: 0, playButton: true, showTime: true})
     e.currentTarget.pause()
     e.currentTarget.currentTime = 0
+    this.setState({playButton: true, showTime: true, currentTime: 0})
   }
+
 
   tick(e) {
     let video = e.currentTarget;
