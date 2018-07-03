@@ -42,7 +42,7 @@ export const requestSingleVideo = (id) => dispatch => {
 
 export const createVideo = video => dispatch => (
   APIUtil.createVideo(video).then(video => (
-    dispatch(receiveVideo(video))
+    dispatch(receiveSingleVideo(video))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ))

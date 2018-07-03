@@ -20,22 +20,29 @@ class RelatedVideoIndexItem extends React.Component {
 
   preview(e) {
     let video = e.currentTarget.children[0].children['video']
-    this.setState({preview: true, showTime: false})
     video.muted = true;
-    video.play()
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      this.setState({preview: true, showTime: false})
+    })
+    .catch(error => {
+      return null
+    });
   }
+}
 
   closePreview(e) {
     let video = e.currentTarget.children[0].children['video']
-    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
     video.pause()
+    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
     video.currentTime = 0
   }
 
   resetPreview(e) {
-    this.setState({currentTime: 0, playButton: true, showTime: true})
     e.currentTarget.pause()
     e.currentTarget.currentTime = 0
+    this.setState({playButton: true, showTime: true, currentTime: 0})
   }
 
   tick(e) {
@@ -74,45 +81,36 @@ class RelatedVideoIndexItem extends React.Component {
     return(
       <li>
         <Link to={`/videos/${video.id}`}>
-          <div onMouseEnter={this.preview}
-          onMouseLeave={this.closePreview}>
-          <div className="video-thumb" id={"video-" + idx}>
+          <div className="related-video-container" onMouseEnter={this.preview}
+            onMouseLeave={this.closePreview}>
+          <div className="related-video-thumb" id={"video-" + idx}>
             <video
               onTimeUpdate={this.tick}
               onLoadedMetadata={this.getDuration}
               className={idx}
               id='video'
               src={video.video_url}
-              width="250"
-              height="150"
+              width="150"
+              height="120"
               />
-            <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
-            <nav className={this.state.playButton ? "play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-            <nav className={this.state.preview ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
           </div>
 
-          <div className="video-index-title">
-            <p>{video.title}</p>
-            <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
-              <i className="fas fa-ellipsis-v"></i>
-            </span>
+          <div className="related-video-info">
+            <div className="related-video-index-title">
+                       <p>{video.title}</p>
+                       <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
+                         <i className="fas fa-ellipsis-v"></i>
+                       </span>
+                     </div>
+                     <nav className="video-author-views">
+                       <span className="related-video-index-author">{author}</span>
+                       <div>
+                         <span>100K views</span>
+                       </div>
+                     </nav>
+
           </div>
-          <nav className="video-author-views">
-            <Link to={`/users/${video.author_id}`}><span className="video-index-author">{author}</span></Link>
 
-            <div>
-              <span>100K views</span>
-
-              <span className="dot-seperator">
-                <i className="fas fa-circle"></i>
-              </span>
-
-              <span>
-                <TimeAgo date={date} minPeriod='60' />
-              </span>
-
-            </div>
-          </nav>
         </div>
         </Link>
       </li>

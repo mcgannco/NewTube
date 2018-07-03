@@ -1,0 +1,42 @@
+.related-video-container {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.related-video-thumb {
+  position: relative;
+  overflow: hidden;
+  min-width: 180px;
+  width: 180px;
+  height: 110px;
+}
+
+.related-video-container video {
+  background: black;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.related-video-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 6px;
+}
+
+.related-video-info p {
+  color: black;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-video-index-title {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 7px;
+  justify-content: space-between;
+}

@@ -17,7 +17,7 @@ class VideoShow extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
-      this.props.requestSingleVideo(nextProps.match.params.id);
+      this.props.requestSingleVideo(nextProps.match.params.id).then(window.scrollTo(0, 0));
     }
   }
 
@@ -51,7 +51,9 @@ class VideoShow extends React.Component {
                 </div>
               </div>
               <section>
-                <h1>Comments</h1>
+                <div>
+                  <p>{video.description}</p>
+                </div>
               </section>
         	</section>
 
