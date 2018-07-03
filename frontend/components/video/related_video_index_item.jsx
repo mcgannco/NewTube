@@ -93,6 +93,9 @@ class RelatedVideoIndexItem extends React.Component {
               width="150"
               height="120"
               />
+            <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
+              <nav className={this.state.playButton ? "related-play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
+              <nav className={this.state.preview ? "related-clock" : "no-clock"}><i className="far fa-clock"></i></nav>
           </div>
 
           <div className="related-video-info">
@@ -108,9 +111,7 @@ class RelatedVideoIndexItem extends React.Component {
                          <span>100K views</span>
                        </div>
                      </nav>
-
-          </div>
-
+              </div>
         </div>
         </Link>
       </li>
