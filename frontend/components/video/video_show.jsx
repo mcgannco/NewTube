@@ -40,17 +40,22 @@ class VideoShow extends React.Component {
               <div className= "video-stats">
                 <span>17,4999,333 views</span>
                 <div>
-                  <span>
+                  <span className="video-show-likes">
                     <i className="fas fa-thumbs-up"></i>
-                    <p>234</p>
+                    <p>1,000,000,000</p>
                   </span>
-                  <span>
+                  <span className="video-show-dislikes">
                     <i className="fas fa-thumbs-down"></i>
-                    <p>234</p>
+                    <p>1,000,000,000</p>
                   </span>
                 </div>
               </div>
+              <section>
+                <h1>Comments</h1>
+              </section>
         	</section>
+
+
         	<section className="col col-1-3">
             <ul>
             {videos.map((video,idx) => <RelatedVideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}

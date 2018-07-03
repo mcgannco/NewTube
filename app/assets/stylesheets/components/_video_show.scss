@@ -30,6 +30,7 @@
   justify-content: space-between;
   color: grey;
   align-items: center;
+  font-size: 1rem;
 }
 
 .video-stats div {
@@ -38,4 +39,38 @@
 
 .video-stats div span {
   display: flex;
+}
+
+.video-show-likes {
+  cursor: pointer;
+}
+
+.video-show-likes:hover {
+  color: black;
+  p {
+    color: grey;
+  }
+}
+
+.video-show-likes p {
+  padding: 0px 30px 0px 10px;
+  max-width: 150px;
+  overflow: hidden;
+}
+
+.video-show-dislikes p {
+  padding-left: 10px;
+  max-width: 150px;
+  overflow: hidden;
+}
+
+.video-show-dislikes {
+  cursor: pointer;
+}
+
+.video-show-dislikes:hover {
+  color: black;
+  p {
+    color: grey;
+  }
 }
