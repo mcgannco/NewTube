@@ -20,7 +20,7 @@
 .related-video-info {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 180px);
   margin-left: 6px;
 }
 
@@ -29,7 +29,7 @@
   font-family: 'Roboto', 'Noto', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-  width: 50%;
+  width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -38,5 +38,23 @@
   display: flex;
   align-items: flex-start;
   margin-top: 7px;
-  justify-content: space-between;
+  position: relative;
+}
+
+.related-video-index-options-dd {
+  width: 30px;
+  display: flex;
+  justify-content: flex-end;
+  color: grey;
+  position: absolute;
+  right: 10px;
+}
+
+.related-video-index-options-dd-hidden {
+  width: 30px;
+  display: flex;
+  justify-content: flex-end;
+  color: transparent;
+  position: absolute;
+  right: 10px;
 }

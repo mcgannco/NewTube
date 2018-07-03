@@ -98,7 +98,7 @@ class RelatedVideoIndexItem extends React.Component {
           <div className="related-video-info">
             <div className="related-video-index-title">
                        <p>{video.title}</p>
-                       <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
+                       <span className={this.state.preview ? "related-video-index-options-dd" : "related-video-index-options-dd-hidden"}>
                          <i className="fas fa-ellipsis-v"></i>
                        </span>
                      </div>
