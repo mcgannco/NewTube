@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RelatedVideoIndexItem from './related_video_index_item';
-import CommentsIndex from './comments_index';
+import CommentsIndexContainer from './comments_index_container';
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -39,8 +39,8 @@ class VideoShow extends React.Component {
   }
 
   render() {
-    let {video, videos, users} = this.props;
-    if (!video || !users) {
+    let {video, videos, users, currentUser} = this.props;
+    if (!video || !users || currentUser) {
       return null;
     }
 
@@ -108,7 +108,7 @@ class VideoShow extends React.Component {
                   <nav><i className="fas fa-sort-amount-down"></i></nav>
                 </div>
 
-                <CommentsIndex vidId={video.id} />
+                <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
 
               </div>
 

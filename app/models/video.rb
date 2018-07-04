@@ -24,6 +24,8 @@ class Video < ApplicationRecord
     foreign_key: :author_id,
     primary_key: :id
 
+  has_many :comments
+
   has_attached_file :clip, styles: {
     medium: { geometry: "640x480", format: 'mp4'  },
     thumb:  { geometry: "300x170", format: 'jpeg' },

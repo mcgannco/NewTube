@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CommentIndexItem from './comment_index_item';
 
 class CommentsIndex extends React.Component {
   constructor(props) {
@@ -16,7 +17,13 @@ class CommentsIndex extends React.Component {
   }
 
   componentDidMount() {
+    this.props.requestAllComments(this.props.vidId)
+  }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.vidId && (this.props.vidId != nextProps.vidId)) {
+      this.props.requestAllComments(nextProps.vidId)
+    }
   }
 
   updateInput(e) {
@@ -41,11 +48,22 @@ class CommentsIndex extends React.Component {
     if(this.state.commentInput === "") {
       return null;
     } else {
-      debugger
+      this.props.createComment({
+        body: this.state.commentInput,
+        video_id: this.props.vidId,
+        author_id: this.props.currentUser.id
+       })
+       .then(
+        this.setState({commentInput: ""})
+      )
     }
   }
 
   render() {
+    let {comments, vidId} = this.props;
+    if(comments.length > 0) {
+      comments = comments.filter(comment => comment.video_id === vidId);
+    }
     return(
       <div className="user-comment-div-container">
         <div className="user-comment-div">
@@ -62,6 +80,10 @@ class CommentsIndex extends React.Component {
           <button onClick={this.hideButtons} className="cancel-button">Cancel</button>
           <button onClick={this.submit} className={this.state.allowSubmit ? "submit-button" : "no-submit-button"}>Submit</button>
         </div>
+
+        <ul>
+          {comments.map((comment) => <CommentIndexItem comment={comment}/>)}
+        </ul>
 
       </div>
     )
