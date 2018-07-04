@@ -6,8 +6,9 @@ class VideoShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      expandDescription: false
     }
+    this.showMore = this.showMore.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
@@ -21,6 +22,14 @@ class VideoShow extends React.Component {
     }
   }
 
+  showMore(e) {
+    if (e.currentTarget.innerText === "SHOW MORE") {
+      this.setState({expandDescription: true})
+    } else {
+      this.setState({expandDescription: false})
+    }
+  }
+
   render() {
     let {video, videos, users} = this.props;
     if (!video || !users) {
@@ -30,7 +39,7 @@ class VideoShow extends React.Component {
     if(!users[video.author_id]) {
       return null;
     }
-
+    let showmore = this.state.expandDescription ? "SHOW LESS" : "SHOW MORE"
     let userIcon = users[video.author_id].username[0];
       return(
         <section className="video-show-container" id='body'>
@@ -73,10 +82,13 @@ class VideoShow extends React.Component {
 
                     <button>Subscribe 3.4M</button>
                 </div>
-                <div className="description">
+                <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>
-                    <p className="description-main">In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision to join them, Stephen A. Smith asks Brian Windhorst how safe Lakers coach Luke Walton is, and whether Phil Jackson might </p>
-                    <p className="description-show-more">SHOW MORE</p>
+                    <p className={this.state.expandDescription ? "expand-description-main": "description-main"}>
+                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision
+                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision
+                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision to join them, Stephen A. Smith asks Brian Windhorst how safe Lakers coach Luke Walton is, and whether Phil Jackson might twat</p>
+                    <p onClick={this.showMore}className="description-show-more">{showmore}</p>
                   </div>
                 </div>
               </div>
