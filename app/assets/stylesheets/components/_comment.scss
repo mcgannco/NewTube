@@ -1,0 +1,26 @@
+.comment-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.comment-icon {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+.comment-icon span {
+  background: #599732;
+  border-radius: 23px;
+  width: 41px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 5px 0px;
+  height: 40px;
+  align-items: center;
+  margin-left: 16px;
+}

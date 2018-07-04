@@ -7,7 +7,7 @@ class CommentsIndex extends React.Component {
     super(props)
     this.state = {
       commentInput: "",
-      submitButtons: true,
+      submitButtons: false,
       allowSubmit: false
     }
     this.updateInput = this.updateInput.bind(this);
@@ -18,6 +18,7 @@ class CommentsIndex extends React.Component {
 
   componentDidMount() {
     this.props.requestAllComments(this.props.vidId)
+    .then(this.props.requestAllUsers())
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,20 +55,23 @@ class CommentsIndex extends React.Component {
         author_id: this.props.currentUser.id
        })
        .then(
-        this.setState({commentInput: ""})
+        this.setState({commentInput: "", submitButtons: false})
       )
     }
   }
 
   render() {
-    let {comments, vidId} = this.props;
+    let {comments, vidId, users, currentUser} = this.props;
+    if(!currentUser) {
+      return null;
+    }
     if(comments.length > 0) {
       comments = comments.filter(comment => comment.video_id === vidId);
     }
     return(
       <div className="user-comment-div-container">
         <div className="user-comment-div">
-          <span>f</span>
+          <span>{currentUser.username.slice(0,1)}</span>
           <input onClick={this.showButton}
             onChange={this.updateInput}
             placeholder="Add a public comment..."
@@ -82,7 +86,7 @@ class CommentsIndex extends React.Component {
         </div>
 
         <ul>
-          {comments.map((comment) => <CommentIndexItem comment={comment}/>)}
+          {comments.reverse().map((comment,idx) => <CommentIndexItem key={idx} user={users[comment.author_id]} comment={comment}/>)}
         </ul>
 
       </div>

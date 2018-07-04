@@ -8,6 +8,7 @@ import CommentsIndex from './comments_index';
 const msp = (state, ownProps) => {
   return({
     comments: selectAllComments(state),
+    users: state.entities.users,
     currentUser: state.entities.users[state.session.id]
   })
 };
@@ -15,7 +16,8 @@ const msp = (state, ownProps) => {
 const mdp = dispatch => {
   return({
     createComment: (comment) => dispatch(createComment(comment)),
-    requestAllComments: (id) => dispatch(requestAllComments(id))
+    requestAllComments: (id) => dispatch(requestAllComments(id)),
+    requestAllUsers: () => dispatch(requestAllUsers())
   })
 };
 

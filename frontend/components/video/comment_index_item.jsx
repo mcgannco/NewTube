@@ -10,10 +10,21 @@ class CommentIndexItem extends React.Component {
   }
 
   render() {
-    let { comment } = this.props;
+    let { comment, user } = this.props;
     return(
       <li>
-        {comment.body}
+        <div className="comment-content-container">
+          <div className="comment-icon">
+            <span>
+              {user.username.slice(0,1)}
+            </span>
+          </div>
+
+          <nav>
+            {comment.body}
+          </nav>
+
+        </div>
       </li>
     )
 
