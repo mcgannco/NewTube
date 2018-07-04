@@ -129,7 +129,7 @@
 }
 
 .uploader-div span {
-  background: #599732;
+  background: #0099ff;
   border-radius: 23px;
   width: 50px;
   display: flex;
@@ -206,4 +206,115 @@
   color: grey;
   cursor: pointer;
   margin-left: 80px;
+}
+
+.comments-container {
+  padding-top: 15px;
+}
+
+.comments-container-num-comments {
+  display: flex;
+  align-items: center;
+}
+
+.comments-container span {
+  font-size: 16px;
+}
+
+.comments-container nav {
+  padding-left: 10px;
+  font-size: 17px;
+  color: grey;
+}
+
+.user-comment-div-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.user-comment-div {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+.user-comment-div span {
+  background: #599732;
+  border-radius: 23px;
+  width: 41px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 5px 0px;
+  height: 40px;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.user-comment-div input {
+  border-bottom: 1px solid lightgrey;
+  resize: none;
+  font-size: 14px;
+  font-weight: 200;
+  height: 18px;
+  width: calc(100% - 76px);
+}
+
+.user-comment-div input:focus {
+  border-bottom: 2px solid green;
+
+}
+
+.comment-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit-button {
+  background: #0099ff;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.no-submit-button {
+  background: #0099ff;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  opacity: 0.4;
+  cursor: inherit;
+}
+
+.cancel-button {
+  color: grey;
+  padding: 10px;
+  border-radius: 2px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.cancel-button:hover {
+  color: black;
+}
+
+.hidden {
+  display: none;
 }

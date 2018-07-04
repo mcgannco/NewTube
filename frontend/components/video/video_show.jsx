@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RelatedVideoIndexItem from './related_video_index_item';
+import CommentsIndex from './comments_index';
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -99,6 +100,16 @@ class VideoShow extends React.Component {
                     <p onClick={this.showMore}className={this.state.expandDescription ? "expand-description-show-more" : "description-show-more"}>{showmore}</p>
                   </div>
                 </div>
+              </div>
+
+              <div className="comments-container">
+                <div className="comments-container-num-comments">
+                  <span>900 Comments</span>
+                  <nav><i className="fas fa-sort-amount-down"></i></nav>
+                </div>
+
+                <CommentsIndex vidId={video.id} />
+
               </div>
 
               </section>
