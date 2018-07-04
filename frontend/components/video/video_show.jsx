@@ -85,9 +85,20 @@ class VideoShow extends React.Component {
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>
                     <p className={this.state.expandDescription ? "expand-description-main" : "description-main"  }>
-                      a
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
+                      aasdfasdfsadfasdfasdfasdfsd
                     </p>
-                    <p onClick={this.showMore}className="description-show-more">{showmore}</p>
+                    <p onClick={this.showMore}className={this.state.expandDescription ? "expand-description-show-more" : "description-show-more"}>{showmore}</p>
                   </div>
                 </div>
               </div>
