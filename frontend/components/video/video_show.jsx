@@ -84,10 +84,9 @@ class VideoShow extends React.Component {
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>
-                    <p className={this.state.expandDescription ? "expand-description-main": "description-main"}>
-                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision
-                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision
-                      In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision to join them, Stephen A. Smith asks Brian Windhorst how safe Lakers coach Luke Walton is, and whether Phil Jackson might twat</p>
+                    <p className={this.state.expandDescription ? "expand-description-main" : "description-main"  }>
+                      a
+                    </p>
                     <p onClick={this.showMore}className="description-show-more">{showmore}</p>
                   </div>
                 </div>
