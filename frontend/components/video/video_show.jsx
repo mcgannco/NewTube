@@ -9,6 +9,7 @@ class VideoShow extends React.Component {
       expandDescription: false
     }
     this.showMore = this.showMore.bind(this);
+    this.convertDate = this.convertDate.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
@@ -30,6 +31,12 @@ class VideoShow extends React.Component {
     }
   }
 
+  convertDate(date) {
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    let d  = new Date(date);
+    return d.toLocaleDateString("en-US", options);
+  }
+
   render() {
     let {video, videos, users} = this.props;
     if (!video || !users) {
@@ -39,8 +46,10 @@ class VideoShow extends React.Component {
     if(!users[video.author_id]) {
       return null;
     }
+
     let showmore = this.state.expandDescription ? "SHOW LESS" : "SHOW MORE"
     let userIcon = users[video.author_id].username[0];
+    let date = this.convertDate(video.timestamp)
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
@@ -75,7 +84,7 @@ class VideoShow extends React.Component {
 
                     <div>
                       <p>{users[video.author_id].username}</p>
-                      <nav>Uploaded on June 11, 2011</nav>
+                      <nav>Published on {date}</nav>
                     </div>
 
                     </div>
@@ -85,18 +94,7 @@ class VideoShow extends React.Component {
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>
                     <p className={this.state.expandDescription ? "expand-description-main" : "description-main"  }>
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
-                      aasdfasdfsadfasdfasdfasdfsd
+                      {video.description}
                     </p>
                     <p onClick={this.showMore}className={this.state.expandDescription ? "expand-description-show-more" : "description-show-more"}>{showmore}</p>
                   </div>
