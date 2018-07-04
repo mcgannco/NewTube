@@ -26,6 +26,12 @@ class VideoShow extends React.Component {
     if (!video || !users) {
       return null;
     }
+
+    if(!users[video.author_id]) {
+      return null;
+    }
+
+    let userIcon = users[video.author_id].username[0];
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
@@ -38,23 +44,42 @@ class VideoShow extends React.Component {
 
               <h1>{video.title}</h1>
               <div className= "video-stats">
-                <span>17,4999,333 views</span>
+                <span className="total-views">17,4999,333 views</span>
                 <div>
                   <span className="video-show-likes">
                     <i className="fas fa-thumbs-up"></i>
-                    <p>1,000,000,000</p>
+                    <p>1,000</p>
                   </span>
                   <span className="video-show-dislikes">
                     <i className="fas fa-thumbs-down"></i>
-                    <p>1,000,000,000</p>
+                    <p>19</p>
                   </span>
                 </div>
               </div>
               <section>
-
+                <div className="sub-video-container">
                 <div className="video-description">
-                  <p>{video.description}</p>
+                  <div className="uploader-container">
+                    <div className="uploader-div">
+                      <span>{userIcon}</span>
+                    </div>
+
+                    <div>
+                      <p>{users[video.author_id].username}</p>
+                      <nav>Uploaded on June 11, 2011</nav>
+                    </div>
+
+                    </div>
+
+                    <button>Subscribe 3.4M</button>
                 </div>
+                <div className="description">
+                  <div>
+                    <p className="description-main">In the by the Los Angeles Lakers fby the Los Angeles Lakers f by the Los Angeles Lakers following LeBron James decision to join them, Stephen A. Smith asks Brian Windhorst how safe Lakers coach Luke Walton is, and whether Phil Jackson might </p>
+                    <p className="description-show-more">SHOW MORE</p>
+                  </div>
+                </div>
+              </div>
 
               </section>
         	</section>
