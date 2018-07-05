@@ -13,6 +13,7 @@ class ChannelShow extends React.Component {
     this.showEditButtons = this.showEditButtons.bind(this);
     this.hideButtons = this.hideButtons.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
+    this.updateBanner = this.updateBanner.bind(this);
   }
 
   componentDidMount() {
@@ -43,8 +44,8 @@ class ChannelShow extends React.Component {
     this.setState({edit: false, buttons: false, cancel: false})
   }
 
-  updateFile(e) {
-    debugger
+  updateBanner(e) {
+    let file = e.currentTarget.files[0];
   }
 
   render() {
@@ -65,7 +66,7 @@ class ChannelShow extends React.Component {
             <div className="banner-edit-container">
               <span className={this.state.buttons ? "" : "hidden"}><i className="fas fa-edit"></i></span>
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
-                onChange={this.updateFile}
+                onChange={this.updateBanner}
                 type="file"></input>
               <button onClick={this.editProfile} className={this.state.edit ? "hidden" : "customize-button"}>Customize Channel</button>
             </div>
