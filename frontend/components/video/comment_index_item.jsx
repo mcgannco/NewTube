@@ -6,14 +6,28 @@ class CommentIndexItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      preview: false
     }
+    this.showOptions = this.showOptions.bind(this);
+    this.closeshowOptions = this.closeshowOptions.bind(this);
+  }
+
+  showOptions() {
+    this.setState({preview: true})
+  }
+
+  closeshowOptions() {
+    this.setState({preview: false})
   }
 
   render() {
     let { comment, user } = this.props;
     let date = new Date(comment.timestamp);
     return(
-      <li>
+      <li
+        onMouseEnter={this.showOptions}
+        onMouseLeave={this.closeshowOptions}
+        >
         <div className="comment-content-container">
           <div className="comment-icon">
             <span>
@@ -21,16 +35,22 @@ class CommentIndexItem extends React.Component {
             </span>
           </div>
 
-          <nav>
-            <div className="comment-body">
-              <p>{user.username}</p>
+          <nav className="hover-comment-container">
+            <div>
+              <div className="comment-body">
+                <p>{user.username}</p>
                 <span>
                   <TimeAgo date={date} minPeriod='60' />
                 </span>
+              </div>
+              <p>{comment.body}</p>
             </div>
-            <p>{comment.body}</p>
-          </nav>
 
+
+            <span className={this.state.preview ? "opitions" : "hidden"}>
+              <i className="fas fa-ellipsis-v"></i>
+            </span>
+          </nav>
         </div>
       </li>
     )

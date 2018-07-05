@@ -50,3 +50,14 @@
 .comment-body span time {
   font-size: 12px;
 }
+
+.hover-comment-container {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 70px);
+}
+
+.opitions {
+  color: grey;
+  font-size: 14px;
+}

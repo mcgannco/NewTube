@@ -146,6 +146,9 @@
   height: 110px;
   border-bottom: 1px solid #E8E8E8;
   height: 130px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
 }
 
 .expand-description {
@@ -171,6 +174,8 @@
   height: 100%;
   min-height: 120px;
   flex-direction: column;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .description-main {
@@ -182,6 +187,8 @@
   max-height: 100px;
   min-width: 76px;
   min-height: 100px;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .expand-description-main {
