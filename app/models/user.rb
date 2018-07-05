@@ -2,18 +2,32 @@
 #
 # Table name: users
 #
-#  id              :bigint(8)        not null, primary key
-#  username        :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :bigint(8)        not null, primary key
+#  username            :string           not null
+#  password_digest     :string           not null
+#  session_token       :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  banner_file_name    :string
+#  banner_content_type :string
+#  banner_file_size    :integer
+#  banner_updated_at   :datetime
 #
 
 class User < ApplicationRecord
   validates :username, :password_digest, :session_token, presence: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
+
+  has_attached_file :banner
+  has_attached_file :avatar, styles: {
+    thumb: '48x48'
+  }
+  validates_attachment_content_type :avatar, :banner, content_type: /\Aimage\/.*\Z/
 
   has_many :videos,
     class_name: :Video,

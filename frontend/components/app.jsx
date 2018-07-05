@@ -4,6 +4,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/sign_up_form_container';
 import VideoIndexContainer from './video/video_index_container';
 import VideoShowContainer from './video/video_show_container';
+import ChannelShowContainer from './channel/channel_show_container';
 import UploadVideoContainer from './video/upload_video_container';
 import Modal from './modal/modal';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
@@ -25,6 +26,7 @@ const App = () => (
        <AuthRoute exact path="/signup" component={SignupFormContainer} />
        <ProtectedRoute exact path='/upload' component={UploadVideoContainer} />
        <Route exact path="/video/:id" component={VideoShowContainer} />
+       <Route exact path="/channel/:id" component={ChannelShowContainer} />
        <Route path="/" component={VideoIndexContainer} />
      </Switch>
 
