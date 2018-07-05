@@ -7,16 +7,27 @@ class VideoShow extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      expandDescription: false
+      expandDescription: false,
+      isColumnView: window.innerWidth <= 1000
     }
+    this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
     this.convertDate = this.convertDate.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
     this.props.requestAllVideos().then(this.props.requestAllUsers())
+    window.addEventListener("resize", this.updateWindowSize);
     window.scrollTo(0, 0)
   }
+
+  updateWindowSize() {
+   this.setState({isColumnView: window.innerWidth <= 1000});
+ }
+
+ componentWillUnmount() {
+   window.removeEventListener("resize", this.updateWindowSize);
+ }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
@@ -102,10 +113,8 @@ class VideoShow extends React.Component {
                 </div>
               </div>
 
-              <div className="comments-container">
-
+              <div className={!this.state.isColumnView ? "comments-container" : "hidden"}>
                 <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
-
               </div>
 
               </section>
@@ -116,6 +125,9 @@ class VideoShow extends React.Component {
             <ul>
             {videos.map((video,idx) => <RelatedVideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
+            <div className={this.state.isColumnView ? "comments-container" : "hidden"}>
+              <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
+            </div>
     			</section>
         </section>
       )
