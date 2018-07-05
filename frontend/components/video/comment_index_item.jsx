@@ -11,6 +11,7 @@ class CommentIndexItem extends React.Component {
 
   render() {
     let { comment, user } = this.props;
+    let date = new Date(comment.timestamp);
     return(
       <li>
         <div className="comment-content-container">
@@ -21,7 +22,13 @@ class CommentIndexItem extends React.Component {
           </div>
 
           <nav>
-            {comment.body}
+            <div className="comment-body">
+              <p>{user.username}</p>
+                <span>
+                  <TimeAgo date={date} minPeriod='60' />
+                </span>
+            </div>
+            <p>{comment.body}</p>
           </nav>
 
         </div>

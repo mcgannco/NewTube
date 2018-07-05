@@ -62,14 +62,20 @@ class CommentsIndex extends React.Component {
 
   render() {
     let {comments, vidId, users, currentUser} = this.props;
+    let numComments;
     if(!currentUser) {
       return null;
     }
     if(comments.length > 0) {
       comments = comments.filter(comment => comment.video_id === vidId);
+      numComments = comments.length;
     }
     return(
       <div className="user-comment-div-container">
+        <div className="comments-container-num-comments">
+          <p>{numComments} Comments</p>
+          <nav><i className="fas fa-sort-amount-down"></i></nav>
+        </div>
         <div className="user-comment-div">
           <span>{currentUser.username.slice(0,1)}</span>
           <input onClick={this.showButton}

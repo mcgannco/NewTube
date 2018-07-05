@@ -103,10 +103,6 @@ class VideoShow extends React.Component {
               </div>
 
               <div className="comments-container">
-                <div className="comments-container-num-comments">
-                  <span>900 Comments</span>
-                  <nav><i className="fas fa-sort-amount-down"></i></nav>
-                </div>
 
                 <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
 

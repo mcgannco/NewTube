@@ -3,6 +3,16 @@
   align-items: center;
 }
 
+.comment-content-container p {
+  color: black;
+  font-size: 14px;
+}
+
+.comments-container-num-comments p {
+  font-size: 17px;
+  margin-left: 25px;
+}
+
 .comment-icon {
   cursor: pointer;
   display: flex;
@@ -23,4 +33,20 @@
   height: 40px;
   align-items: center;
   margin-left: 16px;
+}
+
+.comment-body {
+  display: flex;
+  align-items: center;
+}
+
+.comment-body p {
+  font-weight: 600;
+  color: black;
+  padding-right: 10px;
+  font-size: 14px;
+}
+
+.comment-body span time {
+  font-size: 12px;
 }

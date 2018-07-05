@@ -311,6 +311,10 @@
   font-size: 14px;
 }
 
+.cancel-button:active {
+  background: lightgrey;
+}
+
 .cancel-button:hover {
   color: black;
 }
