@@ -106,10 +106,11 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user} = this.props;
+    let {user, currentUserID} = this.props;
     if(!user) {
       return null;
     }
+
     let banner;
     let avatar;
     if(this.state.bannerURL === "" && this.props.user.banner_img_url) {
@@ -122,6 +123,15 @@ class ChannelShow extends React.Component {
       avatar = this.props.user.profile_img_url
     } else {
       avatar = this.state.avatarURL
+    }
+
+    let customize;
+    if(user.id !== currentUserID) {
+      customize = "hidden";
+    } else if (this.state.edit) {
+      customize = "hidden"
+    } else {
+      customize = "customize-button";
     }
 
       return(
@@ -142,7 +152,7 @@ class ChannelShow extends React.Component {
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
                 onChange={this.updateBanner}
                 type="file"></input>
-              <button onClick={this.editProfile} className={this.state.edit ? "hidden" : "customize-button"}>Customize Channel</button>
+              <button onClick={this.editProfile} className={customize}>Customize Channel</button>
             </div>
 
             <div className="finalize-buttons">

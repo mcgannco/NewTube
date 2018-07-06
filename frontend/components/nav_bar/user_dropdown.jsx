@@ -19,7 +19,7 @@ class UserDropDown extends React.Component {
     return(
       <div className="user-drop-down-container">
         <ul className="user-drop-down">
-          <Link to= 'signin'>
+          <Link to={`/channel/${currentUser.id}`}>
             <li className="drop-down-list-item">
               <div>
                 <span>
