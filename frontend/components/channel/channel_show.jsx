@@ -18,6 +18,7 @@ class ChannelShow extends React.Component {
     this.hideButtons = this.hideButtons.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.updateBanner = this.updateBanner.bind(this);
+    this.submitChanges = this.submitChanges.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +64,29 @@ class ChannelShow extends React.Component {
       reader.readAsDataURL(file);
     }
 
+  }
+
+  submitChanges(e) {
+    e.preventDefault();
+    const avatar = this.state.avatarFile;
+    const banner = this.state.bannerFile;
+    const formData = new FormData();
+    if (avatar) {
+      formData.append("user[avatar]", avatar);
+    }
+    if (banner) {
+      formData.append("user[banner]", banner);
+    }
+
+    this.props.editUser(this.props.user.id, formData).then(
+      this.setState({edit: false,
+      buttons: false,
+      cancel: false,
+      bannerFile: "",
+      bannerURL: "",
+      avatarFile: "",
+      avatarURL: ""})
+    )
 
   }
 
@@ -70,6 +94,12 @@ class ChannelShow extends React.Component {
     let {user} = this.props;
     if(!user) {
       return null;
+    }
+    let banner;
+    if(this.state.bannerURL === "" && this.props.user.banner_img_url) {
+      banner = this.props.user.banner_img_url
+    } else {
+      banner = this.state.bannerURL
     }
 
       return(
@@ -80,13 +110,11 @@ class ChannelShow extends React.Component {
             onMouseEnter={this.showEditButtons}
             onMouseLeave={this.hideButtons}
             style={
-              {backgroundImage: `url(${this.state.bannerURL})`}
+              {backgroundImage: `url(${banner})`}
              }>
-            <h1>{user.username}</h1>
-
           <div className='right-container'>
             <div className="banner-edit-container">
-              <span className={this.state.edit ? "hidden" : "hidden"}><i className="fas fa-edit"></i></span>
+              <span className={this.state.edit ? "banner-edit-container-span" : "hidden"}><i className="fas fa-edit"></i></span>
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
                 onChange={this.updateBanner}
                 type="file"></input>
@@ -94,7 +122,7 @@ class ChannelShow extends React.Component {
             </div>
 
             <div className="finalize-buttons">
-              <button onClick={this.cancelEdit} className={this.state.bannerURL || this.state.avatarURL ? "save-button" : "hidden"}>Save Changes</button>
+              <button onClick={this.submitChanges} className={this.state.bannerURL || this.state.avatarURL ? "save-button" : "hidden"}>Save Changes</button>
               <button onClick={this.cancelEdit} className={this.state.edit ? "finalize-button" : "hidden"}>Cancel</button>
             </div>
 
@@ -102,6 +130,11 @@ class ChannelShow extends React.Component {
 
           </div>
 
+        </div>
+        <div className="user-info-container">
+          <div className="user-show-icon">
+            <span>s</span>
+          </div>
         </div>
       </div>
       )

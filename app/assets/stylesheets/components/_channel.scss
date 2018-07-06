@@ -25,7 +25,7 @@
 
 .right-container {
   display: flex;
-  width: 319px;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   height: 200px;
@@ -75,7 +75,7 @@
   justify-content: center;
 }
 
-.banner-edit-container span {
+.banner-edit-container-span {
   font-size: 23px;
     cursor: pointer;
     margin-top: 5px;
@@ -90,7 +90,7 @@
     width: 43px;
 }
 
-.banner-edit-container span svg:hover {
+.banner-edit-container-span svg:hover {
   cursor: pointer;
 }
 
@@ -120,4 +120,27 @@
 
 .hidden {
   display: none;
+}
+
+.user-show-icon {
+  cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20px 0px;
+
+}
+
+.user-show-icon span {
+  background: #599732;
+    border-radius: 23px;
+    width: 41px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 5px 0px;
+    height: 40px;
+    align-items: center;
+    margin-left: 16px;
 }
