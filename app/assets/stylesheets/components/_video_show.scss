@@ -138,6 +138,9 @@
   padding: 5px 0px;
   height: 50px;
   align-items: center;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .description {
@@ -261,6 +264,9 @@
   height: 40px;
   align-items: center;
   margin-left: 16px;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .user-comment-div input {

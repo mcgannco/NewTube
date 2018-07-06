@@ -61,6 +61,7 @@ class VideoShow extends React.Component {
 
     let showmore = this.state.expandDescription ? "SHOW LESS" : "SHOW MORE"
     let userIcon = users[video.author_id].username[0];
+    let userAvatar = users[video.author_id].profile_img_url;
     let date = this.convertDate(video.timestamp)
       return(
         <section className="video-show-container" id='body'>
@@ -91,7 +92,9 @@ class VideoShow extends React.Component {
                 <div className="video-description">
                   <div className="uploader-container">
                     <div className="uploader-div">
-                      <span>{userIcon}</span>
+                      <span style={
+                        {backgroundImage: `url(${userAvatar})`}
+                       }>{userIcon}</span>
                     </div>
 
                     <div>

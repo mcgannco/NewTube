@@ -70,6 +70,9 @@ class CommentsIndex extends React.Component {
       comments = comments.filter(comment => comment.video_id === vidId);
       numComments = comments.length;
     }
+
+    let userAvatar = users[currentUser.id].profile_img_url;
+
     return(
       <div className="user-comment-div-container">
         <div className="comments-container-num-comments">
@@ -77,7 +80,9 @@ class CommentsIndex extends React.Component {
           <nav><i className="fas fa-sort-amount-down"></i></nav>
         </div>
         <div className="user-comment-div">
-          <span>{currentUser.username.slice(0,1)}</span>
+          <span style={
+            {backgroundImage: `url(${userAvatar})`}
+           }>{currentUser.username.slice(0,1)}</span>
           <input onClick={this.showButton}
             onChange={this.updateInput}
             placeholder="Add a public comment..."

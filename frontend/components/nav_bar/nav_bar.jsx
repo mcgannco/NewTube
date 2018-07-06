@@ -128,7 +128,10 @@ class NavBar extends React.Component {
     const {currentUser, logout, openModal} = this.props
     let loggedin;
     let userDropDown;
-
+    let userAvatar;
+    if (this.props.currentUser) {
+      userAvatar = this.props.currentUser.profile_img_url;
+    }
     let dd;
     if (this.state.videoDropDown) {
       dd = <VideoDropDown />
@@ -150,8 +153,10 @@ class NavBar extends React.Component {
                 </li>
       } else {
         loggedin = <div className="user-profile-div" onClick={this.userDropDown}>
-          <span>
-            {currentUser.username[0]}
+          <span style={
+            {backgroundImage: `url(${userAvatar})`}
+           }>
+            {userAvatar  !== "/avatars/original/missing.png" ? "" : currentUser.username[0]}
           </span>
           {this.state.usersDropDown ? dd : ""}
         </div>

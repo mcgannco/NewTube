@@ -23,6 +23,7 @@ class CommentIndexItem extends React.Component {
   render() {
     let { comment, user } = this.props;
     let date = new Date(comment.timestamp);
+    let userAvatar = user.profile_img_url;
     return(
       <li
         onMouseEnter={this.showOptions}
@@ -30,7 +31,9 @@ class CommentIndexItem extends React.Component {
         >
         <div className="comment-content-container">
           <div className="comment-icon">
-            <span>
+            <span style={
+              {backgroundImage: `url(${userAvatar})`}
+             }>
               {user.username.slice(0,1)}
             </span>
           </div>
