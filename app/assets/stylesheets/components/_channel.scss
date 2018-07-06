@@ -123,7 +123,6 @@
 }
 
 .user-show-icon {
-  cursor: pointer;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -134,13 +133,34 @@
 
 .user-show-icon span {
   background: #599732;
-    border-radius: 23px;
-    width: 41px;
-    display: flex;
-    justify-content: center;
-    color: white;
-    padding: 5px 0px;
-    height: 40px;
-    align-items: center;
-    margin-left: 16px;
+  border-radius: 54px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 5px 0px;
+  height: 93px;
+  align-items: center;
+  margin-left: 16px;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.user-show-icon span:hover {
+  background: red;
+}
+
+.avatar-input {
+  position: absolute;
+  text-indent: -999px;
+  cursor: pointer;
+  background: rebeccapurple;
+  width: 117px;
+  height: 46px;
+  opacity: 0;
+}
+
+.avatar-input:hover {
+  background: blue;
 }

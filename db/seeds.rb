@@ -5,7 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-
-Video.destroy_all
-demo_vid = Video.create({description: "Demo Song description", author_id: 1, title: "Default video"})

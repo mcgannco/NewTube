@@ -18,6 +18,7 @@ class ChannelShow extends React.Component {
     this.hideButtons = this.hideButtons.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
     this.updateBanner = this.updateBanner.bind(this);
+    this.updateAvatar = this.updateAvatar.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
   }
 
@@ -66,6 +67,20 @@ class ChannelShow extends React.Component {
 
   }
 
+  updateAvatar(e) {
+    let file = e.currentTarget.files[0];
+    this.setState({avatarFile: file})
+    let reader  = new FileReader();
+    reader.onloadend = function () {
+      this.setState({ avatarURL: reader.result });
+    }.bind(this);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+  }
+
   submitChanges(e) {
     e.preventDefault();
     const avatar = this.state.avatarFile;
@@ -96,10 +111,17 @@ class ChannelShow extends React.Component {
       return null;
     }
     let banner;
+    let avatar;
     if(this.state.bannerURL === "" && this.props.user.banner_img_url) {
       banner = this.props.user.banner_img_url
     } else {
       banner = this.state.bannerURL
+    }
+
+    if(this.state.avatarURL === "" && this.props.user.profile_img_url) {
+      avatar = this.props.user.profile_img_url
+    } else {
+      avatar = this.state.avatarURL
     }
 
       return(
@@ -114,7 +136,9 @@ class ChannelShow extends React.Component {
              }>
           <div className='right-container'>
             <div className="banner-edit-container">
-              <span className={this.state.edit ? "banner-edit-container-span" : "hidden"}><i className="fas fa-edit"></i></span>
+              <span className={this.state.edit ? "banner-edit-container-span" : "hidden"}>
+                <i className="fas fa-camera"></i>
+              </span>
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
                 onChange={this.updateBanner}
                 type="file"></input>
@@ -133,7 +157,14 @@ class ChannelShow extends React.Component {
         </div>
         <div className="user-info-container">
           <div className="user-show-icon">
-            <span>s</span>
+            <span style={
+              {backgroundImage: `url(${avatar})`}
+             }>s</span>
+              <input
+                className="avatar-input"
+                type="file"
+                onChange={this.updateAvatar}>
+              </input>
           </div>
         </div>
       </div>
