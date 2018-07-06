@@ -40,6 +40,7 @@ class Modal extends React.Component {
         default:
         return null;
       }
+      
     }
 
   return(

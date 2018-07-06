@@ -8,6 +8,10 @@ class ChannelShow extends React.Component {
       edit: false,
       buttons: false,
       cancel: false,
+      bannerFile: "",
+      bannerURL: "",
+      avatarFile: "",
+      avatarURL: ""
     }
     this.editProfile = this.editProfile.bind(this);
     this.showEditButtons = this.showEditButtons.bind(this);
@@ -41,11 +45,25 @@ class ChannelShow extends React.Component {
   }
 
   cancelEdit() {
-    this.setState({edit: false, buttons: false, cancel: false})
+    this.setState({edit: false, buttons: false, cancel: false,bannerFile: "",
+    bannerURL: "",
+    avatarFile: "",
+    avatarURL: ""})
   }
 
   updateBanner(e) {
     let file = e.currentTarget.files[0];
+    this.setState({bannerFile: file})
+    let reader  = new FileReader();
+    reader.onloadend = function () {
+      this.setState({ bannerURL: reader.result });
+    }.bind(this);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+
   }
 
   render() {
@@ -55,31 +73,37 @@ class ChannelShow extends React.Component {
     }
 
       return(
+      <div className="channel-container">
         <div
           className="user-banner-container">
           <div className="user-banner"
             onMouseEnter={this.showEditButtons}
-            onMouseLeave={this.hideButtons}>
+            onMouseLeave={this.hideButtons}
+            style={
+              {backgroundImage: `url(${this.state.bannerURL})`}
+             }>
             <h1>{user.username}</h1>
 
           <div className='right-container'>
             <div className="banner-edit-container">
-              <span className={this.state.buttons ? "" : "hidden"}><i className="fas fa-edit"></i></span>
+              <span className={this.state.edit ? "hidden" : "hidden"}><i className="fas fa-edit"></i></span>
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
                 onChange={this.updateBanner}
                 type="file"></input>
               <button onClick={this.editProfile} className={this.state.edit ? "hidden" : "customize-button"}>Customize Channel</button>
             </div>
 
-            <div>
-              <button onClick={this.cancelEdit} className={this.state.edit ? "customize-button" : "hidden"}>Cancel</button>
+            <div className="finalize-buttons">
+              <button onClick={this.cancelEdit} className={this.state.bannerURL || this.state.avatarURL ? "save-button" : "hidden"}>Save Changes</button>
+              <button onClick={this.cancelEdit} className={this.state.edit ? "finalize-button" : "hidden"}>Cancel</button>
             </div>
 
           </div>
 
-
           </div>
+
         </div>
+      </div>
       )
     }
   }

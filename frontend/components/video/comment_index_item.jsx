@@ -38,7 +38,7 @@ class CommentIndexItem extends React.Component {
           <nav className="hover-comment-container">
             <div>
               <div className="comment-body">
-                <p>{user.username}</p>
+              <Link to={`/channel/${user.id}`}><p>{user.username}</p></Link>
                 <span>
                   <TimeAgo date={date} minPeriod='60' />
                 </span>
