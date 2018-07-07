@@ -98,7 +98,7 @@ class VideoShow extends React.Component {
                     </div>
 
                     <div>
-                      <p>{users[video.author_id].username}</p>
+                      <Link to={`/channel/${video.author_id}`}><p>{users[video.author_id].username}</p></Link>
                       <nav>Published on {date}</nav>
                     </div>
 
