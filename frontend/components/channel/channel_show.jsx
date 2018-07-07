@@ -47,11 +47,15 @@ class ChannelShow extends React.Component {
   }
 
   cancelEdit() {
-    debugger
-    this.setState({edit: false, buttons: false, cancel: false,bannerFile: "",
-    bannerURL: "",
+    let {user} = this.props;
+    if (user.banner_img_url !== "/banners/original/missing.png")
+    this.setState({edit: false, buttons: false, cancel: false,
+    bannerFile: "",
     avatarFile: "",
-    avatarURL: ""})
+    avatarFile: "",
+    bannerURL: "",
+    avatarURL: ""
+    })
   }
 
   updateBanner(e) {
@@ -111,25 +115,8 @@ class ChannelShow extends React.Component {
       return null;
     }
 
-    let banner;
-    let avatar;
-
-    if(loading && this.state.bannerURL) {
-      banner = this.state.bannerURL;
-    } else if(this.state.edit && this.state.bannerURL){
-      banner = this.state.bannerURL;
-    } else {
-      banner = user.banner_img_url;
-    }
-
-    if(this.state.avatarURL) {
-      avatar = this.state.avatarURL;
-    } else if(this.state.edit && this.state.avatarURL){
-      debugger
-      avatar = this.state.avatarURL;
-    } else {
-      avatar = user.profile_img_url;
-    }
+    let banner = user.banner_img_url;
+    let avatar = user.profile_img_url;
 
     let customize;
     if(user.id !== currentUserID) {
@@ -168,12 +155,24 @@ class ChannelShow extends React.Component {
 
           </div>
 
+          <div className={ this.state.bannerURL ? "banner-preview" : "hidden"}
+            style={
+              {backgroundImage: `url(${this.state.bannerURL})`}
+             }>
+
+          </div>
+
         </div>
         <div className="user-info-container">
           <div className="user-show-icon">
             <span style={
               {backgroundImage: `url(${avatar})`}
             }>{user.profile_img_url === "/avatars/original/missing.png" ? user.username.slice(0,1): ""}</span>
+
+          <nav className={this.state.avatarURL ? "avatarPreview" : "hidden"}
+            style={
+              {backgroundImage: `url(${this.state.avatarURL})`}
+             }></nav>
               <input
                 className={currentUserID === user.id ? "avatar-input" : "hidden"}
                 type="file"
