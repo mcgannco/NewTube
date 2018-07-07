@@ -99,7 +99,7 @@ class ChannelShow extends React.Component {
       cancel: false,
       bannerFile: "",
       avatarFile: "",
-      avatarURL: ""})
+    })
     )
 
   }
@@ -113,7 +113,7 @@ class ChannelShow extends React.Component {
     let banner;
     let avatar;
 
-    if(loading && this.state.bannerURL) {
+    if(this.state.bannerURL) {
       banner = this.state.bannerURL;
     } else if(this.state.edit && this.state.bannerURL){
       banner = this.state.bannerURL;
@@ -121,7 +121,7 @@ class ChannelShow extends React.Component {
       banner = user.banner_img_url;
     }
 
-    if(loading && this.state.avatarURL) {
+    if(this.state.avatarURL) {
       avatar = this.state.avatarURL;
     } else if(this.state.edit && this.state.avatarURL){
       debugger
