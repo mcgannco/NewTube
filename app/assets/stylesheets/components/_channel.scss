@@ -201,7 +201,7 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin-left: 117px;
+  margin-left: 118px;
 }
 
 .user-info-container {
@@ -253,7 +253,6 @@
   display: flex;
   margin-left: 93px;
   color: grey;
-  overflow: scroll;
 }
 
 .user-toggle-options ul  li {
@@ -274,4 +273,33 @@
 
 .selected {
   border-bottom: 3px solid grey;
+}
+
+@media (max-width: 660px) {
+  .user-show-icon {
+    width: 120px;
+  }
+  .user-show-icon span {
+    margin-left: 10px;
+  }
+
+  .avatar-input {
+    margin-left: 36px;
+  }
+
+  .avatar-cam {
+    margin-left: 36px;
+  }
+
+  .avatarPreview {
+    margin-left: 10px;
+  }
+  .user-name-info {
+    width: calc(100% - 120px);
+  }
+
+  .user-toggle-options ul {
+    margin-left: 10px;
+  }
+
 }
