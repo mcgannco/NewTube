@@ -6,6 +6,7 @@ const msp = (state, ownProps) => {
   return({
     user: state.entities.users[ownProps.match.params.id],
     currentUserID: state.session.id,
+    loading: state.ui.loading.pictureLoading
   })
 };
 

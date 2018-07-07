@@ -4,8 +4,14 @@ import {
   RECEIVE_SESSION_ERRORS,
 } from '../actions/session_actions';
 
+import {
+  RECEIVE_SINGLE_USER,
+  START_LOADING_USER_PIC
+} from '../actions/user_actions'
+
 const initialState = {
   usernameLoading: false,
+  pictureLoading: false
 };
 
 const loadingReducer = (state = initialState, action) => {
@@ -16,7 +22,11 @@ const loadingReducer = (state = initialState, action) => {
     case RECEIVE_SESSION_ERRORS:
       return Object.assign({}, state, { usernameLoading: false });
     case START_LOADING_USERNAME:
-    return Object.assign({}, state, { usernameLoading: true });
+      return Object.assign({}, state, { usernameLoading: true });
+    case RECEIVE_SINGLE_USER:
+      return Object.assign({}, state, { pictureLoading: false });
+    case START_LOADING_USER_PIC:
+      return Object.assign({}, state, { pictureLoading: true });
     default:
       return state;
   }

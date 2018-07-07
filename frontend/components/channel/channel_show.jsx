@@ -98,7 +98,6 @@ class ChannelShow extends React.Component {
       buttons: false,
       cancel: false,
       bannerFile: "",
-      bannerURL: "",
       avatarFile: "",
       avatarURL: ""})
     )
@@ -106,23 +105,29 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID} = this.props;
+    let {user, currentUserID, loading} = this.props;
     if(!user) {
       return null;
     }
 
     let banner;
     let avatar;
-    if(this.state.bannerURL === "" && this.props.user.banner_img_url) {
-      banner = this.props.user.banner_img_url
+
+    if(loading && this.state.bannerURL) {
+      banner = this.state.bannerURL;
+    } else if(this.state.edit && this.state.bannerURL){
+      banner = this.state.bannerURL;
     } else {
-      banner = this.state.bannerURL
+      banner = user.banner_img_url;
     }
 
-    if(this.state.avatarURL === "" && this.props.user.profile_img_url) {
-      avatar = this.props.user.profile_img_url
+    if(loading && this.state.avatarURL) {
+      avatar = this.state.avatarURL;
+    } else if(this.state.edit && this.state.avatarURL){
+      debugger
+      avatar = this.state.avatarURL;
     } else {
-      avatar = this.state.avatarURL
+      avatar = user.profile_img_url;
     }
 
     let customize;
@@ -139,8 +144,6 @@ class ChannelShow extends React.Component {
         <div
           className="user-banner-container">
           <div className="user-banner"
-            onMouseEnter={this.showEditButtons}
-            onMouseLeave={this.hideButtons}
             style={
               {backgroundImage: `url(${banner})`}
              }>
@@ -169,7 +172,7 @@ class ChannelShow extends React.Component {
           <div className="user-show-icon">
             <span style={
               {backgroundImage: `url(${avatar})`}
-             }>s</span>
+            }>{user.profile_img_url === "/avatars/original/missing.png" ? user.username.slice(0,1): ""}</span>
               <input
                 className="avatar-input"
                 type="file"
