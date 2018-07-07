@@ -11,7 +11,8 @@ class ChannelShow extends React.Component {
       bannerFile: "",
       bannerURL: "",
       avatarFile: "",
-      avatarURL: ""
+      avatarURL: "",
+      selected: "HOME"
     }
     this.editProfile = this.editProfile.bind(this);
     this.showEditButtons = this.showEditButtons.bind(this);
@@ -20,6 +21,7 @@ class ChannelShow extends React.Component {
     this.updateBanner = this.updateBanner.bind(this);
     this.updateAvatar = this.updateAvatar.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
+    this.selectToggle = this.selectToggle.bind(this);
   }
 
   componentDidMount() {
@@ -65,11 +67,9 @@ class ChannelShow extends React.Component {
     reader.onloadend = function () {
       this.setState({ bannerURL: reader.result });
     }.bind(this);
-
     if (file) {
       reader.readAsDataURL(file);
     }
-
   }
 
   updateAvatar(e) {
@@ -82,8 +82,6 @@ class ChannelShow extends React.Component {
     if (file) {
       reader.readAsDataURL(file);
     }
-
-
   }
 
   submitChanges(e) {
@@ -97,7 +95,6 @@ class ChannelShow extends React.Component {
     if (banner) {
       formData.append("user[banner]", banner);
     }
-
     this.props.editUser(this.props.user.id, formData).then(
       this.setState({edit: false,
       buttons: false,
@@ -106,7 +103,20 @@ class ChannelShow extends React.Component {
       avatarFile: "",
     })
     )
+  }
 
+  selectToggle(e) {
+    if (e === "HOME") {
+      this.setState({selected: "HOME"})
+    } else if (e === "VIDEOS") {
+      this.setState({selected: "VIDEOS"})
+    } else if (e === "CHANNELS") {
+      this.setState({selected: "CHANNELS"})
+    } else if (e === "LIKES") {
+      this.setState({selected: "LIKES"})
+    } else if (e === "ABOUT") {
+      this.setState({selected: "ABOUT"})
+    }
   }
 
   render() {
@@ -128,7 +138,7 @@ class ChannelShow extends React.Component {
     }
 
       return(
-      <div className="channel-container">
+      <div className="channel-container" id="body">
         <div
           className="user-banner-container">
           <div className="user-banner"
@@ -164,6 +174,7 @@ class ChannelShow extends React.Component {
           </div>
 
         </div>
+
         <div className="user-info-container">
           <div className="user-show-icon">
             <span style={
@@ -186,6 +197,46 @@ class ChannelShow extends React.Component {
                 onChange={this.updateAvatar}>
               </input>
           </div>
+          <div className="user-name-info">
+            <nav>
+              <h1>{user.username}</h1>
+              <p>200 subscribers</p>
+            </nav>
+
+            <nav className="subs">
+              <button className="subscribe-bttn">SUBSCRIBE</button>
+            </nav>
+
+          </div>
+        </div>
+
+        <div className="user-toggle-options">
+          <ul>
+            <li className={this.state.selected === "HOME" ? "selected" : ""}
+              onClick={() => this.selectToggle("HOME")}>
+              HOME
+            </li>
+
+            <li className={this.state.selected === "VIDEOS" ? "selected" : ""}
+              onClick={() => this.selectToggle("VIDEOS")}>
+              VIDEOS
+            </li>
+
+            <li className={this.state.selected === "CHANNELS" ? "selected" : ""}
+              onClick={() => this.selectToggle("CHANNELS")}>
+              CHANNELS
+            </li>
+
+            <li className={this.state.selected === "LIKES" ? "selected" : ""}
+              onClick={() => this.selectToggle("LIKES")}>
+              LIKES
+            </li>
+
+            <li className={this.state.selected === "ABOUT" ? "selected" : ""}
+              onClick={() => this.selectToggle("ABOUT")}>
+              ABOUT
+            </li>
+          </ul>
         </div>
       </div>
       )

@@ -6,7 +6,6 @@
 .user-banner-container {
   height: 200px;
   font-family: 'Roboto', 'Noto', sans-serif;
-
 }
 
 .user-banner {
@@ -128,8 +127,8 @@
    justify-content: center;
    align-items: center;
    justify-content: space-between;
-   padding: 20px 0px;
-
+   padding-top: 20px;
+   width: 216px;
 }
 
 .user-show-icon span {
@@ -142,14 +141,14 @@
   padding: 5px 0px;
   height: 93px;
   align-items: center;
-  margin-left: 16px;
+  margin-left: 93px;
   background-position:center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .avatar-input {
-  margin-left: 42px;
+  margin-left: 118px;;
   position: absolute;
   text-indent: -999px;
   cursor: pointer;
@@ -186,7 +185,7 @@
   padding: 5px 0px;
   height: 93px;
   align-items: center;
-  margin-left: 16px;
+  margin-left: 93px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -202,5 +201,77 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin-left: 42px;
+  margin-left: 117px;
+}
+
+.user-info-container {
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  background: #F5F5F5;
+}
+
+.user-name-info {
+  width: calc(100% - 216px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name-info h1 {
+  color: black;
+  font-size: 20px;
+}
+
+.user-name-info p {
+  color: grey;
+  font-size: 14px;
+}
+
+.subs {
+  margin-right: 49px;
+}
+
+.subscribe-bttn {
+  background: #0099ff;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  height: 10px;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  z-index: 2;
+}
+
+.user-toggle-options {
+  background: #F5F5F5;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.user-toggle-options ul {
+  display: flex;
+  margin-left: 93px;
+  color: grey;
+  overflow: scroll;
+}
+
+.user-toggle-options ul  li {
+  cursor: pointer;
+  padding: 0px 40px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  font-size: 13px;
+  width: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.user-toggle-options ul  li:hover {
+  color: black;
+}
+
+.selected {
+  border-bottom: 3px solid grey;
 }
