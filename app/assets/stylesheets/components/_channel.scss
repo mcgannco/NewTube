@@ -73,7 +73,6 @@
   width: 151px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   display: flex;
   justify-content: center;
   z-index: 2;
@@ -81,37 +80,35 @@
 
 .banner-edit-container-span {
   font-size: 23px;
-    cursor: pointer;
-    margin-top: 5px;
-    background: grey;
-    justify-content: flex-end;
-    align-items: flex-end;
-    text-align: end;
-    margin-left: 90px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    width: 43px;
+  cursor: pointer;
+  background: #E0E0E0;
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: end;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 43px;
+  height: 46px;
+  margin-left: 107px;
 }
 
 .banner-edit-container-span svg:hover {
   cursor: pointer;
 }
 
-.banner-edit-container span:hover {
-  background: green;
-}
-
-
 .banner-edit-input {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  padding-left: 240px;
-  margin-right: -240px;
+  width: 43px;
+  height: 46px;
   cursor: pointer;
   position: absolute;
   text-indent: -999px;
+  margin-left: 54px;
+}
+
+.banner-edit-input:hover {
+  background: grey;
+  opacity: 0.5;
 }
 
 .finalize-buttons {
@@ -152,18 +149,18 @@
 }
 
 .avatar-input {
+  margin-left: 42px;
   position: absolute;
   text-indent: -999px;
   cursor: pointer;
-  background: rebeccapurple;
-  width: 117px;
-  height: 46px;
-  opacity: 0;
+  width: 46px;
+  height: 40px;
   z-index: 2;
 }
 
 .avatar-input:hover {
-  background: blue;
+  background: grey;
+  opacity: 0.5;
 }
 
 .banner-preview {
@@ -176,7 +173,6 @@
 }
 
 .avatarPreview {
-  background: red;
   border-radius: 54px;
   width: 100px;
   position: absolute;
@@ -194,4 +190,17 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.avatar-cam {
+  color: black;
+  font-size: 23px;
+  width: 46px;
+  height: 40px;
+  background: #E0E0E0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: 42px;
 }

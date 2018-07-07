@@ -174,6 +174,11 @@ class ChannelShow extends React.Component {
             style={
               {backgroundImage: `url(${this.state.avatarURL})`}
              }></nav>
+
+           <div className={this.state.edit ? "avatar-cam" : "hidden"}>
+                 <i className="fas fa-camera"></i>
+               </div>
+
               <input
                 className={currentUserID === user.id && this.state.buttons ? "avatar-input" : "hidden"}
                 type="file"
