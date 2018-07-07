@@ -79,10 +79,10 @@ class ChannelShow extends React.Component {
     reader.onloadend = function () {
       this.setState({ avatarURL: reader.result });
     }.bind(this);
-
     if (file) {
       reader.readAsDataURL(file);
     }
+
 
   }
 
@@ -142,6 +142,7 @@ class ChannelShow extends React.Component {
               </span>
               <input className={this.state.buttons ? "banner-edit-input" : "hidden"}
                 onChange={this.updateBanner}
+                value=""
                 type="file"></input>
               <button onClick={this.editProfile} className={customize}>Customize Channel</button>
             </div>
@@ -174,8 +175,9 @@ class ChannelShow extends React.Component {
               {backgroundImage: `url(${this.state.avatarURL})`}
              }></nav>
               <input
-                className={currentUserID === user.id ? "avatar-input" : "hidden"}
+                className={currentUserID === user.id && this.state.buttons ? "avatar-input" : "hidden"}
                 type="file"
+                value=""
                 onChange={this.updateAvatar}>
               </input>
           </div>
