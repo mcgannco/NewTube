@@ -82,7 +82,7 @@ class CommentsIndex extends React.Component {
         <div className="user-comment-div">
           <span style={
             {backgroundImage: `url(${userAvatar})`}
-           }>{currentUser.username.slice(0,1)}</span>
+          }>{currentUser.profile_img_url ? "" : username.slice(0,1)}</span>
           <input onClick={this.showButton}
             onChange={this.updateInput}
             placeholder="Add a public comment..."

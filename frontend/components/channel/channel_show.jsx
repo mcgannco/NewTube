@@ -99,6 +99,8 @@ class ChannelShow extends React.Component {
       cancel: false,
       bannerFile: "",
       avatarFile: "",
+      bannerURL: "",
+      avatarURL: ""
     })
     )
 
@@ -159,7 +161,7 @@ class ChannelShow extends React.Component {
             </div>
 
             <div className="finalize-buttons">
-              <button onClick={this.submitChanges} className={this.state.bannerURL || this.state.avatarURL ? "save-button" : "hidden"}>Save Changes</button>
+              <button onClick={this.submitChanges} className={this.state.edit ? "save-button" : "hidden"}>Save Changes</button>
               <button onClick={this.cancelEdit} className={this.state.edit ? "finalize-button" : "hidden"}>Cancel</button>
             </div>
 

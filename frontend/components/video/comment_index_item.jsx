@@ -34,7 +34,7 @@ class CommentIndexItem extends React.Component {
             <span style={
               {backgroundImage: `url(${userAvatar})`}
              }>
-              {user.username.slice(0,1)}
+              {user.profile_img_url ? "" : user.username.slice(0,1)}
             </span>
           </div>
 
