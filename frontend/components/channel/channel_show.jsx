@@ -47,6 +47,7 @@ class ChannelShow extends React.Component {
   }
 
   cancelEdit() {
+    debugger
     this.setState({edit: false, buttons: false, cancel: false,bannerFile: "",
     bannerURL: "",
     avatarFile: "",
@@ -160,7 +161,7 @@ class ChannelShow extends React.Component {
 
             <div className="finalize-buttons">
               <button onClick={this.submitChanges} className={this.state.edit  || this.state.avatarFile ? "save-button" : "hidden"}>Save Changes</button>
-              <button onClick={this.cancelEdit} className={this.state.edit ? "finalize-button" : "hidden"}>Cancel</button>
+              <button onClick={this.cancelEdit} className={this.state.edit || this.state.avatarFile ? "finalize-button" : "hidden"}>Cancel</button>
             </div>
 
           </div>
