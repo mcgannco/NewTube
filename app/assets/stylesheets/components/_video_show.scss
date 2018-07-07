@@ -16,20 +16,17 @@
   position: relative;
   overflow: hidden;
   padding-bottom: 56.25%;
+  background: black;
 }
 
 .video-player{
   position: absolute;
-  bottom: 50%;
-  right: 50%;
-  -webkit-transform: translateX(50%) translateY(50%);
-  transform: translateX(50%) translateY(50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1000;
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%    !important;
+  height: auto   !important;
 };
 
 .video-stats {

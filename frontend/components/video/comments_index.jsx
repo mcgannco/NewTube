@@ -18,7 +18,6 @@ class CommentsIndex extends React.Component {
 
   componentDidMount() {
     this.props.requestAllComments(this.props.vidId)
-    .then(this.props.requestAllUsers())
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,7 +81,7 @@ class CommentsIndex extends React.Component {
         <div className="user-comment-div">
           <span style={
             {backgroundImage: `url(${userAvatar})`}
-          }>{currentUser.profile_img_url ? "" : username.slice(0,1)}</span>
+          }>{currentUser.profile_img_url !== "/avatars/original/missing.png" ? "" : currentUser.username.slice(0,1)}</span>
           <input onClick={this.showButton}
             onChange={this.updateInput}
             placeholder="Add a public comment..."
