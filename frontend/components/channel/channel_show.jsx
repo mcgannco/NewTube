@@ -115,7 +115,7 @@ class ChannelShow extends React.Component {
     let banner;
     let avatar;
 
-    if(this.state.bannerURL) {
+    if(loading && this.state.bannerURL) {
       banner = this.state.bannerURL;
     } else if(this.state.edit && this.state.bannerURL){
       banner = this.state.bannerURL;
@@ -123,7 +123,7 @@ class ChannelShow extends React.Component {
       banner = user.banner_img_url;
     }
 
-    if(this.state.avatarURL) {
+    if(loading && this.state.avatarURL) {
       avatar = this.state.avatarURL;
     } else if(this.state.edit && this.state.avatarURL){
       debugger
@@ -150,7 +150,7 @@ class ChannelShow extends React.Component {
               {backgroundImage: `url(${banner})`}
              }>
           <div className='right-container'>
-            <div className="banner-edit-container">
+            <div className={currentUserID === user.id ? "banner-edit-container" : "" }>
               <span className={this.state.edit ? "banner-edit-container-span" : "hidden"}>
                 <i className="fas fa-camera"></i>
               </span>
@@ -161,7 +161,7 @@ class ChannelShow extends React.Component {
             </div>
 
             <div className="finalize-buttons">
-              <button onClick={this.submitChanges} className={this.state.edit ? "save-button" : "hidden"}>Save Changes</button>
+              <button onClick={this.submitChanges} className={this.state.edit  || this.state.avatarFile ? "save-button" : "hidden"}>Save Changes</button>
               <button onClick={this.cancelEdit} className={this.state.edit ? "finalize-button" : "hidden"}>Cancel</button>
             </div>
 
@@ -176,7 +176,7 @@ class ChannelShow extends React.Component {
               {backgroundImage: `url(${avatar})`}
             }>{user.profile_img_url === "/avatars/original/missing.png" ? user.username.slice(0,1): ""}</span>
               <input
-                className="avatar-input"
+                className={currentUserID === user.id ? "avatar-input" : "hidden"}
                 type="file"
                 onChange={this.updateAvatar}>
               </input>
