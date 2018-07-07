@@ -99,8 +99,6 @@ class ChannelShow extends React.Component {
       cancel: false,
       bannerFile: "",
       avatarFile: "",
-      bannerURL: "",
-      avatarURL: ""
     })
     )
 
