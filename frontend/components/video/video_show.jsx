@@ -98,7 +98,7 @@ class VideoShow extends React.Component {
 
   render() {
     let {video, videos, users, currentUser} = this.props;
-    if (!video || !users || !currentUser ) {
+    if (!video || !users ) {
       return null;
     }
     if(!users[video.author_id]) {
