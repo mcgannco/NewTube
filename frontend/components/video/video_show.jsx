@@ -80,7 +80,8 @@ class VideoShow extends React.Component {
                 src={video.video_url}
                 />
 
-
+              <div className="vid-controls">
+              </div>
 
             </nav>
 
