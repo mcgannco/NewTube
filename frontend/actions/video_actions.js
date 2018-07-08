@@ -55,3 +55,15 @@ export const createVideo = video => dispatch => (
     dispatch(receiveErrors(err.responseJSON))
   ))
 );
+
+export const createLike = (videoId, like) => dispatch => {
+  return APIUtil.createLike(videoId, like).then(video => dispatch(receiveSingleVideo(video)));
+};
+
+export const updateLike = (videoId, userId, like) => dispatch => {
+  return APIUtil.updateLike(videoId, userId, like).then(video => dispatch(receiveSingleVideo(video)));
+};
+
+export const deleteLike = (id) => dispatch => {
+  return APIUtil.deleteLike(id).then(video => dispatch(receiveSingleVideo(video)));
+};

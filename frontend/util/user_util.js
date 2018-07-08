@@ -24,3 +24,10 @@ export const updateUser = (userId, data) => {
     dataType: 'json',
   });
 };
+
+export const createLike = (videoId) => {
+  return $.ajax({
+    url: `api/users/likes/${videoId}`,
+    method: 'post',
+  });
+};

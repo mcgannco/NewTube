@@ -16,6 +16,8 @@ class VideoShow extends React.Component {
     this.convertDate = this.convertDate.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
     this.videoSetup = this.videoSetup.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
+    this.handleLike = this.handleLike.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
@@ -57,7 +59,7 @@ class VideoShow extends React.Component {
     let playPromise = video.play();
     if (playPromise !== undefined) {
     playPromise.then(_ => {
-      console.log('fuck')
+
     })
     .catch(error => {
       return null
@@ -76,12 +78,29 @@ class VideoShow extends React.Component {
    }
   }
 
+  handleEnd(e) {
+
+  }
+
+  handleLike(e) {
+    if (!this.props.video) {
+      return;
+    }
+    if (this.props.video.currentUsersLike.like_value === 'N/A') {
+      this.props.createLike(this.props.video.id, {like_value: e});
+    } else if (e === this.props.video.currentUsersLike.like_value) {
+      const likeId = this.props.video.currentUsersLike.id;
+      this.props.deleteLike(likeId);
+    } else {
+      this.props.updateLike(this.props.video.id, this.props.currentUser.id, {like_value: e});
+    }
+  }
+
   render() {
     let {video, videos, users, currentUser} = this.props;
-    if (!video || !users || currentUser) {
+    if (!video || !users || !currentUser ) {
       return null;
     }
-
     if(!users[video.author_id]) {
       return null;
     }
@@ -93,11 +112,14 @@ class VideoShow extends React.Component {
     let playPauseButton;
     let play = window.play;
     let pause = window.pause;
+    let icon;
     if(this.props.vidPlaying) {
+      icon = pause;
       playPauseButton = <div style={
         {backgroundImage: `url(${pause})`}
        }></div>
     } else {
+      icon = play;
       playPauseButton = <div style={
         {backgroundImage: `url(${play})`}
        }></div>
@@ -109,20 +131,18 @@ class VideoShow extends React.Component {
             <nav className="video-container"
               id='vid-player-container'>
               <video
+                controls
+                autoPlay
                 preload='metadata'
                 onLoadedMetadata={this.videoSetup}
+                onEnded={this.handleEnd}
                 className="video-player"
+                onClick={this.togglePlay}
                 id="vid-player"
                 src={video.video_url}
                 />
 
-              <div className="vid-controls">
-                <div>
-                  <span onClick={this.togglePlay}>
-                    {playPauseButton}
-                  </span>
-                </div>
-              </div>
+
 
             </nav>
 
@@ -131,12 +151,16 @@ class VideoShow extends React.Component {
                 <span className="total-views">17,4999,333 views</span>
                 <div>
                   <span className="video-show-likes">
-                    <i className="fas fa-thumbs-up"></i>
-                    <p>1,000</p>
+                    <nav onClick={() => this.handleLike(true)}>
+                      <i className="fas fa-thumbs-up"></i>
+                    </nav>
+                    <p>{video.likes}</p>
                   </span>
                   <span className="video-show-dislikes">
-                    <i className="fas fa-thumbs-down"></i>
-                    <p>19</p>
+                    <nav onClick={() => this.handleLike(false)}>
+                      <i className="fas fa-thumbs-down"></i>
+                    </nav>
+                    <p>{video.dislikes}</p>
                   </span>
                 </div>
               </div>

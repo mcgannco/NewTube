@@ -31,11 +31,18 @@ class User < ApplicationRecord
 
   has_many :videos,
     class_name: :Video,
-    foreign_key: :video_id
+    foreign_key: :video_id,
+    dependent: :destroy
 
   has_many :comments,
     class_name: :User,
-    foreign_key: :author_id
+    foreign_key: :author_id,
+    dependent: :destroy
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_videos,
+   through: :likes,
+   source: :video
 
   attr_reader :password
   after_initialize :ensure_session_token
