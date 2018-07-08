@@ -23,6 +23,9 @@ class CommentIndexItem extends React.Component {
   render() {
     let { comment, user } = this.props;
     let date = new Date(comment.timestamp);
+    if (!user) {
+      return null;
+    }
     let userAvatar = user.profile_img_url;
     return(
       <li

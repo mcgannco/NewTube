@@ -8,11 +8,14 @@ class VideoShow extends React.Component {
     super(props)
     this.state = {
       expandDescription: false,
-      isColumnView: window.innerWidth <= 1000
+      isColumnView: window.innerWidth <= 1000,
+      duration: 0
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
     this.convertDate = this.convertDate.bind(this);
+    this.togglePlay = this.togglePlay.bind(this);
+    this.videoSetup = this.videoSetup.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
@@ -43,15 +46,34 @@ class VideoShow extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    let $continer = $('#vid-player-container');
-    let $video = $('#vid-player');
-  }
-
   convertDate(date) {
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
     let d  = new Date(date);
     return d.toLocaleDateString("en-US", options);
+  }
+
+  videoSetup(e) {
+    let video = e.currentTarget;
+    let playPromise = video.play();
+    if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      console.log('fuck')
+    })
+    .catch(error => {
+      return null
+    });
+    }
+  }
+
+  togglePlay(e) {
+    let video = document.getElementById('vid-player')
+    if (this.props.vidPlaying) {
+     this.props.vPlaying(false);
+     video.pause();
+   } else {
+     this.props.vPlaying(true);
+     video.play();
+   }
   }
 
   render() {
@@ -67,20 +89,39 @@ class VideoShow extends React.Component {
     let showmore = this.state.expandDescription ? "SHOW LESS" : "SHOW MORE"
     let userIcon = users[video.author_id].username[0];
     let userAvatar = users[video.author_id].profile_img_url;
-    let date = this.convertDate(video.timestamp)
+    let date = this.convertDate(video.timestamp);
+    let playPauseButton;
+    let play = window.play;
+    let pause = window.pause;
+    if(this.props.vidPlaying) {
+      playPauseButton = <div style={
+        {backgroundImage: `url(${pause})`}
+       }></div>
+    } else {
+      playPauseButton = <div style={
+        {backgroundImage: `url(${play})`}
+       }></div>
+    }
+
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
             <nav className="video-container"
               id='vid-player-container'>
               <video
-                autoPlay preload='metadata' controls
+                preload='metadata'
+                onLoadedMetadata={this.videoSetup}
                 className="video-player"
                 id="vid-player"
                 src={video.video_url}
                 />
 
               <div className="vid-controls">
+                <div>
+                  <span onClick={this.togglePlay}>
+                    {playPauseButton}
+                  </span>
+                </div>
               </div>
 
             </nav>

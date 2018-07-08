@@ -2,6 +2,7 @@ import * as APIUtil from '../util/video_util';
 export const RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS ';
 export const RECEIVE_VIDEO = 'RECEIVE_VIDEO ';
 export const RECEIVE_VIDEO_ERRORS = 'RECEIVE_VIDEO_ERRORS ';
+export const VID_STATUS = 'VID_STATUS';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -21,6 +22,13 @@ export const receiveErrors = (errors) => (
   {
     type: RECEIVE_VIDEO_ERRORS,
     errors
+  }
+);
+
+export const vPlaying = (bool) => (
+  {
+    type: VID_STATUS,
+    bool
   }
 );
 
