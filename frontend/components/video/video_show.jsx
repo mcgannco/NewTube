@@ -18,7 +18,7 @@ class VideoShow extends React.Component {
     this.props.requestSingleVideo(this.props.match.params.id)
     this.props.requestAllVideos().then(this.props.requestAllUsers())
     window.addEventListener("resize", this.updateWindowSize);
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   updateWindowSize() {
@@ -41,6 +41,11 @@ class VideoShow extends React.Component {
     } else {
       this.setState({expandDescription: false})
     }
+  }
+
+  componentDidUpdate() {
+    let $continer = $('#vid-player-container');
+    let $video = $('#vid-player');
   }
 
   convertDate(date) {
@@ -66,11 +71,17 @@ class VideoShow extends React.Component {
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
-            <nav className="video-container">
+            <nav className="video-container"
+              id='vid-player-container'>
               <video
+                autoPlay preload='metadata' controls
                 className="video-player"
+                id="vid-player"
                 src={video.video_url}
                 />
+
+
+
             </nav>
 
               <h1>{video.title}</h1>
