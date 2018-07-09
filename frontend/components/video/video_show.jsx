@@ -27,7 +27,7 @@ class VideoShow extends React.Component {
     this.props.createView(this.props.match.params.id)
   }
   componentDidMount() {
-
+    this.props.requestAllUsers()
     window.addEventListener("resize", this.updateWindowSize);
     window.scrollTo(0, 0);
   }
@@ -128,8 +128,6 @@ class VideoShow extends React.Component {
     let commentContainer;
     let relatedContainer;
     if (!video || !users ) {
-      commentContainer = null;
-      relatedContainer = null;
       return null;
     } else if (video) {
       commentContainer =   <CommentsIndexContainer vidId={video.id} requestAllUsers={this.props.requestAllUsers} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
