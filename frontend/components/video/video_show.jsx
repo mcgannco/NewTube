@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import RelatedVideoIndexItem from './related_video_index_item';
+import RelatedVideoIndexContainer from './related_index_container';
 import CommentsIndexContainer from './comments_index_container';
 
 class VideoShow extends React.Component {
@@ -9,7 +9,8 @@ class VideoShow extends React.Component {
     this.state = {
       expandDescription: false,
       isColumnView: window.innerWidth <= 1000,
-      duration: 0
+      duration: 0,
+      views: ""
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
@@ -21,9 +22,12 @@ class VideoShow extends React.Component {
     this.formatNumber = this.formatNumber.bind(this);
     this.formatViews = this.formatViews.bind(this);
   }
+
+  componentWillMount() {
+    this.props.createView(this.props.match.params.id)
+  }
   componentDidMount() {
-    this.props.requestSingleVideo(this.props.match.params.id)
-    this.props.requestAllVideos().then(this.props.requestAllUsers()).then(this.props.createView(this.props.match.params.id))
+
     window.addEventListener("resize", this.updateWindowSize);
     window.scrollTo(0, 0);
   }
@@ -38,7 +42,9 @@ class VideoShow extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
-      this.props.requestSingleVideo(nextProps.match.params.id).then(window.scrollTo(0, 0));
+      this.props.requestSingleVideo(nextProps.match.params.id).then(window.scrollTo(0, 0)).then(
+        this.props.createView(nextProps.match.params.id)
+      );
     }
   }
 
@@ -118,9 +124,16 @@ class VideoShow extends React.Component {
   }
 
   render() {
-    let {video, videos, users, currentUser} = this.props;
+    let {video,users, currentUser} = this.props;
+    let commentContainer;
+    let relatedContainer;
     if (!video || !users ) {
+      commentContainer = null;
+      relatedContainer = null;
       return null;
+    } else if (video) {
+      commentContainer =   <CommentsIndexContainer vidId={video.id} requestAllUsers={this.props.requestAllUsers} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
+      relatedContainer =   <RelatedVideoIndexContainer />
     }
     if(!users[video.author_id]) {
       return null;
@@ -162,14 +175,11 @@ class VideoShow extends React.Component {
                 id="vid-player"
                 src={video.video_url}
                 />
-
-
-
             </nav>
 
               <h1>{video.title}</h1>
               <div className= "video-stats">
-                <span className="total-views">{this.formatViews(video.view_count)} views</span>
+                <span className="total-views">{this.formatViews(this.props.video.view_count)} views</span>
                 <div>
                   <span className="video-show-likes">
                     <nav onClick={() => this.handleLike(true)}>
@@ -215,7 +225,7 @@ class VideoShow extends React.Component {
               </div>
 
               <div className={!this.state.isColumnView ? "comments-container" : "hidden"}>
-                <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
+                {commentContainer}
               </div>
 
               </section>
@@ -223,11 +233,9 @@ class VideoShow extends React.Component {
 
 
         	<section className="col col-1-3">
-            <ul>
-            {videos.map((video,idx) => <RelatedVideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
-            </ul>
+            {relatedContainer}
             <div className={this.state.isColumnView ? "comments-container" : "hidden"}>
-              <CommentsIndexContainer vidId={video.id} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
+              {commentContainer}
             </div>
     			</section>
         </section>
