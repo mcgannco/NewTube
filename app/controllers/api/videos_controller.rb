@@ -19,8 +19,18 @@ class Api::VideosController < ApplicationController
     end
   end
 
+  def update
+    @video = Video.find(params[:id])
+    update_info = params[:video] ? {description: params[:video][:description], title: params[:video][:title]} : {view_count: @video.view_count + 1}
+    if @video.update(update_info)
+     render "api/videos/show"
+   else
+     render json: @video.errors.full_messages, status: 422
+   end
+  end
+
   private
   def video_params
-    params.require(:video).permit(:title, :author_id, :clip, :description)
+    params.require(:video).permit(:title, :author_id, :clip, :description, :view_count)
   end
 end

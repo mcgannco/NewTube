@@ -18,10 +18,12 @@ class VideoShow extends React.Component {
     this.videoSetup = this.videoSetup.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleLike = this.handleLike.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
+    this.formatViews = this.formatViews.bind(this);
   }
   componentDidMount() {
     this.props.requestSingleVideo(this.props.match.params.id)
-    this.props.requestAllVideos().then(this.props.requestAllUsers())
+    this.props.requestAllVideos().then(this.props.requestAllUsers()).then(this.props.createView(this.props.match.params.id))
     window.addEventListener("resize", this.updateWindowSize);
     window.scrollTo(0, 0);
   }
@@ -96,6 +98,25 @@ class VideoShow extends React.Component {
     }
   }
 
+  formatNumber(num) {
+    num = Math.abs(num);
+    let formattedNumber;
+    if (num >= 1000000000) {
+        formattedNumber = (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+    } else if (num >= 1000000) {
+        formattedNumber =  (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    } else  if (num >= 1000) {
+        formattedNumber =  (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    } else {
+        formattedNumber = num;
+    }
+    return formattedNumber;
+  }
+
+  formatViews(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   render() {
     let {video, videos, users, currentUser} = this.props;
     if (!video || !users ) {
@@ -148,19 +169,19 @@ class VideoShow extends React.Component {
 
               <h1>{video.title}</h1>
               <div className= "video-stats">
-                <span className="total-views">17,4999,333 views</span>
+                <span className="total-views">{this.formatViews(video.view_count)} views</span>
                 <div>
                   <span className="video-show-likes">
                     <nav onClick={() => this.handleLike(true)}>
                       <i className="fas fa-thumbs-up"></i>
                     </nav>
-                    <p>{video.likes}</p>
+                    <p>{this.formatNumber(video.likes)}</p>
                   </span>
                   <span className="video-show-dislikes">
                     <nav onClick={() => this.handleLike(false)}>
                       <i className="fas fa-thumbs-down"></i>
                     </nav>
-                    <p>{video.dislikes}</p>
+                    <p>{this.formatNumber(video.dislikes)}</p>
                   </span>
                 </div>
               </div>

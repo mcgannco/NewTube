@@ -12,6 +12,7 @@
 #  clip_file_size    :integer
 #  clip_updated_at   :datetime
 #  author_id         :integer
+#  view_count        :integer          default(0), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

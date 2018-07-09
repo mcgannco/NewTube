@@ -67,3 +67,7 @@ export const updateLike = (videoId, userId, like) => dispatch => {
 export const deleteLike = (id) => dispatch => {
   return APIUtil.deleteLike(id).then(video => dispatch(receiveSingleVideo(video)));
 };
+
+export const createView = (videoId) => dispatch => {
+  return APIUtil.createView(videoId).then(video => dispatch(receiveSingleVideo(video)));
+};

@@ -12,10 +12,11 @@
 #  clip_file_size    :integer
 #  clip_updated_at   :datetime
 #  author_id         :integer
+#  view_count        :integer          default(0), not null
 #
 
 class Video < ApplicationRecord
-  validates :title, :description, :author_id, presence: true
+  validates :title, :description, :author_id, :view_count, presence: true
   validates :author_id, uniqueness: { scope: :title, message: "video titles must be unique"},
   unless: Proc.new {|video| video.title.blank? }
 

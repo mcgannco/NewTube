@@ -45,3 +45,11 @@ export const deleteLike = (id) => {
       url: `/api/likes/${id}`
   });
 };
+
+export const createView = (id) => {
+  return $.ajax({
+      method: 'patch',
+      url: `/api/videos/${id}`,
+      data: { addView: true}
+  });
+};

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180708201850) do
+ActiveRecord::Schema.define(version: 20180708215513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180708201850) do
     t.integer "clip_file_size"
     t.datetime "clip_updated_at"
     t.integer "author_id"
+    t.integer "view_count", default: 0, null: false
   end
 
 end

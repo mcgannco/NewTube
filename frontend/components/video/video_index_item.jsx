@@ -16,6 +16,7 @@ class VideoIndexItem extends React.Component {
     this.closePreview = this.closePreview.bind(this);
     this.getDuration = this.getDuration.bind(this);
     this.tick = this.tick.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
   }
 
   preview(e) {
@@ -76,6 +77,21 @@ class VideoIndexItem extends React.Component {
     }
   }
 
+  formatNumber(num) {
+    num = Math.abs(num);
+    let formattedNumber;
+    if (num >= 1000000000) {
+        formattedNumber = (num / 1000000000).toFixed(0).replace(/\.0$/, '') + 'G';
+    } else if (num >= 1000000) {
+        formattedNumber =  (num / 1000000).toFixed(0).replace(/\.0$/, '') + 'M';
+    } else  if (num >= 1000) {
+        formattedNumber =  (num / 1000).toFixed(0).replace(/\.0$/, '') + 'K';
+    } else {
+        formattedNumber = num;
+    }
+    return formattedNumber;
+  }
+
   render() {
     let { video, idx, author, timeAgo} = this.props;
     let date = new Date(timeAgo);
@@ -109,7 +125,7 @@ class VideoIndexItem extends React.Component {
             <Link to={`/channel/${video.author_id}`}><span className="video-index-author">{author}</span></Link>
 
             <div>
-              <span>100K views</span>
+              <span>{this.formatNumber(video.view_count)} views</span>
 
               <span className="dot-seperator">
                 <i className="fas fa-circle"></i>
