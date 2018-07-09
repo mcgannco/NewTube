@@ -10,7 +10,6 @@
 
 [class*='col-']:last-of-type {
   padding-right: 20px;
-  padding-left: 20px;
 }
 
 .col-2-3 {
@@ -25,5 +24,9 @@
 @media all and (max-width: 1000px) {
   [class*='col-'] {
     width: 100%;
+  }
+
+  [class*='col-']:last-of-type {
+    padding-left: 20px;
   }
 }
