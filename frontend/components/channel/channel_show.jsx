@@ -121,8 +121,8 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID, loading, videos, users} = this.props;
-    if(!user || !videos) {
+    let {user, currentUserID, loading, videos, users, users_arr} = this.props;
+    if(!user || !videos || !users_arr) {
       return null;
     }
 
@@ -144,6 +144,14 @@ class ChannelShow extends React.Component {
       selected = <div className='video-index'>
         <ul>
         {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        </ul>
+      </div>
+    } else if (this.state.selected === "CHANNELS") {
+      debugger
+      users_arr = users_arr.filter(channel => user.subscriberIds.includes(channel.id));
+      selected = <div className="channel-index">
+        <ul>
+          {users_arr.map((user,idx) => <li>{user.username}</li>)}
         </ul>
       </div>
     }
@@ -211,7 +219,7 @@ class ChannelShow extends React.Component {
           <div className="user-name-info">
             <nav>
               <h1>{user.username}</h1>
-              <p>200 subscribers</p>
+              <p>{user.subscribeeIds.length} subscribers</p>
             </nav>
 
             <nav className="subs">
