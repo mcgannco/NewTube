@@ -15,10 +15,12 @@ class Subscription < ApplicationRecord
   validate :no_self_subscription
 
   belongs_to :subscriber,
-    class_name: 'User'
+    class_name: 'User',
+    foreign_key: :subscriber_id
 
   belongs_to :subscribee,
-    class_name: 'User'
+    class_name: 'User',
+    foreign_key: :subscribee_id
 
   def no_self_subscription
     errors[:base] << 'Cannot subscribe to own channel' if self.subscriber_id == self.subscribee_id
