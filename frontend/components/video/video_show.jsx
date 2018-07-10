@@ -214,8 +214,9 @@ class VideoShow extends React.Component {
                     </div>
 
                     </div>
+                <nav>
+                <button onClick={() => this.handleSubs(false)}>Subscribe {this.formatNumber(users[video.author_id].subCount)}</button></nav>
 
-                  <button onClick={() => this.handleSubs(false)}>Subscribe {this.formatNumber(users[video.author_id].subCount)}</button>;
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>
