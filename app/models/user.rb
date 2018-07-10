@@ -31,25 +31,37 @@ class User < ApplicationRecord
 
   has_many :videos,
     class_name: :Video,
-    foreign_key: :video_id,
+    foreign_key: :author_id,
+    primary_key: :id,
     dependent: :destroy
 
   has_many :comments,
-    class_name: :User,
+    class_name: :Comment,
     foreign_key: :author_id,
+    primary_key: :id,
     dependent: :destroy
 
-  has_many :likes, dependent: :destroy
+  has_many :likes,
+    class_name: :Like,
+    foreign_key: :user_id,
+    primary_key: :id,
+    dependent: :destroy
+
   has_many :liked_videos,
    through: :likes,
    source: :video
 
    has_many :subscriptions,
-       foreign_key: :subscriber_id
+       foreign_key: :subscriber_id,
+       class_name: :Subscription,
+       primary_key: :id,
+       dependent: :destroy
 
    has_many :subscribers,
      foreign_key: :subscribee_id,
-     class_name: 'Subscription'
+     class_name: :Subscription,
+     primary_key: :id,
+     dependent: :destroy
 
   attr_reader :password
   after_initialize :ensure_session_token

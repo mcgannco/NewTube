@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.all.includes(:subscriptions, :subscribers, :videos, :likes, :comments)
   end
 
   def show
@@ -31,6 +31,26 @@ class Api::UsersController < ApplicationController
       render "api/users/show"
     else
       render json: ['update failed'], status: 422
+    end
+  end
+
+  def subscribe
+    @sub = current_user.follows.new(followee_id: params[:followee_id])
+    if @follow.save
+      render :follow
+    else
+      render json: @follow.errors.full_messages, status: 422
+    end
+  end
+
+  def unsubscribe
+    @follow = current_user.follows.find_by(followee_id: params[:followee_id])
+
+    if @follow
+      @follow.destroy
+      render :follow
+    else
+      render json: ['Follow does not exist or you are not authorized to destroy it'], status: 401
     end
   end
 

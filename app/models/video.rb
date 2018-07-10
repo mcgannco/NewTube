@@ -23,10 +23,18 @@ class Video < ApplicationRecord
   belongs_to :uploader,
     class_name: :User,
     foreign_key: :author_id,
+    primary_key: :id,
+    dependent: :destroy
+
+  has_many :comments,
+    class_name: :Comment,
+    foreign_key: :video_id,
     primary_key: :id
 
-  has_many :comments
-  has_many :likes, dependent: :destroy
+  has_many :likes,
+    foreign_key: :video_id,
+    class_name: :Like,
+    dependent: :destroy
 
   has_many :likers,
     through: :likes,

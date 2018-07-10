@@ -1,11 +1,11 @@
 class Api::VideosController < ApplicationController
 
   def index
-    @videos = Video.all
+    @videos = Video.all.includes(:likes, :comments, :likers, :uploader)
   end
 
   def show
-    @video = Video.find(params[:id])
+    @video = Video.find(params[:id]).includes(:likes)
     render "api/videos/show"
   end
 

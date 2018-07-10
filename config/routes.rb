@@ -4,15 +4,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resource :username, only: [:create]
-    resources :users, only: [:create, :update, :show, :index] do
-      resources :subscriptions, only: [:create]
-    end
+    resources :users, only: [:create, :update, :show, :index]
     resource :session, only: [:create, :destroy]
     resources :videos, only: [:create, :index, :show, :update] do
       resources :comments, only: [:create, :index, :show, :edit, :destroy]
       resources :likes, only: [:create, :update]
     end
     resources :likes, only: [:destroy]
-    resources :subscriptions, only: [:destroy, :index]
+    post 'users/subscriptions/:subscribee_id', to: 'users#subscribe'
+    delete 'users/subscriptions/:subscribee_id', to: 'users#unsubscribe'
   end
 end

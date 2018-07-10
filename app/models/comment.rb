@@ -13,10 +13,14 @@
 class Comment < ApplicationRecord
   belongs_to :video,
     class_name: :Video,
-    foreign_key: :video_id
+    foreign_key: :video_id,
+    primary_key: :id,
+    dependent: :destroy
 
   belongs_to :author,
     class_name: :User,
-    foreign_key: :author_id
-    
+    foreign_key: :author_id,
+    primary_key: :id,
+    dependent: :destroy
+
 end

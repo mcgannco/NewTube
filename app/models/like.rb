@@ -16,6 +16,14 @@ class Like < ApplicationRecord
     message: "Users may only like a video once" }
   validates :like_value, inclusion: { in: [true, false] }
 
-  belongs_to :user
-  belongs_to :video
+  belongs_to :user,
+    foreign_key: :user_id,
+    class_name: :User,
+    primary_key: :id
+
+  belongs_to :video,
+    foreign_key: :video_id,
+    class_name: :Video,
+    primary_key: :id
+
 end
