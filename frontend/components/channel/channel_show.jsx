@@ -122,7 +122,7 @@ class ChannelShow extends React.Component {
 
   render() {
     let {user, currentUserID, loading, videos, users, users_arr} = this.props;
-    if(!user || !videos || !users_arr || currentUserID) {
+    if(!user || !videos || !users_arr) {
       return null;
     }
 
@@ -229,7 +229,7 @@ class ChannelShow extends React.Component {
             </nav>
 
             <nav className="subs">
-              <button className="subscribe-bttn">SUBSCRIBE</button>
+              <button className={currentUserID === user.id ? "hidden" : "subscribe-bttn"}>SUBSCRIBE</button>
             </nav>
 
           </div>
