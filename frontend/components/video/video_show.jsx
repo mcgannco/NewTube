@@ -106,7 +106,23 @@ class VideoShow extends React.Component {
   }
 
   handleSubs(e) {
+    const { video, deleteSub, createSub, users, currentUser } = this.props;
+    if (!video) {
+      return;
+    }
+    let subscribee_id = video.author_id
+    if (!currentUser) {
+      this.props.history.push('/login');
+      return;
+    }
 
+    if (currentUser.subscriberIds.includes(subscribee_id)) {
+      debugger
+      deleteSub(subscribee_id);
+    } else {
+      debugger
+      createSub(subscribee_id);
+    }
   }
 
   formatNumber(num) {
@@ -215,7 +231,7 @@ class VideoShow extends React.Component {
 
                     </div>
                 <nav>
-                <button onClick={() => this.handleSubs(false)}>Subscribe {this.formatNumber(users[video.author_id].subCount)}</button></nav>
+                <button onClick={this.handleSubs}>Subscribe {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button></nav>
 
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>

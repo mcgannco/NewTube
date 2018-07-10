@@ -63,6 +63,14 @@ class User < ApplicationRecord
      primary_key: :id,
      dependent: :destroy
 
+   has_many :subscribed_channels,
+     through: :subscriptions,
+     source: :subscribee
+
+   has_many :subsciber_channels,
+     through: :subscribers,
+     source: :subscriber
+
   attr_reader :password
   after_initialize :ensure_session_token
 

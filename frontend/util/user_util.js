@@ -31,3 +31,17 @@ export const createLike = (videoId) => {
     method: 'post',
   });
 };
+
+export const createSub = (subscribeeId) => {
+  return $.ajax({
+    url: `api/users/subscriptions/${subscribeeId}`,
+    method: 'post',
+  });
+};
+
+export const deleteSub = (subscribeeId) => {
+  return $.ajax({
+    url: `api/users/subscriptions/${subscribeeId}`,
+    method: 'delete',
+  });
+};

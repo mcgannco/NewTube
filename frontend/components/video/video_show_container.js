@@ -4,7 +4,7 @@ import { requestSingleVideo,
   vPlaying,
 createLike, updateLike, deleteLike, createView  } from '../../actions/video_actions';
 import { createComment, requestAllComments  } from '../../actions/comment_actions';
-import { requestAllUsers  } from '../../actions/user_actions';
+import { requestAllUsers, createSub, deleteSub  } from '../../actions/user_actions';
 import { selectAllVideos  } from '../../reducers/selectors';
 import VideoShow from './video_show';
 
@@ -31,6 +31,8 @@ const mdp = dispatch => {
     updateLike: (videoId, userId, like) => dispatch(updateLike(videoId, userId, like)),
     deleteLike: (id) => dispatch(deleteLike(id)),
     createView: (videoId) => dispatch(createView(videoId)),
+    createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
+    deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId))
   })
 };
 

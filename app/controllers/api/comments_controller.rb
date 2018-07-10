@@ -1,6 +1,6 @@
 class Api::CommentsController < ApplicationController
   def index
-    @comments = Comment.all.includes(:author, :video)
+    @comments = Comment.all
   end
 
   def show
