@@ -147,11 +147,17 @@ class ChannelShow extends React.Component {
         </ul>
       </div>
     } else if (this.state.selected === "CHANNELS") {
-      debugger
       users_arr = users_arr.filter(channel => user.subscriberIds.includes(channel.id));
       selected = <div className="channel-index">
         <ul>
-          {users_arr.map((user,idx) => <li>{user.username}</li>)}
+          {users_arr.map((user,idx) => <li key={user.id}>
+            <div>
+              <img src={user.profile_img_url}></img>
+              <h1>{user.username}</h1>
+              <p>{user.subscribeeIds.length} subscribers</p>
+              <button>Subscribe</button>
+            </div>
+          </li>)}
         </ul>
       </div>
     }
