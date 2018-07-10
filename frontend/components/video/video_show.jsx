@@ -178,10 +178,10 @@ class VideoShow extends React.Component {
 
     let subButton;
     let subButtonClass;
-    if(currentUser.id === video.author_id) {
+    if(currentUser && currentUser.id === video.author_id) {
       subButtonClass = "hidden"
     }
-    else if(currentUser.subscriberIds.includes(video.author_id)) {
+    else if(currentUser && currentUser.subscriberIds.includes(video.author_id)) {
       subButton = "SUBSCRIBED"
       subButtonClass = "subscribed-button"
     } else {
@@ -244,7 +244,7 @@ class VideoShow extends React.Component {
                     </div>
                 <nav>
                 <button className={subButtonClass} onClick={this.handleSubs}>{subButton} {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button>
-                <button className={video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
+                <button className={currentUser && video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
 
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>

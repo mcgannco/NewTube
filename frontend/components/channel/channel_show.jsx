@@ -122,7 +122,7 @@ class ChannelShow extends React.Component {
 
   render() {
     let {user, currentUserID, loading, videos, users, users_arr} = this.props;
-    if(!user || !videos || !users_arr) {
+    if(!user || !videos || !users_arr || currentUserID) {
       return null;
     }
 
@@ -155,7 +155,7 @@ class ChannelShow extends React.Component {
               <img src={user.profile_img_url}></img>
               <h1>{user.username}</h1>
               <p>{user.subscribeeIds.length} subscribers</p>
-              <button>{users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
+              <button>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
             </div>
           </li>)}
         </ul>
