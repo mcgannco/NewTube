@@ -2,6 +2,9 @@ import * as APIUtil from '../util/user_util';
 export const RECEIVE_ALL_USERS = 'RECEIVE_ALL_USERS';
 export const RECEIVE_SINGLE_USER = 'RECEIVE_SINGLE_USER';
 export const START_LOADING_USER_PIC = 'START_LOADING_USER_PIC';
+export const RECEIVE_ALL_SUBS = 'RECEIVE_ALL_SUBS ';
+export const RECEIVE_SUB = 'RECEIVE_SUB ';
+export const REMOVE_SUB = 'RECEIVE_SUB ';
 
 export const receiveAllUsers = (users) => (
   {

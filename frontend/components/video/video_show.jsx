@@ -19,6 +19,7 @@ class VideoShow extends React.Component {
     this.videoSetup = this.videoSetup.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleLike = this.handleLike.bind(this);
+    this.handleSubs = this.handleSubs.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
     this.formatViews = this.formatViews.bind(this);
   }
@@ -102,6 +103,10 @@ class VideoShow extends React.Component {
     } else {
       this.props.updateLike(this.props.video.id, this.props.currentUser.id, {like_value: e});
     }
+  }
+
+  handleSubs(e) {
+
   }
 
   formatNumber(num) {
@@ -210,7 +215,7 @@ class VideoShow extends React.Component {
 
                     </div>
 
-                    <button>Subscribe 3.4M</button>
+                  <button onClick={() => this.handleSubs(false)}>Subscribe {this.formatNumber(users[video.author_id].subCount)}</button>;
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
                   <div>

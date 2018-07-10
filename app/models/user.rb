@@ -44,6 +44,13 @@ class User < ApplicationRecord
    through: :likes,
    source: :video
 
+   has_many :subscriptions,
+       foreign_key: :subscriber_id
+
+   has_many :subscribers,
+     foreign_key: :subscribee_id,
+     class_name: 'Subscription'
+
   attr_reader :password
   after_initialize :ensure_session_token
 

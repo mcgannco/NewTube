@@ -15,7 +15,7 @@ const msp = (state, ownProps) => {
     video: state.entities.videos[ownProps.match.params.id],
     comments: state.entities.comments,
     vidPlaying: state.ui.vidPlaying.vidPlaying,
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
   })
 };
 
