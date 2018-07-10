@@ -148,11 +148,37 @@
   justify-content: space-between;
 }
 
-.video-description button {
+.sub-vid-show {
   background: #0099ff;
   color: white;
   padding: 10px;
   border-radius: 2px;
+  width: 132px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.subscribed-button {
+  background: green;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 132px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.edit-vid {
+  background: grey;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 132px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
 
 .uploader-container {

@@ -155,7 +155,7 @@ class ChannelShow extends React.Component {
               <img src={user.profile_img_url}></img>
               <h1>{user.username}</h1>
               <p>{user.subscribeeIds.length} subscribers</p>
-              <button>Subscribe</button>
+              <button>{users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
             </div>
           </li>)}
         </ul>

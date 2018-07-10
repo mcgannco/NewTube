@@ -117,10 +117,8 @@ class VideoShow extends React.Component {
     }
 
     if (currentUser.subscriberIds.includes(subscribee_id)) {
-      debugger
       deleteSub(subscribee_id);
     } else {
-      debugger
       createSub(subscribee_id);
     }
   }
@@ -178,6 +176,20 @@ class VideoShow extends React.Component {
        }></div>
     }
 
+    let subButton;
+    let subButtonClass;
+    if(currentUser.id === video.author_id) {
+      subButtonClass = "hidden"
+    }
+    else if(currentUser.subscriberIds.includes(video.author_id)) {
+      subButton = "SUBSCRIBED"
+      subButtonClass = "subscribed-button"
+    } else {
+      subButton = "SUBSCRIBE"
+      subButtonClass = "sub-vid-show"
+
+    }
+
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
@@ -231,7 +243,8 @@ class VideoShow extends React.Component {
 
                     </div>
                 <nav>
-                <button onClick={this.handleSubs}>Subscribe {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button></nav>
+                <button className={subButtonClass} onClick={this.handleSubs}>{subButton} {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button>
+                <button className={video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
 
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>

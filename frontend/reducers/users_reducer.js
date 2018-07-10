@@ -22,7 +22,6 @@ const usersReducer = (state = {}, action) => {
       subscribee.subscribeeIds = subscribee.subscribeeIds.concat(action.subscriberId)
       return newState;
     case REMOVE_SUB:
-    debugger
       newState = _.merge({}, state);
       subscriber = newState[action.subscriberId];
       subscribee = newState[action.subscribeeId];
