@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import VideoIndexItem from '../video/video_index_item';
 
 class ChannelShow extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestSingleUser(this.props.match.params.id)
+    this.props.requestAllUsers().then(this.props.requestAllVideos())
   }
 
   componentWillReceiveProps(nextProps) {
@@ -120,8 +121,8 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID, loading} = this.props;
-    if(!user) {
+    let {user, currentUserID, loading, videos, users} = this.props;
+    if(!user || !videos) {
       return null;
     }
 
@@ -135,6 +136,16 @@ class ChannelShow extends React.Component {
       customize = "hidden"
     } else {
       customize = "customize-button";
+    }
+
+    let selected;
+    if(this.state.selected ==="VIDEOS") {
+      videos = videos.filter(video => video.author_id === user.id)
+      selected = <div className='video-index'>
+        <ul>
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        </ul>
+      </div>
     }
 
       return(
@@ -238,6 +249,7 @@ class ChannelShow extends React.Component {
             </li>
           </ul>
         </div>
+        {selected}
       </div>
       )
     }
