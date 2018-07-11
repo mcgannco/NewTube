@@ -233,13 +233,25 @@
   margin-right: 49px;
 }
 
-.subscribe-bttn {
+.nav-subscribe {
   background: #0099ff;
   color: white;
   padding: 10px;
   border-radius: 2px;
   height: 10px;
-  width: 100%;
+  width: 110px;
+  text-align: center;
+  margin-top: 10px;
+  z-index: 2;
+}
+
+.nav-subscribed {
+  background: green;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  height: 10px;
+  width: 110px;
   text-align: center;
   margin-top: 10px;
   z-index: 2;

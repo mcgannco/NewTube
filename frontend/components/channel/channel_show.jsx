@@ -24,6 +24,8 @@ class ChannelShow extends React.Component {
     this.submitChanges = this.submitChanges.bind(this);
     this.selectToggle = this.selectToggle.bind(this);
     this.handleSubs = this.handleSubs.bind(this);
+    this.formatViews = this.formatViews.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
   }
 
   componentDidMount() {
@@ -133,12 +135,29 @@ class ChannelShow extends React.Component {
     }
 
     if (users[currentUserID].subscriberIds.includes(subscribee_id)) {
-      debugger
       deleteSub(subscribee_id);
     } else {
-      debugger
       createSub(subscribee_id);
     }
+  }
+
+  formatViews(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  formatNumber(num) {
+    num = Math.abs(num);
+    let formattedNumber;
+    if (num >= 1000000000) {
+        formattedNumber = (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+    } else if (num >= 1000000) {
+        formattedNumber =  (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    } else  if (num >= 1000) {
+        formattedNumber =  (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    } else {
+        formattedNumber = num;
+    }
+    return formattedNumber;
   }
 
   render() {
@@ -159,6 +178,18 @@ class ChannelShow extends React.Component {
       customize = "customize-button";
     }
 
+    let navSubButton;
+    let navSubButtonClass;
+    if(currentUserID === user.id) {
+      navSubButtonClass = "hidden";
+    } else if (currentUserID && users[currentUserID].subscriberIds.includes(user.id)) {
+      navSubButtonClass = "nav-subscribed";
+      navSubButton = "SUBSCRIBED";
+    } else {
+      navSubButtonClass = "nav-subscribe";
+      navSubButton = "SUBSCRIBE";
+    }
+
     let selected;
     if(this.state.selected ==="VIDEOS") {
       videos = videos.filter(video => video.author_id === user.id)
@@ -175,7 +206,7 @@ class ChannelShow extends React.Component {
             <div>
               <Link to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
               <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
-              <p>{user.subscribeeIds.length} subscribers</p>
+              <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
               <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
               <p className={user.id === currentUserID ? "" : "hidden"}>My Channel</p>
             </div>
@@ -247,11 +278,11 @@ class ChannelShow extends React.Component {
           <div className="user-name-info">
             <nav>
               <h1>{user.username}</h1>
-              <p>{user.subscribeeIds.length} subscribers</p>
+              <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
             </nav>
 
             <nav className="subs">
-              <button onClick={() => this.handleSubs(user)} className={currentUserID === user.id ? "hidden" : "subscribe-bttn"}>SUBSCRIBE</button>
+              <button onClick={() => this.handleSubs(user)} className={navSubButtonClass}>{navSubButton} {this.formatNumber(user.subscribeeIds.length)}</button>
             </nav>
 
           </div>
