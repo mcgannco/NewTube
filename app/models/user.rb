@@ -16,6 +16,7 @@
 #  banner_content_type :string
 #  banner_file_size    :integer
 #  banner_updated_at   :datetime
+#  description         :text
 #
 
 class User < ApplicationRecord

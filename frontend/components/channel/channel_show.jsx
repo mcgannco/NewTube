@@ -13,7 +13,9 @@ class ChannelShow extends React.Component {
       bannerURL: "",
       avatarFile: "",
       avatarURL: "",
-      selected: "HOME"
+      selected: "HOME",
+      username: "",
+      description: ""
     }
     this.editProfile = this.editProfile.bind(this);
     this.showEditButtons = this.showEditButtons.bind(this);
@@ -27,6 +29,8 @@ class ChannelShow extends React.Component {
     this.formatViews = this.formatViews.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
     this.convertDate = this.convertDate.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
+    this.updateDescription = this.updateDescription.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +44,9 @@ class ChannelShow extends React.Component {
   }
 
   editProfile() {
-    this.setState({edit: true, cancel: true, buttons: true})
+    this.setState({edit: true, cancel: true, buttons: true,
+      selected: "ABOUT", username: this.props.user.username,
+      description: this.props.user.description})
   }
 
   showEditButtons() {
@@ -61,7 +67,9 @@ class ChannelShow extends React.Component {
     avatarFile: "",
     avatarFile: "",
     bannerURL: "",
-    avatarURL: ""
+    avatarURL: "",
+    username: "",
+    description: ""
     })
   }
 
@@ -93,6 +101,8 @@ class ChannelShow extends React.Component {
     e.preventDefault();
     const avatar = this.state.avatarFile;
     const banner = this.state.bannerFile;
+    const username = this.state.username;
+    const description = this.state.description;
     const formData = new FormData();
     if (avatar) {
       formData.append("user[avatar]", avatar);
@@ -100,12 +110,23 @@ class ChannelShow extends React.Component {
     if (banner) {
       formData.append("user[banner]", banner);
     }
+
+    if(username) {
+      formData.append("user[username]", username);
+    }
+
+    if (description) {
+      formData.append("user[description]", description);
+    }
+
     this.props.editUser(this.props.user.id, formData).then(
       this.setState({edit: false,
       buttons: false,
       cancel: false,
       bannerFile: "",
       avatarFile: "",
+      username: "",
+      description: ""
     })
     )
   }
@@ -165,6 +186,14 @@ class ChannelShow extends React.Component {
     let options = { year: 'numeric', month: 'long', day: 'numeric' };
     let d  = new Date(date);
     return d.toLocaleDateString("en-US", options);
+  }
+
+  updateUsername(e) {
+    this.setState({username: e.currentTarget.value})
+  }
+
+  updateDescription(e) {
+    this.setState({description: e.currentTarget.value})
   }
 
   render() {
@@ -248,9 +277,8 @@ class ChannelShow extends React.Component {
                 	<section className="user-description-container col col-1-2">
                     <div className="description-header">
                       <span>Description</span>
-                      <p>
-                        Please add a description
-                      </p>
+                      <p className={this.state.edit ? "hidden" : ""}>{user.description ? user.description : "No Description"}</p>
+                      <textarea value={this.state.description} onChange={this.updateDescription}className={this.state.edit ? "edit-description" : "hidden"}>{this.state.description}</textarea>
                     </div>
                   </section>
                   	<section className="col col-1-2">
@@ -349,7 +377,8 @@ class ChannelShow extends React.Component {
           </div>
           <div className="user-name-info">
             <nav>
-              <h1>{user.username}</h1>
+              <h1 className={this.state.edit ? "hidden" : "user-name-info-h1"}>{user.username}</h1>
+              <input onChange={this.updateUsername} className={this.state.edit ? "user-name-info-input" : "hidden"} value={this.state.username}/>
               <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
             </nav>
 
