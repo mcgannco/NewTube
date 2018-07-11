@@ -21,6 +21,17 @@
   width: 33.3333%;
 }
 
+.col-1-2 {
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.col-1-2-1 {
+  width: 50%;
+  margin-top: 0px;
+}
+
 @media all and (max-width: 1000px) {
   [class*='col-'] {
     width: 100%;

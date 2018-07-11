@@ -26,6 +26,7 @@ class ChannelShow extends React.Component {
     this.handleSubs = this.handleSubs.bind(this);
     this.formatViews = this.formatViews.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
+    this.convertDate = this.convertDate.bind(this);
   }
 
   componentDidMount() {
@@ -160,6 +161,12 @@ class ChannelShow extends React.Component {
     return formattedNumber;
   }
 
+  convertDate(date) {
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    let d  = new Date(date);
+    return d.toLocaleDateString("en-US", options);
+  }
+
   render() {
     let {user, currentUserID, loading, videos, users, users_arr} = this.props;
     if(!user || !videos || !users_arr) {
@@ -197,6 +204,9 @@ class ChannelShow extends React.Component {
         <ul>
         {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
+        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+          <p>{videos.length === 0 ? "No Uploads" : ""}</p>
+        </nav>
       </div>
     } else if (this.state.selected === "CHANNELS") {
       users_arr = users_arr.filter(channel => user.subscriberIds.includes(channel.id));
@@ -212,7 +222,52 @@ class ChannelShow extends React.Component {
             </div>
           </li>)}
         </ul>
+        <nav className={users_arr.length === 0 ? "empty-message" : "hidden"}>
+          <p>{users_arr.length === 0 ? "No Subscriptions" : ""}</p>
+        </nav>
       </div>
+    } else if (this.state.selected === "LIKES") {
+      let likedVideoIds = user.likedVideoIds
+      videos = videos.filter(video => likedVideoIds.includes(video.id))
+      selected = <div className='video-index'>
+        <ul>
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        </ul>
+        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+          <p>{videos.length === 0 ? "No Likes" : ""}</p>
+        </nav>
+      </div>
+
+    } else if (this.state.selected === "ABOUT") {
+      videos = videos.filter(video => video.author_id === user.id)
+      let total_views = 0;
+      videos.forEach(vid =>  total_views += vid.view_count)
+      selected = <section className="user-container" id='body'>
+                	<section className="user-description-container col col-1-2">
+                    <div className="description-header">
+                      <span>Description</span>
+                      <p>
+                        this is the description body
+                      </p>
+                    </div>
+                  </section>
+                  	<section className="col col-1-2">
+                      <section className="col col-1-2-1">
+                      <div className="stats-header">
+                        <span>Stats</span>
+                        <p>Joined {this.convertDate(user.timestamp)}</p>
+                        <p>{this.formatViews(total_views)} views</p>
+                      </div>
+                      </section>
+                      <section className="col col-1-2-1">
+                      <div className="subs-header">
+                        <span>Subscribers</span>
+                        <p>Joined {this.convertDate(user.timestamp)}</p>
+                        <p>{this.formatViews(total_views)} views</p>
+                      </div>
+                      </section>
+            			</section>
+                </section>
     }
 
       return(
