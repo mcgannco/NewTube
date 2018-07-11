@@ -233,7 +233,7 @@ class VideoShow extends React.Component {
                     <div className="uploader-div">
                       <span style={
                         {backgroundImage: `url(${userAvatar})`}
-                       }>{userIcon}</span>
+                      }>{users[video.author_id].profile_img_url === "/avatars/original/missing.png" ? userIcon : ""}</span>
                     </div>
 
                     <div>

@@ -215,7 +215,7 @@ class ChannelShow extends React.Component {
           {users_arr.map((user,idx) => <li key={user.id}>
             <div>
               <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "hidden" : ""} to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
-              <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "" : "hidden"} to={`/channel/${user.id}`}><div className="channel-no-pic">{user.username.slice(0,1)}</div></Link>
+              <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "channel-no-pic" : "hidden"} to={`/channel/${user.id}`}>{user.username.slice(0,1)}</Link>
               <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
               <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
               <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
@@ -279,6 +279,7 @@ class ChannelShow extends React.Component {
                                 </div>
                               </li>)}
                             </ul>
+                            <p className={subscribers.length === 0 ? "no-subs-p" : "hidden"}>No Subscribers</p>
                         </div>
                       </section>
 
