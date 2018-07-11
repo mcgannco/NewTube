@@ -214,7 +214,8 @@ class ChannelShow extends React.Component {
         <ul>
           {users_arr.map((user,idx) => <li key={user.id}>
             <div>
-              <Link to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
+              <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "hidden" : ""} to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
+              <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "" : "hidden"} to={`/channel/${user.id}`}><div className="channel-no-pic">{user.username.slice(0,1)}</div></Link>
               <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
               <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
               <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
@@ -240,6 +241,7 @@ class ChannelShow extends React.Component {
 
     } else if (this.state.selected === "ABOUT") {
       videos = videos.filter(video => video.author_id === user.id)
+      let subscribers = users_arr.filter(channel => channel.subscriberIds.includes(user.id))
       let total_views = 0;
       videos.forEach(vid =>  total_views += vid.view_count)
       selected = <section className="user-container" id='body'>
@@ -247,25 +249,39 @@ class ChannelShow extends React.Component {
                     <div className="description-header">
                       <span>Description</span>
                       <p>
-                        this is the description body
+                        Please add a description
                       </p>
                     </div>
                   </section>
                   	<section className="col col-1-2">
+
                       <section className="col col-1-2-1">
-                      <div className="stats-header">
-                        <span>Stats</span>
-                        <p>Joined {this.convertDate(user.timestamp)}</p>
-                        <p>{this.formatViews(total_views)} views</p>
-                      </div>
+                        <div className="stats-header">
+                          <span>Stats</span>
+                          <p>Joined {this.convertDate(user.timestamp)}</p>
+                          <p>{this.formatViews(total_views)} views</p>
+                        </div>
                       </section>
+
                       <section className="col col-1-2-1">
-                      <div className="subs-header">
-                        <span>Subscribers</span>
-                        <p>Joined {this.convertDate(user.timestamp)}</p>
-                        <p>{this.formatViews(total_views)} views</p>
-                      </div>
+                        <div className="subs-header">
+                          <span>SUBSCRIBERS</span>
+                            <ul className="subs-list-ul">
+                              {subscribers.map((user,idx) => <li key={user.id}>
+                                <div className="subs-nav-item">
+                                  <div className="subscribers-nav">
+                                    <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "hidden" : ""}to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
+                                    <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "" : "hidden"}to={`/channel/${user.id}`}><div className="no-pic-avatar">{user.username.slice(0,1)}</div></Link>
+                                    <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
+                                  </div>
+                                  <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
+                                  <p className={user.id === currentUserID ? "" : "hidden"}>My Channel</p>
+                                </div>
+                              </li>)}
+                            </ul>
+                        </div>
                       </section>
+
             			</section>
                 </section>
     }
