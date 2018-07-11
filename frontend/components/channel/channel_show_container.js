@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { requestAllUsers, requestSingleUser, editUser } from '../../actions/user_actions';
+import { requestAllUsers, requestSingleUser, editUser,createSub, deleteSub } from '../../actions/user_actions';
 import { requestAllVideos } from '../../actions/video_actions';
 import { selectAllVideos, selectAllChannels  } from '../../reducers/selectors';
 import ChannelShow from './channel_show';
@@ -21,6 +21,8 @@ const mdp = dispatch => {
     requestAllUsers: () => dispatch(requestAllUsers()),
     requestAllVideos: () => dispatch(requestAllVideos()),
      editUser: (id, data) => dispatch(editUser(id, data)),
+     createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
+     deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId))
   })
 };
 

@@ -23,6 +23,7 @@ class ChannelShow extends React.Component {
     this.updateAvatar = this.updateAvatar.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
     this.selectToggle = this.selectToggle.bind(this);
+    this.handleSubs = this.handleSubs.bind(this);
   }
 
   componentDidMount() {
@@ -120,6 +121,26 @@ class ChannelShow extends React.Component {
     }
   }
 
+  handleSubs(user) {
+    const { currentUserID, users, createSub, deleteSub } = this.props;
+    if (!user) {
+      return;
+    }
+    let subscribee_id = user.id
+    if (!currentUserID) {
+      this.props.history.push('/signin');
+      return;
+    }
+
+    if (users[currentUserID].subscriberIds.includes(subscribee_id)) {
+      debugger
+      deleteSub(subscribee_id);
+    } else {
+      debugger
+      createSub(subscribee_id);
+    }
+  }
+
   render() {
     let {user, currentUserID, loading, videos, users, users_arr} = this.props;
     if(!user || !videos || !users_arr) {
@@ -152,10 +173,11 @@ class ChannelShow extends React.Component {
         <ul>
           {users_arr.map((user,idx) => <li key={user.id}>
             <div>
-              <img src={user.profile_img_url}></img>
-              <h1>{user.username}</h1>
+              <Link to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
+              <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
               <p>{user.subscribeeIds.length} subscribers</p>
-              <button>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
+              <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
+              <p className={user.id === currentUserID ? "" : "hidden"}>My Channel</p>
             </div>
           </li>)}
         </ul>
@@ -229,7 +251,7 @@ class ChannelShow extends React.Component {
             </nav>
 
             <nav className="subs">
-              <button className={currentUserID === user.id ? "hidden" : "subscribe-bttn"}>SUBSCRIBE</button>
+              <button onClick={() => this.handleSubs(user)} className={currentUserID === user.id ? "hidden" : "subscribe-bttn"}>SUBSCRIBE</button>
             </nav>
 
           </div>
