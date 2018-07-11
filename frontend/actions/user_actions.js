@@ -4,6 +4,8 @@ export const RECEIVE_SINGLE_USER = 'RECEIVE_SINGLE_USER';
 export const START_LOADING_USER_PIC = 'START_LOADING_USER_PIC';
 export const RECEIVE_SUB = "RECEIVE_SUB";
 export const REMOVE_SUB = "REMOVE_SUB";
+export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
+export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
 
 export const receiveAllUsers = (users) => (
   {
@@ -35,6 +37,19 @@ export const removeSub = (payload) => ({
   subscribeeId: payload.subscribeeId
 });
 
+export const receiveUserErrors = (errors) => (
+  {
+    type: RECEIVE_USER_ERRORS,
+    errors
+  }
+);
+
+export const clearUserErrors = () => (
+  {
+    type: CLEAR_USER_ERRORS,
+  }
+);
+
 export const requestAllUsers = () => dispatch => {
   return(
     APIUtil.fetchAllUsers().then(users => dispatch(receiveAllUsers(users))));
@@ -48,7 +63,12 @@ export const requestSingleUser = (id) => dispatch => {
 export const editUser = (id, data) => dispatch => {
   dispatch(startLoadingUserPicture());
   return(
-    APIUtil.updateUser(id, data).then(user => dispatch(receiveSingleUser(user))));
+    APIUtil.updateUser(id, data).then(user => (
+      dispatch(receiveSingleUser(user))
+    ), err => (
+      dispatch(receiveUserErrors(err.responseJSON))
+    )
+  ))
 };
 
 export const createSub = (subscribeeId) => (dispatch) => {

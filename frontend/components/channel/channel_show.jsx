@@ -34,7 +34,7 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestAllUsers().then(this.props.requestAllVideos())
+    this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,10 +43,15 @@ class ChannelShow extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearUserErrors()
+  }
+
   editProfile() {
+    this.props.clearUserErrors().then(
     this.setState({edit: true, cancel: true, buttons: true,
       selected: "ABOUT", username: this.props.user.username,
-      description: this.props.user.description})
+      description: this.props.user.description}))
   }
 
   showEditButtons() {
@@ -377,9 +382,12 @@ class ChannelShow extends React.Component {
           </div>
           <div className="user-name-info">
             <nav>
-              <h1 className={this.state.edit ? "hidden" : "user-name-info-h1"}>{user.username}</h1>
-              <input onChange={this.updateUsername} className={this.state.edit ? "user-name-info-input" : "hidden"} value={this.state.username}/>
-              <p>{this.formatViews(user.subscribeeIds.length)} subscribers</p>
+              <div>
+                <h1 className={this.state.edit ? "hidden" : "user-name-info-h1"}>{user.username}</h1>
+                <input onChange={this.updateUsername} className={this.state.edit ? "user-name-info-input" : "hidden"} value={this.state.username}/>
+                <p className="subs-count">{this.formatViews(user.subscribeeIds.length)} subscribers</p>
+              </div>
+              <p className="user-errors-update">{this.props.errors[0] ? "Username Invalid" : ""}</p>
             </nav>
 
             <nav className="subs">

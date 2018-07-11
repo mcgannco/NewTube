@@ -225,7 +225,7 @@
   height: 25px;
 }
 
-.user-name-info p {
+.subs-count {
   color: grey;
   font-size: 14px;
 }
@@ -367,6 +367,16 @@
   font-family: 'Roboto', 'Noto', sans-serif;
   display: flex;
   flex-direction: column;
+}
+
+.user-name-info nav {
+  display: flex;
+  align-items: center;
+}
+
+.user-errors-update {
+  margin-left: 10px;
+  color: red;
 }
 
 .stats-header span {
