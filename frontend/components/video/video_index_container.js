@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import { requestAllVideos  } from '../../actions/video_actions';
 import { requestAllUsers  } from '../../actions/user_actions';
 import { selectAllVideos  } from '../../reducers/selectors';
+import { openVidModal  } from '../../actions/video_modal_actions';
 import VideoIndex from './video_index';
 
 const msp = state => {
@@ -15,7 +16,8 @@ const msp = state => {
 const mdp = dispatch => {
   return({
     requestAllVideos: () => dispatch(requestAllVideos()),
-    requestAllUsers: () => dispatch(requestAllUsers())
+    requestAllUsers: () => dispatch(requestAllUsers()),
+    openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
   })
 };
 

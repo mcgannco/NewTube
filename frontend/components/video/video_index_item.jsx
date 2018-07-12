@@ -11,7 +11,8 @@ class VideoIndexItem extends React.Component {
       playButton: false,
       preview: false,
       showTime: true,
-      optionsDropDown: false
+      optionsDropDown: false,
+      targetVid: ""
     }
     this.preview = this.preview.bind(this);
     this.closePreview = this.closePreview.bind(this);
@@ -20,6 +21,8 @@ class VideoIndexItem extends React.Component {
     this.formatNumber = this.formatNumber.bind(this);
     this.toggleOptions = this.toggleOptions.bind(this);
     this.closeToggleOptions = this.closeToggleOptions.bind(this);
+    this.editVideo = this.editVideo.bind(this);
+    this.editclosePreview = this.editclosePreview.bind(this);
   }
 
   preview(e) {
@@ -40,6 +43,13 @@ class VideoIndexItem extends React.Component {
     let video = e.currentTarget.children[0].children['video']
     video.pause()
     this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
+    video.currentTime = 0
+  }
+
+  editclosePreview(e) {
+    let video = e.children[0]
+    video.pause()
+    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true, optionsDropDown: false})
     video.currentTime = 0
   }
 
@@ -95,18 +105,30 @@ class VideoIndexItem extends React.Component {
     return formattedNumber;
   }
 
-  toggleOptions(e) {
-    e.preventDefault();
-    this.setState({ optionsDropDown: true }, () => {
+  toggleOptions(e, video) {
+    e.preventDefault()
+    this.setState({ optionsDropDown: true, targetVid: video }, () => {
     document.getElementById('body').addEventListener('click', this.closeToggleOptions);
     });
   }
 
   closeToggleOptions(e) {
     e.preventDefault();
-    this.setState({ optionsDropDown: false }, () => {
-      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
-    });
+    if(e.target.id === "edit-vid") {
+      this.editVideo(e, video)
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    }
+  }
+
+  editVideo(e, video) {
+    let vid = e.target.parentElement.parentElement.parentElement.getElementsByClassName("video-thumb")[0];
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('edit', id)
+    this.setState({targetVid: ""})
   }
 
 
@@ -115,9 +137,9 @@ class VideoIndexItem extends React.Component {
     let date = new Date(timeAgo);
     let toggleDD;
     if(this.state.optionsDropDown) {
-      
-      toggleDD = <div className="toggleOptionsDD">
-        <span className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
+
+      toggleDD = <div className="toggleOptionsDD" id="toggleDD">
+        <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
         <span className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
         <span>Watch Later</span>
       </div>
@@ -144,7 +166,7 @@ class VideoIndexItem extends React.Component {
 
           <div className="video-index-title">
             <p>{video.title}</p>
-            <span onClick={this.toggleOptions}className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
+            <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
               <i className="fas fa-ellipsis-v"></i>
             </span>
             {toggleDD}

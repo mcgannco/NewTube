@@ -7,6 +7,7 @@ import VideoShowContainer from './video/video_show_container';
 import ChannelShowContainer from './channel/channel_show_container';
 import UploadVideoContainer from './video/upload_video_container';
 import Modal from './modal/modal';
+import VideoModal from './modal/video-modal';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
 import {
   Route,
@@ -21,6 +22,7 @@ const App = () => (
     <NavBarContainer />
     <div className="nav-bar-anchor"></div>
     <Modal />
+    <VideoModal />
      <Switch>
        <AuthRoute exact path="/signin" component={LoginFormContainer} />
        <AuthRoute exact path="/signup" component={SignupFormContainer} />
