@@ -3,6 +3,7 @@ export const RECEIVE_ALL_VIDEOS = 'RECEIVE_ALL_VIDEOS ';
 export const RECEIVE_VIDEO = 'RECEIVE_VIDEO ';
 export const RECEIVE_VIDEO_ERRORS = 'RECEIVE_VIDEO_ERRORS ';
 export const VID_STATUS = 'VID_STATUS';
+export const DESTROY_VIDEO = 'DESTROY_VIDEO';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -31,6 +32,11 @@ export const vPlaying = (bool) => (
     bool
   }
 );
+
+export const receiveDestroyedVideo = video => ({
+  type: DESTROY_VIDEO,
+  video
+});
 
 export const requestAllVideos = () => dispatch => {
   return(
@@ -64,6 +70,10 @@ export const editVideo = (id, data) => dispatch => {
       dispatch(receiveErrors(err.responseJSON))
     )
   ))
+};
+
+export const deleteVideo = (id) => dispatch => {
+  return APIUtil.deleteVideo(id).then(video => dispatch(receiveDestroyedVideo(video)));
 };
 
 export const createLike = (videoId, like) => dispatch => {

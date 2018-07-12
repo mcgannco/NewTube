@@ -33,7 +33,9 @@ class VideoForm extends React.Component {
         this.setState({formType: "",title: "",description: ""}))
         this.props.closeVidModal()
     } else {
-
+      this.props.processForm(this.props.video.id).then(
+      this.setState({formType: "",title: "",description: ""}))
+      this.props.closeVidModal()
     }
 }
 

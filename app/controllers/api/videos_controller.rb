@@ -29,14 +29,10 @@ class Api::VideosController < ApplicationController
    end
   end
 
-  def destory
+  def destroy
     @video = Video.find(params[:id])
-    if @video.destroy!
+    @video.destroy
       render 'api/videos/show'
-    else
-      render json: ["Error"]
-    end
-
   end
 
   private

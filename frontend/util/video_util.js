@@ -34,6 +34,13 @@ export const updateVideo = (videoId, data) => {
   });
 };
 
+export const deleteVideo = (id) => {
+  return $.ajax({
+      method: 'delete',
+      url: `/api/videos/${id}`
+  });
+};
+
 export const createLike = (videoId, like) => {
   return $.ajax({
       method: 'post',
