@@ -116,6 +116,8 @@ class VideoIndexItem extends React.Component {
     e.preventDefault();
     if(e.target.id === "edit-vid") {
       this.editVideo(e, video)
+    } else if (e.target.id === "delete-vid") {
+      this.deleteVideo(e, video)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
         document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
@@ -131,6 +133,14 @@ class VideoIndexItem extends React.Component {
     this.setState({targetVid: ""})
   }
 
+  deleteVideo(e, video) {
+    let vid = e.target.parentElement.parentElement.parentElement.getElementsByClassName("video-thumb")[0];
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('delete', id)
+    this.setState({targetVid: ""})
+  }
+
 
   render() {
     let { video, idx, author, timeAgo, currentUserID} = this.props;
@@ -140,7 +150,7 @@ class VideoIndexItem extends React.Component {
 
       toggleDD = <div className="toggleOptionsDD" id="toggleDD">
         <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
-        <span className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
+        <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
         <span>Watch Later</span>
       </div>
     }

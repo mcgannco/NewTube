@@ -4,8 +4,8 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background: rgba(242,242,242,.9);
-  z-index: 100000000000000000000;
+  background: rgba(0,0,0,.6);
+  z-index: 14;
 
 }
 
@@ -27,4 +27,60 @@
   font-family: 'Poiret One', cursive;
   font-family: 'Quattrocento Sans', sans-serif;
 
+}
+
+.change-video-container {
+  height: 200px;
+  min-width: 600px;
+  padding: 50px;
+  background: white;
+  box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  border-radius: 10px;
+  display: flex;
+   justify-content: space-between;
+   font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.edit-video-gif {
+  border: 2px solid grey;
+}
+
+.change-video-container input {
+  background: white;
+  border: 2px solid green;
+  height: 25px;
+  padding: 0px 10px;
+  width: 333px;
+  margin-bottom: 20px;
+}
+
+.change-video-container textarea {
+  min-height: 88px;
+  border: 2px solid green;
+  padding: 5px 5px;
+  resize: none;
+}
+
+.edit-video-gif {
+  background: black;
+}
+
+.video-edit-info-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.change-vid-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.change-vid-button button {
+  background: #0099ff;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 67px;
+  text-align: center;
 }

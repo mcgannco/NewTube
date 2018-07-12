@@ -21,7 +21,6 @@ function VideoModal({modal, closeVidModal}) {
   }
   return(
     <div className="video-modal-background" onClick={closeVidModal}>
-      <div onClick={closeVidModal} className="close-x">X</div>
       <div className="video-modal-child" onClick={e => e.stopPropagation()}>
         { component }
       </div>
