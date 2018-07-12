@@ -7,7 +7,8 @@ import VideoIndex from './video_index';
 const msp = state => {
   return({
     videos: selectAllVideos(state),
-    users: state.entities.users
+    users: state.entities.users,
+    currentUserID: state.session.id,
   })
 };
 

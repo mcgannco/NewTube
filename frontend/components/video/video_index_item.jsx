@@ -10,13 +10,16 @@ class VideoIndexItem extends React.Component {
       currentTime: 0,
       playButton: false,
       preview: false,
-      showTime: true
+      showTime: true,
+      optionsDropDown: false
     }
     this.preview = this.preview.bind(this);
     this.closePreview = this.closePreview.bind(this);
     this.getDuration = this.getDuration.bind(this);
     this.tick = this.tick.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this);
+    this.closeToggleOptions = this.closeToggleOptions.bind(this);
   }
 
   preview(e) {
@@ -92,9 +95,33 @@ class VideoIndexItem extends React.Component {
     return formattedNumber;
   }
 
+  toggleOptions(e) {
+    e.preventDefault();
+    this.setState({ optionsDropDown: true }, () => {
+    document.getElementById('body').addEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+  closeToggleOptions(e) {
+    e.preventDefault();
+    this.setState({ optionsDropDown: false }, () => {
+      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+
   render() {
-    let { video, idx, author, timeAgo} = this.props;
+    let { video, idx, author, timeAgo, currentUserID} = this.props;
     let date = new Date(timeAgo);
+    let toggleDD;
+    if(this.state.optionsDropDown) {
+      
+      toggleDD = <div className="toggleOptionsDD">
+        <span className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
+        <span className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
+        <span>Watch Later</span>
+      </div>
+    }
     return(
       <li>
         <Link to={`/video/${video.id}`}>
@@ -117,9 +144,10 @@ class VideoIndexItem extends React.Component {
 
           <div className="video-index-title">
             <p>{video.title}</p>
-            <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
+            <span onClick={this.toggleOptions}className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
               <i className="fas fa-ellipsis-v"></i>
             </span>
+            {toggleDD}
           </div>
           <nav className="video-author-views">
             <Link to={`/channel/${video.author_id}`}><span className="video-index-author">{author}</span></Link>

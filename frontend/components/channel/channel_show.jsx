@@ -236,7 +236,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => video.author_id === user.id)
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Uploads" : ""}</p>
@@ -266,7 +266,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => likedVideoIds.includes(video.id))
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Likes" : ""}</p>
