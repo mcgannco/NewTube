@@ -11,6 +11,7 @@ class VideoForm extends React.Component {
     }
     this.updateTitle = this.updateTitle.bind(this);
     this.updateDescription = this.updateDescription.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   updateTitle(e) {
@@ -20,8 +21,21 @@ class VideoForm extends React.Component {
 
   updateDescription(e) {
     e.preventDefault()
-    this.setState({description: e.currentTarget.description})
+    this.setState({description: e.currentTarget.value})
   }
+
+  submit(e) {
+    if(this.props.formType === "edit") {
+      const formData = new FormData();
+        formData.append("video[title]", this.state.title);
+        formData.append("video[description]", this.state.description);
+        this.props.processForm(this.props.video.id, formData).then(
+        this.setState({formType: "",title: "",description: ""}))
+        this.props.closeVidModal()
+    } else {
+
+    }
+}
 
   render() {
     let { formType, video } = this.props;
@@ -34,13 +48,15 @@ class VideoForm extends React.Component {
             className="edit-video-gif"
             src={video.video_url}>
           </video>
+          <h3 className={formType === "edit" ? "hidden" : ""}>{video.title}</h3>
         </div>
 
         <div className="video-edit-info-inputs">
-          <input onChange={this.updateTitle}value={this.state.title}></input>
-          <textarea onChange={this.updateDescription}>{this.state.description}</textarea>
-          <div className="change-vid-button">
-            <button>{formType === "edit" ? "Submit" : "Delete"}</button>
+          <input className={formType === "edit" ? "" : "hidden"} onChange={this.updateTitle}value={this.state.title}></input>
+          <textarea className={formType === "edit" ? "" : "hidden"} onChange={this.updateDescription}>{this.state.description}</textarea>
+          <div className={formType === "edit" ? "change-vid-button" : "delete-button-container"}>
+            <span className={formType === "edit" ? "hidden" : ""}>Please Confirm Deletion</span>
+            <button onClick={this.submit}>{formType === "edit" ? "Submit" : "Delete"}</button>
           </div>
         </div>
       </div>

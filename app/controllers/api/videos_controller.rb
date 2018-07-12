@@ -29,6 +29,16 @@ class Api::VideosController < ApplicationController
    end
   end
 
+  def destory
+    @video = Video.find(params[:id])
+    if @video.destroy!
+      render 'api/videos/show'
+    else
+      render json: ["Error"]
+    end
+
+  end
+
   private
   def video_params
     params.require(:video).permit(:title, :author_id, :clip, :description, :view_count)

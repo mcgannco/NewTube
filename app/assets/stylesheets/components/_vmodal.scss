@@ -54,8 +54,16 @@
   margin-bottom: 20px;
 }
 
+.change-video-container p {
+  height: 25px;
+  padding: 0px 10px;
+  width: 333px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
 .change-video-container textarea {
-  min-height: 88px;
+  height: 88px;
   border: 2px solid green;
   padding: 5px 5px;
   resize: none;
@@ -77,6 +85,30 @@
 }
 
 .change-vid-button button {
+  background: #0099ff;
+  color: white;
+  padding: 10px;
+  border-radius: 2px;
+  width: 67px;
+  text-align: center;
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  height: 111px;
+  width: 328px;
+  margin-top: 37px;
+}
+
+.delete-button-container span {
+  color: grey;
+  font-size: 20px;
+}
+
+.delete-button-container button {
   background: #0099ff;
   color: white;
   padding: 10px;

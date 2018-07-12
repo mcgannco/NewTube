@@ -23,6 +23,17 @@ export const createVideo = (video) => (
   })
 );
 
+export const updateVideo = (videoId, data) => {
+  return $.ajax({
+    method: 'PATCH',
+    url: `api/videos/${videoId}`,
+    data,
+    processData: false,
+    contentType: false,
+    dataType: 'json',
+  });
+};
+
 export const createLike = (videoId, like) => {
   return $.ajax({
       method: 'post',

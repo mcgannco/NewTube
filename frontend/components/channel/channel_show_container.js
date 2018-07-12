@@ -2,6 +2,7 @@ import {connect} from 'react-redux';
 import { requestAllUsers, requestSingleUser, editUser,createSub, deleteSub,clearUserErrors } from '../../actions/user_actions';
 import { requestAllVideos } from '../../actions/video_actions';
 import { selectAllVideos, selectAllChannels  } from '../../reducers/selectors';
+import { openVidModal  } from '../../actions/video_modal_actions';
 import ChannelShow from './channel_show';
 
 const msp = (state, ownProps) => {
@@ -24,7 +25,8 @@ const mdp = dispatch => {
      editUser: (id, data) => dispatch(editUser(id, data)),
      createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
      deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId)),
-     clearUserErrors: () => dispatch(clearUserErrors())
+     clearUserErrors: () => dispatch(clearUserErrors()),
+     openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
   })
 };
 
