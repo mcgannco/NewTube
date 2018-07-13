@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { requestAllUsers, requestSingleUser, editUser,createSub, deleteSub,clearUserErrors } from '../../actions/user_actions';
+import { requestAllUsers,createWatch, deleteWatch, requestSingleUser, editUser,createSub, deleteSub,clearUserErrors } from '../../actions/user_actions';
 import { requestAllVideos } from '../../actions/video_actions';
 import { selectAllVideos, selectAllChannels  } from '../../reducers/selectors';
 import { openVidModal  } from '../../actions/video_modal_actions';
@@ -27,6 +27,8 @@ const mdp = dispatch => {
      deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId)),
      clearUserErrors: () => dispatch(clearUserErrors()),
      openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
+     createWatch: (vidId) => dispatch(createWatch(vidId)),
+     deleteWatch: (vidId) => dispatch(deleteWatch(vidId)),
   })
 };
 

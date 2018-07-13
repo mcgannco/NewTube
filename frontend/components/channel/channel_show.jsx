@@ -147,6 +147,8 @@ class ChannelShow extends React.Component {
       this.setState({selected: "LIKES"})
     } else if (e === "ABOUT") {
       this.setState({selected: "ABOUT"})
+    } else if (e === "WATCHLIST") {
+      this.setState({selected: "WATCHLIST"})
     }
   }
 
@@ -202,7 +204,7 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID, loading, videos, users, users_arr, openVidModal} = this.props;
+    let {user, currentUserID, loading, videos, users, users_arr, openVidModal, createWatch, deleteWatch} = this.props;
     if(!user || !videos || !users_arr) {
       return null;
     }
@@ -236,7 +238,17 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => video.author_id === user.id)
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        </ul>
+        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+          <p>{videos.length === 0 ? "No Uploads" : ""}</p>
+        </nav>
+      </div>
+    } else if (this.state.selected === "WATCHLIST") {
+      videos = videos.filter(video => user.watchLaterIds.includes(video.id))
+      selected = <div className='video-index'>
+        <ul>
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Uploads" : ""}</p>
@@ -266,7 +278,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => likedVideoIds.includes(video.id))
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Likes" : ""}</p>
@@ -407,6 +419,11 @@ class ChannelShow extends React.Component {
             <li className={this.state.selected === "VIDEOS" ? "selected" : ""}
               onClick={() => this.selectToggle("VIDEOS")}>
               VIDEOS
+            </li>
+
+            <li className={this.state.selected === "WATCHLIST" ? "selected" : ""}
+              onClick={() => this.selectToggle("WATCHLIST")}>
+              WATCHLISTS
             </li>
 
             <li className={this.state.selected === "CHANNELS" ? "selected" : ""}
