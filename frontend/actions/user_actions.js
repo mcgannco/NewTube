@@ -4,6 +4,8 @@ export const RECEIVE_SINGLE_USER = 'RECEIVE_SINGLE_USER';
 export const START_LOADING_USER_PIC = 'START_LOADING_USER_PIC';
 export const RECEIVE_SUB = "RECEIVE_SUB";
 export const REMOVE_SUB = "REMOVE_SUB";
+export const RECEIVE_WATCH = "RECEIVE_WATCH";
+export const REMOVE_WATCH = "REMOVE_WATCH";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
 
@@ -35,6 +37,18 @@ export const removeSub = (payload) => ({
   type: REMOVE_SUB,
   subscriberId: payload.subscriberId,
   subscribeeId: payload.subscribeeId
+});
+
+export const removeWatch = (payload) => ({
+  type: REMOVE_WATCH,
+  videoId: payload.videoId,
+  userId: payload.userId
+});
+
+export const receiveWatch = (payload) => ({
+  type: RECEIVE_WATCH,
+  videoId: payload.videoId,
+  userId: payload.userId
 });
 
 export const receiveUserErrors = (errors) => (
@@ -89,4 +103,17 @@ export const deleteSub = (subscribeeId) => (dispatch) => {
     console.log(errors.responseJSON);
     return errors;
   });
+};
+
+export const createWatch = videoId => dispatch => (
+  APIUtil.createWatch(videoId).then(payload => (
+    dispatch(receiveWatch(payload))
+  ), err => (
+    console.log(err.responseJSON)
+   )
+ )
+);
+
+export const deleteWatch = (videoId) => dispatch => {
+  return APIUtil.deleteWatch(videoId).then(payload => dispatch(removeWatch(payload)));
 };

@@ -45,3 +45,17 @@ export const deleteSub = (subscribeeId) => {
     method: 'delete',
   });
 };
+
+export const createWatch = (videoId) => {
+  return $.ajax({
+    url: `api/users/watchlaters/${videoId}`,
+    method: 'post',
+  });
+};
+
+export const deleteWatch = (videoId) => {
+  return $.ajax({
+    url: `api/users/watchlaters/${videoId}`,
+    method: 'delete',
+  });
+};

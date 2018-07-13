@@ -17,6 +17,7 @@ class RelatedVideoIndexItem extends React.Component {
     this.getDuration = this.getDuration.bind(this);
     this.tick = this.tick.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
+    this.toggleDD = this.toggleDD.bind(this);
   }
 
   preview(e) {
@@ -91,6 +92,10 @@ class RelatedVideoIndexItem extends React.Component {
     return formattedNumber;
   }
 
+  toggleDD(e) {
+    
+  }
+
   render() {
     let { video, idx, author, timeAgo} = this.props;
     let date = new Date(timeAgo);
@@ -117,7 +122,7 @@ class RelatedVideoIndexItem extends React.Component {
           <div className="related-video-info">
             <div className="related-video-index-title">
                        <p>{video.title}</p>
-                       <span className={this.state.preview ? "related-video-index-options-dd" : "related-video-index-options-dd-hidden"}>
+                       <span onClick={this.toggleDD} className={this.state.preview ? "related-video-index-options-dd" : "related-video-index-options-dd-hidden"}>
                          <i className="fas fa-ellipsis-v"></i>
                        </span>
                      </div>

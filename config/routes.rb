@@ -11,7 +11,12 @@ Rails.application.routes.draw do
       resources :likes, only: [:create, :update]
     end
     resources :likes, only: [:destroy]
+
     post 'users/subscriptions/:subscribee_id', to: 'users#subscribe'
     delete 'users/subscriptions/:subscribee_id', to: 'users#unsubscribe'
+
+    post 'users/watchlaters/:video_id', to: 'users#watchlater'
+    delete 'users/watchlaters/:video_id', to: 'users#removewatchlater'
+
   end
 end

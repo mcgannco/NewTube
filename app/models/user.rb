@@ -72,6 +72,16 @@ class User < ApplicationRecord
      through: :subscribers,
      source: :subscriber
 
+  has_many :watchlaters,
+    foreign_key: :user_id,
+    class_name: :Watchlater,
+    primary_key: :id,
+    dependent: :destroy
+
+  has_many :vidwatchlaters,
+    through: :watchlaters,
+    source: :video
+
   attr_reader :password
   after_initialize :ensure_session_token
 

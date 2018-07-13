@@ -54,6 +54,11 @@
   font-size: 16px;
 }
 
+.related-video-index-options-dd:active {
+  background: #ccc;
+  border-radius: 20px;
+}
+
 .related-video-index-options-dd-hidden {
   width: 30px;
   display: flex;

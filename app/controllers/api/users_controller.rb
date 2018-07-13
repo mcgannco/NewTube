@@ -54,6 +54,26 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def watchlater
+    @watch = current_user.watchlaters.new(video_id: params[:video_id])
+    if @watch.save
+      render :watch
+    else
+      render json: @watch.errors.full_messages, status: 422
+    end
+  end
+
+  def removewatchlater
+    @watch = current_user.watchlaters.find_by(video_id: params[:video_id])
+
+    if @watch
+      @watch.destroy
+      render :watch
+    else
+      render json: ['Cant remove watchlater'], status: 401
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :password, :avatar, :banner, :description)

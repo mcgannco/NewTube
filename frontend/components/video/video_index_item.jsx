@@ -12,7 +12,8 @@ class VideoIndexItem extends React.Component {
       preview: false,
       showTime: true,
       optionsDropDown: false,
-      targetVid: ""
+      targetVid: "",
+      watched: false
     }
     this.preview = this.preview.bind(this);
     this.closePreview = this.closePreview.bind(this);
@@ -23,6 +24,7 @@ class VideoIndexItem extends React.Component {
     this.closeToggleOptions = this.closeToggleOptions.bind(this);
     this.editVideo = this.editVideo.bind(this);
     this.editclosePreview = this.editclosePreview.bind(this);
+    this.watchLater = this.watchLater.bind(this);
   }
 
   preview(e) {
@@ -118,6 +120,8 @@ class VideoIndexItem extends React.Component {
       this.editVideo(e, video)
     } else if (e.target.id === "delete-vid") {
       this.deleteVideo(e, video)
+    } else if (e.target.id === "watch-later") {
+      this.watchLater(e, video)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
         document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
@@ -141,6 +145,17 @@ class VideoIndexItem extends React.Component {
     this.setState({targetVid: ""})
   }
 
+  watchLater(e,video) {
+    let vid = e.target.parentElement.parentElement.parentElement.getElementsByClassName("video-thumb")[0];
+    let id = this.state.targetVid
+    let {users, currentUserID} = this.props;
+    if(users[currentUserID].watchLaterIds.includes(id.id)) {
+      this.props.deleteWatch(id.id)
+    } else {
+      this.props.createWatch(id.id)
+    }
+  }
+
 
   render() {
     let { video, idx, author, timeAgo, currentUserID} = this.props;
@@ -151,7 +166,7 @@ class VideoIndexItem extends React.Component {
       toggleDD = <div className="toggleOptionsDD" id="toggleDD">
         <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
         <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
-        <span>Watch Later</span>
+        <span id="watch-later">Watch Later</span>
       </div>
     }
     return(
