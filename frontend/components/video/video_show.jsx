@@ -22,6 +22,7 @@ class VideoShow extends React.Component {
     this.handleSubs = this.handleSubs.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
     this.formatViews = this.formatViews.bind(this);
+    this.editVid = this.editVid.bind(this);
   }
 
   componentWillMount() {
@@ -94,6 +95,10 @@ class VideoShow extends React.Component {
 
   handleEnd(e) {
 
+  }
+
+  editVid(e) {
+    debugger
   }
 
   handleLike(e) {
@@ -249,7 +254,7 @@ class VideoShow extends React.Component {
                     </div>
                 <nav>
                 <button className={subButtonClass} onClick={this.handleSubs}>{subButton} {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button>
-                <button className={currentUser && video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
+                <button onClick={this.editVid} className={currentUser && video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
 
                 </div>
                 <div className={this.state.expandDescription ? "expand-description" : "description"}>
@@ -269,7 +274,7 @@ class VideoShow extends React.Component {
               </section>
               <button
                 id="watch-later-bttn-toggle"
-                className={this.props.button ? "watch-later-bttn" : "hide"}>{this.props.button} Watchlist
+                className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
               </button>
         	</section>
 
