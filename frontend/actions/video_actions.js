@@ -4,6 +4,7 @@ export const RECEIVE_VIDEO = 'RECEIVE_VIDEO ';
 export const RECEIVE_VIDEO_ERRORS = 'RECEIVE_VIDEO_ERRORS ';
 export const VID_STATUS = 'VID_STATUS';
 export const DESTROY_VIDEO = 'DESTROY_VIDEO';
+export const WATCH_LATER_BTTN = 'WATCH_LATER_BTTN';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -37,6 +38,11 @@ export const receiveDestroyedVideo = video => ({
   type: DESTROY_VIDEO,
   video
 });
+
+export const watchLaterButton = status => ({
+  type: WATCH_LATER_BTTN,
+  status
+})
 
 export const requestAllVideos = () => dispatch => {
   return(

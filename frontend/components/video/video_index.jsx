@@ -38,7 +38,7 @@ class VideoIndex extends React.Component {
   }
 
   render() {
-    let {videos, users, currentUserID, openVidModal, createWatch, deleteWatch} = this.props;
+    let {videos, users, currentUserID, openVidModal, createWatch, deleteWatch, watchLaterButton} = this.props;
     let marg;
     if (document.getElementById("video-0")) {
       marg = document.getElementById("video-0").offsetLeft.toString();
@@ -66,10 +66,15 @@ class VideoIndex extends React.Component {
               </div>
             <ul>
             {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} timeAgo= {video.timestamp} video={video}
-            currentUserID={currentUserID} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+            currentUserID={currentUserID} watchLaterButton={watchLaterButton}createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
           </div>
-          <button className="watch-later-bttn">Added to watchlist</button>
+
+          <button
+            id="watch-later-bttn-toggle"
+            className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} watchlist
+          </button>
+
         </div>
       )
     }

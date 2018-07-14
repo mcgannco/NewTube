@@ -26,6 +26,18 @@ class VideoIndexItem extends React.Component {
     this.editclosePreview = this.editclosePreview.bind(this);
     this.watchLater = this.watchLater.bind(this);
     this.hide = this.hide.bind(this);
+    this.clockWatch = this.clockWatch.bind(this);
+  }
+
+  componentDidMount() {
+    $('.watch-later-bttn').hide()
+  }
+
+  componentWillReceiveProps(props, nextProps) {
+    $('.watch-later-bttn')
+    setTimeout(function() {
+        $(".watch-later-bttn").fadeOut(1500);
+    }, 3000);
   }
 
   preview(e) {
@@ -149,12 +161,16 @@ class VideoIndexItem extends React.Component {
 
   watchLater(e,video) {
     let vid = e.target.parentElement.parentElement.parentElement.getElementsByClassName("video-thumb")[0];
-    let id = this.state.targetVid
+    let id = this.state.targetVid || video
     let {users, currentUserID} = this.props;
     if(users[currentUserID].watchLaterIds.includes(id.id)) {
       this.props.deleteWatch(id.id)
+      this.props.watchLaterButton("Removed from")
+      $('.watch-later-bttn').show();
     } else {
       this.props.createWatch(id.id)
+      this.props.watchLaterButton("Added to")
+      $('.watch-later-bttn').show();
     }
   }
 
@@ -164,9 +180,15 @@ class VideoIndexItem extends React.Component {
     });
   }
 
+  clockWatch(e,video) {
+    e.preventDefault()
+    this.setState({targetVid: video})
+    this.watchLater(e,video)
+  }
+
 
   render() {
-    let { video, idx, author, timeAgo, currentUserID} = this.props;
+    let { video, idx, author, timeAgo, currentUserID, users} = this.props;
     let date = new Date(timeAgo);
     let toggleDD;
     if(this.state.optionsDropDown) {
@@ -194,7 +216,8 @@ class VideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
             <nav className={this.state.playButton ? "play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-            <nav className={this.state.preview ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+            <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+            <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "check" : "no-clock"}><i className="fas fa-check"></i></nav>
           </div>
 
           <div className="video-index-title">

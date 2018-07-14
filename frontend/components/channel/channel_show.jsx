@@ -251,7 +251,7 @@ class ChannelShow extends React.Component {
         {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
-          <p>{videos.length === 0 ? "No Uploads" : ""}</p>
+          <p>{videos.length === 0 ? "No Videos Added" : ""}</p>
         </nav>
       </div>
     } else if (this.state.selected === "CHANNELS") {

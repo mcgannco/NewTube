@@ -226,6 +226,27 @@
   cursor: pointer;
 }
 
+.check {
+  position: absolute;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  right: 3px;
+  bottom: 95px;
+  color: white;
+  letter-spacing: .5px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 2px 4px;
+  margin: 4px;
+  background: #111111;
+  color: white;
+  opacity: 0.8;
+  border-radius: 2px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  cursor: pointer;
+}
+
 .show {
   color: black;
 }

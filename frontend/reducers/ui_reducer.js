@@ -4,13 +4,15 @@ import vidmodalReducer from './vid_modal_reducer';
 import loadingReducer from './loading_reducer';
 import redirectReducer from './redirect_reducer';
 import vidPlayingReducer from './vid_playing_reducer';
+import watchLaterReducer from './watch_later_button_reducer';
 
 const uiReducer = combineReducers({
   modal: modalReducer,
   vmodal: vidmodalReducer,
   loading: loadingReducer,
   uploadRedirect: redirectReducer,
-  vidPlaying: vidPlayingReducer
+  vidPlaying: vidPlayingReducer,
+  watchLaterBttn:watchLaterReducer,
 });
 
 export default uiReducer;
