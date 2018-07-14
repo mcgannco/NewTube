@@ -165,11 +165,11 @@ class VideoIndexItem extends React.Component {
     let {users, currentUserID} = this.props;
     if(users[currentUserID].watchLaterIds.includes(id.id)) {
       this.props.deleteWatch(id.id)
-      this.props.watchLaterButton("Removed from")
+      this.props.watchLaterButton("Removed From")
       $('.watch-later-bttn').show();
     } else {
       this.props.createWatch(id.id)
-      this.props.watchLaterButton("Added to")
+      this.props.watchLaterButton("Added To")
       $('.watch-later-bttn').show();
     }
   }

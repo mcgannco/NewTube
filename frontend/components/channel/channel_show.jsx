@@ -451,7 +451,7 @@ class ChannelShow extends React.Component {
         {selected}
         <button
           id="watch-later-bttn-toggle"
-          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} watchlist
+          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
         </button>
       </div>
       )

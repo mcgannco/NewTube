@@ -72,7 +72,7 @@ class VideoIndex extends React.Component {
 
           <button
             id="watch-later-bttn-toggle"
-            className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} watchlist
+            className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
           </button>
 
         </div>

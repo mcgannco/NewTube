@@ -46,12 +46,16 @@
 
 .related-video-index-options-dd {
   width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
   display: flex;
-  justify-content: flex-end;
   color: grey;
   position: absolute;
   right: 10px;
   font-size: 16px;
+  top: -6px;
+  right: 0;
 }
 
 .related-video-index-options-dd:active {
