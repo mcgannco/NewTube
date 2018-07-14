@@ -16,6 +16,7 @@ const msp = (state, ownProps) => {
     comments: state.entities.comments,
     vidPlaying: state.ui.vidPlaying.vidPlaying,
     currentUser: state.entities.users[state.session.id],
+    button: state.ui.watchLaterBttn
   })
 };
 

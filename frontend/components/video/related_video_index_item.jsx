@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class RelatedVideoIndexItem extends React.Component {
   constructor(props) {
@@ -10,14 +11,23 @@ class RelatedVideoIndexItem extends React.Component {
       currentTime: 0,
       playButton: false,
       preview: false,
-      showTime: true
+      showTime: true,
+      optionsDropDown: false,
+      targetVid: "",
     }
     this.preview = this.preview.bind(this);
     this.closePreview = this.closePreview.bind(this);
     this.getDuration = this.getDuration.bind(this);
     this.tick = this.tick.bind(this);
     this.formatNumber = this.formatNumber.bind(this);
-    this.toggleDD = this.toggleDD.bind(this);
+    this.toggleOptions = this.toggleOptions.bind(this);
+    this.closeToggleOptions = this.closeToggleOptions.bind(this);
+    this.editVideo = this.editVideo.bind(this);
+    this.editclosePreview = this.editclosePreview.bind(this);
+    this.watchLater = this.watchLater.bind(this);
+    this.hide = this.hide.bind(this);
+    this.clockWatch = this.clockWatch.bind(this);
+
   }
 
   preview(e) {
@@ -92,13 +102,90 @@ class RelatedVideoIndexItem extends React.Component {
     return formattedNumber;
   }
 
-  toggleDD(e) {
-    debugger
+  toggleOptions(e, video) {
+    e.preventDefault()
+    this.setState({ optionsDropDown: true, targetVid: video }, () => {
+    document.getElementById('body').addEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+  closeToggleOptions(e) {
+    e.preventDefault()
+    if(e.target.id === "edit-vid") {
+      this.editVideo(e, video)
+    } else if (e.target.id === "delete-vid") {
+      this.deleteVideo(e, video)
+    } else if (e.target.id === "watch-later") {
+      this.watchLater(e, video)
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    }
+  }
+
+  editclosePreview(e) {
+    let video = e.children[0]
+    video.pause()
+    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true, optionsDropDown: false})
+    video.currentTime = 0
+  }
+
+  editVideo(e, video) {
+    let vid = e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("related-video-thumb")[0];
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('edit', id)
+    this.setState({targetVid: ""})
+  }
+
+  deleteVideo(e, video) {
+    let vid = e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("related-video-thumb")[0];
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('delete', id)
+    this.setState({targetVid: "", optionsDropDown: false})
+  }
+
+  watchLater(e,video) {
+    let vid = e.target.parentElement.parentElement.parentElement.parentElement.getElementsByClassName("related-video-thumb")[0];
+    let id = this.state.targetVid || video
+    let {users, currentUserID} = this.props;
+    if(users[currentUserID].watchLaterIds.includes(id.id)) {
+      this.props.deleteWatch(id.id)
+      this.props.watchLaterButton("Removed From")
+      $('.watch-later-bttn').show();
+    } else {
+      this.props.createWatch(id.id)
+      this.props.watchLaterButton("Added To")
+      $('.watch-later-bttn').show();
+    }
+  }
+
+  hide() {
+    this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+  clockWatch(e,video) {
+    e.preventDefault()
+    this.setState({targetVid: video})
+    this.watchLater(e,video)
   }
 
   render() {
-    let { video, idx, author, timeAgo} = this.props;
+    let { video, idx, author, timeAgo, currentUserID, users, watchLaterButton} = this.props;
     let date = new Date(timeAgo);
+    let toggleDD;
+    if(this.state.optionsDropDown) {
+
+      toggleDD = <div className="toggleOptionsDD" id="toggleDD">
+        <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
+        <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
+        <span onClick={this.hide}id="watch-later">Watch Later</span>
+      </div>
+    }
     return(
       <li>
         <Link to={`/video/${video.id}`}>
@@ -116,15 +203,17 @@ class RelatedVideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
               <nav className={this.state.playButton ? "related-play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-              <nav className={this.state.preview ? "related-clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+              <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "related-clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+              <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "related-check" : "no-check"}><i className="fas fa-check"></i></nav>
           </div>
 
           <div className="related-video-info">
             <div className="related-video-index-title">
                        <p>{video.title}</p>
-                       <span onClick={this.toggleDD} className={this.state.preview ? "related-video-index-options-dd" : "related-video-index-options-dd-hidden"}>
+                       <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "related-video-index-options-dd" : "related-video-index-options-dd-hidden"}>
                          <i className="fas fa-ellipsis-v"></i>
                        </span>
+                       {toggleDD}
                      </div>
                      <nav className="video-author-views">
                        <span className="related-video-index-author">{author}</span>
@@ -142,4 +231,4 @@ class RelatedVideoIndexItem extends React.Component {
 
 };
 
-export default RelatedVideoIndexItem;
+export default withRouter(RelatedVideoIndexItem);

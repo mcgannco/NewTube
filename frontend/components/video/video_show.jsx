@@ -31,6 +31,7 @@ class VideoShow extends React.Component {
     this.props.requestAllUsers()
     window.addEventListener("resize", this.updateWindowSize);
     window.scrollTo(0, 0);
+    $('.watch-later-bttn').hide()
   }
 
   updateWindowSize() {
@@ -47,6 +48,10 @@ class VideoShow extends React.Component {
         this.props.createView(nextProps.match.params.id)
       );
     }
+    $('.watch-later-bttn')
+    setTimeout(function() {
+        $(".watch-later-bttn").fadeOut(1500);
+    }, 3000);
   }
 
   showMore(e) {
@@ -262,6 +267,10 @@ class VideoShow extends React.Component {
               </div>
 
               </section>
+              <button
+                id="watch-later-bttn-toggle"
+                className={this.props.button ? "watch-later-bttn" : "hide"}>{this.props.button} Watchlist
+              </button>
         	</section>
 
 
@@ -271,6 +280,7 @@ class VideoShow extends React.Component {
               {commentContainer}
             </div>
     			</section>
+
         </section>
       )
     }
