@@ -35,12 +35,18 @@ class ChannelShow extends React.Component {
 
   componentDidMount() {
     this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
+    $('.watch-later-bttn').hide()
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user && (this.props.user.id != nextProps.match.params.id)) {
       this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
     }
+
+    $('.watch-later-bttn')
+    setTimeout(function() {
+        $(".watch-later-bttn").fadeOut(1500);
+    }, 3000);
   }
 
   componentWillUnmount() {
@@ -204,7 +210,7 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID, loading, videos, users, users_arr, openVidModal, createWatch, deleteWatch} = this.props;
+    let {user, currentUserID, loading, videos, users, users_arr, openVidModal, watchLaterButton, createWatch, deleteWatch} = this.props;
     if(!user || !videos || !users_arr) {
       return null;
     }
@@ -238,7 +244,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => video.author_id === user.id)
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Uploads" : ""}</p>
@@ -248,7 +254,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => user.watchLaterIds.includes(video.id))
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Videos Added" : ""}</p>
@@ -278,7 +284,7 @@ class ChannelShow extends React.Component {
       videos = videos.filter(video => likedVideoIds.includes(video.id))
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
           <p>{videos.length === 0 ? "No Likes" : ""}</p>
@@ -443,6 +449,10 @@ class ChannelShow extends React.Component {
           </ul>
         </div>
         {selected}
+        <button
+          id="watch-later-bttn-toggle"
+          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} watchlist
+        </button>
       </div>
       )
     }

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import { requestAllUsers,createWatch, deleteWatch, requestSingleUser, editUser,createSub, deleteSub,clearUserErrors } from '../../actions/user_actions';
-import { requestAllVideos } from '../../actions/video_actions';
+import { requestAllVideos,watchLaterButton } from '../../actions/video_actions';
 import { selectAllVideos, selectAllChannels  } from '../../reducers/selectors';
 import { openVidModal  } from '../../actions/video_modal_actions';
 import ChannelShow from './channel_show';
@@ -13,7 +13,8 @@ const msp = (state, ownProps) => {
     videos: selectAllVideos(state),
     currentUserID: state.session.id,
     loading: state.ui.loading.pictureLoading,
-    errors: state.errors.session
+    errors: state.errors.session,
+    button: state.ui.watchLaterBttn
   })
 };
 
@@ -29,6 +30,7 @@ const mdp = dispatch => {
      openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
      createWatch: (vidId) => dispatch(createWatch(vidId)),
      deleteWatch: (vidId) => dispatch(deleteWatch(vidId)),
+     watchLaterButton: (status) => dispatch(watchLaterButton(status)),
   })
 };
 
