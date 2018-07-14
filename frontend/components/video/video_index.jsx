@@ -69,6 +69,7 @@ class VideoIndex extends React.Component {
             currentUserID={currentUserID} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
             </ul>
           </div>
+          <button className="watch-later-bttn">Added to watchlist</button>
         </div>
       )
     }

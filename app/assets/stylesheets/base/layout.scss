@@ -1,6 +1,8 @@
 html {
-	height: 100%;
 	background: #fafafa;
+	min-height: 100% !important;
+  height: 100%;
+	overflow: scroll;
 }
 
 body {
@@ -10,6 +12,8 @@ body {
 	font-size: 12px;
 	height: 100%;
 	overflow-x: hidden;
+	min-height: 100% !important;
+  height: 100%;
 }
 
 img {
@@ -27,4 +31,30 @@ header {
 
 #app {
 	height: 100%;
+}
+
+.fontawesome-i2svg-active {
+	height: 100%;
+}
+
+.fontawesome-i2svg-complete {
+	background: 100%;
+}
+
+.watch-later-bttn{
+	background: black;
+  position: absolute;
+  bottom: 5px;
+  left: 14px;
+  color: white;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 2px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+	opacity: 0.8;
+	text-shadow: 2px 2px black;
+
 }
