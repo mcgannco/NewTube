@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import { requestSingleVideo,
   requestAllVideos,
   vPlaying,
-createLike, updateLike, deleteLike, createView  } from '../../actions/video_actions';
+createLike, updateLike, deleteLike, createView,editVideo  } from '../../actions/video_actions';
 import { createComment, requestAllComments  } from '../../actions/comment_actions';
 import { requestAllUsers, createSub, deleteSub  } from '../../actions/user_actions';
 import { selectAllVideos  } from '../../reducers/selectors';
@@ -33,7 +33,8 @@ const mdp = dispatch => {
     deleteLike: (id) => dispatch(deleteLike(id)),
     createView: (videoId) => dispatch(createView(videoId)),
     createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
-    deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId))
+    deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId)),
+    editVideo: (videoId, data) => dispatch(editVideo(videoId, data)),
   })
 };
 

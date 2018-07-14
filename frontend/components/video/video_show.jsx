@@ -10,7 +10,10 @@ class VideoShow extends React.Component {
       expandDescription: false,
       isColumnView: window.innerWidth <= 1000,
       duration: 0,
-      views: ""
+      views: "",
+      editStatus: false,
+      title: "",
+      description: ""
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
@@ -23,6 +26,10 @@ class VideoShow extends React.Component {
     this.formatNumber = this.formatNumber.bind(this);
     this.formatViews = this.formatViews.bind(this);
     this.editVid = this.editVid.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
+    this.updateDescription = this.updateDescription.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   componentWillMount() {
@@ -97,8 +104,12 @@ class VideoShow extends React.Component {
 
   }
 
-  editVid(e) {
-    debugger
+  editVid(e, video) {
+    this.setState({editStatus: true, title: video.title, description: video.description})
+  }
+
+  cancelEdit(e) {
+    this.setState({editStatus: false, title: "", description: ""})
   }
 
   handleLike(e) {
@@ -152,6 +163,35 @@ class VideoShow extends React.Component {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  updateTitle(e) {
+    this.setState({title: e.currentTarget.value})
+  }
+
+  updateDescription(e) {
+    this.setState({description: e.currentTarget.value})
+  }
+
+  submit(e) {
+    e.preventDefault();
+    const title = this.state.title;
+    const description = this.state.description;
+    const formData = new FormData();
+    if(title) {
+      formData.append("video[title]", title);
+    }
+
+    if (description) {
+      formData.append("video[description]", description);
+    }
+
+    this.props.editVideo(this.props.video.id, formData).then(
+      this.setState({editStatus: false,
+        title: "",
+        description: ""
+    })
+    )
+  }
+
   render() {
     let {video,users, currentUser} = this.props;
     let commentContainer;
@@ -197,7 +237,24 @@ class VideoShow extends React.Component {
     } else {
       subButton = "SUBSCRIBE"
       subButtonClass = "sub-vid-show"
+    }
 
+    let expandDescription;
+    let expandDescriptionMain;
+    let expandDescriptionShowMore;
+
+    if (this.state.editStatus) {
+      expandDescription = "hidden";
+      expandDescriptionMain = "hidden";
+      expandDescriptionShowMore = "hidden";
+    } else if (this.state.expandDescription) {
+      expandDescription = "expand-description";
+      expandDescriptionMain = "expand-description-main";
+      expandDescriptionShowMore = "expand-description-show-more";
+    } else {
+      expandDescription = "description";
+      expandDescriptionMain = "description-main";
+      expandDescriptionShowMore = "description-show-more";
     }
 
       return(
@@ -218,7 +275,8 @@ class VideoShow extends React.Component {
                 />
             </nav>
 
-              <h1>{video.title}</h1>
+              <h1 className={this.state.editStatus ? "hidden" : ""}>{video.title}</h1>
+              <input onChange={this.updateTitle} className={this.state.editStatus ? "edit-title-show-input" : "hidden"} value={this.state.title}></input>
               <div className= "video-stats">
                 <span className="total-views">{this.formatViews(this.props.video.view_count)} views</span>
                 <div>
@@ -252,20 +310,24 @@ class VideoShow extends React.Component {
                     </div>
 
                     </div>
-                <nav>
+                <nav className="video-show-edit-bttns">
                 <button className={subButtonClass} onClick={this.handleSubs}>{subButton} {this.formatNumber(users[video.author_id].subscribeeIds.length)}</button>
-                <button onClick={this.editVid} className={currentUser && video.author_id === currentUser.id ? "edit-vid" : "hidden"}>EDIT</button></nav>
+                <button onClick={(e) => this.editVid(e, video)} className={currentUser && video.author_id === currentUser.id && !this.state.editStatus ? "edit-vid" : "hidden"}>EDIT</button>
+                <button onClick={this.cancelEdit} className={currentUser && video.author_id === currentUser.id && this.state.editStatus ? "edit-vid" : "hidden"}>CANCEL</button>
+                <button onClick={this.submit} className={currentUser && video.author_id === currentUser.id && this.state.editStatus ? "save-vid" : "hidden"}>SAVE</button>
+              </nav>
 
                 </div>
-                <div className={this.state.expandDescription ? "expand-description" : "description"}>
+                <div className={expandDescription}>
                   <div>
-                    <p className={this.state.expandDescription ? "expand-description-main" : "description-main"  }>
+                    <p className={expandDescriptionMain}>
                       {video.description}
                     </p>
-                    <p onClick={this.showMore}className={this.state.expandDescription ? "expand-description-show-more" : "description-show-more"}>{showmore}</p>
+                    <p onClick={this.showMore} className={expandDescriptionShowMore}>{showmore}</p>
                   </div>
                 </div>
               </div>
+              <textarea onChange={this.updateDescription} value={this.state.description} className={this.state.editStatus ? "edit-show-description" : "hidden"}>{this.state.description}</textarea>
 
               <div className={!this.state.isColumnView ? "comments-container" : "hidden"}>
                 {commentContainer}

@@ -301,7 +301,7 @@ class ChannelShow extends React.Component {
                     <div className="description-header">
                       <span>Description</span>
                       <p className={this.state.edit ? "hidden" : ""}>{user.description ? user.description : "No Description"}</p>
-                      <textarea value={this.state.description} onChange={this.updateDescription}className={this.state.edit ? "edit-description" : "hidden"}>{this.state.description}</textarea>
+                      <textarea value={this.state.description} onChange={this.updateDescription} className={this.state.edit ? "edit-description" : "hidden"}>{this.state.description}</textarea>
                     </div>
                   </section>
                   	<section className="col col-1-2">
