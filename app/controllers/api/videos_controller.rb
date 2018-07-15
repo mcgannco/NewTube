@@ -1,7 +1,7 @@
 class Api::VideosController < ApplicationController
 
   def index
-    @videos = Video.all.includes(:likes, :comments, :likers, :uploader)
+    @videos = Video.all.includes(:likes, :comments, :likers, :uploader, :watchlaters)
   end
 
   def show
