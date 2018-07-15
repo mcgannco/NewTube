@@ -216,8 +216,8 @@ class VideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
             <nav className={this.state.playButton ? "play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-            <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
-            <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "check" : "no-clock"}><i className="fas fa-check"></i></nav>
+            <nav onClick={(e) => this.clockWatch(e,video)} className={currentUserID && this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+            <nav onClick={(e) => this.clockWatch(e,video)} className={currentUserID && this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "check" : "no-clock"}><i className="fas fa-check"></i></nav>
           </div>
 
           <div className="video-index-title">

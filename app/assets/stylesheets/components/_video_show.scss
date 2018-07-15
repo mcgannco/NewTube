@@ -342,13 +342,14 @@
 }
 
 .comments-container span {
-  font-size: 16px;
+  // font-size: 16px;
 }
 
 .comments-container nav {
   padding-left: 10px;
   font-size: 17px;
   color: grey;
+  align-items: flex-start;
 }
 
 .user-comment-div-container {

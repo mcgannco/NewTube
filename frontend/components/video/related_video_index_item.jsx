@@ -203,8 +203,8 @@ class RelatedVideoIndexItem extends React.Component {
               />
             <nav className={this.state.showTime ? "video-duration" : "no-video-duration"}>{this.state.videoLength}</nav>
               <nav className={this.state.playButton ? "related-play-button" : "no-play-button"}><i className="fas fa-play"></i></nav>
-              <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "related-clock" : "no-clock"}><i className="far fa-clock"></i></nav>
-              <nav onClick={(e) => this.clockWatch(e,video)} className={this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "related-check" : "no-check"}><i className="fas fa-check"></i></nav>
+              <nav onClick={(e) => this.clockWatch(e,video)} className={currentUserID && this.state.preview && !users[currentUserID].watchLaterIds.includes(video.id) ? "related-clock" : "no-clock"}><i className="far fa-clock"></i></nav>
+              <nav onClick={(e) => this.clockWatch(e,video)} className={currentUserID && this.state.preview &&  users[currentUserID].watchLaterIds.includes(video.id) ? "related-check" : "no-check"}><i className="fas fa-check"></i></nav>
           </div>
 
           <div className="related-video-info">

@@ -1,6 +1,6 @@
 class Api::CommentsController < ApplicationController
   def index
-    @comments = Comment.all.includes(:video, :author)
+    @comments = Comment.all.includes(:video, :author,:child_comments, :parent_comment)
   end
 
   def show
@@ -23,6 +23,6 @@ class Api::CommentsController < ApplicationController
 
   private
   def comments_params
-    params.require(:comment).permit(:body, :author_id, :video_id)
+    params.require(:comment).permit(:body, :author_id, :video_id, :parent_comment_id)
   end
 end

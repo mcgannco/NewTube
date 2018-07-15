@@ -60,7 +60,7 @@ class CommentsIndex extends React.Component {
   }
 
   render() {
-    let {comments, vidId, users, currentUser} = this.props;
+    let {comments, vidId, users, currentUser, createComment} = this.props;
     let numComments;
     if(!currentUser) {
       return null;
@@ -96,7 +96,7 @@ class CommentsIndex extends React.Component {
         </div>
 
         <ul>
-          {comments.reverse().map((comment,idx) => <CommentIndexItem key={idx} user={users[comment.author_id]} comment={comment}/>)}
+          {comments.reverse().map((comment,idx) => <CommentIndexItem key={idx} createComment={createComment} currentUser={currentUser} user={users[comment.author_id]} comment={comment}/>)}
         </ul>
 
       </div>
