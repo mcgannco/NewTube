@@ -15,10 +15,20 @@ class Api::CommentsController < ApplicationController
     end
   end
 
-  def edit
+  def update
+    @comment = Comment.find_by(id: params[:id])
+    
+    if @comment.update(comments_params)
+      render :show
+    else
+      render json: ['update failed'], status: 422
+    end
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy!
+    render :show
   end
 
   private

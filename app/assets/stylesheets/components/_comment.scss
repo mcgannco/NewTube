@@ -11,6 +11,14 @@
   margin-bottom: 5px;
 }
 
+.comment-body-body-edit {
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid green;
+  width: 100%;
+}
+
 .comments-container-num-comments p {
   font-size: 17px;
   margin-left: 25px;
@@ -26,14 +34,16 @@
   display: flex;
   margin-right: 20px;
   font-size: 12px;
+  align-items: center;
 }
 
 .children-comment {
   display: flex;
-font-size: 12px;
-align-items: center;
-text-align: center;
-display: flex;
+  font-size: 12px;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 
 .comment-icon {
@@ -118,13 +128,27 @@ display: flex;
 .opitions {
   color: grey;
   font-size: 14px;
-  width: 10px;
+  width: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+}
+
+.opitions:active {
+  background: #ccc;
+  border-radius: 20px;
 }
 
 .hiddenoption {
   color: transparent;
   font-size: 14px;
-  width: 10px;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
 }
 
 .comment-like-count {
@@ -181,5 +205,57 @@ display: flex;
 
 .new-comment:focus {
   border-bottom: 2px solid green;
+}
 
+.toggleCommentOptionsDD {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 103px;
+  padding: 5px 0px;
+  right: 0px;
+  background: white;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
+  z-index: 11;
+  top: -1px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  color: black;
+  font-size: 12px;
+}
+
+#edit-comment {
+  padding: 5px;
+  z-index: 14;
+}
+
+#edit-comment:hover {
+  background: #F0F0F0;
+}
+
+#delete-comment {
+  padding: 5px;
+  z-index: 14;
+}
+
+#delete-comment:hover {
+  background: #F0F0F0;
+}
+
+.children-comment-left {
+  display: flex;
+}
+
+.children-comment-right {
+  display: flex;
+  margin: 0px;
+}
+
+@media (max-width: 467px) {
+  .children-comment-right {
+    flex-direction: column;
+  }
+
+  .children-comment {
+    align-items: flex-start;
+  }
 }

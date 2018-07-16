@@ -32,7 +32,7 @@ class Api::VideosController < ApplicationController
   def destroy
     @video = Video.find(params[:id])
     @video.destroy
-      render 'api/videos/show'
+    render 'api/videos/show'
   end
 
   private

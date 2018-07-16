@@ -11,7 +11,12 @@ class CommentIndexItem extends React.Component {
       subComment: false,
       subStr: "",
       allowSubmit: false,
-      showReplies: false
+      showReplies: false,
+      optionsDropDown: false,
+      targetComment: "",
+      body: "",
+      commentStatus: "",
+      allowEditSubmit: false
     }
     this.showOptions = this.showOptions.bind(this);
     this.closeshowOptions = this.closeshowOptions.bind(this);
@@ -20,6 +25,13 @@ class CommentIndexItem extends React.Component {
     this.updateComment = this.updateComment.bind(this);
     this.submit = this.submit.bind(this);
     this.toggleReplies = this.toggleReplies.bind(this);
+    this.toggleCommentOptions = this.toggleCommentOptions.bind(this);
+    this.closeToggleOptions = this.closeToggleOptions.bind(this);
+    this.editComment = this.editComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
+    this.updateCommentBody = this.updateCommentBody.bind(this);
+    this.submitEdit = this.submitEdit.bind(this);
   }
 
   showOptions() {
@@ -67,6 +79,58 @@ class CommentIndexItem extends React.Component {
     this.setState({showReplies: !this.state.showReplies})
   }
 
+  toggleCommentOptions(e, comment) {
+    e.preventDefault()
+    this.setState({ optionsDropDown: true, targetComment: comment, body: comment.body }, () => {
+    document.getElementById('body-body').addEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+  closeToggleOptions(e) {
+    e.preventDefault()
+    if(e.target.id === "edit-comment") {
+      this.editComment(e)
+    } else if (e.target.id === "delete-comment") {
+      this.deleteComment(e)
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body-body').removeEventListener('click', this.closeToggleOptions);
+      });
+    }
+  }
+
+  editComment(e) {
+    this.setState({commentStatus: "edit", optionsDropDown: false})
+  }
+
+  deleteComment(e) {
+    this.setState({commentStatus: "delete", optionsDropDown: false})
+  }
+
+  cancelUpdate(e) {
+    this.setState({commentStatus: "", optionsDropDown: false, targetComment: "", body: "", allowEditSubmit: false })
+  }
+
+  updateCommentBody(e) {
+    if (e.currentTarget.value !== "") {
+      this.setState({body: e.currentTarget.value,allowEditSubmit: true})
+    } else {
+      this.setState({body: e.currentTarget.value, allowEditSubmit:false})
+    }
+  }
+
+  submitEdit(e) {
+    if(this.state.commentStatus === "edit") {
+      const formData = new FormData();
+      formData.append("comment[body]", this.state.body);
+      this.props.editComment(this.state.targetComment.video_id, this.state.targetComment.id, formData).then(
+        this.setState({optionsDropDown: false,targetComment: "",body: "",commentStatus: "",allowEditSubmit: false})
+      )
+    } else if(this.state.commentStatus === "delete") {
+
+    }
+  }
+
   render() {
 
     let { comment, user, currentUser, createComment, users, comments } = this.props;
@@ -97,6 +161,26 @@ class CommentIndexItem extends React.Component {
       replyMessage = `View all ${child_comments.length} replies`
     }
 
+    let toggleDD;
+    if(this.state.optionsDropDown) {
+      toggleDD = <div className={comment.author_id === currentUser.id ? "toggleCommentOptionsDD" : "hidden"} id="toggleDD">
+        <span  id = "edit-comment" className={comment.author_id === currentUser.id ? "" : "hidden"}>Edit</span>
+        <span id = "delete-comment" className={comment.author_id === currentUser.id ? "" : "hidden"}>Delete</span>
+      </div>
+    }
+
+    let submitEditComment;
+
+    if(this.state.commentStatus === "") {
+      submitEditComment = "hidden";
+    } else if (this.state.commentStatus === "edit" && this.state.allowEditSubmit) {
+      submitEditComment = "submit-button";
+    } else if (this.state.commentStatus === "delete") {
+      submitEditComment = "submit-button";
+    } else if (!this.state.allowEditSubmit) {
+      submitEditComment = "no-submit-button";
+    }
+
       return(
       <li>
         <div className="comment-content-container"
@@ -119,21 +203,30 @@ class CommentIndexItem extends React.Component {
                   <TimeAgo date={date} minPeriod='60' />
                 </span>
               </div>
-              <p className="comment-body-body">{comment.body}</p>
+              <p className={this.state.commentStatus === "edit" ? "hidden" : "comment-body-body"}>{comment.body}</p>
+              <input onChange={this.updateCommentBody} className={this.state.commentStatus === "edit" ? "comment-body-body-edit" : "hidden"} value={this.state.body}></input>
 
                 <div className="children-comment-container">
-                  <div className="children-comment">
-                    <div>
-                      <i className="fas fa-thumbs-up"></i>
-                      <p className="comment-like-count"> 344</p>
-                    </div>
+                    <section className="children-comment">
+                      <div className="children-comment-left">
+                        <div>
+                          <i className="fas fa-thumbs-up"></i>
+                          <p className="comment-like-count"> 344</p>
+                        </div>
 
-                    <div>
-                      <i className="fas fa-thumbs-down"></i>
-                      <p className="comment-like-count"> 344</p>
-                    </div>
-                      <p className="reply-comment" onClick={this.commentCommentBar}>Reply</p>
-                    </div>
+                        <div>
+                          <i className="fas fa-thumbs-down"></i>
+                          <p className="comment-like-count"> 344</p>
+                        </div>
+                          <p className="reply-comment" onClick={this.commentCommentBar}>Reply</p>
+                        </div>
+
+                        <nav className="children-comment-right">
+                          <button onClick={this.cancelUpdate} className={this.state.commentStatus === "edit" || this.state.commentStatus=== "delete" ? "cancel-button" : "hidden"}>Cancel</button>
+                          <button onClick={this.submitEdit}className={submitEditComment}>Submit</button>
+                        </nav>
+
+                    </section>
 
                     <span className="child-comment-input-container">
                       <span className="child-comment-input">
@@ -156,8 +249,9 @@ class CommentIndexItem extends React.Component {
                     <span onClick={this.toggleReplies} className={replyClass}>{replyMessage} <i className="fas fa-angle-down"></i></span>
                 </div>
           </div>
-            <span className={this.state.preview ? "opitions" : "hiddenoption"}>
+            <span onClick={(e) => this.toggleCommentOptions(e, comment)}className={this.state.preview ? "opitions" : "hiddenoption"}>
               <i className="fas fa-ellipsis-v"></i>
+              {toggleDD}
             </span>
           </nav>
           </div>

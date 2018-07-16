@@ -60,7 +60,7 @@ class CommentsIndex extends React.Component {
   }
 
   render() {
-    
+
     let {comments, vidId, users, currentUser, createComment} = this.props;
     let numComments;
     if(!currentUser) {
@@ -71,7 +71,7 @@ class CommentsIndex extends React.Component {
       numComments = comments.length;
     }
 
-    let userAvatar = users[currentUser.id].profile_img_url;
+    let userAvatar = currentUser ? users[currentUser.id].profile_img_url : null;
 
     return(
       <div className="user-comment-div-container">

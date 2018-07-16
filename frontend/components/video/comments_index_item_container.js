@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import { selectAllVideos, selectAllComments  } from '../../reducers/selectors';
-import { createSubComment  } from '../../actions/comment_actions';
+import { createSubComment, editComment  } from '../../actions/comment_actions';
 import CommentIndexItem from './comment_index_item';
 
 const msp = (state, ownProps) => {
@@ -11,7 +11,8 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => {
   return({
-    createSubComment: (comment) => dispatch(createSubComment(comment))
+    createSubComment: (comment) => dispatch(createSubComment(comment)),
+    editComment: (videoId, commentId, data) => dispatch(editComment(videoId, commentId, data))
   })
 };
 

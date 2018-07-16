@@ -59,10 +59,6 @@ class VideoIndex extends React.Component {
           <div className='video-index'>
             <div className="video-header" style={{marginLeft: marg + 'px', width: header + 'px'}}>
               <h1>Recommended</h1>
-              <div>
-                <button>Subscribe</button>
-                <span><i className="fas fa-times"></i></span>
-              </div>
               </div>
             <ul>
             {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} timeAgo= {video.timestamp} video={video}

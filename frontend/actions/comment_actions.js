@@ -47,3 +47,13 @@ export const createSubComment = comment => dispatch => (
     dispatch(receiveErrors(err.responseJSON))
   ))
 );
+
+export const editComment = (videoId, commentId, data) => dispatch => {
+  return(
+    APIUtil.updateComment(videoId, commentId, data).then(comment => (
+      dispatch(receiveSingleComment(comment))
+    ), err => (
+      dispatch(receiveErrors(err.responseJSON))
+    )
+  ))
+};
