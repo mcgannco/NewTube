@@ -23,7 +23,7 @@ const commentsReducer =  (state = {}, action) => {
       newState = merge({}, state);
       if (action.comment.parent_comment_id) {
         parentComment = {[action.comment.parent_comment_id]: newState[action.comment.parent_comment_id]};
-        parentComment[action.comment.parent_comment_id].child_comment_ids = parentComment[action.comment.parent_comment_id].child_comment_ids.filter(comment => comment.id === action.comment.id)
+        parentComment[action.comment.parent_comment_id].child_comment_ids = parentComment[action.comment.parent_comment_id].child_comment_ids.filter(comment => comment !== action.comment.id)
         delete newState[action.comment.id];
         return Object.assign({}, newState, parentComment);
       } else {
