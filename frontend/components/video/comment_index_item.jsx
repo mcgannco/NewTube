@@ -121,13 +121,19 @@ class CommentIndexItem extends React.Component {
 
   submitEdit(e) {
     if(this.state.commentStatus === "edit") {
-      const formData = new FormData();
-      formData.append("comment[body]", this.state.body);
-      this.props.editComment(this.state.targetComment.video_id, this.state.targetComment.id, formData).then(
+      if(this.state.body === "") {
+        return null
+      } else {
+        const formData = new FormData();
+        formData.append("comment[body]", this.state.body);
+        this.props.editComment(this.state.targetComment.video_id, this.state.targetComment.id, formData).then(
+          this.setState({optionsDropDown: false,targetComment: "",body: "",commentStatus: "",allowEditSubmit: false})
+        )
+      }
+    } else if(this.state.commentStatus === "delete") {
+      this.props.deleteComment(this.state.targetComment.video_id, this.state.targetComment.id).then(
         this.setState({optionsDropDown: false,targetComment: "",body: "",commentStatus: "",allowEditSubmit: false})
       )
-    } else if(this.state.commentStatus === "delete") {
-
     }
   }
 

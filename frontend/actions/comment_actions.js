@@ -2,6 +2,7 @@ import * as APIUtil from '../util/comment_util';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 export const RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 export const RECEIVE_SUB_COMMENT = 'RECEIVE_SUB_COMMENT';
+export const DESTROY_COMMENT = 'DESTROY_COMMENT';
 
 export const receiveAllComments = (comments) => (
   {
@@ -23,6 +24,11 @@ export const receiveSingleSubComment = (comment) => (
     comment,
   }
 );
+
+export const receiveDestroyedComment = comment => ({
+  type: DESTROY_COMMENT,
+  comment
+});
 
 export const requestAllComments = (id) => dispatch => {
   return(
@@ -56,4 +62,8 @@ export const editComment = (videoId, commentId, data) => dispatch => {
       dispatch(receiveErrors(err.responseJSON))
     )
   ))
+};
+
+export const deleteComment = (videoId, commentId) => dispatch => {
+  return APIUtil.deleteComment(videoId, commentId).then(comment => dispatch(receiveDestroyedComment(comment)));
 };

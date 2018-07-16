@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_COMMENTS, RECEIVE_COMMENT, RECEIVE_SUB_COMMENT } from '../actions/comment_actions';
+import { RECEIVE_ALL_COMMENTS, RECEIVE_COMMENT, RECEIVE_SUB_COMMENT, DESTROY_COMMENT } from '../actions/comment_actions';
 import merge from 'lodash/merge';
 import _ from 'lodash';
 
@@ -18,9 +18,18 @@ const commentsReducer =  (state = {}, action) => {
       subComment = {[action.comment.id]: action.comment};
       parentComment = {[action.comment.parent_comment_id]: newState[action.comment.parent_comment_id]};
       parentComment[action.comment.parent_comment_id].child_comment_ids = parentComment[action.comment.parent_comment_id].child_comment_ids.concat(subComment[action.comment.id].id)
-
       return Object.assign({}, newState, subComment, parentComment);
-
+    case DESTROY_COMMENT:
+      newState = merge({}, state);
+      if (action.comment.parent_comment_id) {
+        parentComment = {[action.comment.parent_comment_id]: newState[action.comment.parent_comment_id]};
+        parentComment[action.comment.parent_comment_id].child_comment_ids = parentComment[action.comment.parent_comment_id].child_comment_ids.filter(comment => comment.id === action.comment.id)
+        delete newState[action.comment.id];
+        return Object.assign({}, newState, parentComment);
+      } else {
+        delete newState[action.comment.id];
+        return newState;
+      }
     default:
       return state;
   }
