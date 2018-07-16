@@ -145,8 +145,13 @@ class CommentIndexItem extends React.Component {
       return null;
     }
 
+    let subuserAvatar;
+    if(!currentUser) {
+      subuserAvatar = window.defaultUser
+    } else {
+      subuserAvatar = currentUser.profile_img_url
+    }
     let userAvatar = user.profile_img_url;
-    let subuserAvatar = currentUser.profile_img_url;
     let child_comments = [];
     if(comment.child_comment_ids.length > 0) {
       for (let i = 0; i < comment.child_comment_ids.length; i++) {

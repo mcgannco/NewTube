@@ -63,15 +63,19 @@ class CommentsIndex extends React.Component {
 
     let {comments, vidId, users, currentUser, createComment} = this.props;
     let numComments;
-    if(!currentUser) {
-      return null;
-    }
+
     if(comments.length > 0) {
       comments = comments.filter(comment => comment.video_id === vidId && comment.parent_comment_id === null);
       numComments = comments.length;
     }
 
-    let userAvatar = currentUser ? users[currentUser.id].profile_img_url : null;
+    let userAvatar = currentUser ? users[currentUser.id].profile_img_url : window.defaultUser;
+    let userName;
+    if(!currentUser || currentUser.profile_img_url !== "/avatars/original/missing.png") {
+      userName = "";
+    } else {
+      userName = currentUser.username.slice(0,1)
+    }
 
     return(
       <div className="user-comment-div-container">
@@ -82,7 +86,7 @@ class CommentsIndex extends React.Component {
         <div className="user-comment-div">
           <span style={
             {backgroundImage: `url(${userAvatar})`}
-          }>{currentUser.profile_img_url !== "/avatars/original/missing.png" ? "" : currentUser.username.slice(0,1)}</span>
+          }>{userName}</span>
           <input onClick={this.showButton}
             onChange={this.updateInput}
             placeholder="Add a public comment..."
