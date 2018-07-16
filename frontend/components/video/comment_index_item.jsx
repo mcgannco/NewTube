@@ -10,7 +10,8 @@ class CommentIndexItem extends React.Component {
       preview: false,
       subComment: false,
       subStr: "",
-      allowSubmit: false
+      allowSubmit: false,
+      showReplies: false
     }
     this.showOptions = this.showOptions.bind(this);
     this.closeshowOptions = this.closeshowOptions.bind(this);
@@ -18,6 +19,7 @@ class CommentIndexItem extends React.Component {
     this.closeSubComment = this.closeSubComment.bind(this);
     this.updateComment = this.updateComment.bind(this);
     this.submit = this.submit.bind(this);
+    this.toggleReplies = this.toggleReplies.bind(this);
   }
 
   showOptions() {
@@ -60,6 +62,11 @@ class CommentIndexItem extends React.Component {
     }
   }
 
+  toggleReplies(e) {
+    e.preventDefault();
+    this.setState({showReplies: !this.state.showReplies})
+  }
+
   render() {
 
     let { comment, user, currentUser, createComment, users, comments } = this.props;
@@ -75,6 +82,19 @@ class CommentIndexItem extends React.Component {
       for (let i = 0; i < comment.child_comment_ids.length; i++) {
         child_comments.push(comments[comment.child_comment_ids[i]])
       }
+    }
+
+    let replyClass;
+    let replyMessage;
+    if(this.state.showReplies && child_comments.length > 0) {
+      replyClass = "view-all-replies"
+      replyMessage = 'Hide replies'
+    } else if (child_comments.length === 0) {
+        replyClass = "hidden"
+        replyMessage = ""
+    } else {
+      replyClass = "view-all-replies"
+      replyMessage = `View all ${child_comments.length} replies`
     }
 
       return(
@@ -107,6 +127,7 @@ class CommentIndexItem extends React.Component {
                       <i className="fas fa-thumbs-up"></i>
                       <p className="comment-like-count"> 344</p>
                     </div>
+
                     <div>
                       <i className="fas fa-thumbs-down"></i>
                       <p className="comment-like-count"> 344</p>
@@ -132,6 +153,7 @@ class CommentIndexItem extends React.Component {
                     </span>
                     </span>
 
+                    <span onClick={this.toggleReplies} className={replyClass}>{replyMessage} <i className="fas fa-angle-down"></i></span>
                 </div>
           </div>
             <span className={this.state.preview ? "opitions" : "hiddenoption"}>
@@ -142,7 +164,8 @@ class CommentIndexItem extends React.Component {
 
         </div>
 
-        <ul>
+
+        <ul className={this.state.showReplies ? "" : "hidden"}>
           {child_comments.length > 0 ? child_comments.reverse().map((child,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[child.author_id]} users={users} comment={child}/>) : null}
         </ul>
 
