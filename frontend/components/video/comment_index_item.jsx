@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
+import CommentIndexItemContainer from './comments_index_item_container';
 
 class CommentIndexItem extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class CommentIndexItem extends React.Component {
     if(this.state.subStr === "") {
       return null;
     } else {
-      this.props.createComment({
+      this.props.createSubComment({
         body: this.state.subStr,
         video_id: this.props.comment.video_id,
         author_id: this.props.currentUser.id,
@@ -60,20 +61,27 @@ class CommentIndexItem extends React.Component {
   }
 
   render() {
-    let { comment, user, currentUser } = this.props;
+
+    let { comment, user, currentUser, createComment, users, comments } = this.props;
     let date = new Date(comment.timestamp);
-    if (!user) {
+    if (!user || !comments) {
       return null;
     }
+
     let userAvatar = user.profile_img_url;
     let subuserAvatar = currentUser.profile_img_url;
+    let child_comments = [];
+    if(comment.child_comment_ids.length > 0) {
+      for (let i = 0; i < comment.child_comment_ids.length; i++) {
+        child_comments.push(comments[comment.child_comment_ids[i]])
+      }
+    }
 
-    return(
-      <li
-        onMouseEnter={this.showOptions}
-        onMouseLeave={this.closeshowOptions}
-        >
-        <div className="comment-content-container">
+      return(
+      <li>
+        <div className="comment-content-container"
+          onMouseEnter={this.showOptions}
+          onMouseLeave={this.closeshowOptions}>
           <div className="parent-container">
           <div className="comment-icon">
             <span style={
@@ -124,7 +132,6 @@ class CommentIndexItem extends React.Component {
                     </span>
                     </span>
 
-                    <span className="view-all-replies">View all 12 replies <i className="fas fa-angle-down"></i></span>
                 </div>
           </div>
             <span className={this.state.preview ? "opitions" : "hiddenoption"}>
@@ -135,9 +142,12 @@ class CommentIndexItem extends React.Component {
 
         </div>
 
+        <ul>
+          {child_comments.length > 0 ? child_comments.reverse().map((child,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[child.author_id]} users={users} comment={child}/>) : null}
+        </ul>
+
       </li>
     )
-
   }
 
 };

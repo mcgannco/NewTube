@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CommentIndexItem from './comment_index_item';
+import CommentIndexItemContainer from './comments_index_item_container';
 
 class CommentsIndex extends React.Component {
   constructor(props) {
@@ -60,13 +60,14 @@ class CommentsIndex extends React.Component {
   }
 
   render() {
+    
     let {comments, vidId, users, currentUser, createComment} = this.props;
     let numComments;
     if(!currentUser) {
       return null;
     }
     if(comments.length > 0) {
-      comments = comments.filter(comment => comment.video_id === vidId);
+      comments = comments.filter(comment => comment.video_id === vidId && comment.parent_comment_id === null);
       numComments = comments.length;
     }
 
@@ -96,7 +97,7 @@ class CommentsIndex extends React.Component {
         </div>
 
         <ul>
-          {comments.reverse().map((comment,idx) => <CommentIndexItem key={idx} createComment={createComment} currentUser={currentUser} user={users[comment.author_id]} comment={comment}/>)}
+          {comments.reverse().map((comment,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[comment.author_id]} users={users}comment={comment}/>)}
         </ul>
 
       </div>

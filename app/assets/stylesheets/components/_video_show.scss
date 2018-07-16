@@ -336,6 +336,10 @@
   padding-top: 15px;
 }
 
+.comments-container ul li ul{
+  margin-left: 40px;
+}
+
 .comments-container-num-comments {
   display: flex;
   align-items: center;
@@ -401,6 +405,7 @@
 .comment-button-container {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 20px;
 }
 
 .submit-button {
