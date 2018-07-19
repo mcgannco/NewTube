@@ -250,6 +250,14 @@
   margin: 0px;
 }
 
+.comment-likes {
+  cursor: pointer;
+}
+
+.comment-likes:hover {
+  color: black;
+}
+
 @media (max-width: 467px) {
   .children-comment-right {
     flex-direction: column;

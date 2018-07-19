@@ -12,6 +12,8 @@
 #
 
 class Comment < ApplicationRecord
+  include Likeable
+
   belongs_to :video,
     class_name: :Video,
     foreign_key: :video_id,
@@ -34,5 +36,15 @@ class Comment < ApplicationRecord
     primary_key: :id,
     optional: true
 
+    has_many :likers, :through => :likes, :source => :likeable,
+     :source_type => 'User'
 
+   def likes_dislikes
+       like_count = 0
+       dislike_count = 0
+       self.likes.each do |like|
+         like.like_value ? like_count += 1 : dislike_count += 1
+       end
+       [like_count, dislike_count]
+   end
 end

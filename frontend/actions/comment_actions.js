@@ -67,3 +67,15 @@ export const editComment = (videoId, commentId, data) => dispatch => {
 export const deleteComment = (videoId, commentId) => dispatch => {
   return APIUtil.deleteComment(videoId, commentId).then(comment => dispatch(receiveDestroyedComment(comment)));
 };
+
+export const createCommentLike = (videoId, commentId, like) => dispatch => {
+  return APIUtil.createCommentLike(videoId, commentId, like).then(comment => dispatch(receiveSingleComment(comment)));
+};
+
+export const updateCommentLike = (videoId, commentId, user_id, like) => dispatch => {
+  return APIUtil.updateCommentLike(videoId, commentId, user_id, like).then(comment => dispatch(receiveSingleComment(comment)));
+};
+
+export const deleteCommentLike = (id) => dispatch => {
+  return APIUtil.deleteCommentLike(id).then(comment => dispatch(receiveSingleComment(comment)));
+};

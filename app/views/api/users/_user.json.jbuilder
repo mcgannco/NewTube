@@ -4,6 +4,8 @@ json.timestamp formatted_time
 
 json.profile_img_url asset_path(user.avatar.url)
 json.banner_img_url asset_path(user.banner.url)
+
+json.likedCommentIds user.liked_comment_ids
 json.likedVideoIds user.liked_video_ids
 
 json.subscriberIds user.subscribed_channel_ids

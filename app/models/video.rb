@@ -16,6 +16,8 @@
 #
 
 class Video < ApplicationRecord
+  include Likeable
+
   validates :title, :description, :author_id, :view_count, presence: true
   validates :author_id, uniqueness: { scope: :title, message: "video titles must be unique"},
   unless: Proc.new {|video| video.title.blank? }
@@ -31,21 +33,15 @@ class Video < ApplicationRecord
     primary_key: :id,
     dependent: :destroy
 
-  has_many :likes,
-    foreign_key: :video_id,
-    class_name: :Like,
-    dependent: :destroy
-
-  has_many :likers,
-    through: :likes,
-    source: :user
+  has_many :likers, :through => :likes, :source => :likeable,
+   :source_type => 'User'
 
   has_many :watchlaters,
     foreign_key: :video_id,
     class_name: :Watchlater,
     primary_key: :id,
     dependent: :destroy
-    
+
   has_attached_file :clip, styles: {
     medium: { geometry: "640x480", format: 'mp4'  },
     thumb:  { geometry: "300x170", format: 'jpeg' },

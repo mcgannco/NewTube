@@ -48,9 +48,8 @@ class User < ApplicationRecord
     primary_key: :id,
     dependent: :destroy
 
-  has_many :liked_videos,
-   through: :likes,
-   source: :video
+  has_many :liked_comments, through: :likes, source: :likeable, source_type: 'Comment'
+  has_many :liked_videos, through: :likes, source: :likeable, source_type: 'Video'
 
    has_many :subscriptions,
        foreign_key: :subscriber_id,
@@ -109,4 +108,5 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
   end
+
 end

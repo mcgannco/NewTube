@@ -32,6 +32,8 @@ class CommentIndexItem extends React.Component {
     this.cancelUpdate = this.cancelUpdate.bind(this);
     this.updateCommentBody = this.updateCommentBody.bind(this);
     this.submitEdit = this.submitEdit.bind(this);
+    this.handleLike = this.handleLike.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
   }
 
   showOptions() {
@@ -137,6 +139,36 @@ class CommentIndexItem extends React.Component {
     }
   }
 
+  handleLike(e) {
+    if (!this.props.comment) {
+      return;
+    }
+
+    if (this.props.comment.currentUsersLike.like_value === 'N/A') {
+      this.props.createCommentLike(this.props.comment.video_id, this.props.comment.id, {like_value: e});
+    } else if (e === this.props.comment.currentUsersLike.like_value) {
+      const likeId = this.props.comment.currentUsersLike.id;
+      this.props.deleteCommentLike(likeId);
+    } else {
+      this.props.updateCommentLike(this.props.comment.video_id, this.props.comment.id, this.props.currentUser.id, {like_value: e});
+    }
+  }
+
+  formatNumber(num) {
+    num = Math.abs(num);
+    let formattedNumber;
+    if (num >= 1000000000) {
+        formattedNumber = (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+    } else if (num >= 1000000) {
+        formattedNumber =  (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    } else  if (num >= 1000) {
+        formattedNumber =  (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    } else {
+        formattedNumber = num;
+    }
+    return formattedNumber;
+  }
+
   render() {
 
     let { comment, user, currentUser, createComment, users, comments } = this.props;
@@ -221,13 +253,17 @@ class CommentIndexItem extends React.Component {
                     <section className="children-comment">
                       <div className="children-comment-left">
                         <div>
-                          <i className="fas fa-thumbs-up"></i>
-                          <p className="comment-like-count"> 344</p>
+                          <section className="comment-likes" onClick={() => this.handleLike(true)}>
+                            <i className="fas fa-thumbs-up"></i>
+                          </section>
+                          <p className="comment-like-count">{this.formatNumber(comment.likes)}</p>
                         </div>
 
                         <div>
-                          <i className="fas fa-thumbs-down"></i>
-                          <p className="comment-like-count"> 344</p>
+                          <section className="comment-likes" onClick={() => this.handleLike(false)}>
+                            <i className="fas fa-thumbs-down"></i>
+                          </section>
+                          <p className="comment-like-count">{this.formatNumber(comment.dislikes)}</p>
                         </div>
                           <p className="reply-comment" onClick={this.commentCommentBar}>Reply</p>
                         </div>

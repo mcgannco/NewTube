@@ -32,3 +32,26 @@ export const deleteComment = (videoId, commentId) => {
       url: `/api/videos/${videoId}/comments/${commentId}`
   });
 };
+
+export const createCommentLike = (videoId, commentId, like) => {
+  return $.ajax({
+      method: 'post',
+      url: `/api/videos/${videoId}/comments/${commentId}/likes`,
+      data: { like }
+  });
+};
+
+export const updateCommentLike = (videoId, commentId, user_id, like) => {
+  return $.ajax({
+      method: 'patch',
+      url: `/api/videos/${videoId}/comments/${commentId}/likes/${user_id}`,
+      data: { like }
+  });
+};
+
+export const deleteCommentLike = (id) => {
+  return $.ajax({
+      method: 'delete',
+      url: `/api/likes/${id}`
+  });
+};
