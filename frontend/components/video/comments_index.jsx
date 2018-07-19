@@ -8,12 +8,19 @@ class CommentsIndex extends React.Component {
     this.state = {
       commentInput: "",
       submitButtons: false,
-      allowSubmit: false
+      allowSubmit: false,
+      commentSort: "time",
+      commentsDropDown: false
     }
     this.updateInput = this.updateInput.bind(this);
     this.showButton = this.showButton.bind(this);
     this.hideButtons = this.hideButtons.bind(this);
     this.submit = this.submit.bind(this);
+    this.toggleCommentSort = this.toggleCommentSort.bind(this);
+    this.closeCommentSort = this.closeCommentSort.bind(this);
+    this.commentSortSet = this.commentSortSet.bind(this);
+    this.topComment = this.topComment.bind(this);
+    this.merge = this.merge.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +51,10 @@ class CommentsIndex extends React.Component {
     this.setState({submitButtons: false, commentInput: "", allowSubmit: false})
   }
 
+  commentSortSet(e) {
+    this.setState({commentSort: e})
+  }
+
   submit(e) {
     if(this.state.commentInput === "") {
       return null;
@@ -57,6 +68,40 @@ class CommentsIndex extends React.Component {
         this.setState({commentInput: "", submitButtons: false})
       )
     }
+  }
+
+  toggleCommentSort(e) {
+    e.preventDefault()
+    this.setState({ commentsDropDown: true }, () => {
+    document.addEventListener('click', this.closeCommentSort);
+    });
+  }
+
+  closeCommentSort(e) {
+    e.preventDefault();
+    this.setState({ commentsDropDown: false }, () => {
+      document.removeEventListener('click', this.closeCommentSort);
+    });
+  }
+
+  topComment(comments) {
+    if (comments.length < 2) {
+      return comments;
+    } else {
+      const middle = Math.floor(comments.length / 2);
+      const left = this.topComment(comments.slice(0, middle));
+      const right = this.topComment(comments.slice(middle));
+      return this.merge(left, right);
+    }
+  }
+
+  merge(left, right) {
+    const merged = [];
+    while (left.length > 0 && right.length > 0) {
+      let nextItem = ((left[0].likes - left[0].dislikes) > (right[0].likes - right[0].dislikes)) ? left.shift() : right.shift();
+      merged.push(nextItem);
+    }
+    return merged.concat(left, right);
   }
 
   render() {
@@ -76,12 +121,27 @@ class CommentsIndex extends React.Component {
     } else {
       userName = currentUser.username.slice(0,1)
     }
+    let commentsSortDD;
+    if(this.state.commentsDropDown) {
+      commentsSortDD = <div className="comment-sort-dd-container">
+        <span onClick={() => this.commentSortSet('likes')} className={this.state.commentSort === "likes" ? "comment-select" : "comment-unselect"}>Top Comments</span>
+        <span onClick={() => this.commentSortSet('time')}className={this.state.commentSort === "time" ? "comment-select" : "comment-unselect"}>Newest First</span>
+      </div>
+    }
 
+    let commentsSorted;
+    if(this.state.commentSort === "time") {
+      commentsSorted = comments.reverse();
+    } else {
+      commentsSorted = this.topComment(comments);
+    }
     return(
       <div className="user-comment-div-container">
         <div className="comments-container-num-comments">
           <p>{numComments} Comments</p>
-          <nav><i className="fas fa-sort-amount-down"></i></nav>
+          <nav className="comment-sort" onClick={this.toggleCommentSort}><i className="fas fa-sort-amount-down"></i>
+        {commentsSortDD}
+          </nav>
         </div>
         <div className="user-comment-div">
           <span style={
@@ -101,7 +161,7 @@ class CommentsIndex extends React.Component {
         </div>
 
         <ul>
-          {comments.reverse().map((comment,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[comment.author_id]} users={users}comment={comment}/>)}
+          {commentsSorted.map((comment,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[comment.author_id]} users={users}comment={comment}/>)}
         </ul>
 
       </div>

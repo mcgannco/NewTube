@@ -298,8 +298,8 @@ class CommentIndexItem extends React.Component {
           </div>
             <span onClick={(e) => this.toggleCommentOptions(e, comment)}className={this.state.preview ? "opitions" : "hiddenoption"}>
               <i className="fas fa-ellipsis-v"></i>
-              {toggleDD}
             </span>
+            {toggleDD}
           </nav>
           </div>
 

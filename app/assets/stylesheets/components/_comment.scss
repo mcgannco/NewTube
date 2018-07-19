@@ -80,7 +80,7 @@
 
 .parent-container {
   display: flex;
-
+  position: relative;
 }
 
 .comment-icon span {
@@ -256,6 +256,44 @@
 
 .comment-likes:hover {
   color: black;
+}
+
+.comment-sort {
+  cursor: pointer;
+}
+
+.comment-sort-dd-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 0.5rem 0rem;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
+  z-index: 2;
+}
+
+.comment-select {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  cursor: pointer;
+  color: black;
+  font-size: 13px;
+  border-top: 3px solid #0099ff;
+  border-bottom: 3px solid #0099ff;
+}
+
+.comment-unselect {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  cursor: pointer;
+  color: black;
+  font-size: 13px;
+}
+
+.comment-sort-dd-container span:hover {
+  background: #F0F0F0;
 }
 
 @media (max-width: 467px) {
