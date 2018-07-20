@@ -15,7 +15,7 @@ class Search extends React.Component {
   }
 
   querySearch(e) {
-
+debugger
   }
 
   render() {
