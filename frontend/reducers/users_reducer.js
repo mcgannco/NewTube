@@ -1,5 +1,6 @@
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 import {RECEIVE_ALL_USERS,RECEIVE_SINGLE_USER, RECEIVE_SUB, REMOVE_SUB, RECEIVE_WATCH, REMOVE_WATCH} from '../actions/user_actions';
+import {RECEIVE_LIKE, REMOVE_LIKE} from '../actions/video_actions';
 import merge from 'lodash/merge';
 import _ from 'lodash';
 
@@ -41,6 +42,16 @@ const usersReducer = (state = {}, action) => {
       video = newState[action.videoId];
       user = newState[action.userId];
       user.watchLaterIds = user.watchLaterIds.filter(element => element !== action.videoId)
+      return newState;
+    case RECEIVE_LIKE:
+      newState = _.merge({}, state);
+      user = newState[action.video.author_id];
+      user.likedVideoIds = user.likedVideoIds.concat(action.video.id)
+      return newState;
+    case REMOVE_LIKE:
+      newState = _.merge({}, state);
+      user = newState[action.video.author_id];
+      user.likedVideoIds = user.likedVideoIds.filter(element => element !== action.video.id)
       return newState;
     default:
       return state;

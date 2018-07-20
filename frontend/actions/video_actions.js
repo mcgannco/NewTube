@@ -5,6 +5,8 @@ export const RECEIVE_VIDEO_ERRORS = 'RECEIVE_VIDEO_ERRORS ';
 export const VID_STATUS = 'VID_STATUS';
 export const DESTROY_VIDEO = 'DESTROY_VIDEO';
 export const WATCH_LATER_BTTN = 'WATCH_LATER_BTTN';
+export const RECEIVE_LIKE = 'RECEIVE_LIKE';
+export const REMOVE_LIKE = 'REMOVE_LIKE';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -16,6 +18,20 @@ export const receiveAllVideos = (videos) => (
 export const receiveSingleVideo = (video) => (
   {
     type: RECEIVE_VIDEO,
+    video,
+  }
+);
+
+export const receiveSingleLike = (video) => (
+  {
+    type: RECEIVE_LIKE,
+    video,
+  }
+);
+
+export const removeSingleLike = (video) => (
+  {
+    type: REMOVE_LIKE,
     video,
   }
 );
@@ -83,15 +99,15 @@ export const deleteVideo = (id) => dispatch => {
 };
 
 export const createLike = (videoId, like) => dispatch => {
-  return APIUtil.createLike(videoId, like).then(video => dispatch(receiveSingleVideo(video)));
+  return APIUtil.createLike(videoId, like).then(video => dispatch(receiveSingleLike(video)));
 };
 
 export const updateLike = (videoId, userId, like) => dispatch => {
-  return APIUtil.updateLike(videoId, userId, like).then(video => dispatch(receiveSingleVideo(video)));
+  return APIUtil.updateLike(videoId, userId, like).then(video => dispatch(receiveSingleLike(video)));
 };
 
 export const deleteLike = (id) => dispatch => {
-  return APIUtil.deleteLike(id).then(video => dispatch(receiveSingleVideo(video)));
+  return APIUtil.deleteLike(id).then(video => dispatch(removeSingleLike(video)));
 };
 
 export const createView = (videoId) => dispatch => {
