@@ -34,6 +34,11 @@ class VideoForm extends React.Component {
         this.props.closeVidModal()
     } else {
       let path = this.props.history.location["pathname"]
+      if (path === '/') {
+        this.props.processForm(this.props.video.id).then(
+        this.setState({formType: "",title: "",description: ""}))
+        this.props.closeVidModal()
+      } else {
       let matches = path.match(/\d+/g)[0];
       if (parseInt(matches) === this.props.video.id) {
         this.props.processForm(this.props.video.id).then(
@@ -44,6 +49,7 @@ class VideoForm extends React.Component {
         this.props.processForm(this.props.video.id).then(
         this.setState({formType: "",title: "",description: ""}))
         this.props.closeVidModal()
+      }
       }
     }
 }

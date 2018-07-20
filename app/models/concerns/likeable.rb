@@ -3,7 +3,6 @@ module Likeable
 
   included do
     has_many :likes, :as => :likeable, dependent: :destroy
-    has_many :likings, through: :likes
   end
 
   def receive_like(name)

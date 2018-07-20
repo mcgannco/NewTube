@@ -1,6 +1,6 @@
 class Api::CommentsController < ApplicationController
   def index
-    @comments = Comment.all.includes(:video, :author,:child_comments, :parent_comment)
+    @comments = Comment.all.includes(:video, :author,:child_comments, :parent_comment, :likes)
   end
 
   def show
@@ -17,7 +17,7 @@ class Api::CommentsController < ApplicationController
 
   def update
     @comment = Comment.find_by(id: params[:id])
-    
+
     if @comment.update(comments_params)
       render :show
     else
