@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Search from '../search/search';
+import Search from '../search/search_container';
 import VideoDropDown from './video_dropdown';
 import AppDropDown from './app_dropdown';
 import SettingDropDown from './setting_dropdown';

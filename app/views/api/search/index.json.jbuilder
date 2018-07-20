@@ -1,11 +1,10 @@
 video_ids = []
-json.set! :videos do
-  @videos.each do |vid|
-    video_ids << vid.id
+
+  @videos.each do |video|
+    video_ids << video.id
     json.set! video.id do
-      json.partial! 'video', video: video
+      json.partial! "api/videos/video", video: video
     end
-  end
 end
 
 json.video_ids video_ids
@@ -15,7 +14,7 @@ all_users = @videos.map{ |video| video.uploader } + @users
 json.set! :users do
   all_users.uniq.each do |user|
     json.set! user.id do
-      json.partial! 'user', user: user
+      json.partial! "api/users/user", user: user
     end
   end
 end

@@ -11,11 +11,16 @@ class Search extends React.Component {
   }
 
   search(e) {
-    this.setState({searchStr: e.currentTarget.value})
+    if (this.timeOut) {
+      clearTimeout(this.timeOut);
+    }
+    this.setState({searchStr: e.currentTarget.value}, () =>  {
+      this.timeOut = setTimeout(this.querySearch, 300);
+    });
   }
 
   querySearch(e) {
-debugger
+    this.props.fetchSearch(this.state.searchStr)
   }
 
   render() {
