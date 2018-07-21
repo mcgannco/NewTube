@@ -1,50 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Route, Redirect, withRouter } from 'react-router-dom';
 
-class Search extends React.Component {
+class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchStr: "",
-      searchList: false
-    };
-    this.search = this.search.bind(this);
-    this.querySearch = this.querySearch.bind(this);
-    this.closeSearch = this.closeSearch.bind(this);
-    this.sendSearch = this.sendSearch.bind(this);
+      expandDescription: false,
+      isColumnView: window.innerWidth <= 1000,
+      duration: 0,
+      views: "",
+      editStatus: false,
+      title: "",
+      description: ""
+    }
     this.rankSearch = this.rankSearch.bind(this);
     this.similarity = this.similarity.bind(this);
   }
 
-  search(e) {
-    if (this.timeOut) {
-      clearTimeout(this.timeOut);
-    }
-
-    this.setState({searchStr: e.currentTarget.value}, () =>  {
-      this.timeOut = setTimeout(this.querySearch, 300);
-    });
-  }
-
-  querySearch(e) {
-    this.props.fetchSearch(this.state.searchStr).then(
-      this.setState({ searchList: true }, () => {
-      document.addEventListener('click', this.closeSearch)
-    })
-  )}
-
-  closeSearch(e) {
-    e.preventDefault();
-    this.setState({ searchList: false }, () => {
-      document.removeEventListener('click', this.closeSearch);
-    });
-  }
-
-  sendSearch(e) {
-    e.preventDefault();
-    this.props.fetchResultSearch(this.props.searchedTerm)
-    this.props.history.push("/results");
+  componentDidMount() {
+    this.props.requestAllVideos().then(this.props.requestAllUsers()).then(
+      this.props.fetchResultSearch(this.props.query)
+    )
   }
 
   rankSearch(arr) {
@@ -58,7 +34,7 @@ class Search extends React.Component {
       } else {
         attribute = element.title;
       }
-      rankings[attribute] = this.similarity(this.state.searchStr.toLowerCase(), attribute.slice(0, this.state.searchStr.length).toLowerCase())
+      rankings[attribute] = this.similarity(this.props.query.toLowerCase(), attribute.slice(0, this.props.query.length).toLowerCase())
     }
     let keysSorted = Object.keys(rankings).sort(function(a,b){return rankings[a]-rankings[b]})
     let new_arr = [];
@@ -118,25 +94,18 @@ class Search extends React.Component {
 
     let search_result_list
     if(all_searched_results && all_searched_results.length > 0) {
-      search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
-        { this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
+      search_result_list = <ul className={this.props.query !== "" ? "" : "hidden"}>
+        { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>) : ""}
       </ul>
     }
+
     return(
-      <div className="search-container">
-        <input onChange={this.search} className="search" type="text" value={this.state.searchStr} placeholder="Search"></input>
-        <button onClick={this.sendSearch}>
-          <i className="fas fa-search"></i>
-          <nav className="searchtiptext">Search</nav>
-        </button>
-
-        <div className="search-results">
-          {search_result_list}
-        </div>
-
+      <div>
+        {search_result_list}
       </div>
     )
   }
-};
+}
 
-export default withRouter(Search);
+
+export default Results;

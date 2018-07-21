@@ -6,6 +6,7 @@ import VideoIndexContainer from './video/video_index_container';
 import VideoShowContainer from './video/video_show_container';
 import ChannelShowContainer from './channel/channel_show_container';
 import UploadVideoContainer from './video/upload_video_container';
+import ResultsContainer from './search/results_container';
 import Modal from './modal/modal';
 import VideoModal from './modal/video-modal';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
@@ -29,6 +30,7 @@ const App = () => (
        <ProtectedRoute exact path='/upload' component={UploadVideoContainer} />
        <Route exact path="/video/:id" component={VideoShowContainer} />
        <Route exact path="/channel/:id" component={ChannelShowContainer} />
+       <Route exact path="/results" component={ResultsContainer} />
        <Route path="/" component={VideoIndexContainer} />
      </Switch>
 
