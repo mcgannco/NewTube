@@ -1,10 +1,15 @@
 video_ids = []
-
+if params[:query] == ""
+  @videos = []
+  @users = []
+end
+json.set! :videos do
   @videos.each do |video|
     video_ids << video.id
     json.set! video.id do
-      json.partial! "api/videos/video", video: video
+      json.partial! 'api/videos/video', video: video
     end
+  end
 end
 
 json.video_ids video_ids
@@ -19,4 +24,4 @@ json.set! :users do
   end
 end
 
-json.search_user_ids @users.map { |user| user.id }
+json.user_ids all_users.uniq.map { |user| user.id }

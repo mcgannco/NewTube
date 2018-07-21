@@ -6,6 +6,8 @@ const msp = (state) => {
   return({
     video_arr: state.ui.search.searchedVideos,
     user_arr: state.ui.search.searchedUsers,
+    users: state.entities.users,
+    videos: state.entities.videos
   })
 };
 

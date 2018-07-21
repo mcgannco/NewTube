@@ -14,6 +14,7 @@ class Search extends React.Component {
     if (this.timeOut) {
       clearTimeout(this.timeOut);
     }
+
     this.setState({searchStr: e.currentTarget.value}, () =>  {
       this.timeOut = setTimeout(this.querySearch, 300);
     });
@@ -24,6 +25,23 @@ class Search extends React.Component {
   }
 
   render() {
+    let {user_arr, video_arr, users, videos } = this.props
+    let users_searched = [];
+      for (let i = 0; i < user_arr.length; i++) {
+        users_searched.push(users[user_arr[i]])
+      }
+    let videos_searched = [];
+      for (let i = 0; i < video_arr.length; i++) {
+        videos_searched.push(videos[video_arr[i]])
+      }
+    let all_searched_results = videos_searched.concat(users_searched);
+
+    let search_result_list
+    if(all_searched_results) {
+      search_result_list = <ul>
+        { all_searched_results.map((el,idx) => <li key={idx}>{el.username ? el.username : el.title}</li>)}
+      </ul>
+    }
     return(
       <div className="search-container">
         <input onChange={this.search} className="search" type="text" value={this.state.searchStr} placeholder="Search"></input>
@@ -31,6 +49,11 @@ class Search extends React.Component {
           <i className="fas fa-search"></i>
           <nav className="searchtiptext">Search</nav>
         </button>
+
+        <div className="search-results">
+          {search_result_list}
+        </div>
+
       </div>
     )
   }

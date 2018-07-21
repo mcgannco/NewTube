@@ -1,0 +1,23 @@
+.search-results {
+  position: absolute;
+  top: 34px;
+  background: white;
+  width: 90%;
+  color: black;
+  font-weight: 600;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
+  z-index: 11;
+  font-family: 'Roboto', 'Noto', sans-serif;
+
+}
+
+.search-results li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 1128px) {
+  .search-results {
+    width: calc(100% - 50px);
+  }
+}
