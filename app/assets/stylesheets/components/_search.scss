@@ -8,12 +8,19 @@
   box-shadow: 0.02em 0.1em 0.3em 0.015em #999999;
   z-index: 11;
   font-family: 'Roboto', 'Noto', sans-serif;
+}
 
+.search-results ul {
+  padding: 10px 0px;
 }
 
 .search-results li {
   padding: 10px;
   cursor: pointer;
+}
+
+.search-results li:hover {
+  background: #F0F0F0;
 }
 
 @media (max-width: 1128px) {

@@ -1,13 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      searchStr: ""
+      searchStr: "",
+      searchList: false
     };
     this.search = this.search.bind(this);
     this.querySearch = this.querySearch.bind(this);
+    this.closeSearch = this.closeSearch.bind(this);
   }
 
   search(e) {
@@ -21,7 +24,17 @@ class Search extends React.Component {
   }
 
   querySearch(e) {
-    this.props.fetchSearch(this.state.searchStr)
+    this.props.fetchSearch(this.state.searchStr).then(
+      this.setState({ searchList: true }, () => {
+      document.addEventListener('click', this.closeSearch)
+    })
+  )}
+
+  closeSearch(e) {
+    e.preventDefault();
+    this.setState({ searchList: false }, () => {
+      document.removeEventListener('click', this.closeSearch);
+    });
   }
 
   render() {
@@ -37,9 +50,9 @@ class Search extends React.Component {
     let all_searched_results = videos_searched.concat(users_searched);
 
     let search_result_list
-    if(all_searched_results) {
-      search_result_list = <ul>
-        { all_searched_results.map((el,idx) => <li key={idx}>{el.username ? el.username : el.title}</li>)}
+    if(all_searched_results && all_searched_results.length > 0) {
+      search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
+        { all_searched_results.map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
       </ul>
     }
     return(
