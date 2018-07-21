@@ -1,17 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserResultItem from './user_result_item';
+import VideoResultItem from './video_result_item';
 
 class Results extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      expandDescription: false,
-      isColumnView: window.innerWidth <= 1000,
-      duration: 0,
-      views: "",
-      editStatus: false,
-      title: "",
-      description: ""
     }
     this.rankSearch = this.rankSearch.bind(this);
     this.similarity = this.similarity.bind(this);
@@ -21,6 +16,10 @@ class Results extends React.Component {
     this.props.requestAllVideos().then(this.props.requestAllUsers()).then(
       this.props.fetchResultSearch(this.props.query)
     )
+  }
+
+  componentWillUnmount() {
+    this.props.clearResultSearchTerm()
   }
 
   rankSearch(arr) {
@@ -95,12 +94,17 @@ class Results extends React.Component {
     let search_result_list
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.props.query !== "" ? "" : "hidden"}>
-        { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>) : ""}
+        { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
+          <li>
+            {el.username ? <UserResultItem key={idx} timeAgo={el.timestamp} user={el}>{el.username}</UserResultItem> :
+            <VideoResultItem key={idx} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
+            }
+        </li>) : ""}
       </ul>
     }
 
     return(
-      <div>
+      <div className="results-container">
         {search_result_list}
       </div>
     )

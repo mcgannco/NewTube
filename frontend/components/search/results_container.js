@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { fetchResultSearch } from '../../actions/search_actions';
+import { fetchResultSearch, clearResultSearchTerm } from '../../actions/search_actions';
 import Results from './results';
 
 const msp = (state) => {
@@ -7,7 +7,7 @@ const msp = (state) => {
     currentUser: state.session.id,
     users: state.entities.users,
     videos: state.entities.videos,
-    query: state.ui.search.searchedTerm,
+    query: state.ui.search.searchedTermResult,
     video_arr: state.ui.search.searchedResultVideos,
     user_arr: state.ui.search.searchedResultUsers,
   })
@@ -17,7 +17,8 @@ const mdp = dispatch => {
   return({
      fetchResultSearch: (query) => dispatch(fetchResultSearch(query)),
      requestAllVideos: () => dispatch(requestAllVideos()),
-     requestAllUsers: () => dispatch(requestAllUsers())
+     requestAllUsers: () => dispatch(requestAllUsers()),
+     clearResultSearchTerm: () => dispatch(clearResultSearchTerm()),
   })
 };
 
