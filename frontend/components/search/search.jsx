@@ -11,6 +11,9 @@ class Search extends React.Component {
     this.search = this.search.bind(this);
     this.querySearch = this.querySearch.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
+    this.sendSearch = this.sendSearch.bind(this);
+    this.rankSearch = this.rankSearch.bind(this);
+    this.similarity = this.similarity.bind(this);
   }
 
   search(e) {
@@ -37,6 +40,67 @@ class Search extends React.Component {
     });
   }
 
+  sendSearch(e) {
+    e.preventDefault(e)
+  }
+
+  rankSearch(arr) {
+    let rankings = {};
+    let element;
+    let attribute;
+    for (let i = 0; i < arr.length; i++) {
+      element = arr[i]
+      if(element.username) {
+        attribute = element.username;
+      } else {
+        attribute = element.title;
+      }
+      rankings[attribute] = this.similarity(this.state.searchStr.toLowerCase(), attribute.slice(0, this.state.searchStr.length).toLowerCase())
+    }
+    let keysSorted = Object.keys(rankings).sort(function(a,b){return rankings[a]-rankings[b]})
+    let new_arr = [];
+    for (let i = 0; i < keysSorted.length; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i]) {
+          new_arr.push(arr[j])
+        }
+      }
+    }
+    return new_arr
+  }
+
+  similarity(a, b) {
+    if(a.length == 0) return b.length;
+    if(b.length == 0) return a.length;
+
+    var matrix = [];
+
+    var i;
+    for(i = 0; i <= b.length; i++){
+      matrix[i] = [i];
+    }
+
+    var j;
+    for(j = 0; j <= a.length; j++){
+      matrix[0][j] = j;
+    }
+
+    for(i = 1; i <= b.length; i++){
+      for(j = 1; j <= a.length; j++){
+        if(b.charAt(i-1) == a.charAt(j-1)){
+          matrix[i][j] = matrix[i-1][j-1];
+        } else {
+          matrix[i][j] = Math.min(matrix[i-1][j-1] + 1,
+                                  Math.min(matrix[i][j-1] + 1,
+                                           matrix[i-1][j] + 1));
+        }
+      }
+    }
+
+    return matrix[b.length][a.length];
+
+  }
+
   render() {
     let {user_arr, video_arr, users, videos } = this.props
     let users_searched = [];
@@ -52,13 +116,13 @@ class Search extends React.Component {
     let search_result_list
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
-        { all_searched_results.map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
+        { this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
       </ul>
     }
     return(
       <div className="search-container">
         <input onChange={this.search} className="search" type="text" value={this.state.searchStr} placeholder="Search"></input>
-        <button onClick={this.querySearch}>
+        <button onClick={this.sendSearch}>
           <i className="fas fa-search"></i>
           <nav className="searchtiptext">Search</nav>
         </button>
