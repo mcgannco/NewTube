@@ -16,6 +16,7 @@ class UserResultItem extends React.Component {
 
     return(
       <li>
+        <Link to={`/channel/${user.id}`}>
         <div className="user-result-container">
           <div className="user-result-icon">
             <span style={
@@ -25,18 +26,26 @@ class UserResultItem extends React.Component {
 
           </div>
 
-          <div className="user-info-containter">
-            <div>{user.username}</div>
-            <div>{user.subscribeeIds.length} subscribers</div>
-              <span className="result-dot-seperator">
-                <i className="fas fa-circle"></i>
-              </span>
-              <span>
-                <span>{user.uploadIds.length} videos</span>
-              </span>
+          <div className="user-result-info-containter">
+            <div className="user-result-name">{user.username}</div>
+              <div className="user-result-containter">
+                <div>{user.subscribeeIds.length} subscribers</div>
+                <span className="result-dot-seperator">
+                  <i className="fas fa-circle"></i>
+                </span>
+                <span>
+                  <span>{user.uploadIds.length} videos</span>
+                </span>
+              </div>
+
+              <div className="video-result-description">
+                {user.description}
+              </div>
+
           </div>
 
         </div>
+        </Link>
       </li>
     )
 
