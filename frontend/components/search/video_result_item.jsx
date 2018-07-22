@@ -24,6 +24,12 @@ class VideoResultItem extends React.Component {
     this.tick = this.tick.bind(this)
     this.clockWatch = this.clockWatch.bind(this)
     this.watchLater = this.watchLater.bind(this)
+    this.toggleOptions = this.toggleOptions.bind(this)
+    this.closeToggleOptions = this.closeToggleOptions.bind(this)
+    this.editVideo = this.editVideo.bind(this)
+    this.deleteVideo = this.deleteVideo.bind(this)
+    this.editclosePreview = this.editclosePreview.bind(this)
+    this.hide = this.hide.bind(this)
   }
 
   formatNum(num) {
@@ -109,8 +115,61 @@ class VideoResultItem extends React.Component {
     }
   }
 
+  toggleOptions(e, video) {
+    e.preventDefault()
+    this.setState({ optionsDropDown: true, targetVid: video }, () => {
+    document.getElementById('body').addEventListener('click', this.closeToggleOptions);
+    });
+  }
+
+  closeToggleOptions(e) {
+    e.preventDefault()
+    if(e.target.id === "edit-vid") {
+      this.editVideo(e)
+    } else if (e.target.id === "delete-vid") {
+      this.deleteVideo(e)
+    } else if (e.target.id === "watch-later") {
+      this.watchLater(e)
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    }
+  }
+
+  editVideo(e) {
+    let vid = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[0]
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('edit', id)
+    this.setState({targetVid: ""})
+  }
+
+  deleteVideo(e) {
+    let vid = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[0].children[0]
+    let id = this.state.targetVid
+    this.editclosePreview(vid)
+    this.props.openVidModal('delete', id).then(
+      this.setState({targetVid: "", optionsDropDown: false})
+    )
+  }
+
+  editclosePreview(e) {
+    let video = e
+    video.pause()
+    this.setState({preview: false, currentTime: 0, playButton: false, showTime: true, optionsDropDown: false})
+    video.currentTime = 0
+  }
+
+  hide() {
+    this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+    });
+  }
+
   render() {
     let { video, timeAgo, users, currentUser} = this.props;
+    let toggleDD;
     let date = new Date(timeAgo);
     let newStatus;
     if(date) {
@@ -120,8 +179,17 @@ class VideoResultItem extends React.Component {
         newStatus = "New";
       }
     }
+
+    if(this.state.optionsDropDown) {
+
+      toggleDD = <div className="toggleOptionsDD" id="toggleDD">
+        <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUser ? "" : "hidden"}>Edit</span>
+        <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUser ? "" : "hidden"}>Delete</span>
+        <span onClick={this.hide}id="watch-later">Watch Later</span>
+      </div>
+    }
+
     return(
-      <li>
         <Link to={`video/${video.id}`}>
         <div className="video-result-container"
           onMouseEnter={this.preview}
@@ -147,9 +215,10 @@ class VideoResultItem extends React.Component {
                 <span className="video-result-title">{video.title}</span>
 
                   <div className="result-options">
-                    <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd"}>
+                    <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd"}>
                       <i className="fas fa-ellipsis-v"></i>
                     </span>
+                    {toggleDD}
                   </div>
               </div>
 
@@ -181,7 +250,6 @@ class VideoResultItem extends React.Component {
             </div>
         </div>
         </Link>
-      </li>
     )
 
   }

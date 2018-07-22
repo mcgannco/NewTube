@@ -39,12 +39,20 @@ class VideoForm extends React.Component {
         this.setState({formType: "",title: "",description: ""}))
         this.props.closeVidModal()
       } else {
-      let matches = path.match(/\d+/g)[0];
-      if (parseInt(matches) === this.props.video.id) {
-        this.props.processForm(this.props.video.id).then(
-        this.setState({formType: "",title: "",description: ""}))
-        this.props.closeVidModal()
-        this.props.history.push('/')
+
+      let matches;
+      if(path.match(/\d+/g)) {
+        matches = path.match(/\d+/g)[0];
+        if (parseInt(matches) === this.props.video.id) {
+          this.props.processForm(this.props.video.id).then(
+          this.setState({formType: "",title: "",description: ""}))
+          this.props.closeVidModal()
+          this.props.history.push('/')
+        } else {
+          this.props.processForm(this.props.video.id).then(
+          this.setState({formType: "",title: "",description: ""}))
+          this.props.closeVidModal()
+        }
       } else {
         this.props.processForm(this.props.video.id).then(
         this.setState({formType: "",title: "",description: ""}))

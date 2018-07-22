@@ -72,7 +72,6 @@ class UserResultItem extends React.Component {
     }
 
     return(
-      <li>
         <Link to={`/channel/${user.id}`}>
         <div className="user-result-container">
           <div className="user-result-icon">
@@ -111,7 +110,6 @@ class UserResultItem extends React.Component {
 
         </div>
         </Link>
-      </li>
     )
 
   }

@@ -53,6 +53,9 @@ class Search extends React.Component {
     let attribute;
     for (let i = 0; i < arr.length; i++) {
       element = arr[i]
+      if(!element) {
+        continue;
+      }
       if(element.username) {
         attribute = element.username;
       } else {
@@ -64,6 +67,9 @@ class Search extends React.Component {
     let new_arr = [];
     for (let i = 0; i < keysSorted.length; i++) {
       for (var j = 0; j < arr.length; j++) {
+        if(!arr[j]) {
+          continue;
+        }
         if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i]) {
           new_arr.push(arr[j])
         }
@@ -117,6 +123,7 @@ class Search extends React.Component {
     let all_searched_results = videos_searched.concat(users_searched);
 
     let search_result_list
+
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
         { this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}

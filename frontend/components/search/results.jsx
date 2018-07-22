@@ -96,7 +96,7 @@ class Results extends React.Component {
   }
 
   render() {
-    let {user_arr, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton } = this.props
+    let {user_arr, openVidModal, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -114,7 +114,7 @@ class Results extends React.Component {
         { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
           <li>
             {el.username ? <UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem> :
-            <VideoResultItem key={idx} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
+            <VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
             }
         </li>) : ""}
       </ul>

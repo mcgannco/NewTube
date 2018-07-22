@@ -3,6 +3,7 @@ import { fetchResultSearch, clearResultSearchTerm } from '../../actions/search_a
 import { createSub, deleteSub, createWatch, deleteWatch } from '../../actions/user_actions';
 import { watchLaterButton } from '../../actions/video_actions';
 import Results from './results';
+import { openVidModal  } from '../../actions/video_modal_actions';
 
 const msp = (state) => {
   return({
@@ -27,6 +28,7 @@ const mdp = dispatch => {
      createWatch: (vidId) => dispatch(createWatch(vidId)),
      deleteWatch: (vidId) => dispatch(deleteWatch(vidId)),
      watchLaterButton: (status) => dispatch(watchLaterButton(status)),
+     openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
   })
 };
 
