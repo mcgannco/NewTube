@@ -24,6 +24,18 @@ class UserResultItem extends React.Component {
           </span>
 
           </div>
+
+          <div className="user-info-containter">
+            <div>{user.username}</div>
+            <div>{user.subscribeeIds.length} subscribers</div>
+              <span className="result-dot-seperator">
+                <i className="fas fa-circle"></i>
+              </span>
+              <span>
+                <span>{user.uploadIds.length} videos</span>
+              </span>
+          </div>
+
         </div>
       </li>
     )
