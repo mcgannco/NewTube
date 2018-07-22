@@ -148,7 +148,7 @@ class VideoResultItem extends React.Component {
                 <span className="video-result-title">{video.title}</span>
 
                   <div className="result-options">
-                    <span className={this.state.preview ? "video-index-options-dd" : "hidden"}>
+                    <span className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd"}>
                       <i className="fas fa-ellipsis-v"></i>
                     </span>
                   </div>
@@ -164,9 +164,9 @@ class VideoResultItem extends React.Component {
                   </span>
                 </div>
 
-                <div className="video-result-description">
+                <p className="video-result-description">
                   {video.description}
-                </div>
+                </p>
                 <div>
 
                 </div>
