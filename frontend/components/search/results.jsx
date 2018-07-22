@@ -10,6 +10,8 @@ class Results extends React.Component {
     }
     this.rankSearch = this.rankSearch.bind(this);
     this.similarity = this.similarity.bind(this);
+    this.formatNum = this.formatNum.bind(this)
+
   }
 
   componentDidMount() {
@@ -79,6 +81,10 @@ class Results extends React.Component {
 
   }
 
+  formatNum(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   render() {
     let {user_arr, video_arr, users, videos } = this.props
     let users_searched = [];
@@ -91,7 +97,8 @@ class Results extends React.Component {
       }
     let all_searched_results = videos_searched.concat(users_searched);
 
-    let search_result_list
+    let search_result_list;
+    let search_result_length;
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.props.query !== "" ? "" : "hidden"}>
         { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
@@ -101,10 +108,12 @@ class Results extends React.Component {
             }
         </li>) : ""}
       </ul>
+      search_result_length = all_searched_results.length
     }
 
     return(
-      <div className="results-container">
+      <div className="results-container" id="body">
+        <h1 className={search_result_length > 0 ? "results-num" : "hidden"}>{search_result_length > 0 ? `About ${this.formatNum(search_result_length)} results` : "" }</h1>
         {search_result_list}
       </div>
     )
