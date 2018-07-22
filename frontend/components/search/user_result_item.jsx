@@ -87,7 +87,7 @@ class UserResultItem extends React.Component {
             <div className="user-result-left">
 
             <div className="user-result-name">{user.username}</div>
-              <div className="user-result-containter">
+              <div className="user-result-containter-name">
                 <div>{user.subscribeeIds.length} subscribers</div>
                 <span className="result-dot-seperator">
                   <i className="fas fa-circle"></i>

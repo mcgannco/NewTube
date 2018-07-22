@@ -114,8 +114,30 @@ cursor: pointer;
   align-items: flex-start;
 }
 
+.video-result-author:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.user-result-containter-name {
+  display: flex;
+  color: grey;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
 @media (max-width: 660px) {
   .user-result-right {
     display: none;
+  }
+}
+
+@media (max-width: 590px) {
+  .user-result-containter-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 30px;
+    overflow: hidden;
   }
 }

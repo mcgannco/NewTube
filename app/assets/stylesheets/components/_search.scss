@@ -35,6 +35,13 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #484848;
+  max-height: 42px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  width: calc(100% - 30px);
 }
 
 .video-result-stats {
@@ -114,5 +121,23 @@
 @media (max-width: 1128px) {
   .search-results {
     width: calc(100% - 50px);
+  }
+}
+
+@media (max-width: 590px) {
+  .new-status {
+    margin-top: 5px;
+  }
+
+  .video-result-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 30px;
+    overflow: hidden;
+  }
+
+  .result-dot-seperator {
+    display: none;
   }
 }
