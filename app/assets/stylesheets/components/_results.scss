@@ -67,6 +67,53 @@
   width: 80%;
 }
 
+.result-play-button {
+  position: absolute;
+  right: 96px;
+  bottom: 48px;
+  color: white;
+  font-size: 41px;
+  font-weight: 500;
+  padding: 2px 4px;
+  margin: 4px;
+  color: white;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.result-clock {
+  position: absolute;
+max-width: 70px;
+overflow: hidden;
+text-overflow: ellipsis;
+right: 0;
+bottom: 123px;
+color: white;
+letter-spacing: .5px;
+font-size: 20px;
+font-weight: 500;
+padding: 2px 4px;
+margin: 4px;
+background: #111111;
+color: white;
+opacity: 0.8;
+border-radius: 2px;
+font-family: 'Roboto', 'Noto', sans-serif;
+cursor: pointer;
+}
+
+.result-options {
+  display: flex;
+  position: relative;
+  width: 30px;
+}
+
+.result-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 @media (max-width: 660px) {
   .user-result-right {
     display: none;

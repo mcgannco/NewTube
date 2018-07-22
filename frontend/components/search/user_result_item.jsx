@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class UserResultItem extends React.Component {
   constructor(props) {
@@ -65,6 +66,9 @@ class UserResultItem extends React.Component {
         subscribeClass = "nav-subscribe";
         subscribeText = "SUBSCRIBE"
       }
+    } else {
+      subscribeClass = "nav-subscribe";
+      subscribeText = "SUBSCRIBE"
     }
 
     return(
@@ -114,4 +118,4 @@ class UserResultItem extends React.Component {
 
 };
 
-export default UserResultItem;
+export default withRouter(UserResultItem);
