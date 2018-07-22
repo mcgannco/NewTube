@@ -95,11 +95,10 @@ class VideoResultItem extends React.Component {
   }
 
   watchLater(e,video) {
-
-    let vid = e.target.parentElement.parentElement.parentElement.getElementsByClassName("video-thumb")[0];
+    let vid = e.target.parentElement.parentElement.children[0];
     let id = this.state.targetVid || video
-    let {users, currentUserID} = this.props;
-    if(users[currentUserID].watchLaterIds.includes(id.id)) {
+    let {users, currentUser} = this.props;
+    if(users[currentUser].watchLaterIds.includes(id.id)) {
       this.props.deleteWatch(id.id)
       this.props.watchLaterButton("Removed From")
       $('.watch-later-bttn').show();

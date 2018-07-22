@@ -18,6 +18,16 @@ class Results extends React.Component {
     this.props.requestAllVideos().then(this.props.requestAllUsers()).then(
       this.props.fetchResultSearch(this.props.query)
     )
+    window.scrollTo(0, 0);
+    $('.watch-later-bttn').hide()
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    $('.watch-later-bttn')
+    setTimeout(function() {
+        $(".watch-later-bttn").fadeOut(1500);
+    }, 3000);
   }
 
   componentWillUnmount() {
@@ -86,7 +96,7 @@ class Results extends React.Component {
   }
 
   render() {
-    let {user_arr, video_arr, users, videos, currentUser, createSub, deleteSub } = this.props
+    let {user_arr, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -104,7 +114,7 @@ class Results extends React.Component {
         { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
           <li>
             {el.username ? <UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem> :
-            <VideoResultItem key={idx} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
+            <VideoResultItem key={idx} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
             }
         </li>) : ""}
       </ul>
@@ -115,6 +125,10 @@ class Results extends React.Component {
       <div className="results-container" id="body">
         <h1 className={search_result_length > 0 ? "results-num" : "hidden"}>{search_result_length > 0 ? `About ${this.formatNum(search_result_length)} results` : "" }</h1>
         {search_result_list}
+        <button
+          id="watch-later-bttn-toggle"
+          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
+        </button>
       </div>
     )
   }
