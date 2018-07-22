@@ -86,7 +86,7 @@ class Results extends React.Component {
   }
 
   render() {
-    let {user_arr, video_arr, users, videos } = this.props
+    let {user_arr, video_arr, users, videos, currentUser, createSub, deleteSub } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -103,8 +103,8 @@ class Results extends React.Component {
       search_result_list = <ul className={this.props.query !== "" ? "" : "hidden"}>
         { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
           <li>
-            {el.username ? <UserResultItem key={idx} timeAgo={el.timestamp} user={el}>{el.username}</UserResultItem> :
-            <VideoResultItem key={idx} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
+            {el.username ? <UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem> :
+            <VideoResultItem key={idx} currentUser={currentUser} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
             }
         </li>) : ""}
       </ul>

@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import { fetchResultSearch, clearResultSearchTerm } from '../../actions/search_actions';
+import { createSub, deleteSub } from '../../actions/user_actions';
 import Results from './results';
 
 const msp = (state) => {
@@ -19,6 +20,9 @@ const mdp = dispatch => {
      requestAllVideos: () => dispatch(requestAllVideos()),
      requestAllUsers: () => dispatch(requestAllUsers()),
      clearResultSearchTerm: () => dispatch(clearResultSearchTerm()),
+     createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
+     deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId)),
+
   })
 };
 

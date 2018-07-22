@@ -87,11 +87,11 @@
 }
 
 .user-result-info-containter {
-  width: calc(100% - 350px);
+  width: calc(100% - 240px);
   display: flex;
-  flex-direction: column;
   padding-left: 20px;
   font-family: 'Roboto', 'Noto', sans-serif;
+  justify-content: space-between;
 }
 
 .user-result-containter {
