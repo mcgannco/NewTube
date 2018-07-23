@@ -14,7 +14,7 @@
 class Like < ApplicationRecord
   validates :user_id, :likeable_id, presence: true
   validates :user_id, uniqueness: { scope: [:likeable_id, :likeable_type],
-    message: "Users may only like a video once" }
+  message: "Users may only like a video once" }
   validates :like_value, inclusion: { in: [true, false] }
 
   belongs_to :user

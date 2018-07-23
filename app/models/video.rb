@@ -56,4 +56,9 @@ class Video < ApplicationRecord
       end
       [like_count, dislike_count]
   end
+
+  def self.trending_videos
+    
+  end
+
 end
