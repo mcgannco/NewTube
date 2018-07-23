@@ -15,7 +15,7 @@ class ChannelShow extends React.Component {
       avatarURL: "",
       selected: "HOME",
       username: "",
-      description: ""
+      description: "",
     }
     this.editProfile = this.editProfile.bind(this);
     this.showEditButtons = this.showEditButtons.bind(this);
@@ -39,7 +39,16 @@ class ChannelShow extends React.Component {
 
     if(this.props.sideLink) {
       if(this.props.sideLink[0] === "subscription") {
-        this.setState({selected: "CHANNELS"})
+        this.setState({selected: "CHANNELS" })
+        this.props.clearSideBarLink()
+      } else if (this.props.sideLink[0] === "watchlater") {
+        this.setState({selected: "WATCHLIST" })
+        this.props.clearSideBarLink()
+      } else if (this.props.sideLink[0] === "likedvids") {
+        this.setState({selected: "LIKES" })
+        this.props.clearSideBarLink()
+      } else if (this.props.sideLink[0] === "uploads") {
+        this.setState({selected: "VIDEOS" })
         this.props.clearSideBarLink()
       }
     }
@@ -50,17 +59,26 @@ class ChannelShow extends React.Component {
       this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
     }
 
-    if(this.props.sideLink) {
-      if(this.props.sideLink[0] === "subscription") {
-        this.setState({selected: "CHANNELS"})
-        this.props.clearSideBarLink()
-      }
-    }
-
     $('.watch-later-bttn')
     setTimeout(function() {
         $(".watch-later-bttn").fadeOut(1500);
     }, 3000);
+
+    if(nextProps.sideLink) {
+      if(nextProps.sideLink[0] === "subscription") {
+        this.setState({selected: "CHANNELS" })
+        this.props.clearSideBarLink()
+      } else if (nextProps.sideLink[0] === "watchlater") {
+        this.setState({selected: "WATCHLIST" })
+        this.props.clearSideBarLink()
+      } else if (nextProps.sideLink[0] === "likedvids") {
+        this.setState({selected: "LIKES" })
+        this.props.clearSideBarLink()
+      } else if (nextProps.sideLink[0] === "uploads") {
+        this.setState({selected: "VIDEOS" })
+        this.props.clearSideBarLink()
+      }
+    }
   }
 
   componentWillUnmount() {

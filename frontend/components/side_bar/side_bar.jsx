@@ -10,14 +10,25 @@ class SideBar extends React.Component {
   }
 
   handleRedirect(arg) {
-    debugger
     if(!this.props.currentUser) {
       this.props.closeModal()
       this.props.history.push('/signin')
     } else if(arg === 'subscription') {
-      this.props.sideBarLink('subscription')
-      this.props.closeModal()
-      this.props.history.push(`/channel/${this.props.currentUser}`)
+        this.props.sideBarLink('subscription')
+        this.props.closeModal();
+        this.props.history.push(`/channel/${this.props.currentUser}`)
+    } else if(arg === 'watchlater') {
+        this.props.sideBarLink('watchlater')
+        this.props.closeModal();
+        this.props.history.push(`/channel/${this.props.currentUser}`)
+    } else if(arg === 'likedvids') {
+        this.props.sideBarLink('likedvids')
+        this.props.closeModal();
+        this.props.history.push(`/channel/${this.props.currentUser}`)
+    } else if(arg === 'uploads') {
+        this.props.sideBarLink('uploads')
+        this.props.closeModal();
+        this.props.history.push(`/channel/${this.props.currentUser}`)
     }
   }
 
@@ -42,10 +53,10 @@ class SideBar extends React.Component {
               <p>Home</p>
             </div></Link>
 
-            <div>
+          <Link to='/trending'><div onClick={closeModal}>
               <nav><i className="fas fa-fire"></i></nav>
               <p>Trending</p>
-            </div>
+            </div></Link>
 
             <div
               onClick={() => this.handleRedirect('subscription')}>
@@ -57,18 +68,21 @@ class SideBar extends React.Component {
               LIBRARY
             </nav>
 
-            <div>
+            <div
+              onClick={() => this.handleRedirect('watchlater')}>
               <nav><i className="far fa-clock"></i>
               </nav>
               <p>Watch Later</p>
             </div>
 
-            <div>
+            <div
+              onClick={() => this.handleRedirect('likedvids')}>
               <nav><i className="fas fa-thumbs-up"></i></nav>
               <p>Liked Videos</p>
             </div>
 
-            <div>
+            <div
+              onClick={() => this.handleRedirect('uploads')}>
               <nav><i className="fas fa-play"></i></nav>
               <p>Uploads</p>
             </div>
