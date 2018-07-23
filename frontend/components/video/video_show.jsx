@@ -34,6 +34,7 @@ class VideoShow extends React.Component {
 
   componentWillMount() {
     this.props.createView(this.props.match.params.id)
+    this.props.recordView(this.props.match.params.id)
   }
   componentDidMount() {
     this.props.requestAllUsers()
@@ -53,7 +54,8 @@ class VideoShow extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
       this.props.requestSingleVideo(nextProps.match.params.id).then(window.scrollTo(0, 0)).then(
-        this.props.createView(nextProps.match.params.id)
+        this.props.createView(nextProps.match.params.id).then(this.props.recordView(nextProps.match.params.id))
+
       );
     }
     $('.watch-later-bttn')

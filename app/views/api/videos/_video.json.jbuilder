@@ -6,6 +6,9 @@ likes_dislikes = video.likes_dislikes
 json.likes likes_dislikes[0]
 json.dislikes likes_dislikes[1]
 
+recorded_views = video.views.length
+json.recordedViews recorded_views
+
 c_u_like = current_user.likes.where(likeable_type: "Video").find_by(likeable_id: video.id) if logged_in?
 if logged_in? && c_u_like
   json.currentUsersLike do

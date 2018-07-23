@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     post 'users/watchlaters/:video_id', to: 'users#watchlater'
     delete 'users/watchlaters/:video_id', to: 'users#removewatchlater'
     resources :search, only: [:index]
+    resources :views, only: [:create]
   end
 end

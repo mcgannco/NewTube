@@ -6,6 +6,7 @@ createLike, updateLike, deleteLike, createView,editVideo  } from '../../actions/
 import { createComment, requestAllComments  } from '../../actions/comment_actions';
 import { requestAllUsers, createSub, deleteSub  } from '../../actions/user_actions';
 import { selectAllVideos  } from '../../reducers/selectors';
+import { recordView  } from '../../actions/view_actions';
 import VideoShow from './video_show';
 
 const msp = (state, ownProps) => {
@@ -35,6 +36,7 @@ const mdp = dispatch => {
     createSub: (subscribeeId) => dispatch(createSub(subscribeeId)),
     deleteSub: (subscribeeId) => dispatch(deleteSub(subscribeeId)),
     editVideo: (videoId, data) => dispatch(editVideo(videoId, data)),
+    recordView: (videoId) => dispatch(recordView(videoId)),
   })
 };
 

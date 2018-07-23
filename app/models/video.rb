@@ -42,6 +42,9 @@ class Video < ApplicationRecord
     primary_key: :id,
     dependent: :destroy
 
+  has_many :views,
+    dependent: :destroy
+
   has_attached_file :clip, styles: {
     medium: { geometry: "640x480", format: 'mp4'  },
     thumb:  { geometry: "300x170", format: 'jpeg' },
@@ -58,7 +61,12 @@ class Video < ApplicationRecord
   end
 
   def self.trending_videos
-    
+    Video
+    .left_joins(:views)
+    .where(views: { created_at: (1.week.ago.in_time_zone)..Time.zone.now })
+    .group(:id)
+    .order('COUNT(views.id) DESC')
+    .limit(10)
   end
 
 end

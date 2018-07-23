@@ -81,6 +81,9 @@ class User < ApplicationRecord
     through: :watchlaters,
     source: :video
 
+  has_many :views,
+    dependent: :destroy
+
   attr_reader :password
   after_initialize :ensure_session_token
 
