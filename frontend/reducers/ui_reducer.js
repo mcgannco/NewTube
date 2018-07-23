@@ -6,6 +6,7 @@ import redirectReducer from './redirect_reducer';
 import vidPlayingReducer from './vid_playing_reducer';
 import watchLaterReducer from './watch_later_button_reducer';
 import searchReducer from './search_reducer';
+import sideBarReducer from './side_bar_reducer';
 
 const uiReducer = combineReducers({
   modal: modalReducer,
@@ -14,7 +15,8 @@ const uiReducer = combineReducers({
   uploadRedirect: redirectReducer,
   vidPlaying: vidPlayingReducer,
   watchLaterBttn:watchLaterReducer,
-  search: searchReducer
+  search: searchReducer,
+  sideLink: sideBarReducer
 });
 
 export default uiReducer;

@@ -1,7 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
-const SideBar = ({status, closeModal, currentUser}) => {
+class SideBar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleRedirect = this.handleRedirect.bind(this)
+  }
+
+  handleRedirect(arg) {
+    if(!this.props.currentUser) {
+      this.props.closeModal()
+      this.props.history.push('/signin')
+    } else if(arg === 'subscription') {
+      this.props.sideBarLink('subscription')
+      this.props.closeModal()
+      this.props.history.push(`/channel/${this.props.currentUser}`)
+    }
+  }
+
+  render() {
+    let {status, closeModal, currentUser} = this.props;
   return(
     <div className ="side-bar">
           <span onClick={closeModal}>
@@ -26,11 +46,11 @@ const SideBar = ({status, closeModal, currentUser}) => {
               <p>Trending</p>
             </div>
 
-            <Link to={currentUser ? `/channel/${currentUser}` : '/signin'}><div
-              onClick={closeModal}>
+            <div
+              onClick={() => this.handleRedirect('subscription')}>
               <nav><i className="far fa-folder-open"></i></nav>
               <p>Subscriptions</p>
-            </div></Link>
+            </div>
 
             <nav className="side-bar-section-header">
               LIBRARY
@@ -59,6 +79,7 @@ const SideBar = ({status, closeModal, currentUser}) => {
           </div>
         </div>
     )
+  }
 };
 
-export default SideBar;
+export default withRouter(SideBar);

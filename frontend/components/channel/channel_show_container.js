@@ -3,6 +3,7 @@ import { requestAllUsers,createWatch, deleteWatch, requestSingleUser, editUser,c
 import { requestAllVideos,watchLaterButton } from '../../actions/video_actions';
 import { selectAllVideos, selectAllChannels  } from '../../reducers/selectors';
 import { openVidModal  } from '../../actions/video_modal_actions';
+import { clearSideBarLink  } from '../../actions/side_bar_actions';
 import ChannelShow from './channel_show';
 
 const msp = (state, ownProps) => {
@@ -14,7 +15,8 @@ const msp = (state, ownProps) => {
     currentUserID: state.session.id,
     loading: state.ui.loading.pictureLoading,
     errors: state.errors.session,
-    button: state.ui.watchLaterBttn
+    button: state.ui.watchLaterBttn,
+    sideLink: state.ui.sideLink
   })
 };
 
@@ -31,6 +33,7 @@ const mdp = dispatch => {
      createWatch: (vidId) => dispatch(createWatch(vidId)),
      deleteWatch: (vidId) => dispatch(deleteWatch(vidId)),
      watchLaterButton: (status) => dispatch(watchLaterButton(status)),
+     clearSideBarLink: () => dispatch(clearSideBarLink()),
   })
 };
 

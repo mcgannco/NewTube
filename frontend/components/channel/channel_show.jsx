@@ -34,14 +34,28 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount() {
-    debugger
     this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
     $('.watch-later-bttn').hide()
+
+    if(this.props.sideLink) {
+      if(this.props.sideLink[0] === "subscription") {
+        this.setState({selected: "CHANNELS"})
+        this.props.clearSideBarLink()
+      }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user && (this.props.user.id != nextProps.match.params.id)) {
       this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
+    }
+
+    debugger
+    if(this.props.sideLink) {
+      if(this.props.sideLink[0] === "subscription") {
+        this.setState({selected: "CHANNELS"})
+        this.props.clearSideBarLink()
+      }
     }
 
     $('.watch-later-bttn')
