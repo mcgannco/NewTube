@@ -84,6 +84,15 @@
   font-size: 13px;
 }
 
+.side-bar-section-header {
+  font-size: 13px;
+  color: grey;
+  padding-left: 28px;
+  border-top: 1px solid #E8E8E8;
+  padding-top: 13px;
+  font-weight: 600;
+}
+
 @media (max-width: 450px) {
   .side-bar-logo {
     margin-left: 0px;

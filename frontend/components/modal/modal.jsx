@@ -9,7 +9,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    let {modal, closeModal} = this.props
+    let {modal, closeModal, currentUser} = this.props
 
     let modalClass;
     let modalid;
@@ -24,7 +24,7 @@ class Modal extends React.Component {
       classN = "modal-child-n";
       click = null;
       clickChild = null;
-      component = <SideBar status={"close"} closeModal={closeModal} />;
+      component = <SideBar status={"close"} currentUser={currentUser} closeModal={closeModal} />;
 
     } else {
       modalid= "modal-background"
@@ -35,12 +35,12 @@ class Modal extends React.Component {
 
       switch (modal) {
         case 'sidebar':
-        component = <SideBar status={"open"} closeModal={closeModal} />;
+        component = <SideBar status={"open"} currentUser={currentUser} closeModal={closeModal} />;
         break;
         default:
         return null;
       }
-      
+
     }
 
   return(
@@ -55,7 +55,8 @@ class Modal extends React.Component {
 
 const msp = state => {
   return({
-    modal: state.ui.modal
+    modal: state.ui.modal,
+    currentUser: state.session.id
   });
 };
 

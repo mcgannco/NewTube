@@ -215,7 +215,7 @@ class VideoResultItem extends React.Component {
                 <span className="video-result-title">{video.title}</span>
 
                   <div className="result-options">
-                    <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd"}>
+                    <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
                       <i className="fas fa-ellipsis-v"></i>
                     </span>
                     {toggleDD}

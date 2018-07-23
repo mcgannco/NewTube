@@ -34,6 +34,7 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount() {
+    debugger
     this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
     $('.watch-later-bttn').hide()
   }
