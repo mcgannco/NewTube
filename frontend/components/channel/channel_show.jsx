@@ -50,7 +50,6 @@ class ChannelShow extends React.Component {
       this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
     }
 
-    debugger
     if(this.props.sideLink) {
       if(this.props.sideLink[0] === "subscription") {
         this.setState({selected: "CHANNELS"})

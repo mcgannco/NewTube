@@ -10,6 +10,7 @@ class SideBar extends React.Component {
   }
 
   handleRedirect(arg) {
+    debugger
     if(!this.props.currentUser) {
       this.props.closeModal()
       this.props.history.push('/signin')
