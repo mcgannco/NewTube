@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     delete 'users/watchlaters/:video_id', to: 'users#removewatchlater'
     resources :search, only: [:index]
     resources :views, only: [:create]
+    resources :filtered_videos, only: [:index]
   end
 end

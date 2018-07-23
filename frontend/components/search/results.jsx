@@ -114,7 +114,7 @@ class Results extends React.Component {
         { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
           <li>
             {el.username ? <UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem> :
-            <VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
+            <VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} button={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
             }
         </li>) : ""}
       </ul>

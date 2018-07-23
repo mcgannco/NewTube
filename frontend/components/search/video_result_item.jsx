@@ -169,6 +169,9 @@ class VideoResultItem extends React.Component {
 
   render() {
     let { video, timeAgo, users, currentUser} = this.props;
+    if(!video) {
+      return null;
+    }
     let toggleDD;
     let date = new Date(timeAgo);
     let newStatus;
