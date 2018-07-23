@@ -147,6 +147,12 @@
   font-size: 0.8rem;
 }
 
+.no-trending-videos {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 14px;
+  margin-left: 30px;
+}
+
 @media (max-width: 660px) {
   .user-result-right {
     display: none;

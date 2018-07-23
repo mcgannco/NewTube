@@ -19,6 +19,7 @@ class Trending extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     $('.watch-later-bttn')
     setTimeout(function() {
         $(".watch-later-bttn").fadeOut(1500);
@@ -28,7 +29,7 @@ class Trending extends React.Component {
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
     watchLaterButton, trendingVideoIds } = this.props;
-    let search_result_list = <div>No Trending Videos</div>;
+    let search_result_list = <div className="no-trending-videos">No Videos Currently Trending</div>;
     if(trendingVideoIds && trendingVideoIds.length > 0) {
       let trendingVideos = [];
       for (var i = 0; i < videos.length; i++) {

@@ -226,7 +226,7 @@ class VideoResultItem extends React.Component {
               </div>
 
                 <div className="video-result-stats">
-                  <Link to={`/channel/${video.author_id}`}><span className="video-result-author">{users[video.author_id].username}</span></Link>
+                  <Link to={`/channel/${video.author_id}`}><span className="video-result-author">{users[video.author_id] ? users[video.author_id].username : ""}</span></Link>
                     <span className="result-dot-seperator">
                       <i className="fas fa-circle"></i>
                     </span>
