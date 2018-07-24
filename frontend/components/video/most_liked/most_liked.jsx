@@ -13,6 +13,7 @@ class MostLiked extends React.Component {
   componentDidMount() {
     this.props.requestAllVideos().then(this.props.requestAllUsers())
     $('.watch-later-bttn').hide()
+    $('body').animate({ scrollTop: top }, 0);
   }
 
   componentWillReceiveProps(nextProps) {

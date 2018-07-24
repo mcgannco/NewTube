@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import VideoResultItem from '../../search/video_result_item';
 
-class MostViews extends React.Component {
+class RecentlyAdded extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,7 +38,7 @@ class MostViews extends React.Component {
   merge(left, right) {
     const merged = [];
     while (left.length > 0 && right.length > 0) {
-      let nextItem = ((left[0].view_count) > (right[0].view_count)) ? left.shift() : right.shift();
+      let nextItem = ((left[0].timestamp) > (right[0].timestamp)) ? left.shift() : right.shift();
       merged.push(nextItem);
     }
     return merged.concat(left, right);
@@ -73,4 +73,4 @@ class MostViews extends React.Component {
   }
 
 
-export default MostViews;
+export default RecentlyAdded;

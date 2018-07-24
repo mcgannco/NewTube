@@ -146,13 +146,12 @@ class SideBar extends React.Component {
             </div>
           </Link>
 
-            <div
-              onClick={() => this.handleRedirect('likedvids')}>
+            <Link to={"/oldest"}><div onClick={closeModal}>
               <nav><i className="fas fa-calendar-alt"></i></nav>
               <p>Oldest</p>
-            </div>
+            </div></Link>
 
-            <Link to={"/most_viewed"}><div onClick={closeModal}>
+          <Link to={"/recently_added"}><div onClick={closeModal}>
               <nav><i className="far fa-plus-square"></i></nav>
               <p>Recently Added</p>
             </div></Link>
