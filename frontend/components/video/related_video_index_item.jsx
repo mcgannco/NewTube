@@ -163,9 +163,16 @@ class RelatedVideoIndexItem extends React.Component {
   }
 
   hide() {
-    this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
-    });
+    if(this.props.currentUserID) {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+      this.props.history.push('/signin')
+    }
   }
 
   clockWatch(e,video) {

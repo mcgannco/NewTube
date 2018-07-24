@@ -2,6 +2,7 @@ import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
 import CommentIndexItemContainer from './comments_index_item_container';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class CommentIndexItem extends React.Component {
   constructor(props) {
@@ -45,6 +46,9 @@ class CommentIndexItem extends React.Component {
   }
 
   commentCommentBar(e) {
+    if(!this.props.currentUserId) {
+      this.props.history.push('/signin')
+    }
     this.setState({subComment: true})
   }
 
@@ -140,6 +144,9 @@ class CommentIndexItem extends React.Component {
   }
 
   handleLike(e) {
+    if(!this.props.currentUserId) {
+      this.props.history.push('/signin')
+    }
     if (!this.props.comment) {
       return;
     }
@@ -171,7 +178,7 @@ class CommentIndexItem extends React.Component {
 
   render() {
 
-    let { comment, user, currentUser, createComment, users, comments } = this.props;
+    let { comment, user, currentUser, createComment, users, comments, currentUserId } = this.props;
     let date = new Date(comment.timestamp);
     if (!user || !comments) {
       return null;
@@ -206,9 +213,9 @@ class CommentIndexItem extends React.Component {
 
     let toggleDD;
     if(this.state.optionsDropDown) {
-      toggleDD = <div className={comment.author_id === currentUser.id ? "toggleCommentOptionsDD" : "hidden"} id="toggleDD">
-        <span  id = "edit-comment" className={comment.author_id === currentUser.id ? "" : "hidden"}>Edit</span>
-        <span id = "delete-comment" className={comment.author_id === currentUser.id ? "" : "hidden"}>Delete</span>
+      toggleDD = <div className={comment.author_id === currentUserId ? "toggleCommentOptionsDD" : "hidden"} id="toggleDD">
+        <span  id = "edit-comment" className={comment.author_id === currentUserId ? "" : "hidden"}>Edit</span>
+        <span id = "delete-comment" className={comment.author_id === currentUserId ? "" : "hidden"}>Delete</span>
       </div>
     }
 
@@ -316,4 +323,4 @@ class CommentIndexItem extends React.Component {
 
 };
 
-export default CommentIndexItem;
+export default withRouter(CommentIndexItem);

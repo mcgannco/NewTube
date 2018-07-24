@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RelatedVideoIndexContainer from './related_index_container';
 import CommentsIndexContainer from './comments_index_container';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -114,6 +115,10 @@ class VideoShow extends React.Component {
   }
 
   handleLike(e) {
+    if (!this.props.currentUser) {
+      this.props.history.push('/signin');
+      return;
+    }
     if (!this.props.video) {
       return;
     }
@@ -134,7 +139,7 @@ class VideoShow extends React.Component {
     }
     let subscribee_id = video.author_id
     if (!currentUser) {
-      this.props.history.push('/login');
+      this.props.history.push('/signin');
       return;
     }
 

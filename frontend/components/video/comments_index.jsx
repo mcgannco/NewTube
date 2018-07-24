@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CommentIndexItemContainer from './comments_index_item_container';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class CommentsIndex extends React.Component {
   constructor(props) {
@@ -56,6 +57,9 @@ class CommentsIndex extends React.Component {
   }
 
   submit(e) {
+    if(!this.props.currentUser) {
+      this.props.history.push('/signin')
+    }
     if(this.state.commentInput === "") {
       return null;
     } else {
@@ -169,4 +173,4 @@ class CommentsIndex extends React.Component {
   }
 }
 
-export default CommentsIndex;
+export default withRouter(CommentsIndex);
