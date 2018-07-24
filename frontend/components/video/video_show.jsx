@@ -39,8 +39,8 @@ class VideoShow extends React.Component {
   componentDidMount() {
     this.props.requestAllUsers()
     window.addEventListener("resize", this.updateWindowSize);
-    window.scrollTo(0, 0);
     $('.watch-later-bttn').hide()
+    $('body').animate({ scrollTop: top }, 0);
   }
 
   updateWindowSize() {
@@ -53,9 +53,8 @@ class VideoShow extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
-      this.props.requestSingleVideo(nextProps.match.params.id).then(window.scrollTo(0, 0)).then(
+      this.props.requestSingleVideo(nextProps.match.params.id).then($('body').animate({ scrollTop: top }, 0)).then(
         this.props.createView(nextProps.match.params.id).then(this.props.recordView(nextProps.match.params.id))
-
       );
     }
     $('.watch-later-bttn')

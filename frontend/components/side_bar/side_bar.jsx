@@ -134,11 +134,11 @@ class SideBar extends React.Component {
               MORE FROM NEWTUBE
             </nav>
 
-            <div
-              onClick={() => this.handleRedirect('likedvids')}>
+            <Link to='/most_viewed'><div
+              onClick={closeModal}>
               <nav><i className="fas fa-trophy"></i></nav>
               <p>Most Viewed</p>
-            </div>
+            </div></Link>
 
             <div
               onClick={() => this.handleRedirect('likedvids')}>
@@ -152,11 +152,10 @@ class SideBar extends React.Component {
               <p>Oldest</p>
             </div>
 
-            <div
-              onClick={() => this.handleRedirect('likedvids')}>
+            <Link to={"/most_viewed"}><div onClick={closeModal}>
               <nav><i className="far fa-plus-square"></i></nav>
               <p>Recently Added</p>
-            </div>
+            </div></Link>
 
           </div>
         </div>

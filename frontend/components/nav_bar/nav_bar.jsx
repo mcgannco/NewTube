@@ -171,7 +171,7 @@ class NavBar extends React.Component {
       }
 
       return(
-        <header className={ this.state.smallSearch ? "small-search-main-nav" : "main-nav"}>
+        <header id="header-header" className={ this.state.smallSearch ? "small-search-main-nav" : "main-nav"}>
           <nav className={ this.state.smallSearch ? "no-left-nav" : "left-nav"}>
             <ul>
               <li id="nav-button" onClick={() => openModal('sidebar')}>

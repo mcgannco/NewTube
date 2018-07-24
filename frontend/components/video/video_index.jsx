@@ -21,6 +21,7 @@ class VideoIndex extends React.Component {
     let vids_length = num_vids * 225;
     margin = ((width - vids_length) / 2) + 2.5;
     this.setState({headermargin: margin, headerwidth: width - (margin * 2)})
+    $('body').animate({ scrollTop: top }, 0);
   }
 
   componentWillUnmount() {

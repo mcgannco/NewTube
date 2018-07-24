@@ -8,6 +8,8 @@ import ChannelShowContainer from './channel/channel_show_container';
 import UploadVideoContainer from './video/upload_video_container';
 import ResultsContainer from './search/results_container';
 import TrendingContainer from './video/trending_container';
+import MostViewsContainer from './video/most_viewed/most_viewed_container';
+import MostLikesContainer from './video/most_liked/most_liked_container';
 import Modal from './modal/modal';
 import VideoModal from './modal/video-modal';
 import {AuthRoute, ProtectedRoute} from '../util/route_util';
@@ -33,6 +35,8 @@ const App = () => (
        <Route exact path="/channel/:id" component={ChannelShowContainer} />
        <Route exact path="/results" component={ResultsContainer} />
        <Route exact path="/trending" component={TrendingContainer} />
+       <Route exact path="/most_viewed" component={MostViewsContainer} />
+       <Route exact path="/most_liked" component={MostLikesContainer} />
        <Route path="/" component={VideoIndexContainer} />
      </Switch>
 

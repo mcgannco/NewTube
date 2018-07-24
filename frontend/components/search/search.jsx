@@ -123,10 +123,15 @@ class Search extends React.Component {
     let all_searched_results = videos_searched.concat(users_searched);
 
     let search_result_list
-
+    let sliceNum;
+    if(all_searched_results.length > 10) {
+      sliceNum = 10;
+    } else {
+      sliceNum = all_searched_results.length
+    }
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
-        { this.rankSearch(all_searched_results).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
+        { this.rankSearch(all_searched_results).slice(0,10).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
       </ul>
     }
     return(
