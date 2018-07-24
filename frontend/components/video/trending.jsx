@@ -29,7 +29,7 @@ class Trending extends React.Component {
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
     watchLaterButton, trendingVideoIds } = this.props;
-    let search_result_list = <div className="no-trending-videos">No Videos Currently Trending</div>;
+    let search_result_list;
     if(trendingVideoIds && trendingVideoIds.length > 0) {
       let trendingVideos = [];
       for (var i = 0; i < videos.length; i++) {
@@ -58,7 +58,7 @@ class Trending extends React.Component {
         {search_result_list}
         <button
           id="watch-later-bttn-toggle"
-          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
+          className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
         </button>
       </div>
 

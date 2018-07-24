@@ -100,6 +100,12 @@ class SideBar extends React.Component {
               LIBRARY
             </nav>
 
+          <Link to='/my_history'><section onClick={closeModal} className={currentUserId ? "side-bar-no-subs" : "hidden"}>
+              <nav><i className="fas fa-history"></i>
+              </nav>
+              <p>History</p>
+            </section></Link>
+
             <div
               onClick={() => this.handleRedirect('watchlater')}>
               <nav><i className="far fa-clock"></i>

@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
 
   def index
-    @users = User.all.includes(:subscriptions, :subscribers, :videos,:comments, :likes, :subscribed_channels, :subsciber_channels, :watchlaters, :vidwatchlaters)
+    @users = User.all.includes(:subscriptions, :subscribers, :videos,:comments, :likes, :subscribed_channels, :subsciber_channels, :watchlaters, :vidwatchlaters, :watched_videos)
   end
 
   def show

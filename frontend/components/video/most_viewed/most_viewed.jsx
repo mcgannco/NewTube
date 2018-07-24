@@ -65,7 +65,7 @@ class MostViews extends React.Component {
           {search_result_list}
           <button
             id="watch-later-bttn-toggle"
-            className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
+            className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
           </button>
         </div>
       )

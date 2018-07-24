@@ -14,3 +14,4 @@ json.subscribeeIds user.subsciber_channel_ids
 json.watchLaterIds user.vidwatchlater_ids
 
 json.uploadIds user.video_ids
+json.watchHistory user.watched_video_ids

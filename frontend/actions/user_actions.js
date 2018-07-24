@@ -8,6 +8,7 @@ export const RECEIVE_WATCH = "RECEIVE_WATCH";
 export const REMOVE_WATCH = "REMOVE_WATCH";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
+export const UPDATE_CURRENT_USER_WATCH_HISTORY = "UPDATE_CURRENT_USER_WATCH_HISTORY";
 
 export const receiveAllUsers = (users) => (
   {
@@ -61,6 +62,14 @@ export const receiveUserErrors = (errors) => (
 export const clearUserErrors = () => (
   {
     type: CLEAR_USER_ERRORS,
+  }
+);
+
+export const updateHistory = (userId, vidId) => (
+  {
+    type: UPDATE_CURRENT_USER_WATCH_HISTORY,
+    userId,
+    vidId
   }
 );
 

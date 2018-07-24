@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import VideoResultItem from '../../search/video_result_item';
+import isEmpty from 'lodash/isEmpty'
 
-class RecentlyAdded extends React.Component {
+class History extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,16 +13,21 @@ class RecentlyAdded extends React.Component {
 
   componentDidMount() {
     this.props.requestAllVideos().then(this.props.requestAllUsers())
-    $('body').animate({ scrollTop: top }, 0);
     $('.watch-later-bttn').hide()
+    $('body').animate({ scrollTop: top }, 0);
   }
 
   componentWillReceiveProps(nextProps) {
-
-    $('.watch-later-bttn')
-    setTimeout(function() {
-        $(".watch-later-bttn").fadeOut(1500);
-    }, 3000);
+    if(!this.props.button && !nextProps.button) {
+      $('.watch-later-bttn').hide()
+    } else if (nextProps.button) {
+      $('.watch-later-bttn')
+      setTimeout(function() {
+          $(".watch-later-bttn").fadeOut(1500);
+      }, 3000);
+    } else {
+      $('.watch-later-bttn').hide()
+    }
   }
 
   sortVideos(videos) {
@@ -38,7 +44,7 @@ class RecentlyAdded extends React.Component {
   merge(left, right) {
     const merged = [];
     while (left.length > 0 && right.length > 0) {
-      let nextItem = ((left[0].timestamp) > (right[0].timestamp)) ? left.shift() : right.shift();
+      let nextItem = ((left[0].likes) > (right[0].likes)) ? left.shift() : right.shift();
       merged.push(nextItem);
     }
     return merged.concat(left, right);
@@ -49,20 +55,12 @@ class RecentlyAdded extends React.Component {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
     watchLaterButton, trendingVideoIds } = this.props;
 
-    let search_result_list;
-    if(videos) {
-      search_result_list = <ul>
-                {this.sortVideos(videos).slice(0,10).map((video,idx) => <li>
-                  <VideoResultItem
-                  key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
-                  watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}
-                  timeAgo={video.timestamp} video={video}>}</VideoResultItem></li>)}
-              </ul>
-    }
+    if(isEmpty(videoHash) || isEmpty(users)) {
+      return null;
+    } 
 
       return(
         <div className="results-container" id="body">
-          {search_result_list}
           <button
             id="watch-later-bttn-toggle"
             className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
@@ -73,4 +71,4 @@ class RecentlyAdded extends React.Component {
   }
 
 
-export default RecentlyAdded;
+export default History;

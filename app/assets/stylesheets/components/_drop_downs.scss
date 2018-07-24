@@ -63,7 +63,22 @@
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
   width: 250px;
-  padding: 0.5rem 0rem;
+  padding-bottom: 0.5rem;
+}
+
+.drop-down-list-item-username {
+  background: #F0F0F0;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+.drop-down-list-item-username div {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: black;
 }
 
 .user-drop-down-container {
@@ -105,7 +120,30 @@
   padding: 3px;
   display: flex;
   justify-content: center;
-  background: white
+}
+
+.drop-down-list-item-username-icon {
+  background: #599732;
+    border-radius: 23px;
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 5px 0px;
+    height: 1.8rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 1rem;
+}
+
+.dd-user-section {
+  margin-right: 20px;;
+}
+
+.dd-user-section svg {
+  color: grey;
+  font-size: 1.2rem;
 }
 
 @media (max-width: 700px) {
