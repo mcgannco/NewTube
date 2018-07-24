@@ -27,6 +27,7 @@ class UserDropDown extends React.Component {
                   <section className="drop-down-list-item-username-icon" style={
                     {backgroundImage: `url(${userAvatar})`}
                    }>
+                   {userAvatar  !== "/avatars/original/missing.png" ? "" : currentUser.username[0]}
                   </section>
                 </div>
                 <div>{currentUser.username}</div>
