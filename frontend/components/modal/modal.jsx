@@ -1,6 +1,7 @@
 import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { sideBarLink } from '../../actions/side_bar_actions';
+import { requestSubscriptions } from '../../actions/user_actions';
 import { connect } from 'react-redux';
 import SideBar from '../side_bar/side_bar';
 
@@ -10,7 +11,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    let {modal, closeModal, currentUser, sideBarLink, sideLink} = this.props
+    let {modal, closeModal, currentUser, currentUserId, sideBarLink, sideLink, users, requestSubscriptions} = this.props
 
     let modalClass;
     let modalid;
@@ -25,7 +26,7 @@ class Modal extends React.Component {
       classN = "modal-child-n";
       click = null;
       clickChild = null;
-      component = <SideBar status={"close"} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
+    component = <SideBar status={"close"} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
 
     } else {
       modalid= "modal-background"
@@ -36,7 +37,7 @@ class Modal extends React.Component {
 
       switch (modal) {
         case 'sidebar':
-        component = <SideBar status={"open"} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
+        component = <SideBar status={"open"} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
         break;
         default:
         return null;
@@ -55,17 +56,24 @@ class Modal extends React.Component {
 }
 
 const msp = state => {
+  let cId;
+  if(state.session.id) {
+    cId = state.session.id
+  }
   return({
     modal: state.ui.modal,
-    currentUser: state.session.id,
-    sideLink: state.ui.sideLink
+    currentUserId: state.session.id,
+    currentUser: state.entities.users[cId] || {},
+    sideLink: state.ui.sideLink,
+    users: state.entities.users
   });
 };
 
 const mdp = dispatch=> {
   return({
     closeModal: () => dispatch(closeModal()),
-    sideBarLink: (link) => dispatch(sideBarLink(link))
+    sideBarLink: (link) => dispatch(sideBarLink(link)),
+    requestSubscriptions: () => dispatch(requestSubscriptions())
   });
 };
 

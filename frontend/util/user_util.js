@@ -59,3 +59,10 @@ export const deleteWatch = (videoId) => {
     method: 'delete',
   });
 };
+
+export const fetchSubscriptions = () => (
+  $.ajax({
+    method: 'GET',
+    url: '/api/subscriptions',
+  })
+);

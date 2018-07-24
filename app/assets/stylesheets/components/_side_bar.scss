@@ -61,7 +61,7 @@
 }
 .side-bar-section-one div {
   display: flex;
-  padding: 30px 30px;
+  padding: 15px 30px;
   font-size: 18px;
   cursor: pointer;
   justify-content: flex-start;
@@ -89,8 +89,32 @@
   color: grey;
   padding-left: 28px;
   border-top: 1px solid #E8E8E8;
-  padding-top: 13px;
+  padding-top: 25px;
   font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+.side-bar-no-subs {
+  display: flex;
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.side-bar-no-subs:hover {
+  background: #F0F0F0;
+}
+
+.side-bar-no-subs svg {
+  color: #989898;
+}
+
+.side-bar-no-subs nav {
+  width: 30px;
 }
 
 @media (max-width: 450px) {

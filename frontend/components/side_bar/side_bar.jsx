@@ -5,8 +5,11 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 class SideBar extends React.Component {
   constructor(props) {
     super(props)
-
     this.handleRedirect = this.handleRedirect.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.requestSubscriptions()
   }
 
   handleRedirect(arg) {
@@ -33,7 +36,13 @@ class SideBar extends React.Component {
   }
 
   render() {
-    let {status, closeModal, currentUser} = this.props;
+    let { status, closeModal, currentUser, users, currentUserId } = this.props;
+
+    let length;
+    if(currentUser.id) {
+      length = currentUser.subscriberIds.length
+    }
+
   return(
     <div className ="side-bar">
           <span onClick={closeModal}>
@@ -90,6 +99,39 @@ class SideBar extends React.Component {
             <nav className={currentUser ? "side-bar-section-header" : "hidden"}>
               SUBSCRIPTIONS
             </nav>
+
+            <section className={length && length > 0 ? "hidden" : "side-bar-no-subs"} onClick={closeModal}>
+              <nav><i className="fas fa-users"></i></nav>
+              <p>No Subscriptions</p>
+            </section>
+
+            <nav className="side-bar-section-header">
+              MORE FROM NEWTUBE
+            </nav>
+
+            <div
+              onClick={() => this.handleRedirect('likedvids')}>
+              <nav><i className="fas fa-trophy"></i></nav>
+              <p>Most Viewed</p>
+            </div>
+
+            <div
+              onClick={() => this.handleRedirect('likedvids')}>
+              <nav><i className="fas fa-thumbs-up"></i></nav>
+              <p>Most Liked</p>
+            </div>
+
+            <div
+              onClick={() => this.handleRedirect('likedvids')}>
+              <nav><i className="fas fa-calendar-alt"></i></nav>
+              <p>Oldest</p>
+            </div>
+
+            <div
+              onClick={() => this.handleRedirect('likedvids')}>
+              <nav><i className="far fa-plus-square"></i></nav>
+              <p>Recently Added</p>
+            </div>
 
           </div>
         </div>

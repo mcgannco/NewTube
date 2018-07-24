@@ -34,9 +34,8 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
     $('.watch-later-bttn').hide()
-
+    this.props.requestAllUsers().then(this.props.requestAllVideos()).then(this.props.clearUserErrors())
     if(this.props.sideLink) {
       if(this.props.sideLink[0] === "subscription") {
         this.setState({selected: "CHANNELS" })
@@ -55,14 +54,16 @@ class ChannelShow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.user && (this.props.user.id != nextProps.match.params.id)) {
-      this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
-    }
-
     $('.watch-later-bttn')
     setTimeout(function() {
         $(".watch-later-bttn").fadeOut(1500);
     }, 3000);
+
+    if (this.props.user && (this.props.user.id != nextProps.match.params.id)) {
+      this.props.requestSingleUser(nextProps.match.params.id).then(window.scrollTo(0, 0));
+    }
+
+
 
     if(nextProps.sideLink) {
       if(nextProps.sideLink[0] === "subscription") {
@@ -483,7 +484,7 @@ class ChannelShow extends React.Component {
         {selected}
         <button
           id="watch-later-bttn-toggle"
-          className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
+          className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
         </button>
       </div>
       )

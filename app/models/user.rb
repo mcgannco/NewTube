@@ -84,6 +84,10 @@ class User < ApplicationRecord
   has_many :views,
     dependent: :destroy
 
+  has_many :watched_videos,
+    through: :views,
+    source: :video
+
   attr_reader :password
   after_initialize :ensure_session_token
 

@@ -16,11 +16,11 @@ Rails.application.routes.draw do
 
     post 'users/subscriptions/:subscribee_id', to: 'users#subscribe'
     delete 'users/subscriptions/:subscribee_id', to: 'users#unsubscribe'
-
     post 'users/watchlaters/:video_id', to: 'users#watchlater'
     delete 'users/watchlaters/:video_id', to: 'users#removewatchlater'
     resources :search, only: [:index]
     resources :views, only: [:create]
     resources :filtered_videos, only: [:index]
+    resources :subscriptions, only: [:index]
   end
 end

@@ -117,3 +117,13 @@ export const createWatch = videoId => dispatch => (
 export const deleteWatch = (videoId) => dispatch => {
   return APIUtil.deleteWatch(videoId).then(payload => dispatch(removeWatch(payload)));
 };
+
+export const requestSubscriptions = () => dispatch => {
+  return(
+    APIUtil.fetchSubscriptions().then(users => (
+      dispatch(receiveAllUsers(users))
+    ), err => (
+      dispatch(receiveUserErrors(err.responseJSON))
+    )
+  ))
+};
