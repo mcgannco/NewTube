@@ -35,7 +35,6 @@ class VideoShow extends React.Component {
   componentWillMount() {
     this.props.createView(this.props.match.params.id)
     this.props.recordView(this.props.match.params.id)
-    this.props.updateHistory(this.props.currentUser.id, this.props.match.params.id)
   }
   componentDidMount() {
     this.props.requestAllUsers()

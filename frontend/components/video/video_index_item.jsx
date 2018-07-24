@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class VideoIndexItem extends React.Component {
   constructor(props) {
@@ -175,9 +176,17 @@ class VideoIndexItem extends React.Component {
   }
 
   hide() {
-    this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
-    });
+    if(this.props.currentUserID) {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+      this.props.history.push('/signin')
+    }
+
   }
 
   clockWatch(e,video) {
@@ -252,4 +261,4 @@ class VideoIndexItem extends React.Component {
 
 };
 
-export default VideoIndexItem;
+export default withRouter(VideoIndexItem);

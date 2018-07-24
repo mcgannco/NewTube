@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class VideoResultItem extends React.Component {
   constructor(props) {
@@ -162,9 +163,18 @@ class VideoResultItem extends React.Component {
   }
 
   hide() {
-    this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-      document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
-    });
+    if(!this.props.currentUser) {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+      this.props.history.push('/signin')
+
+    } else {
+      this.setState({ optionsDropDown: false, targetVid: "" }, () => {
+        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+      });
+    }
+
   }
 
   render() {
@@ -259,4 +269,4 @@ class VideoResultItem extends React.Component {
 
 };
 
-export default VideoResultItem;
+export default withRouter(VideoResultItem);
