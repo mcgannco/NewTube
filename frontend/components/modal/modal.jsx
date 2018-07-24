@@ -2,6 +2,7 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { sideBarLink } from '../../actions/side_bar_actions';
 import { requestSubscriptions } from '../../actions/user_actions';
+import { selectAllChannels } from '../../reducers/selectors';
 import { connect } from 'react-redux';
 import SideBar from '../side_bar/side_bar';
 
@@ -11,7 +12,7 @@ class Modal extends React.Component {
   }
 
   render() {
-    let {modal, closeModal, currentUser, currentUserId, sideBarLink, sideLink, users, requestSubscriptions} = this.props
+    let {modal, closeModal, usersArr, currentUser, currentUserId, sideBarLink, sideLink, users, requestSubscriptions} = this.props
 
     let modalClass;
     let modalid;
@@ -26,7 +27,7 @@ class Modal extends React.Component {
       classN = "modal-child-n";
       click = null;
       clickChild = null;
-    component = <SideBar status={"close"} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
+    component = <SideBar status={"close"} usersArr={usersArr} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
 
     } else {
       modalid= "modal-background"
@@ -37,7 +38,7 @@ class Modal extends React.Component {
 
       switch (modal) {
         case 'sidebar':
-        component = <SideBar status={"open"} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
+        component = <SideBar status={"open"} usersArr={usersArr} currentUserId={currentUserId} requestSubscriptions={requestSubscriptions} users={users} sideBarLink={sideBarLink} sideLink={sideLink} currentUser={currentUser} closeModal={closeModal} />;
         break;
         default:
         return null;
@@ -65,7 +66,8 @@ const msp = state => {
     currentUserId: state.session.id,
     currentUser: state.entities.users[cId] || {},
     sideLink: state.ui.sideLink,
-    users: state.entities.users
+    users: state.entities.users,
+    usersArr: selectAllChannels(state)
   });
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import SubsIndexItem from './subs_index_item';
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -13,35 +14,57 @@ class SideBar extends React.Component {
   }
 
   handleRedirect(arg) {
-    if(!this.props.currentUser) {
+    if(!this.props.currentUserId) {
       this.props.closeModal()
       this.props.history.push('/signin')
     } else if(arg === 'subscription') {
         this.props.sideBarLink('subscription')
         this.props.closeModal();
-        this.props.history.push(`/channel/${this.props.currentUser}`)
+        this.props.history.push(`/channel/${this.props.currentUserId}`)
     } else if(arg === 'watchlater') {
         this.props.sideBarLink('watchlater')
         this.props.closeModal();
-        this.props.history.push(`/channel/${this.props.currentUser}`)
+        this.props.history.push(`/channel/${this.props.currentUserId}`)
     } else if(arg === 'likedvids') {
         this.props.sideBarLink('likedvids')
         this.props.closeModal();
-        this.props.history.push(`/channel/${this.props.currentUser}`)
+        this.props.history.push(`/channel/${this.props.currentUserId}`)
     } else if(arg === 'uploads') {
         this.props.sideBarLink('uploads')
         this.props.closeModal();
-        this.props.history.push(`/channel/${this.props.currentUser}`)
+        this.props.history.push(`/channel/${this.props.currentUserId}`)
     }
   }
 
   render() {
-    let { status, closeModal, currentUser, users, currentUserId } = this.props;
+    let { status, closeModal, currentUser, users, currentUserId, usersArr } = this.props;
 
     let length;
     if(currentUser.id) {
-      length = currentUser.subscriberIds.length
+      length = currentUser.subscriberIds.length;
     }
+
+
+    let subs = [];
+    if(currentUserId) {
+    for (var i = 0; i < usersArr.length; i++) {
+      if(users[currentUserId].subscriberIds.includes(usersArr[i].id)) {
+        subs.push(usersArr[i])
+      }
+      }
+    }
+
+    let subsList;
+    if(subs.length > 0) {
+      let userAvatar;
+      subsList =
+        <ul>
+          {subs.map((user,idx) =>
+            <SubsIndexItem key={idx} user={user} closeModal={closeModal}></SubsIndexItem>
+              )}
+      </ul>
+    }
+
 
   return(
     <div className ="side-bar">
@@ -104,6 +127,8 @@ class SideBar extends React.Component {
               <nav><i className="fas fa-users"></i></nav>
               <p>No Subscriptions</p>
             </section>
+
+            {subsList}
 
             <nav className="side-bar-section-header">
               MORE FROM NEWTUBE
