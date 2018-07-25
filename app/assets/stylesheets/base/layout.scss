@@ -2,7 +2,6 @@ html {
 	background: #fafafa;
 	min-height: 100% !important;
   height: 100%;
-	overflow:auto;
 }
 
 body {
@@ -31,6 +30,7 @@ header {
 
 #app {
 	height: 100%;
+	overflow:scroll;
 }
 
 .fontawesome-i2svg-active {

@@ -18,7 +18,7 @@ class History extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.trackScrolling);
+    document.getElementById('app').addEventListener('scroll', this.trackScrolling);
     if(this.props.currentUser) {
       this.props.requestSingleUser(this.props.currentUser).then(
         this.props.fetchHistory(this.state.offSet)
@@ -30,7 +30,7 @@ class History extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(!this.props.button && !nextProps.button) {
-      $('.watch-later-bttn').hide()
+
     } else if (nextProps.button) {
       $('.watch-later-bttn')
       setTimeout(function() {
@@ -39,6 +39,10 @@ class History extends React.Component {
     } else {
       $('.watch-later-bttn').hide()
     }
+  }
+
+  componentWillUnMount() {
+    document.getElementById('app').removeEventListener('scroll', this.trackScrolling);
   }
 
   isBottom(el) {
@@ -55,10 +59,6 @@ class History extends React.Component {
       }
     }
   };
-
-  componentWillUnMount() {
-    window.removeEventListener('scroll', this.trackScrolling);
-  }
 
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
@@ -85,7 +85,7 @@ class History extends React.Component {
           {search_result_list}
           <button
             id="watch-later-bttn-toggle"
-            className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
+            className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
           </button>
             <div className="loaderContainer">
               <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
