@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
 import { createSub, deleteSub, createWatch, deleteWatch, requestSingleUser } from '../../../actions/user_actions';
 import { openVidModal  } from '../../../actions/video_modal_actions';
-import {requestAllVideos, watchLaterButton, clearAllVideos, fetchHistory } from '../../../actions/video_actions';
+import {requestAllVideos, watchLaterButton, clearAllVideos,
+  fetchHistory,startSubVideoLoader,clearSubVideoLoader,resetHistory } from '../../../actions/video_actions';
 import {selectAllVideos } from '../../../reducers/selectors';
 import History from './history'
 const msp = (state, ownProps) => {
@@ -12,7 +13,8 @@ const msp = (state, ownProps) => {
     currentUser: state.session.id,
     button: state.ui.watchLaterBttn,
     historyIds: state.ui.filteredVideos["history"]["ids"],
-    historyLength: state.ui.filteredVideos["history"]["length"]
+    historyLength: state.ui.filteredVideos["history"]["length"],
+    subVideoLoader: state.ui.loading.subVideos
   })
 };
 
@@ -27,7 +29,10 @@ const mdp = dispatch => {
     watchLaterButton: (status) => dispatch(watchLaterButton(status)),
     openVidModal: (modal, vid) => dispatch(openVidModal(modal, vid)),
     clearAllVideos: () => dispatch(clearAllVideos()),
-    fetchHistory: (offSet) => dispatch(fetchHistory(offSet))
+    fetchHistory: (offSet) => dispatch(fetchHistory(offSet)),
+    startSubVideoLoader: () => dispatch(startSubVideoLoader()),
+    clearSubVideoLoader: () => dispatch(clearSubVideoLoader()),
+    resetHistory: () => dispatch(resetHistory()),
   })
 };
 

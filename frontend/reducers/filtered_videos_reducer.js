@@ -1,5 +1,5 @@
 import {RECEIVE_TRENDING_VIDEOS} from '../actions/filtered_video_actions';
-import {RECEIVE_HISTORY} from '../actions/video_actions';
+import {RECEIVE_HISTORY, RESET_HISTORY} from '../actions/video_actions';
 import merge from 'lodash/merge';
 import _ from 'lodash';
 
@@ -15,6 +15,11 @@ const filteredVideosReducer = (state = {trending: [], history: {ids: [], length:
     newState = _.merge([], state);
     newState["history"]["ids"] = newState["history"]["ids"].concat(action.HistoryVideoIds)
     newState["history"]["length"] = action.numberOfHistoryVideos
+      return newState;
+    case RESET_HISTORY:
+      newState = _.merge([], state);
+      newState["history"]["ids"] = []
+      newState["history"]["length"] = ""
       return newState;
     default:
       return state;

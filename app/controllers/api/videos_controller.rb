@@ -38,7 +38,7 @@ class Api::VideosController < ApplicationController
   end
 
   def history
-    offset_idx = (params[:request_counter].to_i - 1) * NUM_VIDEOS
+    offset_idx = (params[:request_counter].to_i - 1)
     @history_video_count = current_user.watched_videos.count
     @next_videos = current_user.watched_videos
       .order('views.created_at DESC')

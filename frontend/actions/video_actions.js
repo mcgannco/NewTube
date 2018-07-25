@@ -9,6 +9,9 @@ export const RECEIVE_LIKE = 'RECEIVE_LIKE';
 export const REMOVE_LIKE = 'REMOVE_LIKE';
 export const CLEAR_VIDEOS = 'CLEAR_VIDEOS';
 export const RECEIVE_HISTORY = 'RECEIVE_HISTORY';
+export const SUB_LOADER = 'SUB_LOADER';
+export const CLEAR_SUB_LOADER = 'CLEAR_SUB_LOADER';
+export const RESET_HISTORY = 'RESET_HISTORY';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -24,6 +27,12 @@ export const receiveHistory = (payload) => (
     users: payload.users,
     numberOfHistoryVideos: payload.number_of_history_videos,
     HistoryVideoIds: payload.history_video_ids
+  }
+);
+
+export const resetHistory = () => (
+  {
+    type: RESET_HISTORY,
   }
 );
 
@@ -75,6 +84,18 @@ export const watchLaterButton = status => ({
 export const clearAllVideos = () => (
   {
     type: CLEAR_VIDEOS,
+  }
+);
+
+export const startSubVideoLoader = () => (
+  {
+    type: SUB_LOADER,
+  }
+);
+
+export const clearSubVideoLoader = () => (
+  {
+    type: CLEAR_SUB_LOADER,
   }
 );
 

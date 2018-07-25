@@ -7,7 +7,6 @@ class History extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      offSet: 1
     }
     this.trackScrolling = this.trackScrolling.bind(this);
     this.isBottom = this.isBottom.bind(this);
@@ -21,7 +20,7 @@ class History extends React.Component {
     document.getElementById('app').addEventListener('scroll', this.trackScrolling);
     if(this.props.currentUser) {
       this.props.requestSingleUser(this.props.currentUser).then(
-        this.props.fetchHistory(this.state.offSet)
+        this.props.fetchHistory(1)
       )
     }
     $('.watch-later-bttn').hide()
@@ -41,8 +40,9 @@ class History extends React.Component {
     }
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     document.getElementById('app').removeEventListener('scroll', this.trackScrolling);
+    this.props.resetHistory();
   }
 
   isBottom(el) {
@@ -50,12 +50,15 @@ class History extends React.Component {
 }
 
   trackScrolling() {
-    debugger
     const wrappedElement = document.getElementsByClassName('results-container')[0];
     if (this.isBottom(wrappedElement)) {
       if(this.props.historyIds.length < this.props.historyLength) {
-        this.setState({offSet: this.state.offSet + 1})
-        console.log('Spinning Things')
+        if(!this.props.subVideoLoader) {
+          this.props.startSubVideoLoader()
+          this.props.fetchHistory(this.props.historyIds.length)
+        }
+      } else {
+        this.props.clearSubVideoLoader()
       }
     }
   };
@@ -88,7 +91,7 @@ class History extends React.Component {
             className={this.props.button ? "watch-later-bttn" : "watch-later-bttn"}>{this.props.button} Watchlist
           </button>
             <div className="loaderContainer">
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <div className={this.props.subVideoLoader ? "lds-ring" : "hidden"}><div></div><div></div><div></div><div></div></div>
             </div>
         </div>
       )
