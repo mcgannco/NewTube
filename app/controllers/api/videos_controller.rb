@@ -1,5 +1,7 @@
 class Api::VideosController < ApplicationController
 
+  NUM_VIDEOS = 10
+
   def index
     @videos = Video.all.includes(:likes, :comments, :likers, :uploader, :watchlaters, :views)
   end
@@ -33,6 +35,21 @@ class Api::VideosController < ApplicationController
     @video = Video.find(params[:id])
     @video.destroy
     render 'api/videos/show'
+  end
+
+  def history
+    offset_idx = (params[:request_counter].to_i - 1) * NUM_VIDEOS
+    @history_video_count = current_user.watched_videos.count
+    @next_videos = current_user.watched_videos
+      .order('views.created_at DESC')
+      .offset(offset_idx)
+      .limit(NUM_VIDEOS)
+
+    if @next_videos
+      render "api/videos/history"
+    else
+      render json: { users: {}, videos: {} }
+    end
   end
 
   private

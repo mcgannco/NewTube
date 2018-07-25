@@ -7,11 +7,23 @@ export const DESTROY_VIDEO = 'DESTROY_VIDEO';
 export const WATCH_LATER_BTTN = 'WATCH_LATER_BTTN';
 export const RECEIVE_LIKE = 'RECEIVE_LIKE';
 export const REMOVE_LIKE = 'REMOVE_LIKE';
+export const CLEAR_VIDEOS = 'CLEAR_VIDEOS';
+export const RECEIVE_HISTORY = 'RECEIVE_HISTORY';
 
 export const receiveAllVideos = (videos) => (
   {
     type: RECEIVE_ALL_VIDEOS,
     videos
+  }
+);
+
+export const receiveHistory = (payload) => (
+  {
+    type: RECEIVE_HISTORY,
+    videos: payload.videos,
+    users: payload.users,
+    numberOfHistoryVideos: payload.number_of_history_videos,
+    HistoryVideoIds: payload.history_video_ids
   }
 );
 
@@ -59,6 +71,12 @@ export const watchLaterButton = status => ({
   type: WATCH_LATER_BTTN,
   status
 })
+
+export const clearAllVideos = () => (
+  {
+    type: CLEAR_VIDEOS,
+  }
+);
 
 export const requestAllVideos = () => dispatch => {
   return(
@@ -112,4 +130,10 @@ export const deleteLike = (id) => dispatch => {
 
 export const createView = (videoId) => dispatch => {
   return APIUtil.createView(videoId).then(video => dispatch(receiveSingleVideo(video)));
+};
+
+export const fetchHistory = offSet => dispatch => {
+  return APIUtil.fetchHistory(offSet)
+    .then( videos => dispatch( receiveHistory(videos)),
+           err    => dispatch( receiveErrors(err.responseJSON)));
 };

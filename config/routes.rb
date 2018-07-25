@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       end
       resources :likes, only: [:create, :update]
     end
+    get "videos/history/:request_counter", to: "videos#history"
     resources :likes, only: [:destroy]
-
     post 'users/subscriptions/:subscribee_id', to: 'users#subscribe'
     delete 'users/subscriptions/:subscribee_id', to: 'users#unsubscribe'
     post 'users/watchlaters/:video_id', to: 'users#watchlater'

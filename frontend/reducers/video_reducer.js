@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, DESTROY_VIDEO, RECEIVE_LIKE, REMOVE_LIKE } from '../actions/video_actions';
+import { RECEIVE_ALL_VIDEOS, RECEIVE_VIDEO, DESTROY_VIDEO, RECEIVE_LIKE, REMOVE_LIKE, CLEAR_VIDEOS, RECEIVE_HISTORY } from '../actions/video_actions';
 import { RECEIVE_SEARCH } from '../actions/search_actions';
 import merge from 'lodash/merge';
 
@@ -8,6 +8,8 @@ const videoReducer =  (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_ALL_VIDEOS:
       return(merge({}, state, action.videos));
+    case RECEIVE_HISTORY:
+      return(merge({}, state, action.videos)) || {};
     case RECEIVE_VIDEO:
       return Object.assign({}, state, {[action.video.id]: action.video});
     case RECEIVE_LIKE:
@@ -20,6 +22,8 @@ const videoReducer =  (state = {}, action) => {
       return nextState;
     case RECEIVE_SEARCH:
       return merge({}, state, action.videos);
+    case CLEAR_VIDEOS:
+      return {}
     default:
       return state;
   }

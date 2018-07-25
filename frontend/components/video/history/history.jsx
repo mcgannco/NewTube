@@ -8,11 +8,18 @@ class History extends React.Component {
     super(props)
     this.state = {
     }
-    this.sortVideos = this.sortVideos.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.clearAllVideos()
   }
 
   componentDidMount() {
-    this.props.requestAllVideos().then(this.props.requestAllUsers())
+    if(this.props.currentUser) {
+      this.props.requestSingleUser(this.props.currentUser).then(
+        this.props.fetchHistory(1)
+      )
+    }
     $('.watch-later-bttn').hide()
     $('body').animate({ scrollTop: top }, 0);
   }
@@ -30,34 +37,13 @@ class History extends React.Component {
     }
   }
 
-  sortVideos(videos) {
-    if (videos.length < 2) {
-      return videos;
-    } else {
-      const middle = Math.floor(videos.length / 2);
-      const left = this.sortVideos(videos.slice(0, middle));
-      const right = this.sortVideos(videos.slice(middle));
-      return this.merge(left, right);
-    }
-  }
-
-  merge(left, right) {
-    const merged = [];
-    while (left.length > 0 && right.length > 0) {
-      let nextItem = ((left[0].likes) > (right[0].likes)) ? left.shift() : right.shift();
-      merged.push(nextItem);
-    }
-    return merged.concat(left, right);
-  }
-
-
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
     watchLaterButton, trendingVideoIds } = this.props;
 
     if(isEmpty(videoHash) || isEmpty(users)) {
       return null;
-    } 
+    }
 
       return(
         <div className="results-container" id="body">

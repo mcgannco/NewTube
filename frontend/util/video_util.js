@@ -71,3 +71,10 @@ export const createView = (id) => {
       data: { addView: true}
   });
 };
+
+export const fetchHistory = offSet => (
+  $.ajax({
+    method: 'GET',
+    url: `/api/videos/history/${offSet}`
+  })
+);
