@@ -7,10 +7,12 @@ import History from './history'
 const msp = (state, ownProps) => {
   return({
     videos: selectAllVideos(state),
+    videoHash: state.entities.videos,
     users: state.entities.users,
     currentUser: state.session.id,
     button: state.ui.watchLaterBttn,
-    videoHash: state.entities.videos
+    historyIds: state.ui.filteredVideos["history"]["ids"],
+    historyLength: state.ui.filteredVideos["history"]["length"]
   })
 };
 
