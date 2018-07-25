@@ -10,6 +10,7 @@ class SessionForm extends React.Component {
       password: "",
       userVerified: false,
       formType: "",
+      reRoute: ""
     };
     this.updateUserName = this.updateUserName.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
@@ -18,11 +19,16 @@ class SessionForm extends React.Component {
     this.otherForm = this.otherForm.bind(this);
     this.uploadRedirect = this.uploadRedirect.bind(this);
     this.load = this.load.bind(this);
+    this.historyRedirect = this.historyRedirect.bind(this);
   }
 
   componentDidMount() {
     if (this.props.history.action === 'REPLACE') {
-      this.props.redirectToUpload()
+      if(this.props.location["state"]["from"]["pathname"] === "/my_history") {
+        this.setState({reRoute: "/my_history"})
+      } else {
+        this.props.redirectToUpload()
+      }
     }
     if (this.state.formType != this.props.formType) {
       this.props.clearSessionErrors()
@@ -48,7 +54,9 @@ class SessionForm extends React.Component {
 
   demoLogin() {
     const demo = {username: "DemoUser", password: "123456"};
-    if (this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
+    if(this.state.reRoute === "/my_history") {
+      this.props.login(demo).then(this.historyRedirect);
+    } else if (this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
       this.props.login(demo).then(this.uploadRedirect);
     } else {
       this.props.login(demo);
@@ -70,7 +78,9 @@ class SessionForm extends React.Component {
         }
       )
     } else {
-      if(this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
+      if(this.state.reRoute === "/my_history") {
+        processForm({username: this.state.username, password: this.state.password}).then(this.historyRedirect)
+      } else if(this.props.history.action === 'REPLACE' || this.props.uploadRedirect) {
         processForm({username: this.state.username, password: this.state.password}).then(this.uploadRedirect)
       } else {
         processForm({username: this.state.username, password: this.state.password})
@@ -88,6 +98,11 @@ class SessionForm extends React.Component {
   uploadRedirect() {
     this.props.resetRedirect()
     this.props.history.push('/upload')
+  }
+
+  historyRedirect() {
+    this.setState({reRoute: ""})
+    this.props.history.push('/my_history')
   }
 
   load() {
