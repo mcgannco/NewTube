@@ -18,7 +18,7 @@ class History extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('scroll', this.trackScrolling);
+    window.addEventListener('scroll', this.trackScrolling);
     if(this.props.currentUser) {
       this.props.requestSingleUser(this.props.currentUser).then(
         this.props.fetchHistory(this.state.offSet)
@@ -46,17 +46,18 @@ class History extends React.Component {
 }
 
   trackScrolling() {
+    debugger
     const wrappedElement = document.getElementsByClassName('results-container')[0];
     if (this.isBottom(wrappedElement)) {
       if(this.props.historyIds.length < this.props.historyLength) {
         this.setState({offSet: this.state.offSet + 1})
-        this.props.fetchHistory(this.state.offSet)
+        console.log('Spinning Things')
       }
     }
   };
 
   componentWillUnMount() {
-    document.removeEventListener('scroll', this.trackScrolling);
+    window.removeEventListener('scroll', this.trackScrolling);
   }
 
   render() {
@@ -86,7 +87,9 @@ class History extends React.Component {
             id="watch-later-bttn-toggle"
             className={this.props.button ? "watch-later-bttn" : "hidden"}>{this.props.button} Watchlist
           </button>
-
+            <div className="loaderContainer">
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>
         </div>
       )
     }
