@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { requestAllVideos  } from '../../actions/video_actions';
+import { requestAllVideos,clearAllVideoErrors } from '../../actions/video_actions';
 import UploadVideo from './upload_video';
 
 const msp = state => {
@@ -12,6 +12,7 @@ const msp = state => {
 const mdp = dispatch => {
   return({
     createVideo: (vid) => dispatch(createVideo(vid)),
+    clearAllVideoErrors: () => dispatch(clearAllVideoErrors())
   })
 };
 

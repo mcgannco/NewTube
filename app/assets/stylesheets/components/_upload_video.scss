@@ -93,9 +93,10 @@
   justify-content: space-around;
   height: 200px;
   padding-top: 2%;
+  position: relative;
 }
 
-.upload-details-details form input {
+.upload-details-details-input {
   background: white;
   border: 1px solid grey;
   padding-left: 5px;
@@ -103,9 +104,25 @@
   margin-top: 4%;
 }
 
-.upload-details-details form textarea {
+.upload-errors-input {
+  background: white;
+  border: 1px solid red;
+  padding-left: 5px;
+  padding: 10px;
+  margin-top: 4%;
+}
+
+.upload-details-details-textarea {
   background: white;
   border: 1px solid grey;
+  padding: 10px;
+  resize: vertical; max-height: 300px; min-height: 100px;
+  margin-top: 8%;
+}
+
+.upload-details-details-textarea-errors {
+  background: white;
+  border: 1px solid red;
   padding: 10px;
   resize: vertical; max-height: 300px; min-height: 100px;
   margin-top: 8%;
@@ -166,4 +183,16 @@
   width: 85px;
   display: flex;
   justify-content: center;
+}
+
+.upload-error-messages {
+  color: #d50000;
+  position: absolute;
+  top: 4rem;
+}
+
+.description-upload-error-messages {
+  color: #d50000;
+  position: absolute;
+  top: 13.4rem;
 }

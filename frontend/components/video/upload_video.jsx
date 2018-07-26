@@ -17,6 +17,15 @@ class UploadVideo extends React.Component {
     this.uploadVideo = this.uploadVideo.bind(this);
     this.updateInput = this.updateInput.bind(this);
     this.subForm = this.subForm.bind(this);
+    this.generateErrors = this.generateErrors.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.clearAllVideoErrors()
+  }
+
+  componentWillUnmount() {
+    this.props.clearAllVideoErrors()
   }
 
   subForm(e) {
@@ -63,18 +72,50 @@ class UploadVideo extends React.Component {
 
   }
 
+  generateErrors(errors) {
+    let hash = {};
+    for (let i = 0; i < errors.length; i++) {
+      hash[errors[i]] = errors[i]
+    }
+    return hash;
+  }
+
   render() {
     let uploadForm;
     let {errors} = this.props;
+    let errorsHash;
+    if(errors.length > 0) {
+      errorsHash = this.generateErrors(errors);
+    }
+
+    let titleError;
+    let titleErrorClass = "upload-details-details-input";
+      for (let i = 0; i < errors.length; i++) {
+        if(errorsHash && errorsHash["Title can't be blank"]) {
+          titleError = "Title can't be blank"
+          titleErrorClass = "upload-errors-input"
+        } else if (errorsHash && errorsHash["Author video titles must be unique"]) {
+          titleError = "Title must be unique"
+          titleErrorClass = "upload-errors-input"
+        } else if (errorsHash && errorsHash["Clip content type is invalid", "Clip is invalid"]) {
+          titleError = "Invalid file type"
+          titleErrorClass = "upload-errors-input"
+        } else {
+          titleError = ""
+          titleErrorClass = "upload-details-details-input"
+        }
+      }
+
     let selectedForm;
     if (this.state.sub === "Basic Info") {
       selectedForm = <form>
-        <input id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
-        {errors[0]}
-        <textarea id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
+        <input className={ titleErrorClass } id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
+          <p className="upload-error-messages">{titleError}</p>
+        <textarea className={errorsHash && errorsHash["Description can't be blank"] ? "upload-details-details-textarea-errors" : "upload-details-details-textarea"} id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
+          <p className="description-upload-error-messages">{errorsHash && errorsHash["Description can't be blank"] ? errorsHash["Description can't be blank"] : ""}</p>
       </form>
     } else {
-      selectedForm = <form><input value=""placeholder="TBD"></input></form>
+      selectedForm = <form><input className="upload-details-details-input" value=""placeholder="TBD"></input></form>
     }
     if (this.state.videoFile) {
       uploadForm = <div onClick={this.test} className="upload-field">

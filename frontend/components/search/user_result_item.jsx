@@ -74,7 +74,7 @@ class UserResultItem extends React.Component {
     return(
         <Link to={`/channel/${user.id}`}>
         <div className="user-result-container">
-          <div className="user-result-icon">
+          <div className={user.profile_img_url === "/avatars/original/missing.png" ? "missing-user-result-icon" : "user-result-icon"}>
             <span style={
               {backgroundImage: `url(${avatar})`}
             }>{user.profile_img_url === "/avatars/original/missing.png" ? user.username.slice(0,1): ""}

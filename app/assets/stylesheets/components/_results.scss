@@ -42,6 +42,14 @@
    height: 160px;
 }
 
+.missing-user-result-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 250px;
+  height: 160px;
+}
+
 .user-result-icon span {
   display: block;
   height: 160px;
@@ -56,6 +64,28 @@
   background-position:center;
   background-repeat: no-repeat;
   background-size: cover;
+  // background: #599732;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;;
+}
+
+.missing-user-result-icon span {
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%; /* or 50% */
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: #599732;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;;
 }
 
 .user-result-container {
