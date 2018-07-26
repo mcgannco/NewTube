@@ -78,3 +78,10 @@ export const fetchHistory = offSet => (
     url: `/api/videos/history/${offSet}`
   })
 );
+
+export const fetchTopTags = () => (
+  $.ajax({
+    method: 'GET',
+    url: `/api/videos/toptags`
+  })
+);

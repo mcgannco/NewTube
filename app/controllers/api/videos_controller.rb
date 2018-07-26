@@ -53,6 +53,11 @@ class Api::VideosController < ApplicationController
     end
   end
 
+  def toptags
+    @tags = Tag.top_tags
+    render 'api/videos/toptags'
+  end
+
   private
   def video_params
     params.require(:video).permit(:title, :author_id, :clip, :description, :view_count)

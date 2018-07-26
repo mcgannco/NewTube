@@ -15,5 +15,12 @@ class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :videos, through: :taggings
 
+  def self.top_tags
+    self
+    .left_joins(:taggings)
+    .group(:id)
+    .order('COUNT(taggings.tag_id) DESC')
+    .limit(5)
+  end
 
 end
