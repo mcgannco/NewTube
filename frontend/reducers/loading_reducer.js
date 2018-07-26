@@ -13,13 +13,16 @@ import {
   RECEIVE_HISTORY,
   RECEIVE_VIDEO_ERRORS,
   SUB_LOADER,
-  CLEAR_SUB_LOADER
+  CLEAR_SUB_LOADER,
+  VIDEO_LOAD,
+  RECEIVE_ALL_VIDEOS
 } from '../actions/video_actions'
 
 const initialState = {
   usernameLoading: false,
   pictureLoading: false,
-  subVideos: false
+  subVideos: false,
+  videoLoad: false
 };
 
 const loadingReducer = (state = initialState, action) => {
@@ -38,11 +41,15 @@ const loadingReducer = (state = initialState, action) => {
     case RECEIVE_HISTORY:
       return Object.assign({}, state, { subVideos: false });
     case RECEIVE_VIDEO_ERRORS:
-      return Object.assign({}, state, { subVideos: false });
+      return Object.assign({}, state, { subVideos: false, videoLoad: false });
     case SUB_LOADER:
       return Object.assign({}, state, { subVideos: true });
     case CLEAR_SUB_LOADER:
       return Object.assign({}, state, { subVideos: false });
+    case VIDEO_LOAD:
+      return Object.assign({}, state, { videoLoad: true });
+    case RECEIVE_ALL_VIDEOS:
+      return Object.assign({}, state, { videoLoad: false });
 
     default:
       return state;

@@ -13,6 +13,7 @@ export const RECEIVE_HISTORY = 'RECEIVE_HISTORY';
 export const SUB_LOADER = 'SUB_LOADER';
 export const CLEAR_SUB_LOADER = 'CLEAR_SUB_LOADER';
 export const RESET_HISTORY = 'RESET_HISTORY';
+export const VIDEO_LOAD = 'VIDEO_LOAD';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -106,6 +107,12 @@ export const clearSubVideoLoader = () => (
   }
 );
 
+export const startLoadingVideo = () => (
+  {
+    type: VIDEO_LOAD,
+  }
+);
+
 export const requestAllVideos = () => dispatch => {
   return(
     APIUtil.fetchAllVideos().then(videos => dispatch(receiveAllVideos(videos)),
@@ -122,13 +129,15 @@ export const requestSingleVideo = (id) => dispatch => {
   }));
 };
 
-export const createVideo = video => dispatch => (
-  APIUtil.createVideo(video).then(video => (
+export const createVideo = video => dispatch => {
+  dispatch(startLoadingVideo());
+  return(APIUtil.createVideo(video).then(video => (
     dispatch(receiveSingleVideo(video))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
   ))
-);
+)
+};
 
 export const editVideo = (id, data) => dispatch => {
   return(

@@ -17,6 +17,7 @@
   font-family: 'Roboto', 'Noto', sans-serif;
   background: white;
   margin-top: 2rem;
+  position: relative;
 }
 
 .upload-details-video {
@@ -215,4 +216,8 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+}
+
+.hidden {
+  display: none;
 }

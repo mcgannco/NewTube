@@ -65,6 +65,9 @@ class UploadVideo extends React.Component {
   }
 
   uploadVideo(e) {
+    if(this.props.videoLoad) {
+      return null;
+    }
     this.setState({status: "Loading. Please keep window open."})
     const { createVideo} = this.props;
     let videoForm = new FormData();
@@ -89,7 +92,7 @@ class UploadVideo extends React.Component {
 
   render() {
     let uploadForm;
-    let {errors} = this.props;
+    let {errors, videoLoad} = this.props;
     let errorsHash;
     if(errors.length > 0) {
       errorsHash = this.generateErrors(errors);
@@ -136,7 +139,6 @@ class UploadVideo extends React.Component {
                         <div>
                           <span className="video-upload-button-container">
                             <button className="publish" onClick={this.uploadVideo}>Publish</button>
-                            <input type='file'  onChange={this.updateFile} className="change-video" ></input>
                           </span>
 
                           <nav>
@@ -153,6 +155,7 @@ class UploadVideo extends React.Component {
                       </div>
                       {selectedForm}
                     </div>
+                    <div class={videoLoad ? "lds-ring-upload" : "hidden"}><div></div><div></div><div></div><div></div></div>
                   </div>
     } else {
       uploadForm =   <div className="upload-field">

@@ -38,3 +38,49 @@
     transform: rotate(360deg);
   }
 }
+
+//////////
+
+.videoLoaderContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.lds-ring-upload {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 149px;
+  left: 261px;
+}
+.lds-ring-upload div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  margin: 4px;
+  border: 10px solid #cef;
+  border-radius: 50%;
+  animation: lds-ring-upload 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #cef transparent transparent transparent;
+}
+.lds-ring-upload div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring-upload div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring-upload div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring-upload {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

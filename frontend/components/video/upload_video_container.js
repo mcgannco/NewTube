@@ -6,6 +6,7 @@ const msp = state => {
   return({
     currentUser: state.entities.users[state.session.id],
     errors: state.errors.videos,
+    videoLoad: state.ui.loading.videoLoad
   })
 };
 
