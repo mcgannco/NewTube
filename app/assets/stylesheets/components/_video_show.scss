@@ -19,7 +19,7 @@
     margin-top: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
-    border: 2px solid green;
+    border: 2px solid #599732;
     height: 25px;
     width: 60%;
 }
@@ -176,7 +176,7 @@
 }
 
 .subscribed-button {
-  background: green;
+  background: #599732;
   color: white;
   padding: 10px;
   border-radius: 2px;
@@ -198,7 +198,7 @@
 }
 
 .save-vid {
-  background: green;
+  background: #599732;
   color: white;
   padding: 10px;
   border-radius: 2px;
@@ -301,7 +301,7 @@
 .edit-show-description {
   width: calc(100% - 80px);
   height: auto;
-  border: 2px solid green;
+  border: 2px solid #599732;
   min-height: 130px;
   padding: 5px 5px;
   resize: vertical;
@@ -398,7 +398,7 @@
 }
 
 .user-comment-div input:focus {
-  border-bottom: 2px solid green;
+  border-bottom: 2px solid #599732;
 
 }
 

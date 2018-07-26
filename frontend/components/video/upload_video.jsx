@@ -24,6 +24,12 @@ class UploadVideo extends React.Component {
     this.props.clearAllVideoErrors()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.errors.length > 0) {
+      this.setState({status: "Pending.  Fix Errors."})
+    }
+  }
+
   componentWillUnmount() {
     this.props.clearAllVideoErrors()
   }
@@ -42,6 +48,7 @@ class UploadVideo extends React.Component {
   }
 
   updateFile(e) {
+    debugger
     let file    = e.currentTarget.files[0];
     this.setState({videoFile: file})
     let reader  = new FileReader();
@@ -127,7 +134,11 @@ class UploadVideo extends React.Component {
                         </span>
 
                         <div>
-                          <span><button onClick={this.uploadVideo}>Publish</button></span>
+                          <span className="video-upload-button-container">
+                            <button className="publish" onClick={this.uploadVideo}>Publish</button>
+                            <input type='file'  onChange={this.updateFile} className="change-video" ></input>
+                          </span>
+
                           <nav>
                             <p className={this.state.sub === "Basic Info" ? "selectedTab" : ""} onClick={this.subForm}>Basic Info</p>
                             <p className={this.state.sub === "Additional Info" ? "selectedTab" : ""} onClick={this.subForm}>Additional Info</p>
