@@ -15,6 +15,7 @@ class Api::VideosController < ApplicationController
     @video = Video.new(video_params)
     @video.author_id = current_user.id
     if @video.save
+      @video.tag_names = tag_params[:tag_names] if params[:tags]
       render "api/videos/show"
     else
       render json: @video.errors.full_messages, status: 422
@@ -55,5 +56,9 @@ class Api::VideosController < ApplicationController
   private
   def video_params
     params.require(:video).permit(:title, :author_id, :clip, :description, :view_count)
+  end
+
+  def tag_params
+    params.require(:tags).permit(tag_names: [])
   end
 end

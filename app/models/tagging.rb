@@ -12,4 +12,7 @@
 class Tagging < ApplicationRecord
   belongs_to :tag
   belongs_to :video
+
+  validates :video_id, :tag_id, presence: true
+  validates :tag_id, uniqueness: { scope: :video_id }
 end

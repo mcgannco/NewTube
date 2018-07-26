@@ -11,13 +11,17 @@ class UploadVideo extends React.Component {
       vThumb: "",
       videoUrl: "",
       status: "",
-      sub: "Basic Info"
+      sub: "Basic Info",
+      tagbody: "",
+      tagArr: []
     }
     this.updateFile = this.updateFile.bind(this);
     this.uploadVideo = this.uploadVideo.bind(this);
     this.updateInput = this.updateInput.bind(this);
     this.subForm = this.subForm.bind(this);
     this.generateErrors = this.generateErrors.bind(this);
+    this.updateTag = this.updateTag.bind(this);
+    this.addTag = this.addTag.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +52,6 @@ class UploadVideo extends React.Component {
   }
 
   updateFile(e) {
-    debugger
     let file    = e.currentTarget.files[0];
     this.setState({videoFile: file})
     let reader  = new FileReader();
@@ -75,8 +78,15 @@ class UploadVideo extends React.Component {
     videoForm.append("video[clip]", vFile);
     videoForm.append("video[title]", this.state.title);
     videoForm.append("video[description]", this.state.description);
+
+    this.state.tagArr.forEach((tag_name) => {
+          videoForm.append('tags[tag_names][]', tag_name);
+    });
+
+    this.setState({sub: "Basic Info"})
     createVideo(videoForm).then( action => {
-      this.setState({videoFile: "", vThumb: "", title: "", description: "", status: "", videoUrl: ""  })
+      this.setState({videoFile: "", vThumb: "", title: "", description: "", status: "", videoUrl: "", tagbody: "",
+      tagArr: []  })
       this.props.history.push(`/`);
     });
 
@@ -88,6 +98,21 @@ class UploadVideo extends React.Component {
       hash[errors[i]] = errors[i]
     }
     return hash;
+  }
+
+  updateTag(e) {
+    e.preventDefault();
+    this.setState({tagbody: e.currentTarget.value})
+  }
+
+  addTag(e) {
+    e.preventDefault()
+    if(this.state.tagbody === "" || this.state.tagArr.includes(this.state.tagbody)) {
+      return null;
+    } else {
+      let combinedTags = this.state.tagArr.concat(this.state.tagbody)
+      this.setState({tagArr: combinedTags, tagbody: ""})
+    }
   }
 
   render() {
@@ -124,8 +149,18 @@ class UploadVideo extends React.Component {
         <textarea className={errorsHash && errorsHash["Description can't be blank"] ? "upload-details-details-textarea-errors" : "upload-details-details-textarea"} id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
           <p className="description-upload-error-messages">{errorsHash && errorsHash["Description can't be blank"] ? errorsHash["Description can't be blank"] : ""}</p>
       </form>
+    } else if((this.state.sub === "Additional Info")){
+      selectedForm = <form>
+        <input onChange={this.updateTag} value={this.state.tagbody} className="upload-details-details-input" placeholder="Tags"></input>
+        <button onClick={this.addTag} className="add-tag-button">Add Tag</button>
+        <ul className="tag-list">
+          {this.state.tagArr.map((tag,idx) => <li className="tag-list-li" idx={idx} key={idx.id}>{tag}</li>)}
+        </ul>
+      </form>
     } else {
-      selectedForm = <form><input className="upload-details-details-input" value=""placeholder="TBD"></input></form>
+      selectedForm = <form>
+        <input className="upload-details-details-input" value=""placeholder="Links"></input>
+      </form>
     }
     if (this.state.videoFile) {
       uploadForm = <div onClick={this.test} className="upload-field">
@@ -155,7 +190,7 @@ class UploadVideo extends React.Component {
                       </div>
                       {selectedForm}
                     </div>
-                    <div class={videoLoad ? "lds-ring-upload" : "hidden"}><div></div><div></div><div></div><div></div></div>
+                    <div className={videoLoad ? "lds-ring-upload" : "hidden"}><div></div><div></div><div></div><div></div></div>
                   </div>
     } else {
       uploadForm =   <div className="upload-field">

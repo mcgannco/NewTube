@@ -102,6 +102,9 @@
   display: flex;
   justify-content: space-between;
   font-family: 'Roboto', 'Noto', sans-serif;
+  height: 50px;
+  min-height: 50px;
+  align-items: flex-end;
 }
 
 .video-header button {

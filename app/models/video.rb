@@ -45,6 +45,12 @@ class Video < ApplicationRecord
   has_many :views,
     dependent: :destroy
 
+  has_many :taggings,
+    dependent: :destroy
+
+  has_many :tags,
+    through: :taggings
+
   has_attached_file :clip, styles: {
     medium: { geometry: "640x480", format: 'mp4'  },
     thumb:  { geometry: "300x170", format: 'jpeg' },
@@ -67,6 +73,27 @@ class Video < ApplicationRecord
     .group(:id)
     .order('COUNT(views.id) DESC')
     .limit(10)
+  end
+
+  def tag_names=(tag_names)
+    self.tags = tag_names.map do |tag_name|
+      tag_name.strip!
+      self.tags.find_or_create_by(name: tag_name)
+    end
+  end
+
+  def tag_names
+    tags.map(&:name)
+  end
+
+  def tags_string
+    tags.map(&:name).join(', ')
+  end
+
+  def tag(name)
+    name.strip!
+    tag = Tag.find_or_create_by(name: name)
+    self.taggings.find_or_create_by(tag_id: tag.id)
   end
 
 end

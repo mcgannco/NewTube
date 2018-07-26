@@ -104,7 +104,7 @@
   flex-direction: column;
   width: calc(100% - 250px);
   border-top: 1px solid lightgrey;
-  justify-content: space-around;
+  // justify-content: space-around;
   height: 200px;
   padding-top: 2%;
   position: relative;
@@ -220,4 +220,35 @@
 
 .hidden {
   display: none;
+}
+
+.add-tag-button {
+  background: #0099ff;
+  color: white;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+.tag-list {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 349px;
+}
+
+.tag-list-li {
+  margin-right: 10px;
+  margin-top: 5px;
+  background-color: darkslategrey;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 8px 3px 8px;
+  font-weight: 500;
+  cursor: pointer;
 }

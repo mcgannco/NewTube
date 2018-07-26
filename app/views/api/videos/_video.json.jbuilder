@@ -19,3 +19,11 @@ else
     json.like_value  "N/A"
   end
 end
+
+json.tags do
+  video.tags.each do |tag|
+    json.set! tag.id do
+      json.extract! tag, :name, :id
+    end
+  end
+end

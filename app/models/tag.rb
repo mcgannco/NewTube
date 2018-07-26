@@ -10,10 +10,10 @@
 
 class Tag < ApplicationRecord
   validates :name, presence: true
+  validates :name, uniqueness: true
 
-  has_many :taggings
-  has_many :videos,
-    through: :taggings,
-    source: :Video
+  has_many :taggings, dependent: :destroy
+  has_many :videos, through: :taggings
+
 
 end
