@@ -37,6 +37,7 @@ class NavBar extends React.Component {
 
   componentDidMount() {
     this.updateWindowDimensions();
+    this.props.fetchTopTags()
     window.addEventListener('resize', this.updateWindowDimensions);
   }
 
@@ -125,7 +126,7 @@ class NavBar extends React.Component {
 
 
   render() {
-    const {currentUser, logout, openModal} = this.props
+    const {currentUser, logout, openModal, topTags} = this.props
     let loggedin;
     let userDropDown;
     let userAvatar;
@@ -137,7 +138,7 @@ class NavBar extends React.Component {
       dd = <VideoDropDown />
     }
     if (this.state.appsDropDown) {
-      dd = <AppDropDown />
+      dd = <AppDropDown topTags={topTags}/>
     }
     if (this.state.settingsDropDown) {
       dd = <SettingDropDown />

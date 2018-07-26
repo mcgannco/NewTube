@@ -14,6 +14,7 @@ export const SUB_LOADER = 'SUB_LOADER';
 export const CLEAR_SUB_LOADER = 'CLEAR_SUB_LOADER';
 export const RESET_HISTORY = 'RESET_HISTORY';
 export const VIDEO_LOAD = 'VIDEO_LOAD';
+export const TOP_TAGS = 'TOP_TAGS';
 
 export const receiveAllVideos = (videos) => (
   {
@@ -113,6 +114,13 @@ export const startLoadingVideo = () => (
   }
 );
 
+export const receiveTopTags = (tags) => (
+  {
+    type: TOP_TAGS,
+    tags
+  }
+);
+
 export const requestAllVideos = () => dispatch => {
   return(
     APIUtil.fetchAllVideos().then(videos => dispatch(receiveAllVideos(videos)),
@@ -173,4 +181,12 @@ export const fetchHistory = offSet => dispatch => {
   return APIUtil.fetchHistory(offSet)
     .then( videos => dispatch( receiveHistory(videos)),
            err    => dispatch( receiveErrors(err.responseJSON)));
+};
+
+export const fetchTopTags = () => dispatch => {
+  return(
+    APIUtil.fetchTopTags().then(tags => dispatch(receiveTopTags(tags)),
+  err => {
+    dispatch(receiveErrors(err.responseJSON));
+  }));
 };

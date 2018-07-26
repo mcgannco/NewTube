@@ -8,6 +8,7 @@ import watchLaterReducer from './watch_later_button_reducer';
 import searchReducer from './search_reducer';
 import sideBarReducer from './side_bar_reducer';
 import filteredVideosReducer from './filtered_videos_reducer';
+import tagsReducer from './tags_reducer';
 
 const uiReducer = combineReducers({
   modal: modalReducer,
@@ -19,6 +20,7 @@ const uiReducer = combineReducers({
   search: searchReducer,
   sideLink: sideBarReducer,
   filteredVideos: filteredVideosReducer,
+  topTags: tagsReducer,
 });
 
 export default uiReducer;
