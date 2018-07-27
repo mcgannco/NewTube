@@ -19,16 +19,23 @@ class Results extends React.Component {
     this.props.requestAllVideos().then(this.props.requestAllUsers()).then(
       this.props.fetchResultSearch(this.props.query)
     )
-    window.scrollTo(0, 0);
     $('.watch-later-bttn').hide()
+    $('body').animate({ scrollTop: top }, 0);
 
   }
 
   componentWillReceiveProps(nextProps) {
-    $('.watch-later-bttn')
-    setTimeout(function() {
-        $(".watch-later-bttn").fadeOut(1500);
-    }, 3000);
+
+    if(!this.props.button && !nextProps.button) {
+
+    } else if (nextProps.button) {
+      $('.watch-later-bttn')
+      setTimeout(function() {
+          $(".watch-later-bttn").fadeOut(1500);
+      }, 3000);
+    } else {
+      $('.watch-later-bttn').hide()
+    }
   }
 
   componentWillUnmount() {
@@ -124,7 +131,7 @@ class Results extends React.Component {
           if(el.username){
               return <li><UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem></li>
           } else if (el.title) {
-            return <li><VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} button={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem></li>
+            return <li><VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem></li>
           } else if (el.name) {
             return <li><TagResultItem key={idx} tag={el}>{el.name}</TagResultItem></li>
           } else {
