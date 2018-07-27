@@ -157,10 +157,6 @@ class UploadVideo extends React.Component {
           {this.state.tagArr.map((tag,idx) => <li className="tag-list-li" idx={idx} key={idx.id}>{tag}</li>)}
         </ul>
       </form>
-    } else {
-      selectedForm = <form>
-        <input className="upload-details-details-input" value=""placeholder="Links"></input>
-      </form>
     }
     if (this.state.videoFile) {
       uploadForm = <div onClick={this.test} className="upload-field">
@@ -179,7 +175,6 @@ class UploadVideo extends React.Component {
                           <nav>
                             <p className={this.state.sub === "Basic Info" ? "selectedTab" : ""} onClick={this.subForm}>Basic Info</p>
                             <p className={this.state.sub === "Additional Info" ? "selectedTab" : ""} onClick={this.subForm}>Additional Info</p>
-                            <p className={this.state.sub === "Other" ? "selectedTab" : ""} onClick={this.subForm}>Other</p>
                           </nav>
                         </div>
                     </div>
