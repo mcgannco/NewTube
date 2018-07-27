@@ -25,3 +25,9 @@ json.set! :users do
 end
 
 json.user_ids all_users.uniq.map { |user| user.id }
+
+tag_arr = [];
+@tags.each do |tag|
+  tag_arr << tag
+end
+json.foundTags tag_arr

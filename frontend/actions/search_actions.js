@@ -20,7 +20,8 @@ export const receiveSearch = payload => {
     videos: payload.videos,
     users: payload.users,
     video_ids: payload.video_ids,
-    user_ids: payload.user_ids
+    user_ids: payload.user_ids,
+    tags: payload.tag_arr
   });
 }
 

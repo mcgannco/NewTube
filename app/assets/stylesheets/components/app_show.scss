@@ -7,6 +7,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
+}
+
+.nature-nature {
+  color: lightgreen;
+  font-size: 20px;
+}
+
+.nature-icon-nav-bar svg{
+  color: lightgreen;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .tv-banner {
@@ -18,6 +31,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
+}
+
+.tv-tv {
+  color: darkorange;
+  font-size: 20px;
+}
+
+.tv-icon-nav-bar svg{
+  color: darkorange;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .music-banner {
@@ -29,6 +55,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
+}
+
+.music-music {
+  color: darkblue;
+  font-size: 20px;
+}
+
+.music-icon-nav-bar svg{
+  color: darkblue;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .sports-banner {
@@ -40,6 +79,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
+}
+
+.sports-sports {
+  color: #F08080;
+  font-size: 20px;
+}
+
+.sports-icon-nav-bar svg{
+  color: #F08080;
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .movies-banner {
@@ -51,15 +103,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
 }
 
-.app-channel-name {
-  background: #52c234; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #52c234, #061700); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #52c234, #061700);  position: relative;
+.movies-movies {
+  color: darkgoldenrod;
+  font-size: 20px;
+}
+
+.movies-icon-nav-bar svg{
+  color: darkgoldenrod;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.app-show-banner {
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 150px;
   margin: 0px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  margin-bottom: 20px;
+}
+
+.default-app-h {
+  color: darkblue;
+  font-size: 20px;
 }

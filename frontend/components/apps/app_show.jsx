@@ -35,19 +35,26 @@ class AppShow extends React.Component {
     watchLaterButton, trendingVideoIds, tag } = this.props;
     let video_list;
     let banner;
+    let bcolor;
     if(tag) {
       if(tag.name === "Nature") {
         banner = "nature-banner";
+        bcolor = "nature-nature"
       } else if (tag.name === "Music") {
         banner = "music-banner";
+        bcolor = "music-music"
       } else if (tag.name === "Sports") {
         banner = "sports-banner";
+        bcolor = "sports-sports"
       } else if (tag.name === "Movies") {
         banner = "movies-banner";
+        bcolor = "movies-movies"
       } else if (tag.name === "TV") {
         banner = "tv-banner";
+        bcolor = "tv-tv"
       } else {
         banner = "app-show-banner";
+        bcolor = "default-app-h"
       }
     }
     if(videos.length > 0) {
@@ -62,26 +69,26 @@ class AppShow extends React.Component {
       return(
         <div className="results-container" id="body">
           <div className={banner}>
-            <section className={tag && tag.name === "Nature" ? "tag-icon-nav-bar" : "hidden"}>
+            <section className={tag && tag.name === "Nature" ? "nature-icon-nav-bar" : "hidden"}>
               <i className="fas fa-leaf"></i>
             </section>
 
-            <section className={tag && tag.name === "Music" ? "tag-icon-nav-bar" : "hidden"}>
+            <section className={tag && tag.name === "Music" ? "music-icon-nav-bar" : "hidden"}>
               <i className="fas fa-music"></i>
             </section>
 
-            <section className={tag && tag.name === "Movies" ? "tag-icon-nav-bar" : "hidden"}>
+            <section className={tag && tag.name === "Movies" ? "movies-icon-nav-bar" : "hidden"}>
               <i className="fas fa-film"></i>
             </section>
 
-            <section className={tag && tag.name === "TV" ? "tag-icon-nav-bar" : "hidden"}>
+            <section className={tag && tag.name === "TV" ? "tv-icon-nav-bar" : "hidden"}>
               <i className="fas fa-tv"></i>
             </section>
 
-            <section className={tag && tag.name === "Sports" ? "tag-icon-nav-bar" : "hidden"}>
+            <section className={tag && tag.name === "Sports" ? "sports-icon-nav-bar" : "hidden"}>
               <i className="fas fa-football-ball"></i>
             </section>
-            <h1>{tag ? tag.name : ""}</h1>
+            <h1 className={bcolor}>{tag ? tag.name : ""}</h1>
           </div>
           {video_list}
           <button
