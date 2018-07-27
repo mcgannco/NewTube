@@ -85,3 +85,10 @@ export const fetchTopTags = () => (
     url: `/api/videos/toptags`
   })
 );
+
+export const fetchTag = (id) => (
+  $.ajax({
+    method: 'GET',
+    url: `/api/videos/${id}/tag_videos`
+  })
+);

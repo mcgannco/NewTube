@@ -9,6 +9,7 @@ import searchReducer from './search_reducer';
 import sideBarReducer from './side_bar_reducer';
 import filteredVideosReducer from './filtered_videos_reducer';
 import tagsReducer from './tags_reducer';
+import currentTagReducer from './current_tag_reducer';
 
 const uiReducer = combineReducers({
   modal: modalReducer,
@@ -21,6 +22,7 @@ const uiReducer = combineReducers({
   sideLink: sideBarReducer,
   filteredVideos: filteredVideosReducer,
   topTags: tagsReducer,
+  currentTag: currentTagReducer
 });
 
 export default uiReducer;

@@ -4,6 +4,7 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/sign_up_form_container';
 import VideoIndexContainer from './video/video_index_container';
 import VideoShowContainer from './video/video_show_container';
+import AppShowContainer from './apps/app_show_container';
 import ChannelShowContainer from './channel/channel_show_container';
 import UploadVideoContainer from './video/upload_video_container';
 import ResultsContainer from './search/results_container';
@@ -42,6 +43,7 @@ const App = () => (
        <Route exact path="/most_liked" component={MostLikesContainer} />
        <Route exact path="/oldest" component={OldestContainer} />
        <Route exact path="/recently_added" component={RecentlyAddedContainer} />
+       <Route exact path="/apps/:id" component={AppShowContainer} />
        <ProtectedRoute exact path='/my_history' component={HistoryContainer} />
        <Route path="/" component={VideoIndexContainer} />
      </Switch>

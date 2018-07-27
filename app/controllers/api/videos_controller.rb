@@ -58,6 +58,17 @@ class Api::VideosController < ApplicationController
     render 'api/videos/toptags'
   end
 
+  def tag_videos
+    @tag = Tag.find(params[:id])
+    @videos = @tag.videos
+    if @videos
+      render 'api/videos/tag_videos'
+    else
+      render json: @video.errors.full_messages, status: 422
+    end
+
+  end
+
   private
   def video_params
     params.require(:video).permit(:title, :author_id, :clip, :description, :view_count)

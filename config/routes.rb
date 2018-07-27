@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       collection do
         get 'toptags'
       end
+      member do
+        get 'tag_videos'
+      end
       resources :comments, only: [:create, :index, :show, :update, :destroy] do
         resources :likes, only: [:create, :update]
       end
