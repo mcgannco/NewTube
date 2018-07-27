@@ -1,0 +1,167 @@
+.tag-result-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.tag-result-icon-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 250px;
+  height: 160px;
+}
+
+.tv {
+  background: #1a2a6c;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fdbb2d, #b21f1f, #1a2a6c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.tv svg {
+  color: darkorange;
+}
+
+.movie {
+  background: #fffc00;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ffffff, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.movie svg {
+  color: darkgoldenrod;
+}
+
+.sports {
+  background: #ED213A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.sports svg {
+  color: #F08080;
+}
+
+.nature {
+  background: #52c234; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #52c234, #061700); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #52c234, #061700);  position: relative;
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.nature svg {
+  color: lightgreen;
+}
+
+.music {
+  background: #36D1DC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.music svg {
+  color: darkblue;
+}
+
+.default-app {
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: block;
+  height: 160px;
+  width: 160px;
+  line-height: 160px;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 46px;
+}
+
+.default-app svg {
+  color: darkblue;
+}
+
+.hidden {
+  display: none;
+}
