@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import SearchItem from './search_item';
 
 class Search extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Search extends React.Component {
   }
 
   querySearch(e) {
+    if(this.state.searchStr !== "") {}
     this.props.fetchSearch(this.state.searchStr).then(
       this.setState({ searchList: true }, () => {
       document.addEventListener('click', this.closeSearch)
@@ -58,8 +60,10 @@ class Search extends React.Component {
       }
       if(element.username) {
         attribute = element.username;
-      } else {
+      } else if (element.title) {
         attribute = element.title;
+      } else {
+        attribute = element.name
       }
       rankings[attribute] = this.similarity(this.state.searchStr.toLowerCase(), attribute.slice(0, this.state.searchStr.length).toLowerCase())
     }
@@ -70,7 +74,7 @@ class Search extends React.Component {
         if(!arr[j]) {
           continue;
         }
-        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i]) {
+        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i] || arr[j].name === keysSorted[i]) {
           new_arr.push(arr[j])
         }
       }
@@ -111,7 +115,7 @@ class Search extends React.Component {
   }
 
   render() {
-    let {user_arr, video_arr, users, videos } = this.props
+    let {user_arr, video_arr, users, videos, tags } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -120,7 +124,7 @@ class Search extends React.Component {
       for (let i = 0; i < video_arr.length; i++) {
         videos_searched.push(videos[video_arr[i]])
       }
-    let all_searched_results = videos_searched.concat(users_searched);
+    let all_searched_results = videos_searched.concat(users_searched).concat(tags);
 
     let search_result_list
     let sliceNum;
@@ -130,8 +134,10 @@ class Search extends React.Component {
       sliceNum = all_searched_results.length
     }
     if(all_searched_results && all_searched_results.length > 0) {
+
       search_result_list = <ul className={this.state.searchList && this.state.searchStr !== "" ? "" : "hidden"}>
-        { this.rankSearch(all_searched_results).slice(0,10).map((el,idx) => <Link to={el.username ? `/channel/${el.id}` : `/video/${el.id}`}><li key={idx}>{el.username ? el.username : el.title}</li></Link>)}
+        { this.rankSearch(all_searched_results).slice(0,10).map((el,idx) =>
+          <SearchItem key={idx} el={el} />)}
       </ul>
     }
     return(

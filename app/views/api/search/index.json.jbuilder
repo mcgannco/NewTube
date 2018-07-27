@@ -30,4 +30,5 @@ tag_arr = [];
 @tags.each do |tag|
   tag_arr << tag
 end
+
 json.foundTags tag_arr

@@ -8,7 +8,8 @@ const msp = (state) => {
     user_arr: state.ui.search.searchedUsers,
     users: state.entities.users,
     videos: state.entities.videos,
-    searchedTerm: state.ui.search.searchedTerm
+    searchedTerm: state.ui.search.searchedTerm,
+    tags: state.ui.search.searchedTags
   })
 };
 

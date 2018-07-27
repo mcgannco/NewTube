@@ -203,7 +203,7 @@ class VideoResultItem extends React.Component {
     }
 
     return(
-        <Link to={`video/${video.id}`}>
+        <Link to={`/video/${video.id}`}>
         <div className="video-result-container"
           onMouseEnter={this.preview}
           onMouseLeave={this.closePreview}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import UserResultItem from './user_result_item';
 import VideoResultItem from './video_result_item';
+import TagResultItem from './tag_result_item';
 
 class Results extends React.Component {
   constructor(props) {
@@ -40,10 +41,12 @@ class Results extends React.Component {
     let attribute;
     for (let i = 0; i < arr.length; i++) {
       element = arr[i]
-      if(element.username) {
+      if(element && element.username) {
         attribute = element.username;
-      } else {
+      } else if(element && element.title) {
         attribute = element.title;
+      } else if (element && element.name) {
+        attribute = element.name
       }
       rankings[attribute] = this.similarity(this.props.query.toLowerCase(), attribute.slice(0, this.props.query.length).toLowerCase())
     }
@@ -51,7 +54,7 @@ class Results extends React.Component {
     let new_arr = [];
     for (let i = 0; i < keysSorted.length; i++) {
       for (var j = 0; j < arr.length; j++) {
-        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i]) {
+        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i] || arr[j].name === keysSorted[i]) {
           new_arr.push(arr[j])
         }
       }
@@ -96,7 +99,7 @@ class Results extends React.Component {
   }
 
   render() {
-    let {user_arr, openVidModal, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton } = this.props
+    let {user_arr, openVidModal, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton, tags, searchErrors, query } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -105,25 +108,42 @@ class Results extends React.Component {
       for (let i = 0; i < video_arr.length; i++) {
         videos_searched.push(videos[video_arr[i]])
       }
-    let all_searched_results = videos_searched.concat(users_searched);
+    let all_searched_results = videos_searched.concat(users_searched).concat(tags);
 
     let search_result_list;
     let search_result_length;
     if(all_searched_results && all_searched_results.length > 0) {
       search_result_list = <ul className={this.props.query !== "" ? "" : "hidden"}>
-        { this.props.query ? this.rankSearch(all_searched_results).map((el,idx) =>
-          <li>
-            {el.username ? <UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem> :
-            <VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} button={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem>
-            }
-        </li>) : ""}
+
+      {this.props.query ? this.rankSearch(all_searched_results).map((el,idx) => {
+          if(el.username){
+              return <li><UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem></li>
+          } else if (el.title) {
+            return <li><VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} button={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem></li>
+          } else if (el.name) {
+            return <li><TagResultItem key={idx} tag={el}>{el.name}</TagResultItem></li>
+          } else {
+            return ""
+          }
+        }
+      ) : ""
+    }
       </ul>
       search_result_length = all_searched_results.length
     }
 
+    let aboutNum;
+    if(this.props.query === "") {
+      aboutNum = "hidden";
+    } else if(search_result_length > 0) {
+      aboutNum = "results-num";
+    } else {
+      aboutNum = "hidden";
+    }
+
     return(
       <div className="results-container" id="body">
-        <h1 className={search_result_length > 0 ? "results-num" : "hidden"}>{search_result_length > 0 ? `About ${this.formatNum(search_result_length)} results` : "" }</h1>
+        <h1 className={aboutNum}>{search_result_length > 0 ? `About ${this.formatNum(search_result_length)} results` : "" }</h1>
         {search_result_list}
         <button
           id="watch-later-bttn-toggle"

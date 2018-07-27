@@ -13,7 +13,9 @@ const msp = (state) => {
     query: state.ui.search.searchedTermResult,
     video_arr: state.ui.search.searchedResultVideos,
     user_arr: state.ui.search.searchedResultUsers,
-    button: state.ui.watchLaterBttn
+    button: state.ui.watchLaterBttn,
+    tags: state.ui.search.searchedResultTags,
+    searchErrors: state.errors.search
   })
 };
 
