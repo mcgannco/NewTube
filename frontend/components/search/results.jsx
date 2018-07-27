@@ -47,14 +47,19 @@ class Results extends React.Component {
         attribute = element.title;
       } else if (element && element.name) {
         attribute = element.name
+      } else if (!element) {
+        continue;
       }
-      rankings[attribute] = this.similarity(this.props.query.toLowerCase(), attribute.slice(0, this.props.query.length).toLowerCase())
+      if(element) {
+        rankings[attribute] = this.similarity(this.props.query.toLowerCase(), attribute.slice(0, this.props.query.length).toLowerCase())
+      }
     }
+
     let keysSorted = Object.keys(rankings).sort(function(a,b){return rankings[a]-rankings[b]})
     let new_arr = [];
     for (let i = 0; i < keysSorted.length; i++) {
       for (var j = 0; j < arr.length; j++) {
-        if (arr[j].username === keysSorted[i] || arr[j].title === keysSorted[i] || arr[j].name === keysSorted[i]) {
+        if ((arr[j] && arr[j].username === keysSorted[i]) || (arr[j] && arr[j].title === keysSorted[i]) || (arr[j] && arr[j].name === keysSorted[i])) {
           new_arr.push(arr[j])
         }
       }
