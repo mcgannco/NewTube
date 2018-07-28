@@ -1,17 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class SettingDropDown extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      nightMode: false
+      nightMode: ""
     }
     this.toggleNightMode = this.toggleNightMode.bind(this)
   }
 
+  componentDidMount() {
+    if(this.props.currentUser) {
+      this.setState({nightMode: this.props.nightMode})
+    }
+  }
+
   toggleNightMode(e) {
-    this.setState({nightMode: !this.state.nightMode})
+    if(this.props.currentUser) {
+      const formData = new FormData();
+      formData.append("user[night_mode]", !this.state.nightMode);
+
+      this.props.editUser(this.props.currentUser.id, formData).then(
+        this.setState({nightMode: !this.state.nightMode})
+      );
+    } else {
+      this.props.history.push('/signin')
+    }
+
   }
 
   render() {
@@ -50,4 +67,4 @@ class SettingDropDown extends React.Component {
   }
 };
 
-export default SettingDropDown;
+export default withRouter(SettingDropDown);

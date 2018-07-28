@@ -39,6 +39,24 @@ class NavBar extends React.Component {
     this.updateWindowDimensions();
     this.props.fetchTopTags()
     window.addEventListener('resize', this.updateWindowDimensions);
+
+    if(this.props.currentUser) {
+      if(this.props.nightMode) {
+        document.getElementById('app').style.backgroundColor = "#101010	";
+      } else {
+        document.getElementById('app').style.backgroundColor = "";
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps && (this.props.nightMode !== nextProps.nightMode)) {
+      if(nextProps.nightMode) {
+        document.getElementById('app').style.backgroundColor = "#101010	";
+      } else {
+        document.getElementById('app').style.backgroundColor = "";
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -128,7 +146,7 @@ class NavBar extends React.Component {
 
 
   render() {
-    const {currentUser, logout, openModal, topTags} = this.props
+    const {currentUser, logout, openModal, topTags, editUser, nightMode} = this.props
     let loggedin;
     let userDropDown;
     let userAvatar;
@@ -143,7 +161,7 @@ class NavBar extends React.Component {
       dd = <AppDropDown topTags={topTags}/>
     }
     if (this.state.settingsDropDown) {
-      dd = <SettingDropDown />
+      dd = <SettingDropDown editUser={editUser} currentUser={currentUser} nightMode={nightMode}/>
     }
 
     if (this.state.usersDropDown && currentUser) {
@@ -173,8 +191,23 @@ class NavBar extends React.Component {
         navsearch = "nav-search"
       }
 
+      let mainNavClassName;
+      if(this.state.smallSearch) {
+        if(this.props.nightMode) {
+          mainNavClassName = "small-search-main-nav-night"
+        } else {
+          mainNavClassName = "small-search-main-nav"
+        }
+      } else {
+        if(this.props.nightMode) {
+          mainNavClassName = "main-nav-night"
+        } else {
+          mainNavClassName = "main-nav"
+        }
+      }
+
       return(
-        <header id="header-header" className={ this.state.smallSearch ? "small-search-main-nav" : "main-nav"}>
+        <header id="header-header" className={mainNavClassName}>
           <nav className={ this.state.smallSearch ? "no-left-nav" : "left-nav"}>
             <ul>
               <li id="nav-button" onClick={() => openModal('sidebar')}>

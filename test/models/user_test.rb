@@ -17,6 +17,7 @@
 #  banner_file_size    :integer
 #  banner_updated_at   :datetime
 #  description         :text
+#  night_mode          :boolean          default(FALSE)
 #
 
 require 'test_helper'

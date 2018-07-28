@@ -17,12 +17,14 @@
 #  banner_file_size    :integer
 #  banner_updated_at   :datetime
 #  description         :text
+#  night_mode          :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
   validates :username, :password_digest, :session_token, presence: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
+  validates :night_mode, inclusion: { in: [true, false] }
 
   has_attached_file :banner
   has_attached_file :avatar, styles: {
@@ -114,6 +116,6 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
-  end  
+  end
 
 end
