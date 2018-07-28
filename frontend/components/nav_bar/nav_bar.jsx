@@ -90,9 +90,11 @@ class NavBar extends React.Component {
 
   closeSetting(e) {
     e.preventDefault();
-    this.setState({ settingsDropDown: false }, () => {
-      document.removeEventListener('click', this.closeSetting);
-    });
+    if(e.target.id !== "night-mode") {
+      this.setState({ settingsDropDown: false }, () => {
+        document.removeEventListener('click', this.closeSetting);
+      });
+    }
   }
 
   userDropDown(e) {

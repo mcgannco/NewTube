@@ -161,6 +161,28 @@
   display: none;
 }
 
+////
+.night-mode-bttn p {
+  color: #0099ff;
+}
+
+.night-mode-icon {
+  color: #0099ff;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    margin-right: 6px;
+
+}
+
+.night-mode-text {
+  color: #505050;
+}
+
+////
+
 @media (max-width: 700px) {
   .video-drop-down-container {
     justify-content: flex-start;
