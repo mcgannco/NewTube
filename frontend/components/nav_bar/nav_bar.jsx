@@ -130,7 +130,6 @@ class NavBar extends React.Component {
   }
 
   smallSearch(e) {
-
     e.preventDefault();
     this.setState({ smallSearch: true }, () => {
     document.getElementById('body').addEventListener('click', this.closeSmallSearch);
@@ -192,23 +191,33 @@ class NavBar extends React.Component {
       }
 
       let mainNavClassName;
+      let leftNav;
+      let rightNav;
       if(this.state.smallSearch) {
         if(this.props.nightMode) {
           mainNavClassName = "small-search-main-nav-night"
+          leftNav = "no-left-nav-night"
+          rightNav = "no-left-nav-night"
         } else {
           mainNavClassName = "small-search-main-nav"
+          leftNav = "no-left-nav"
+          rightNav = "no-left-nav"
         }
       } else {
         if(this.props.nightMode) {
           mainNavClassName = "main-nav-night"
+          leftNav = "left-nav-night"
+          rightNav = "right-nav-night"
         } else {
           mainNavClassName = "main-nav"
+          leftNav = "left-nav"
+          rightNav = "right-nav"
         }
       }
 
       return(
         <header id="header-header" className={mainNavClassName}>
-          <nav className={ this.state.smallSearch ? "no-left-nav" : "left-nav"}>
+          <nav className={ leftNav }>
             <ul>
               <li id="nav-button" onClick={() => openModal('sidebar')}>
                 <span><i className="fa fa-bars"></i></span>
@@ -229,9 +238,9 @@ class NavBar extends React.Component {
           </div>
 
           <nav className={navsearch}>
-            <Search hideBigSearch={this.state.hideBigSearch} smallSearch={this.state.smallSearch}/>
+            <Search hideBigSearch={this.state.hideBigSearch} smallSearch={this.state.smallSearch} nightMode={nightMode}/>
           </nav>
-          <nav className={ this.state.smallSearch ? "no-left-nav" : "right-nav"}>
+          <nav className={ rightNav}>
 
             <ul>
               <li onClick={this.smallSearch} id="nav-button">

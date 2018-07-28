@@ -115,7 +115,7 @@ class Search extends React.Component {
   }
 
   render() {
-    let {user_arr, video_arr, users, videos, tags } = this.props
+    let {user_arr, video_arr, users, videos, tags, nightMode } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -140,9 +140,10 @@ class Search extends React.Component {
           <SearchItem key={idx} el={el} />)}
       </ul>
     }
+    
     return(
-      <div className="search-container">
-        <input onChange={this.search} className="search" type="text" value={this.state.searchStr} placeholder="Search"></input>
+      <div className={nightMode ? "search-container-night" : "search-container"}>
+        <input onChange={this.search} className={nightMode ? "search-night" : "night"} type="text" value={this.state.searchStr} placeholder="Search"></input>
         <button onClick={this.sendSearch}>
           <i className="fas fa-search"></i>
           <nav className="searchtiptext">Search</nav>
