@@ -15,13 +15,13 @@ class UserDropDown extends React.Component {
 
   render() {
 
-    let {currentUser, logout} = this.props
+    let {currentUser, logout, nightMode} = this.props
     let userAvatar = currentUser.profile_img_url
     return(
       <div className="user-drop-down-container">
-        <ul className="user-drop-down">
+        <ul className={nightMode ? "user-drop-down-night" : "user-drop-down"}>
           <Link to={`/channel/${currentUser.id}`}>
-            <li className="drop-down-list-item-username">
+            <li className={nightMode ? "drop-down-list-item-username-night" : "drop-down-list-item-username"}>
               <div>
                 <div>
                   <section className="drop-down-list-item-username-icon" style={
@@ -37,7 +37,7 @@ class UserDropDown extends React.Component {
 
 
           <Link to={`/channel/${currentUser.id}`}>
-            <li className="drop-down-list-item">
+            <li className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
               <div>
                 <section className="dd-user-section">
                   <i className="fas fa-user"></i>
@@ -48,7 +48,7 @@ class UserDropDown extends React.Component {
           </Link>
 
           <div onClick={this.logoutUser}>
-            <li className="drop-down-list-item">
+            <li className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
               <div>
                 <section className="dd-user-section">
                   <i className="fas fa-sign-out-alt"></i>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AppDropDown = ({topTags}) => {
+const AppDropDown = ({topTags, nightMode}) => {
 let tagsList = topTags["toptags"].map((tag,idx) =>
 <Link to={`/apps/${tag.id}`}>
-  <li className="drop-down-list-item">
+  <li className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
     <div>
       <section className={tag.name === "Nature" ? "tag-icon-nav-bar" : "hidden"}>
         <i className="fas fa-leaf"></i>
@@ -33,7 +33,7 @@ let tagsList = topTags["toptags"].map((tag,idx) =>
 
   return(
     <div className="app-drop-down-container">
-      <ul className="app-drop-down">
+      <ul className={nightMode ? "app-drop-down-night" : "app-drop-down"}>
         {tagsList}
       </ul>
     </div>

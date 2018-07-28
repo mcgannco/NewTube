@@ -42,9 +42,11 @@ class NavBar extends React.Component {
 
     if(this.props.currentUser) {
       if(this.props.nightMode) {
-        document.getElementById('app').style.backgroundColor = "#101010	";
+        document.getElementById('app').style.backgroundColor = "#101010";
+        document.getElementsByTagName("html")[0].style.backgroundColor = "black";
       } else {
         document.getElementById('app').style.backgroundColor = "";
+        document.getElementsByTagName("html")[0].style.backgroundColor = "";
       }
     }
   }
@@ -53,8 +55,10 @@ class NavBar extends React.Component {
     if(nextProps && (this.props.nightMode !== nextProps.nightMode)) {
       if(nextProps.nightMode) {
         document.getElementById('app').style.backgroundColor = "#101010	";
+        document.getElementsByTagName("html")[0].style.backgroundColor = "black";
       } else {
         document.getElementById('app').style.backgroundColor = "";
+        document.getElementsByTagName("html")[0].style.backgroundColor = "";
       }
     }
   }
@@ -154,17 +158,17 @@ class NavBar extends React.Component {
     }
     let dd;
     if (this.state.videoDropDown) {
-      dd = <VideoDropDown />
+      dd = <VideoDropDown nightMode={nightMode}/>
     }
     if (this.state.appsDropDown) {
-      dd = <AppDropDown topTags={topTags}/>
+      dd = <AppDropDown topTags={topTags} nightMode={nightMode}/>
     }
     if (this.state.settingsDropDown) {
       dd = <SettingDropDown editUser={editUser} currentUser={currentUser} nightMode={nightMode}/>
     }
 
     if (this.state.usersDropDown && currentUser) {
-      dd = <UserDropDown currentUser={currentUser} logout={logout}/>
+      dd = <UserDropDown currentUser={currentUser} logout={logout} nightMode={nightMode}/>
     }
 
     if (!currentUser) {
@@ -183,35 +187,52 @@ class NavBar extends React.Component {
       }
       let navsearch;
       if(this.state.smallSearch) {
-        navsearch = "small-search"
+        if(this.props.nightMode) {
+          navsearch = "small-search-night"
+        } else {
+          navsearch = "small-search"
+        }
       } else if (this.state.hideBigSearch) {
-        navsearch = "nav-search-hide"
+        if(this.props.nightMode) {
+          navsearch = "nav-search-hide-night"
+        } else {
+          navsearch = "nav-search-hide"
+        }
       } else {
-        navsearch = "nav-search"
+        if(this.props.nightMode) {
+          navsearch = "nav-search-night"
+        } else {
+          navsearch = "nav-search"
+        }
       }
 
       let mainNavClassName;
       let leftNav;
       let rightNav;
+      let backButton;
       if(this.state.smallSearch) {
         if(this.props.nightMode) {
           mainNavClassName = "small-search-main-nav-night"
           leftNav = "no-left-nav-night"
           rightNav = "no-left-nav-night"
+          backButton = "back-button-small-search-night"
         } else {
           mainNavClassName = "small-search-main-nav"
           leftNav = "no-left-nav"
           rightNav = "no-left-nav"
+          backButton = "back-button-small-search"
         }
       } else {
         if(this.props.nightMode) {
           mainNavClassName = "main-nav-night"
           leftNav = "left-nav-night"
           rightNav = "right-nav-night"
+          backButton = "no-back-button-small-search"
         } else {
           mainNavClassName = "main-nav"
           leftNav = "left-nav"
           rightNav = "right-nav"
+          backButton = "no-back-button-small-search"
         }
       }
 
@@ -230,7 +251,7 @@ class NavBar extends React.Component {
             </ul>
           </nav>
 
-          <div onClick={this.closeSmallSearch} className={this.state.smallSearch ? "back-button-small-search" : "no-back-button-small-search"}>
+          <div onClick={this.closeSmallSearch} className={backButton}>
             <span>
               <i className="fas fa-arrow-left"></i>
             </span>

@@ -9,6 +9,17 @@
   padding: 0.5rem 0rem;
 }
 
+.video-drop-down-night {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #282828;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em black;
+  width: 165px;
+  padding: 0.5rem 0rem;
+}
+
 .video-drop-down-container {
   width: 305px;
   position: absolute;
@@ -24,6 +35,17 @@
   flex-direction: column;
   background: white;
   box-shadow:0.02em 0.1em 0.3em 0.015em #999999;
+  width: 165px;
+  padding: 0.5rem 0rem;
+}
+
+.app-drop-down-night {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #282828;
+  box-shadow:0.02em 0.1em 0.3em 0.015em black;
   width: 165px;
   padding: 0.5rem 0rem;
 }
@@ -47,6 +69,17 @@
   padding: 0.5rem 0rem;
 }
 
+.setting-drop-down-night {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #282828;
+  box-shadow:0.02em 0.1em 0.3em 0.015em black;
+  width: 165px;
+  padding: 0.5rem 0rem;
+}
+
 .setting-drop-down-container {
   width: 305px;
   position: absolute;
@@ -66,6 +99,17 @@
   padding-bottom: 0.5rem;
 }
 
+.user-drop-down-night {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #282828;
+  box-shadow:0.02em 0.1em 0.3em 0.015em black;
+  width: 250px;
+  padding-bottom: 0.5rem;
+}
+
 .drop-down-list-item-username {
   background: #F0F0F0;
   padding-bottom: 0.5rem;
@@ -74,11 +118,28 @@
   padding: 1rem;
   margin-bottom: 0.5rem;
 }
+
+.drop-down-list-item-username-night {
+  background: #484848;
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .drop-down-list-item-username div {
   display: flex;
   align-items: center;
   font-size: 15px;
   color: black;
+}
+
+.drop-down-list-item-username-night div {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: white;
 }
 
 .user-drop-down-container {
@@ -96,8 +157,18 @@
   padding: 1rem;
 }
 
+.drop-down-list-item-night {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
 .drop-down-list-item:hover {
   background: #F0F0F0;
+}
+
+.drop-down-list-item-night:hover {
+  background: #484848;
 }
 
 .drop-down-list-item div {
@@ -108,11 +179,33 @@
   color: #505050;
 }
 
+.drop-down-list-item-night div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+}
+
 .drop-down-list-item span {
   margin-right: 18%;
 }
 
+.drop-down-list-item-night span {
+  margin-right: 18%;
+}
+
 .drop-down-list-item div span {
+  color:   #0099ff;
+  border: 2px solid #989898;
+  border-radius: 3px;
+  font-size: 10px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+}
+
+.drop-down-list-item-night div span {
   color:   #0099ff;
   border: 2px solid #989898;
   border-radius: 3px;
@@ -179,6 +272,10 @@
 
 .night-mode-text {
   color: #505050;
+}
+
+.night-mode-text-night {
+  color: white;
 }
 
 ////

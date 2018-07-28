@@ -97,12 +97,13 @@
   display: flex;
   padding: 10px 0px;
   justify-content: center;
-  border-bottom: 3px solid #F5F5F5;
+  // border-bottom: 3px solid #F5F5F5;
   font-family: 'Roboto', 'Noto', sans-serif;
   width: 100%;
   position: fixed;
   z-index: 3;
   min-height: 35px;
+  background: #282828;
 }
 
 .small-search-main-nav-night button .searchtiptext {
@@ -233,7 +234,6 @@
 }
 
 .nav-search-night {
-  border: 1px solid #ccc;
   display: flex;
   align-items: center;
   width: 45%;
@@ -241,7 +241,7 @@
 }
 
 .small-search-night {
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   display: flex;
   align-items: center;
   width: 80%;
@@ -267,6 +267,10 @@
   font-size: 16px;
   font-weight: 200;
   color: white;
+  background: #101010;
+  border-top: 0.5px solid #404040;
+  border-left: 0.5px solid #404040;
+  border-bottom: 0.5px solid #404040;
 }
 
 .search-container-night input:focus {
@@ -283,14 +287,14 @@
   display: flex;
   justify-content: center;
   height: 100%;
-  border-left: 1px solid #ccc;
   background: #383838;
   border-radius: 0 2px 2px 0;
+  border-bottom: 0.5px solid #383838;
+  border-top: 0.5px solid #383838;
 }
 
 .search-container-night button:hover {
-  background: #F0F0F0;
-  color: black;
+  color: lightgrey;
 }
 
 .user-profile-div {
@@ -334,7 +338,26 @@
   margin: 0px;
 }
 
+.back-button-small-search-night {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  width: 18px;
+  padding: 7px 9px;
+  border-radius: 20px;
+  color: white;
+}
 
+.back-button-small-search-night:active {
+  background: #ccc;
+  border-radius: 20px;
+}
+
+.back-button-small-search-night span {
+  margin: 0px;
+  color: white;
+}
 
 .no-back-button-small-search {
   display: none;
