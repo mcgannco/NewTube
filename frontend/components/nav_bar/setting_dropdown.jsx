@@ -9,23 +9,12 @@ const SettingDropDown = () => {
           <li className="drop-down-list-item">
             <div>
               <span>
-                <i className="fas fa-play"></i>
+                <i className="fas fa-moon"></i>
               </span>
-              <div>Settings</div>
+              <div>Night Mode</div>
             </div>
             </li>
           </Link>
-
-          <Link to='/signin'>
-            <li className="drop-down-list-item">
-              <div>
-                <span>
-                  <i className="fas fa-podcast"></i>
-                </span>
-                <div>Settings</div>
-              </div>
-              </li>
-            </Link>
       </ul>
     </div>
   )
