@@ -124,7 +124,7 @@ class VideoIndexItem extends React.Component {
   toggleOptions(e, video) {
     e.preventDefault()
     this.setState({ optionsDropDown: true, targetVid: video }, () => {
-    document.getElementById('body').addEventListener('click', this.closeToggleOptions);
+    document.getElementById('body-body').addEventListener('click', this.closeToggleOptions);
     });
   }
 
@@ -138,7 +138,7 @@ class VideoIndexItem extends React.Component {
       this.watchLater(e, video)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.getElementById('body-body').removeEventListener('click', this.closeToggleOptions);
       });
     }
   }
