@@ -109,8 +109,7 @@ class CommentsIndex extends React.Component {
   }
 
   render() {
-
-    let {comments, vidId, users, currentUser, createComment} = this.props;
+    let {comments, vidId, users, currentUser, createComment, nightMode} = this.props;
     let numComments;
 
     if(comments.length > 0) {
@@ -141,7 +140,7 @@ class CommentsIndex extends React.Component {
     }
     return(
       <div className="user-comment-div-container">
-        <div className="comments-container-num-comments">
+        <div className={nightMode ? "comments-container-num-comments-night" : "comments-container-num-comments"}>
           <p>{numComments} Comments</p>
           <nav className="comment-sort" onClick={this.toggleCommentSort}><i className="fas fa-sort-amount-down"></i>
         {commentsSortDD}

@@ -4,8 +4,17 @@
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
-.video-player-container h1 {
+.video-player-h1 {
   color: black;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 25px;
+}
+
+.video-player-h1-night {
+  color: white;
   font-size: 1.1rem;
   margin-top: 15px;
   overflow: hidden;
@@ -15,6 +24,17 @@
 
 .edit-title-show-input {
     color: black;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 2px solid #599732;
+    height: 25px;
+    width: 60%;
+}
+
+.edit-title-show-input-night {
+    color: white;
     font-size: 1.1rem;
     margin-top: 15px;
     overflow: hidden;
@@ -103,11 +123,29 @@
   border-bottom: 1px solid 	#E8E8E8;
 }
 
+.video-stats-night {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+  align-items: center;
+  font-size: 1rem;
+  padding: 10px 0px 20px 0px;
+  border-bottom: 0.5px solid 	#404040;
+}
+
 .video-stats div {
   display: flex;
 }
 
+.video-stats-night div {
+  display: flex;
+}
+
 .video-stats div span {
+  display: flex;
+}
+
+.video-stats-night div span {
   display: flex;
 }
 
@@ -122,8 +160,19 @@
   cursor: pointer;
 }
 
+.video-show-likes-night nav {
+  cursor: pointer;
+}
+
 .video-show-likes nav:hover {
   color: black;
+  p {
+    color: grey;
+  }
+}
+
+.video-show-likes-night nav:hover {
+  color: grey;
   p {
     color: grey;
   }
@@ -135,7 +184,19 @@
   overflow: hidden;
 }
 
+.video-show-likes-night p {
+  padding: 0px 30px 0px 10px;
+  max-width: 150px;
+  overflow: hidden;
+}
+
 .video-show-dislikes p {
+  padding-left: 10px;
+  max-width: 150px;
+  overflow: hidden;
+}
+
+.video-show-dislikes-night p {
   padding-left: 10px;
   max-width: 150px;
   overflow: hidden;
@@ -145,8 +206,19 @@
   cursor: pointer;
 }
 
+.video-show-dislikes-night nav{
+  cursor: pointer;
+}
+
 .video-show-dislikes nav:hover {
   color: black;
+  p {
+    color: grey;
+  }
+}
+
+.video-show-dislikes-night nav:hover {
+  color: grey;
   p {
     color: grey;
   }
@@ -214,9 +286,15 @@
   align-items: center;
 }
 
-.uploader-container div p {
+.uploader-div-p {
   font-weight: 600;
   font-size: 14px;
+}
+
+.uploader-div-p-night {
+  font-weight: 600;
+  font-size: 14px;
+  color: white;
 }
 
 .uploader-container div nav {
@@ -258,12 +336,32 @@
   overflow: hidden;
 }
 
+.description-night {
+  display: flex;
+  align-items: flex-start;
+  height: 110px;
+  border-bottom: 0.5px solid #404040;
+  height: 130px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
 .expand-description {
   display: flex;
   align-items: flex-start;
   min-height: 130px;
   border-bottom: 1px solid #E8E8E8;
   height: 100%;
+}
+
+.expand-description-night {
+  display: flex;
+  align-items: flex-start;
+  min-height: 130px;
+  border-bottom: 0.5px solid #404040;
+  height: 100%;
+  color: white;
 }
 
 .description div {
@@ -276,6 +374,16 @@
 }
 
 .expand-description div {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+  min-height: 120px;
+  flex-direction: column;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.expand-description-night div {
   display: flex;
   align-items: flex-start;
   height: 100%;
@@ -298,6 +406,20 @@
   overflow-wrap: break-word;
 }
 
+.description-main-night {
+  margin-left: 80px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px;
+  min-width: 76px;
+  min-height: 100px;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  color: white;
+}
+
 .edit-show-description {
   width: calc(100% - 80px);
   height: auto;
@@ -308,7 +430,29 @@
   margin-left: 80px;
 }
 
+.edit-show-description-night {
+  width: calc(100% - 80px);
+  height: auto;
+  border: 2px solid #599732;
+  min-height: 130px;
+  padding: 5px 5px;
+  resize: vertical;
+  margin-left: 80px;
+  color: white;
+}
+
 .expand-description-main {
+  margin-left: 80px;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  max-height: 100%;
+  min-width: 76px;
+  min-height: 100px;
+}
+
+.expand-description-main-night {
   margin-left: 80px;
   font-size: 13px;
   line-height: 1.6;
@@ -326,8 +470,21 @@
   padding: 0px 0px;
 }
 
+.description-show-more-night {
+  color: white;
+  cursor: pointer;
+  margin-left: 80px;
+  padding: 0px 0px;
+}
+
 .expand-description-show-more {
   color: grey;
+  cursor: pointer;
+  margin-left: 80px;
+}
+
+.expand-description-show-more-night {
+  color: white;
   cursor: pointer;
   margin-left: 80px;
 }
@@ -341,6 +498,11 @@
 }
 
 .comments-container-num-comments {
+  display: flex;
+  position: relative;
+}
+
+.comments-container-num-comments-night {
   display: flex;
   position: relative;
 }

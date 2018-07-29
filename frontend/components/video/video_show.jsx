@@ -199,7 +199,7 @@ class VideoShow extends React.Component {
   }
 
   render() {
-    let {video,users, currentUser} = this.props;
+    let {video,users, currentUser, nightMode} = this.props;
     let commentContainer;
     let relatedContainer;
     if (!video || !users ) {
@@ -254,13 +254,47 @@ class VideoShow extends React.Component {
       expandDescriptionMain = "hidden";
       expandDescriptionShowMore = "hidden";
     } else if (this.state.expandDescription) {
-      expandDescription = "expand-description";
-      expandDescriptionMain = "expand-description-main";
-      expandDescriptionShowMore = "expand-description-show-more";
+      if(nightMode) {
+        expandDescription = "expand-description-night";
+        expandDescriptionMain = "expand-description-main-night";
+        expandDescriptionShowMore = "expand-description-show-more-night";
+      } else {
+        expandDescription = "expand-description";
+        expandDescriptionMain = "expand-description-main";
+        expandDescriptionShowMore = "expand-description-show-more";
+      }
     } else {
-      expandDescription = "description";
-      expandDescriptionMain = "description-main";
-      expandDescriptionShowMore = "description-show-more";
+      if(nightMode) {
+        expandDescription = "description-night";
+        expandDescriptionMain = "description-main-night";
+        expandDescriptionShowMore = "description-show-more-night";
+      } else {
+        expandDescription = "description";
+        expandDescriptionMain = "description-main";
+        expandDescriptionShowMore = "description-show-more";
+      }
+    }
+
+    let videoTiteClass;
+    let videoInputClass;
+    let videoTextAreaClass;
+    if(this.state.editStatus) {
+      videoTiteClass = "hidden"
+      if(nightMode) {
+        videoInputClass = "edit-title-show-input-night"
+        videoTextAreaClass = "edit-show-description-night"
+      } else {
+        videoInputClass = "edit-title-show-input"
+        videoTextAreaClass = "edit-show-description"
+      }
+    } else {
+      videoInputClass = "hidden"
+      videoTextAreaClass = "hidden"
+      if(nightMode) {
+        videoTiteClass = "video-player-h1-night"
+      } else {
+        videoTiteClass = "video-player-h1"
+      }
     }
 
       return(
@@ -281,18 +315,18 @@ class VideoShow extends React.Component {
                 />
             </nav>
 
-              <h1 className={this.state.editStatus ? "hidden" : ""}>{video.title}</h1>
-              <input onChange={this.updateTitle} className={this.state.editStatus ? "edit-title-show-input" : "hidden"} value={this.state.title}></input>
-              <div className= "video-stats">
+              <h1 className={videoTiteClass}>{video.title}</h1>
+              <input onChange={this.updateTitle} className={videoInputClass} value={this.state.title}></input>
+              <div className= {nightMode ? "video-stats-night" : "video-stats"}>
                 <span className="total-views">{this.formatViews(this.props.video.view_count)} views</span>
                 <div>
-                  <span className="video-show-likes">
+                  <span className={nightMode ? "video-show-likes-night" : "video-show-likes"}>
                     <nav onClick={() => this.handleLike(true)}>
                       <i className="fas fa-thumbs-up"></i>
                     </nav>
                     <p>{this.formatNumber(video.likes)}</p>
                   </span>
-                  <span className="video-show-dislikes">
+                  <span className={nightMode ? "video-show-dislikes-night" : "video-show-dislikes"}>
                     <nav onClick={() => this.handleLike(false)}>
                       <i className="fas fa-thumbs-down"></i>
                     </nav>
@@ -311,7 +345,9 @@ class VideoShow extends React.Component {
                     </div>
 
                     <div>
-                      <Link to={`/channel/${video.author_id}`}><p>{users[video.author_id].username}</p></Link>
+                      <Link to={`/channel/${video.author_id}`}>
+                        <p className={nightMode ? "uploader-div-p-night" : "uploader-div-p"}>{users[video.author_id].username}</p>
+                      </Link>
                       <nav>Published on {date}</nav>
                     </div>
 
@@ -333,7 +369,7 @@ class VideoShow extends React.Component {
                   </div>
                 </div>
               </div>
-              <textarea onChange={this.updateDescription} value={this.state.description} className={this.state.editStatus ? "edit-show-description" : "hidden"}>{this.state.description}</textarea>
+              <textarea onChange={this.updateDescription} value={this.state.description} className={videoTextAreaClass}>{this.state.description}</textarea>
 
               <div className={!this.state.isColumnView ? "comments-container" : "hidden"}>
                 {commentContainer}

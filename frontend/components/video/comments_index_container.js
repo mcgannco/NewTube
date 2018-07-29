@@ -9,7 +9,8 @@ const msp = (state, ownProps) => {
   return({
     comments: selectAllComments(state),
     users: state.entities.users,
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    nightMode: state.session.night_mode
   })
 };
 
