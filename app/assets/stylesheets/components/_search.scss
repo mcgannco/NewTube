@@ -10,7 +10,23 @@
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
+.search-results-night {
+  position: absolute;
+  top: 34px;
+  background: #282828;
+  width: 90%;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em black;
+  z-index: 11;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
 .search-results ul {
+  padding: 10px 0px;
+}
+
+.search-results-night ul {
   padding: 10px 0px;
 }
 
@@ -19,8 +35,17 @@
   cursor: pointer;
 }
 
+.search-results-night li {
+  padding: 10px;
+  cursor: pointer;
+}
+
 .search-results li:hover {
   background: #F0F0F0;
+}
+
+.search-results-night li:hover {
+  background: #404040;
 }
 
 .video-result-info {
@@ -120,6 +145,10 @@
 
 @media (max-width: 1128px) {
   .search-results {
+    width: calc(100% - 50px);
+  }
+
+  .search-results-night {
     width: calc(100% - 50px);
   }
 }

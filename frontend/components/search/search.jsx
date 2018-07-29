@@ -140,7 +140,7 @@ class Search extends React.Component {
           <SearchItem key={idx} el={el} />)}
       </ul>
     }
-    
+
     return(
       <div className={nightMode ? "search-container-night" : "search-container"}>
         <input onChange={this.search} className={nightMode ? "search-night" : "night"} type="text" value={this.state.searchStr} placeholder="Search"></input>
@@ -149,7 +149,7 @@ class Search extends React.Component {
           <nav className="searchtiptext">Search</nav>
         </button>
 
-        <div className="search-results">
+        <div className={nightMode ? "search-results-night" : "search-results"}>
           {search_result_list}
         </div>
 
