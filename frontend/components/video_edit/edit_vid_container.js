@@ -7,7 +7,8 @@ import VideoForm from './video_form';
 const msp = state => {
   return({
     formType: 'edit',
-    video: state.ui.vmodal[1]
+    video: state.ui.vmodal[1],
+    nightMode: state.session.night_mode
   })
 };
 

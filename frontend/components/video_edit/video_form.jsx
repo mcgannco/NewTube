@@ -63,9 +63,19 @@ class VideoForm extends React.Component {
 }
 
   render() {
-    let { formType, video } = this.props;
+    let { formType, video, nightMode } = this.props;
+    let titleClass;
+    if(formType === "edit") {
+      titleClass = "hidden"
+    } else {
+      if(nightMode) {
+        titleClass = "video-edit-h3-night"
+      } else {
+        titleClass = "video-edit-h3"
+      }
+    }
     return(
-      <div className="change-video-container">
+      <div className={nightMode ? "change-video-container-night" : "change-video-container"}>
         <div>
           <video
             width="200"
@@ -73,7 +83,7 @@ class VideoForm extends React.Component {
             className="edit-video-gif"
             src={video.video_url}>
           </video>
-          <h3 className={formType === "edit" ? "hidden" : ""}>{video.title}</h3>
+          <h3 className={titleClass}>{video.title}</h3>
         </div>
 
         <div className="video-edit-info-inputs">
