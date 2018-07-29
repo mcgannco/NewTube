@@ -19,7 +19,7 @@ class SubsIndexItem extends React.Component {
   }
 
   render() {
-    let { user } = this.props;
+    let { user, nightMode } = this.props;
     let userAvatar;
     if(user.profile_img_url) {
       userAvatar = user.profile_img_url;
@@ -27,7 +27,7 @@ class SubsIndexItem extends React.Component {
 
     return(
       <li onClick={(e) => this.redirect(e, user.id)}>
-      <section className="user-sidebar-subs-container">
+      <section className={nightMode ? "user-sidebar-subs-container-night" : "user-sidebar-subs-container"}>
         <section className="user-sidebar-icon-container">
           <section className="user-sidebar-icon"
             style={
