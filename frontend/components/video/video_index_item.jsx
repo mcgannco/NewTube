@@ -178,11 +178,11 @@ class VideoIndexItem extends React.Component {
   hide() {
     if(this.props.currentUserID) {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.removeEventListener('click', this.closeToggleOptions);
       });
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.removeEventListener('click', this.closeToggleOptions);
       });
       this.props.history.push('/signin')
     }
@@ -197,12 +197,21 @@ class VideoIndexItem extends React.Component {
 
 
   render() {
-    let { video, idx, author, timeAgo, currentUserID, users} = this.props;
+    let { video, idx, author, timeAgo, currentUserID, users, nightMode} = this.props;
     let date = new Date(timeAgo);
     let toggleDD;
     if(this.state.optionsDropDown) {
-
-      toggleDD = <div className="toggleOptionsDD" id="toggleDD">
+      let toggleOptionsClass;
+      if(video.author_id === currentUserID) {
+        if(nightMode) {
+          toggleOptionsClass = "toggle-dd-li-night"
+        } else {
+          toggleOptionsClass = "toggle-dd-li"
+        }
+      } else {
+        toggleOptionsClass = "hidden"
+      }
+      toggleDD = <div className={nightMode ? "toggleOptionsDD-night" : "toggleOptionsDD"} id="toggleDD">
         <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Edit</span>
         <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUserID ? "" : "hidden"}>Delete</span>
         <span onClick={this.hide}id="watch-later">Watch Later</span>
@@ -230,7 +239,7 @@ class VideoIndexItem extends React.Component {
           </div>
 
           <div className="video-index-title">
-            <p>{video.title}</p>
+            <p className={nightMode ? "video-index-title-p-night" : "video-index-title-p"}>{video.title}</p>
             <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
               <i className="fas fa-ellipsis-v"></i>
             </span>

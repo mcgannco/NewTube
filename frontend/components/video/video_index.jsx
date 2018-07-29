@@ -39,7 +39,8 @@ class VideoIndex extends React.Component {
   }
 
   render() {
-    let {videos, users, currentUserID, openVidModal, createWatch, deleteWatch, watchLaterButton} = this.props;
+    let {videos, users, currentUserID, openVidModal, createWatch,
+      deleteWatch, watchLaterButton, nightMode} = this.props;
     let marg;
     if (document.getElementById("video-0")) {
       marg = document.getElementById("video-0").offsetLeft.toString();
@@ -59,11 +60,15 @@ class VideoIndex extends React.Component {
         <div className='video-index-container' id='body'>
           <div className='video-index'>
             <div className="video-header" style={{marginLeft: marg + 'px', width: header + 'px'}}>
-              <h1>Recommended</h1>
+              <h1 className={nightMode ? "video-header-h1-night" : "video-header-h1"}>Recommended</h1>
               </div>
             <ul>
             {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} timeAgo= {video.timestamp} video={video}
-            currentUserID={currentUserID} watchLaterButton={watchLaterButton}createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+            currentUserID={currentUserID} watchLaterButton={watchLaterButton}
+            createWatch={createWatch} deleteWatch={deleteWatch}
+            openVidModal={openVidModal}
+            author={users[video.author_id] ? users[video.author_id].username : ""}
+            nightMode={nightMode}/>)}
             </ul>
           </div>
 

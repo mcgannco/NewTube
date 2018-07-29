@@ -10,7 +10,8 @@ const msp = state => {
     videos: selectAllVideos(state),
     users: state.entities.users,
     currentUserID: state.session.id,
-    button: state.ui.watchLaterBttn
+    button: state.ui.watchLaterBttn,
+    nightMode: state.session.night_mode
   })
 };
 
