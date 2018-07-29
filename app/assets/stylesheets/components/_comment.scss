@@ -11,12 +11,28 @@
   margin-bottom: 5px;
 }
 
+.comment-body-body-night {
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: white;
+}
+
 .comment-body-body-edit {
   color: black;
   font-size: 14px;
   margin-bottom: 5px;
   border-bottom: 2px solid #599732;
   width: 100%;
+}
+
+.comment-body-body-edit-night {
+  color: black;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid #0099ff;
+  width: 100%;
+  color: white;
 }
 
 .comments-container-num-comments p {
@@ -109,6 +125,11 @@
   align-items: center;
 }
 
+.comment-body-night {
+  display: flex;
+  align-items: center;
+}
+
 .comment-body p {
   font-weight: 600;
   color: black;
@@ -116,7 +137,19 @@
   font-size: 14px;
 }
 
+.comment-body-night p {
+  font-weight: 600;
+  color: black;
+  padding-right: 10px;
+  font-size: 14px;
+  color: white;
+}
+
 .comment-body span time {
+  font-size: 12px;
+}
+
+.comment-body-night span time {
   font-size: 12px;
 }
 
@@ -168,6 +201,13 @@
   cursor: pointer;
 }
 
+.view-all-replies-night {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .reply-comment {
   cursor: pointer;
   padding: 10px;
@@ -208,8 +248,22 @@
   width: calc(100% - 76px);
 }
 
+.new-comment-night {
+  border-bottom: 0.5px solid #404040;
+  resize: none;
+  font-size: 14px;
+  font-weight: 200;
+  height: 18px;
+  width: calc(100% - 76px);
+  color: white;
+}
+
 .new-comment:focus {
   border-bottom: 2px solid #599732;
+}
+
+.new-comment-night:focus {
+  border-bottom: 2px solid #0099ff;
 }
 
 .toggleCommentOptionsDD {
@@ -228,23 +282,41 @@
   font-size: 12px;
 }
 
-#edit-comment {
+.toggleCommentOptionsDD-night {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 103px;
+  padding: 5px 0px;
+  right: 0px;
+  background: #282828;
+  box-shadow: 0.02em 0.1em 0.3em 0.015em black;
+  z-index: 11;
+  top: -1px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  color: black;
+  font-size: 12px;
+  color: white;
+}
+
+.toggleCommentOptionsDD-span {
   padding: 5px;
   z-index: 14;
 }
 
-#edit-comment:hover {
+.toggleCommentOptionsDD-span:hover {
   background: #F0F0F0;
 }
 
-#delete-comment {
+.toggleCommentOptionsDD-span-night {
   padding: 5px;
   z-index: 14;
 }
 
-#delete-comment:hover {
-  background: #F0F0F0;
+.toggleCommentOptionsDD-span-night:hover {
+  background: #404040;
 }
+
 
 .children-comment-left {
   display: flex;
@@ -256,6 +328,10 @@
 }
 
 .comment-likes {
+  cursor: pointer;
+}
+
+.comment-likes-night {
   cursor: pointer;
 }
 

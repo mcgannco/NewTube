@@ -7,7 +7,8 @@ import CommentIndexItem from './comment_index_item';
 const msp = (state, ownProps) => {
   return({
     comments: state.entities.comments,
-    currentUserId: state.session.id
+    currentUserId: state.session.id,
+    nightMode: state.session.night_mode
   })
 };
 

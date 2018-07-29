@@ -97,6 +97,7 @@ class CommentIndexItem extends React.Component {
     if(e.target.id === "edit-comment") {
       this.editComment(e)
     } else if (e.target.id === "delete-comment") {
+      debugger
       this.deleteComment(e)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
@@ -178,7 +179,7 @@ class CommentIndexItem extends React.Component {
 
   render() {
 
-    let { comment, user, currentUser, createComment, users, comments, currentUserId } = this.props;
+    let { comment, user, currentUser, createComment, users, comments, currentUserId, nightMode } = this.props;
     let date = new Date(comment.timestamp);
     if (!user || !comments) {
       return null;
@@ -201,21 +202,45 @@ class CommentIndexItem extends React.Component {
     let replyClass;
     let replyMessage;
     if(this.state.showReplies && child_comments.length > 0) {
-      replyClass = "view-all-replies"
-      replyMessage = 'Hide replies'
+      if(nightMode) {
+        replyClass = "view-all-replies-night"
+        replyMessage = 'Hide replies'
+      } else {
+        replyClass = "view-all-replies"
+        replyMessage = 'Hide replies'
+      }
     } else if (child_comments.length === 0) {
         replyClass = "hidden"
         replyMessage = ""
     } else {
-      replyClass = "view-all-replies"
-      replyMessage = `View all ${child_comments.length} replies`
+      if(nightMode) {
+        replyClass = "view-all-replies-night"
+        replyMessage = `View all ${child_comments.length} replies`
+      } else {
+        replyClass = "view-all-replies"
+        replyMessage = `View all ${child_comments.length} replies`
+      }
     }
 
     let toggleDD;
+    let toggleDDClass;
+    let toggleDDClassSpan;
+    if(comment.author_id === currentUserId) {
+      if(nightMode) {
+        toggleDDClass = "toggleCommentOptionsDD-night"
+        toggleDDClassSpan = "toggleCommentOptionsDD-span-night"
+      } else {
+        toggleDDClass = "toggleCommentOptionsDD"
+        toggleDDClassSpan = "toggleCommentOptionsDD-span"
+      }
+    } else {
+      toggleDDClass = "hidden"
+      toggleDDClassSpan = "hidden"
+    }
     if(this.state.optionsDropDown) {
-      toggleDD = <div className={comment.author_id === currentUserId ? "toggleCommentOptionsDD" : "hidden"} id="toggleDD">
-        <span  id = "edit-comment" className={comment.author_id === currentUserId ? "" : "hidden"}>Edit</span>
-        <span id = "delete-comment" className={comment.author_id === currentUserId ? "" : "hidden"}>Delete</span>
+      toggleDD = <div className={toggleDDClass} id="toggleDD">
+        <span  id = "edit-comment" className={toggleDDClassSpan}>Edit</span>
+        <span id = "delete-comment" className={toggleDDClassSpan}>Delete</span>
       </div>
     }
 
@@ -229,6 +254,46 @@ class CommentIndexItem extends React.Component {
       submitEditComment = "submit-button";
     } else if (!this.state.allowEditSubmit) {
       submitEditComment = "no-submit-button";
+    }
+
+    let commentBody;
+    let commentEdit;
+    if(this.state.commentStatus === "edit") {
+      commentBody = "hidden"
+      if(nightMode) {
+        commentEdit = "comment-body-body-edit-night"
+      } else {
+        commentEdit = "comment-body-body-edit"
+      }
+    } else {
+      commentEdit = "hidden"
+      if(nightMode) {
+        commentBody = "comment-body-body-night"
+      } else {
+        commentBody = "comment-body-body"
+      }
+    }
+
+    let subCommentClass;
+    if(this.state.subComment) {
+      if(nightMode) {
+      subCommentClass = "new-comment-night";
+      } else {
+      subCommentClass = "new-comment";
+      }
+    } else {
+      subCommentClass = "hidden";
+    }
+
+    let childrenCommentCancel;
+    if(this.state.commentStatus === "edit" || this.state.commentStatus=== "delete") {
+      if(nightMode) {
+        childrenCommentCancel = "cancel-button-night"
+      } else {
+        childrenCommentCancel = "cancel-button"
+      }
+    } else {
+      childrenCommentCancel = "hidden"
     }
 
       return(
@@ -247,27 +312,27 @@ class CommentIndexItem extends React.Component {
 
           <nav className="hover-comment-container">
             <div className="hover-comment">
-              <div className="comment-body">
+              <div className={nightMode ? "comment-body-night" : "comment-body"}>
               <Link to={`/channel/${user.id}`}><p>{user.username}</p></Link>
                 <span>
                   <TimeAgo date={date} minPeriod='60' />
                 </span>
               </div>
-              <p className={this.state.commentStatus === "edit" ? "hidden" : "comment-body-body"}>{comment.body}</p>
-              <input onChange={this.updateCommentBody} className={this.state.commentStatus === "edit" ? "comment-body-body-edit" : "hidden"} value={this.state.body}></input>
+              <p className={commentBody}>{comment.body}</p>
+              <input onChange={this.updateCommentBody} className={commentEdit} value={this.state.body}></input>
 
                 <div className="children-comment-container">
                     <section className="children-comment">
                       <div className="children-comment-left">
                         <div>
-                          <section className="comment-likes" onClick={() => this.handleLike(true)}>
+                          <section className={nightMode ? "comment-likes-night" : "comment-likes"} onClick={() => this.handleLike(true)}>
                             <i className="fas fa-thumbs-up"></i>
                           </section>
                           <p className="comment-like-count">{this.formatNumber(comment.likes)}</p>
                         </div>
 
                         <div>
-                          <section className="comment-likes" onClick={() => this.handleLike(false)}>
+                          <section className={nightMode ? "comment-likes-night" : "comment-likes"} onClick={() => this.handleLike(false)}>
                             <i className="fas fa-thumbs-down"></i>
                           </section>
                           <p className="comment-like-count">{this.formatNumber(comment.dislikes)}</p>
@@ -276,7 +341,7 @@ class CommentIndexItem extends React.Component {
                         </div>
 
                         <nav className="children-comment-right">
-                          <button onClick={this.cancelUpdate} className={this.state.commentStatus === "edit" || this.state.commentStatus=== "delete" ? "cancel-button" : "hidden"}>Cancel</button>
+                          <button onClick={this.cancelUpdate} className={childrenCommentCancel}>Cancel</button>
                           <button onClick={this.submitEdit}className={submitEditComment}>Submit</button>
                         </nav>
 
@@ -292,10 +357,10 @@ class CommentIndexItem extends React.Component {
                           </span>
                         </div>
 
-                        <input placeholder="Add a public reply" onChange={this.updateComment}value={this.state.subStr}className={this.state.subComment ? "new-comment" : "hidden"}></input>
+                        <input placeholder="Add a public reply" onChange={this.updateComment}value={this.state.subStr}className={subCommentClass}></input>
                       </span>
                       <span className={this.state.subComment ? "sub-comment-buttons" : "hidden"}>
-                        <button onClick={this.closeSubComment}className="cancel-button">Cancel</button>
+                        <button onClick={this.closeSubComment}className={nightMode ? "cancel-button-night" : "cancel-button"}>Cancel</button>
                         <button onClick={this.submit} className={this.state.allowSubmit ? "submit-button" : "no-submit-button"}>Submit</button>
                     </span>
                     </span>

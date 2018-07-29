@@ -165,7 +165,7 @@ class CommentsIndex extends React.Component {
         {commentsSortDD}
           </nav>
         </div>
-        <div className="user-comment-div">
+        <div className={nightMode ? "user-comment-div-night" : "user-comment-div"}>
           <span style={
             {backgroundImage: `url(${userAvatar})`}
           }>{userName}</span>
@@ -178,7 +178,7 @@ class CommentsIndex extends React.Component {
         </div>
 
         <div className={this.state.submitButtons ? "comment-button-container" : "hidden"}>
-          <button onClick={this.hideButtons} className="cancel-button">Cancel</button>
+          <button onClick={this.hideButtons} className={nightMode ? "cancel-button-night" : "cancel-button"}>Cancel</button>
           <button onClick={this.submit} className={this.state.allowSubmit ? "submit-button" : "no-submit-button"}>Submit</button>
         </div>
 

@@ -534,7 +534,33 @@
   padding: 20px 0px;
 }
 
+.user-comment-div-night {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
 .user-comment-div span {
+  background: #599732;
+  border-radius: 23px;
+  width: 41px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 5px 0px;
+  height: 40px;
+  align-items: center;
+  margin-left: 16px;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.user-comment-div-night span {
   background: #599732;
   border-radius: 23px;
   width: 41px;
@@ -561,7 +587,20 @@
 
 .user-comment-div input:focus {
   border-bottom: 2px solid #599732;
+}
 
+.user-comment-div-night input {
+  border-bottom: 0.5px solid #404040;
+  resize: none;
+  font-size: 14px;
+  font-weight: 200;
+  height: 18px;
+  width: calc(100% - 76px);
+  color: white;
+}
+
+.user-comment-div-night input:focus {
+  border-bottom: 2px solid #0099ff;
 }
 
 .comment-button-container {
@@ -606,12 +645,31 @@
   font-size: 14px;
 }
 
+.cancel-button-night {
+  color: grey;
+  padding: 10px;
+  border-radius: 2px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
 .cancel-button:active {
   background: lightgrey;
 }
 
+.cancel-button-night:active {
+  background: #585858;
+}
+
 .cancel-button:hover {
   color: black;
+}
+
+.cancel-button-night:hover {
+  color: #989898;
 }
 
 .hidden {
