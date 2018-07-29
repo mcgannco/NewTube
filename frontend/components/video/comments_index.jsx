@@ -125,10 +125,29 @@ class CommentsIndex extends React.Component {
       userName = currentUser.username.slice(0,1)
     }
     let commentsSortDD;
+    let commentSelect;
+    let timeSelect;
+    if(this.state.commentSort === "likes") {
+      if(nightMode) {
+        commentSelect = "comment-select-night"
+        timeSelect = "comment-unselect-night"
+      } else {
+        commentSelect = "comment-select"
+        timeSelect = "comment-unselect"
+      }
+    } else if (this.state.commentSort === "time") {
+      if(nightMode) {
+        commentSelect = "comment-unselect-night"
+        timeSelect = "comment-select-night"
+      } else {
+        commentSelect = "comment-unselect"
+        timeSelect = "comment-select"
+      }
+    }
     if(this.state.commentsDropDown) {
-      commentsSortDD = <div className="comment-sort-dd-container">
-        <span onClick={() => this.commentSortSet('likes')} className={this.state.commentSort === "likes" ? "comment-select" : "comment-unselect"}>Top Comments</span>
-        <span onClick={() => this.commentSortSet('time')}className={this.state.commentSort === "time" ? "comment-select" : "comment-unselect"}>Newest First</span>
+      commentsSortDD = <div className={ nightMode ? "comment-sort-dd-container-night" : "comment-sort-dd-container"}>
+        <span onClick={() => this.commentSortSet('likes')} className={commentSelect}>Top Comments</span>
+        <span onClick={() => this.commentSortSet('time')}className={timeSelect}>Newest First</span>
       </div>
     }
 
