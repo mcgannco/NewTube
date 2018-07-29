@@ -27,8 +27,25 @@
   margin-left: 6px;
 }
 
+.related-video-info-night {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 180px);
+  margin-left: 6px;
+}
+
 .related-video-info p {
   color: black;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-video-info-night p {
+  color: white;
   font-family: 'Roboto', 'Noto', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
