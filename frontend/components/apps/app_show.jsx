@@ -58,8 +58,15 @@ class AppShow extends React.Component {
       }
     }
     if(videos.length > 0) {
+      let filtered = [];
+      for (var i = 0; i < videos.length; i++) {
+        if(videos[i].tags !== undefined && videos[i].tags[tag.id]) {
+          filtered.push(videos[i])
+        }
+      }
+      debugger
       video_list = <ul>
-                {videos.map((video,idx) => <li>
+                {filtered.map((video,idx) => <li>
                   <VideoResultItem
                   key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
                   watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}

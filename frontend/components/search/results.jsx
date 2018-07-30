@@ -114,7 +114,6 @@ class Results extends React.Component {
     let {user_arr, openVidModal, video_arr, users, videos, currentUser,
       createSub, deleteSub, createWatch, deleteWatch, watchLaterButton,
       tags, searchErrors, query, nightMode } = this.props
-      debugger
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
