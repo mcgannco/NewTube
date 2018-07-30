@@ -97,7 +97,6 @@ class CommentIndexItem extends React.Component {
     if(e.target.id === "edit-comment") {
       this.editComment(e)
     } else if (e.target.id === "delete-comment") {
-      debugger
       this.deleteComment(e)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {

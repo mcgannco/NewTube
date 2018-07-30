@@ -243,7 +243,9 @@ class ChannelShow extends React.Component {
   }
 
   render() {
-    let {user, currentUserID, loading, videos, users, users_arr, openVidModal, watchLaterButton, createWatch, deleteWatch} = this.props;
+    let {user, currentUserID, loading, videos, users,
+      users_arr, openVidModal, watchLaterButton, createWatch,
+      deleteWatch, nightMode} = this.props;
     if(!user || !videos || !users_arr) {
       return null;
     }
@@ -272,29 +274,77 @@ class ChannelShow extends React.Component {
       navSubButton = "SUBSCRIBE";
     }
 
+    let channelHClass;
+    let channelIClass;
+    if(this.state.edit) {
+      channelHClass = "hidden";
+      if(nightMode) {
+        channelIClass = "user-name-info-input-night"
+      } else {
+        channelIClass = "user-name-info-input"
+      }
+    } else {
+      channelIClass = "hidden"
+      if(nightMode) {
+        channelHClass = "user-name-info-h1-night";
+      } else {
+        channelHClass = "user-name-info-h1";
+      }
+    }
+
     let selected;
     if(this.state.selected ==="VIDEOS") {
       videos = videos.filter(video => video.author_id === user.id)
+      let emptyMessage;
+      if(videos.length === 0) {
+        if(nightMode) {
+          emptyMessage = "empty-message-night"
+        } else {
+          emptyMessage = "empty-message"
+        }
+      } else {
+        emptyMessage = "hidden"
+      }
       selected = <div className='video-index'>
         <ul>
         {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
-        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+        <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Uploads" : ""}</p>
         </nav>
       </div>
     } else if (this.state.selected === "WATCHLIST") {
       videos = videos.filter(video => user.watchLaterIds.includes(video.id))
+      let emptyMessage;
+      if(videos.length === 0) {
+        if(nightMode) {
+          emptyMessage = "empty-message-night"
+        } else {
+          emptyMessage = "empty-message"
+        }
+      } else {
+        emptyMessage = "hidden"
+      }
       selected = <div className='video-index'>
         <ul>
         {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
-        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+        <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Videos Added" : ""}</p>
         </nav>
       </div>
     } else if (this.state.selected === "CHANNELS") {
       users_arr = users_arr.filter(channel => user.subscriberIds.includes(channel.id));
+      let emptyMessage;
+      if(users_arr.length === 0) {
+        if(nightMode) {
+          emptyMessage = "empty-message-night"
+        } else {
+          emptyMessage = "empty-message"
+        }
+      } else {
+        emptyMessage = "hidden"
+      }
       selected = <div className="channel-index">
         <ul>
           {users_arr.map((user,idx) => <li key={user.id}>
@@ -308,39 +358,59 @@ class ChannelShow extends React.Component {
             </div>
           </li>)}
         </ul>
-        <nav className={users_arr.length === 0 ? "empty-message" : "hidden"}>
+        <nav className={emptyMessage}>
           <p>{users_arr.length === 0 ? "No Subscriptions" : ""}</p>
         </nav>
       </div>
     } else if (this.state.selected === "LIKES") {
       let likedVideoIds = user.likedVideoIds
       videos = videos.filter(video => likedVideoIds.includes(video.id))
+      let emptyMessage;
+      if(videos.length === 0) {
+        if(nightMode) {
+          emptyMessage = "empty-message-night"
+        } else {
+          emptyMessage = "empty-message"
+        }
+      } else {
+        emptyMessage = "hidden"
+      }
       selected = <div className='video-index'>
         <ul>
         {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
-        <nav className={videos.length === 0 ? "empty-message" : "hidden"}>
+        <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Likes" : ""}</p>
         </nav>
       </div>
 
     } else if (this.state.selected === "ABOUT") {
+      let textAreaClass;
+      if(this.state.edit) {
+        if(nightMode) {
+          textAreaClass = "edit-description-night"
+        } else {
+          textAreaClass = "edit-description"
+        }
+      } else {
+        textAreaClass = "hidden"
+      }
       videos = videos.filter(video => video.author_id === user.id)
       let subscribers = users_arr.filter(channel => channel.subscriberIds.includes(user.id))
       let total_views = 0;
       videos.forEach(vid =>  total_views += vid.view_count)
       selected = <section className="user-container" id='body'>
                 	<section className="user-description-container col col-1-2">
-                    <div className="description-header">
+                    <div className={nightMode ? "description-header-night" : "description-header"}>
                       <span>Description</span>
                       <p className={this.state.edit ? "hidden" : ""}>{user.description ? user.description : "No Description"}</p>
-                      <textarea value={this.state.description} onChange={this.updateDescription} className={this.state.edit ? "edit-description" : "hidden"}>{this.state.description}</textarea>
+                      <textarea value={this.state.description} onChange={this.updateDescription} className={textAreaClass}>{this.state.description}</textarea>
                     </div>
                   </section>
                   	<section className="col col-1-2">
 
                       <section className="col col-1-2-1">
-                        <div className="stats-header">
+                        <div className={nightMode ? "stats-header-night" : "stats-header"}>
                           <span>Stats</span>
                           <p>Joined {this.convertDate(user.timestamp)}</p>
                           <p>{this.formatViews(total_views)} views</p>
@@ -348,15 +418,15 @@ class ChannelShow extends React.Component {
                       </section>
 
                       <section className="col col-1-2-1">
-                        <div className="subs-header">
+                        <div className={nightMode ? "subs-header-night" : "subs-header"}>
                           <span>SUBSCRIBERS</span>
-                            <ul className="subs-list-ul">
+                            <ul className={nightMode ? "subs-list-ul-night" : "subs-list-ul"}>
                               {subscribers.map((user,idx) => <li key={user.id}>
-                                <div className="subs-nav-item">
+                                <div className={nightMode ? "subs-nav-item-night" : "subs-nav-item"}>
                                   <div className="subscribers-nav">
                                     <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "hidden" : ""}to={`/channel/${user.id}`}><img src={user.profile_img_url}></img></Link>
                                     <Link className={user.profile_img_url === "/avatars/original/missing.png" ? "" : "hidden"}to={`/channel/${user.id}`}><div className="no-pic-avatar">{user.username.slice(0,1)}</div></Link>
-                                    <Link to={`/channel/${user.id}`}>  <h1>{user.username}</h1></Link>
+                                    <Link to={`/channel/${user.id}`}>  <h1 className={nightMode ? "subs-h1-night" : "subs-h1"}>{user.username}</h1></Link>
                                   </div>
                                   <button className={user.id === currentUserID ? "hidden" : ""}onClick={() => this.handleSubs(user)}>{currentUserID && users[currentUserID].subscriberIds.includes(user.id) ? "Subscribed" : "Subscribe"}</button>
                                   <p className={user.id === currentUserID ? "" : "hidden"}>My Channel</p>
@@ -409,7 +479,7 @@ class ChannelShow extends React.Component {
 
         </div>
 
-        <div className="user-info-container">
+        <div className={nightMode ? "user-info-container-night" : "user-info-container"}>
           <div className="user-show-icon">
             <span style={
               {backgroundImage: `url(${avatar})`}
@@ -434,8 +504,8 @@ class ChannelShow extends React.Component {
           <div className="user-name-info">
             <nav>
               <div>
-                <h1 className={this.state.edit ? "hidden" : "user-name-info-h1"}>{user.username}</h1>
-                <input onChange={this.updateUsername} className={this.state.edit ? "user-name-info-input" : "hidden"} value={this.state.username}/>
+                <h1 className={channelHClass}>{user.username}</h1>
+                <input onChange={this.updateUsername} className={channelIClass} value={this.state.username}/>
                 <p className="subs-count">{this.formatViews(user.subscribeeIds.length)} subscribers</p>
               </div>
               <p className="user-errors-update">{this.props.errors[0] ? "Username Invalid" : ""}</p>
@@ -448,7 +518,7 @@ class ChannelShow extends React.Component {
           </div>
         </div>
 
-        <div className="user-toggle-options">
+        <div className={nightMode ? "user-toggle-options-night" : "user-toggle-options"}>
           <ul>
             <li className={this.state.selected === "HOME" ? "selected" : ""}
               onClick={() => this.selectToggle("HOME")}>

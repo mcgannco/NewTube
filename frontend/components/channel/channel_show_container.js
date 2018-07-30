@@ -16,7 +16,8 @@ const msp = (state, ownProps) => {
     loading: state.ui.loading.pictureLoading,
     errors: state.errors.session,
     button: state.ui.watchLaterBttn,
-    sideLink: state.ui.sideLink
+    sideLink: state.ui.sideLink,
+    nightMode: state.session.night_mode
   })
 };
 

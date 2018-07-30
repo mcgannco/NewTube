@@ -51,7 +51,7 @@ class SettingDropDown extends React.Component {
               </div>
 
 
-              <button className="night-mode-bttn" onClick={this.toggleNightMode} id="night-mode">
+              <button onClick={this.toggleNightMode} className="night-mode-bttn" id="night-mode">
                 <p id="night-mode" className={this.state.nightMode ? "" : "hidden"}>
                   ON
                 </p>
