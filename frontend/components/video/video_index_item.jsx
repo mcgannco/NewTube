@@ -198,6 +198,7 @@ class VideoIndexItem extends React.Component {
 
   render() {
     let { video, idx, author, timeAgo, currentUserID, users, nightMode} = this.props;
+    debugger
     let date = new Date(timeAgo);
     let toggleDD;
     if(this.state.optionsDropDown) {

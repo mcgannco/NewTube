@@ -307,7 +307,7 @@ class ChannelShow extends React.Component {
       }
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} key={video.id} users={users} watchLaterButton={watchLaterButton} nightMode={nightMode} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Uploads" : ""}</p>
@@ -327,7 +327,7 @@ class ChannelShow extends React.Component {
       }
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} nightMode={nightMode} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} video={video} currentUserID={currentUserID}author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Videos Added" : ""}</p>
@@ -345,7 +345,7 @@ class ChannelShow extends React.Component {
       } else {
         emptyMessage = "hidden"
       }
-      selected = <div className="channel-index">
+      selected = <div className={nightMode ? "channel-index-night" : "channel-index"}>
         <ul>
           {users_arr.map((user,idx) => <li key={user.id}>
             <div>
@@ -377,7 +377,7 @@ class ChannelShow extends React.Component {
       }
       selected = <div className='video-index'>
         <ul>
-        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+        {videos.map((video,idx) => <VideoIndexItem idx={idx} users={users} nightMode={nightMode} key={video.id} watchLaterButton={watchLaterButton} createWatch={createWatch} deleteWatch={deleteWatch} openVidModal={openVidModal}timeAgo= {video.timestamp} currentUserID={currentUserID} video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
         </ul>
         <nav className={emptyMessage}>
           <p>{videos.length === 0 ? "No Likes" : ""}</p>
