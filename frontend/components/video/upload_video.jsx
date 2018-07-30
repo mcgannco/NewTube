@@ -117,41 +117,120 @@ class UploadVideo extends React.Component {
 
   render() {
     let uploadForm;
-    let {errors, videoLoad} = this.props;
+    let {errors, videoLoad, nightMode} = this.props;
     let errorsHash;
     if(errors.length > 0) {
       errorsHash = this.generateErrors(errors);
     }
 
     let titleError;
-    let titleErrorClass = "upload-details-details-input";
+    let titleErrorClass;
+    let descriptionErrorClass;
+    if(nightMode) {
+      titleError = ""
+      titleErrorClass = "upload-details-details-input-night";
+      descriptionErrorClass = "upload-details-details-textarea-night";
+    } else {
+      titleError = ""
+      titleErrorClass = "upload-details-details-input";
+      descriptionErrorClass = "upload-details-details-textarea";
+    }
       for (let i = 0; i < errors.length; i++) {
-        if(errorsHash && errorsHash["Title can't be blank"]) {
-          titleError = "Title can't be blank"
-          titleErrorClass = "upload-errors-input"
+        if(errorsHash && errorsHash["Title can't be blank"] && (errorsHash && errorsHash["Description can't be blank"])) {
+          if(nightMode) {
+            titleError = "Title can't be blank"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-errors-night"
+          } else {
+            titleError = "Title can't be blank"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea-errors"
+          }
+        } else if (errorsHash && errorsHash["Title can't be blank"]) {
+          if(nightMode) {
+            titleError = "Title can't be blank"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-night"
+          } else {
+            titleError = "Title can't be blank"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea"
+          }
+        } else if (errorsHash && errorsHash["Author video titles must be unique"] && (errorsHash && errorsHash["Description can't be blank"])) {
+          if(nightMode) {
+            titleError = "Title already taken"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-errors-night"
+          } else {
+            titleError = "Title already taken"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea-errors"
+          }
         } else if (errorsHash && errorsHash["Author video titles must be unique"]) {
-          titleError = "Title must be unique"
-          titleErrorClass = "upload-errors-input"
+          if(nightMode) {
+            titleError = "Title already taken"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-night"
+          } else {
+            titleError = "Title already taken"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea"
+          }
+        } else if (errorsHash && errorsHash["Clip content type is invalid", "Clip is invalid"] && (errorsHash && errorsHash["Description can't be blank"])) {
+          if(nightMode) {
+            titleError = "Invalid file"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-errors-night"
+          } else {
+            titleError = "Invalid file"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea-errors"
+          }
         } else if (errorsHash && errorsHash["Clip content type is invalid", "Clip is invalid"]) {
-          titleError = "Invalid file type"
-          titleErrorClass = "upload-errors-input"
+          if(nightMode) {
+            titleError = "Invalid file"
+            titleErrorClass = "upload-errors-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-night"
+          } else {
+            titleError = "Invalid file"
+            titleErrorClass = "upload-errors-input"
+            descriptionErrorClass = "upload-details-details-textarea"
+          }
+        } else if(errorsHash && errorsHash["Description can't be blank"]) {
+          if(nightMode) {
+            titleError = ""
+            titleErrorClass = "upload-details-details-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-errors-night"
+          } else {
+            titleError = ""
+            titleErrorClass = "upload-details-details-input"
+            descriptionErrorClass = "upload-details-details-textarea-errors"
+          }
         } else {
-          titleError = ""
-          titleErrorClass = "upload-details-details-input"
+          if(nightMode) {
+            titleError = ""
+            titleErrorClass = "upload-details-details-input-night"
+            descriptionErrorClass = "upload-details-details-textarea-night"
+          } else {
+            titleError = ""
+            titleErrorClass = "upload-details-details-input"
+            descriptionErrorClass = "upload-details-details-textarea"
+          }
         }
       }
 
+
     let selectedForm;
     if (this.state.sub === "Basic Info") {
-      selectedForm = <form>
+      selectedForm = <form className={nightMode ? "selectedFormForm-night" : "selectedFormForm"}>
         <input className={ titleErrorClass } id ="title" placeholder= "Title" value={this.state.title} onChange={this.updateInput}></input>
           <p className="upload-error-messages">{titleError}</p>
-        <textarea className={errorsHash && errorsHash["Description can't be blank"] ? "upload-details-details-textarea-errors" : "upload-details-details-textarea"} id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
+        <textarea className={descriptionErrorClass} id ="description" placeholder= "Description" value={this.state.description} onChange={this.updateInput}></textarea>
           <p className="description-upload-error-messages">{errorsHash && errorsHash["Description can't be blank"] ? errorsHash["Description can't be blank"] : ""}</p>
       </form>
     } else if((this.state.sub === "Additional Info")){
-      selectedForm = <form>
-        <input onChange={this.updateTag} value={this.state.tagbody} className="upload-details-details-input" placeholder="Tags"></input>
+      selectedForm = <form className={nightMode ? "selectedFormForm-night" : "selectedFormForm"}>
+        <input onChange={this.updateTag} value={this.state.tagbody} className={nightMode ? "upload-details-details-input-night" : "upload-details-details-input"} placeholder="Tags"></input>
         <button onClick={this.addTag} className="add-tag-button">Add Tag</button>
         <ul className="tag-list">
           {this.state.tagArr.map((tag,idx) => <li className="tag-list-li" idx={idx} key={idx.id}>{tag}</li>)}
@@ -159,11 +238,30 @@ class UploadVideo extends React.Component {
       </form>
     }
     if (this.state.videoFile) {
-      uploadForm = <div onClick={this.test} className="upload-field">
+      let basicInfo;
+      let additional;
+      if(this.state.sub === "Basic Info") {
+        if(nightMode) {
+          basicInfo = "selectedTab-night"
+          additional = "unselectedTab-night"
+        } else {
+          basicInfo = "selectedTab"
+          additional = "unselectedTab"
+        }
+      } else {
+        if(nightMode) {
+          basicInfo = "unselectedTab-night"
+          additional = "selectedTab-night"
+        } else {
+          basicInfo = "unselectedTab"
+          additional = "selectedTab"
+        }
+      }
+      uploadForm = <div onClick={this.test} className={nightMode ? "upload-field-night" : "upload-field"}>
                       <div className="upload-details-video">
                         <span>
                           <video src={this.state.videoUrl}  width="250" height="150"  />
-                          <h1>Upload Status</h1>
+                          <h1 className={nightMode ? "upload-details-video-h1-night" : "upload-details-video-h1"}>Upload Status</h1>
                           <p>{this.state.status}</p>
                         </span>
 
@@ -173,22 +271,22 @@ class UploadVideo extends React.Component {
                           </span>
 
                           <nav>
-                            <p className={this.state.sub === "Basic Info" ? "selectedTab" : ""} onClick={this.subForm}>Basic Info</p>
-                            <p className={this.state.sub === "Additional Info" ? "selectedTab" : ""} onClick={this.subForm}>Additional Info</p>
+                            <p className={basicInfo} onClick={this.subForm}>Basic Info</p>
+                            <p className={additional} onClick={this.subForm}>Additional Info</p>
                           </nav>
                         </div>
                     </div>
 
                     <div className="upload-details-details">
                       <div>
-                        <h1></h1>
+                        <h1 className={nightMode ? "upload-details-details-h1-night" : "upload-details-details-h1"}></h1>
                       </div>
                       {selectedForm}
                     </div>
                     <div className={videoLoad ? "lds-ring-upload" : "hidden"}><div></div><div></div><div></div><div></div></div>
                   </div>
     } else {
-      uploadForm =   <div className="upload-field">
+      uploadForm =   <div className={nightMode ? "upload-field-night" : "upload-field"}>
                       <form className="upload-video-input">
                         <span><i className="fas fa-cloud-upload-alt"></i>
                         <p>Select files to upload</p>
