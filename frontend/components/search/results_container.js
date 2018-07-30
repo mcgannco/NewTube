@@ -6,7 +6,6 @@ import Results from './results';
 import { openVidModal  } from '../../actions/video_modal_actions';
 
 const msp = (state) => {
-  debugger
   return({
     currentUser: state.session.id,
     users: state.entities.users,

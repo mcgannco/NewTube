@@ -49,7 +49,6 @@ class MostLiked extends React.Component {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch,
       videoHash,
     watchLaterButton, trendingVideoIds, nightMode } = this.props;
-    debugger
 
     let search_result_list;
     if(videos) {

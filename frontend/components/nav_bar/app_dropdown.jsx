@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AppDropDown = ({topTags, nightMode}) => {
+  let topTagsArr = ["Nature", "Music", "Sports", "Movies", "TV"]
 let tagsList = topTags["toptags"].map((tag,idx) =>
 <Link to={`/apps/${tag.id}`}>
   <li className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
@@ -24,6 +25,10 @@ let tagsList = topTags["toptags"].map((tag,idx) =>
 
       <section className={tag.name === "Sports" ? "tag-icon-nav-bar" : "hidden"}>
         <i className="fas fa-football-ball"></i>
+      </section>
+
+      <section className={!topTagsArr.includes(tag.name) ? "tag-icon-nav-bar" : "hidden"}>
+        <i className="fas fa-tags"></i>
       </section>
 
       <div>{tag.name}</div>

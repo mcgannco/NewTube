@@ -12,7 +12,7 @@ class TagResultItem extends React.Component {
   }
 
   render() {
-    let { tag } = this.props;
+    let { tag, nightMode } = this.props;
     let icon;
     let bcolor;
     if(tag) {
@@ -62,7 +62,7 @@ class TagResultItem extends React.Component {
             </div>
 
             <div className="user-result-info-containter">
-              <div className="user-result-name">#{tag.name}</div>
+              <div className={nightMode ? "user-result-name-night" : "user-result-name"}>#{tag.name}</div>
               </div>
             </div>
         </Link>

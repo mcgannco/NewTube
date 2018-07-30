@@ -114,6 +114,7 @@ class Results extends React.Component {
     let {user_arr, openVidModal, video_arr, users, videos, currentUser,
       createSub, deleteSub, createWatch, deleteWatch, watchLaterButton,
       tags, searchErrors, query, nightMode } = this.props
+      debugger
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -150,7 +151,11 @@ class Results extends React.Component {
     if(this.props.query === "") {
       aboutNum = "hidden";
     } else if(search_result_length > 0) {
-      aboutNum = "results-num";
+      if(nightMode) {
+        aboutNum = "results-num-night";
+      } else {
+        aboutNum = "results-num";
+      }
     } else {
       aboutNum = "hidden";
     }

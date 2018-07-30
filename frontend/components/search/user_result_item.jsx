@@ -48,7 +48,7 @@ class UserResultItem extends React.Component {
   }
 
   render() {
-    let { user, timeAgo, currentUser} = this.props;
+    let { user, timeAgo, currentUser, nightMode} = this.props;
     let date = new Date(timeAgo);
     let avatar = user.profile_img_url;
 
@@ -85,7 +85,7 @@ class UserResultItem extends React.Component {
           <div className="user-result-info-containter">
             <div className="user-result-left">
 
-            <div className="user-result-name">{user.username}</div>
+            <div className={nightMode ? "user-result-name-night" : "user-result-name"}>{user.username}</div>
               <div className="user-result-containter-name">
                 <div>{user.subscribeeIds.length} subscribers</div>
                 <span className="result-dot-seperator">
