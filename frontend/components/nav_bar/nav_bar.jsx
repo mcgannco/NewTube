@@ -149,7 +149,7 @@ class NavBar extends React.Component {
 
 
   render() {
-    const {currentUser, logout, openModal, topTags, editUser, nightMode} = this.props
+    const {currentUser, logout, openModal, topTags, editUser, nightMode, toggleNightMode} = this.props
     let loggedin;
     let userDropDown;
     let userAvatar;
@@ -164,7 +164,8 @@ class NavBar extends React.Component {
       dd = <AppDropDown topTags={topTags} nightMode={nightMode}/>
     }
     if (this.state.settingsDropDown) {
-      dd = <SettingDropDown editUser={editUser} currentUser={currentUser} nightMode={nightMode}/>
+      dd = <SettingDropDown editUser={editUser}
+        currentUser={currentUser} nightMode={nightMode} toggleNightMode={toggleNightMode}/>
     }
 
     if (this.state.usersDropDown && currentUser) {

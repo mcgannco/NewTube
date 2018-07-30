@@ -60,11 +60,10 @@ class AppShow extends React.Component {
     if(videos.length > 0) {
       let filtered = [];
       for (var i = 0; i < videos.length; i++) {
-        if(videos[i].tags !== undefined && videos[i].tags[tag.id]) {
+        if(tag && videos[i].tags !== undefined && videos[i].tags[tag.id]) {
           filtered.push(videos[i])
         }
       }
-      debugger
       video_list = <ul>
                 {filtered.map((video,idx) => <li>
                   <VideoResultItem

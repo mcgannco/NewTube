@@ -22,7 +22,7 @@ class SettingDropDown extends React.Component {
       const formData = new FormData();
       formData.append("user[night_mode]", !this.state.nightMode);
 
-      this.props.editUser(this.props.currentUser.id, formData).then(
+      this.props.toggleNightMode(this.props.currentUser.id, formData).then(
         this.setState({nightMode: !this.state.nightMode})
       );
     } else {

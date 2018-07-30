@@ -9,6 +9,7 @@ export const REMOVE_WATCH = "REMOVE_WATCH";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS";
 export const UPDATE_CURRENT_USER_WATCH_HISTORY = "UPDATE_CURRENT_USER_WATCH_HISTORY";
+export const RECEIVE_NIGHT_MODE = "RECEIVE_NIGHT_MODE";
 
 export const receiveAllUsers = (users) => (
   {
@@ -20,6 +21,13 @@ export const receiveAllUsers = (users) => (
 export const receiveSingleUser = (user) => (
   {
     type: RECEIVE_SINGLE_USER,
+    user
+  }
+);
+
+export const receiveNightMode = (user) => (
+  {
+    type: RECEIVE_NIGHT_MODE,
     user
   }
 );
@@ -131,6 +139,16 @@ export const requestSubscriptions = () => dispatch => {
   return(
     APIUtil.fetchSubscriptions().then(users => (
       dispatch(receiveAllUsers(users))
+    ), err => (
+      dispatch(receiveUserErrors(err.responseJSON))
+    )
+  ))
+};
+
+export const toggleNightMode = (id, data) => dispatch => {
+  return(
+    APIUtil.updateUser(id, data).then(user => (
+      dispatch(receiveNightMode(user))
     ), err => (
       dispatch(receiveUserErrors(err.responseJSON))
     )
