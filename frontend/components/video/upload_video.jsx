@@ -232,8 +232,8 @@ class UploadVideo extends React.Component {
       selectedForm = <form className={nightMode ? "selectedFormForm-night" : "selectedFormForm"}>
         <input onChange={this.updateTag} value={this.state.tagbody} className={nightMode ? "upload-details-details-input-night" : "upload-details-details-input"} placeholder="Tags"></input>
         <button onClick={this.addTag} className="add-tag-button">Add Tag</button>
-        <ul className="tag-list">
-          {this.state.tagArr.map((tag,idx) => <li className="tag-list-li" idx={idx} key={idx.id}>{tag}</li>)}
+        <ul className={nightMode ? "tag-list-night" : "tag-list"}>
+          {this.state.tagArr.map((tag,idx) => <li className={nightMode ? "tag-list-li-night" : "tag-list-li"} idx={idx} key={idx.id}>{tag}</li>)}
         </ul>
       </form>
     }

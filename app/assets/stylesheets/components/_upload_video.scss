@@ -343,11 +343,30 @@
   width: 349px;
 }
 
+.tag-list-night {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 349px;
+}
+
 .tag-list-li {
   margin-right: 10px;
   margin-top: 5px;
   background-color: darkslategrey;
   color: #fff;
+  border-radius: 10px;
+  padding: 1px 8px 3px 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tag-list-li-night {
+  margin-right: 10px;
+  margin-top: 5px;
+  background-color: #686868;
+  color: white;
   border-radius: 10px;
   padding: 1px 8px 3px 8px;
   font-weight: 500;
