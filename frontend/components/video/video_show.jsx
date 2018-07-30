@@ -206,7 +206,7 @@ class VideoShow extends React.Component {
       return null;
     } else if (video) {
       commentContainer =   <CommentsIndexContainer vidId={video.id} requestAllUsers={this.props.requestAllUsers} createComment={this.props.createComment} requestAllComments={this.props.requestAllComments}/>
-      relatedContainer =   <RelatedVideoIndexContainer />
+      relatedContainer =   <RelatedVideoIndexContainer vid={video}/>
     }
     if(!users[video.author_id]) {
       return null;
