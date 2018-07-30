@@ -119,7 +119,7 @@ class VideoResultItem extends React.Component {
   toggleOptions(e, video) {
     e.preventDefault()
     this.setState({ optionsDropDown: true, targetVid: video }, () => {
-    document.getElementById('body').addEventListener('click', this.closeToggleOptions);
+    document.getElementById('body-body').addEventListener('click', this.closeToggleOptions);
     });
   }
 
@@ -133,7 +133,7 @@ class VideoResultItem extends React.Component {
       this.watchLater(e)
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.getElementById('body-body').removeEventListener('click', this.closeToggleOptions);
       });
     }
   }
@@ -165,13 +165,13 @@ class VideoResultItem extends React.Component {
   hide() {
     if(!this.props.currentUser) {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.getElementById('body-body').removeEventListener('click', this.closeToggleOptions);
       });
       this.props.history.push('/signin')
 
     } else {
       this.setState({ optionsDropDown: false, targetVid: "" }, () => {
-        document.getElementById('body').removeEventListener('click', this.closeToggleOptions);
+        document.getElementById('body-body').removeEventListener('click', this.closeToggleOptions);
       });
     }
 

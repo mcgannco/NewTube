@@ -32,7 +32,7 @@ class AppShow extends React.Component {
 
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
-    watchLaterButton, trendingVideoIds, tag } = this.props;
+    watchLaterButton, trendingVideoIds, tag, nightMode } = this.props;
     let video_list;
     let banner;
     let bcolor;
@@ -67,7 +67,7 @@ class AppShow extends React.Component {
       video_list = <ul>
                 {filtered.map((video,idx) => <li>
                   <VideoResultItem
-                  key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
+                  key={idx} nightMode={nightMode} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
                   watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}
                   timeAgo={video.timestamp} video={video}>}</VideoResultItem></li>)}
               </ul>
@@ -94,6 +94,11 @@ class AppShow extends React.Component {
             <section className={tag && tag.name === "Sports" ? "sports-icon-nav-bar" : "hidden"}>
               <i className="fas fa-football-ball"></i>
             </section>
+
+            <span className={( tag && (tag.name != "TV" && tag.name != "Sports" && tag.name != "Music" && tag.name != "Movies" && tag.name != "Nature")) ? "tags-icon-nav-bar" : "hidden"}>
+              <i className="fas fa-tags"></i>
+            </span>
+
             <h1 className={bcolor}>{tag ? tag.name : ""}</h1>
           </div>
           {video_list}

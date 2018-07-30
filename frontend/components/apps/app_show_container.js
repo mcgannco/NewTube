@@ -13,7 +13,8 @@ const msp = (state, ownProps) => {
     currentUser: state.session.id,
     button: state.ui.watchLaterBttn,
     trendingVideoIds: state.ui.filteredVideos["trending"],
-    tag: state.ui.currentTag
+    tag: state.ui.currentTag,
+    nightMode: state.session.night_mode
   })
 };
 
