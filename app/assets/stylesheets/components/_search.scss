@@ -69,6 +69,19 @@
   width: calc(100% - 30px);
 }
 
+.video-result-title-night {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  max-height: 42px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  width: calc(100% - 30px);
+}
+
 .video-result-stats {
   display: flex;
   color: grey;

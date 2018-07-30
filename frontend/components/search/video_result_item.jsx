@@ -178,7 +178,7 @@ class VideoResultItem extends React.Component {
   }
 
   render() {
-    let { video, timeAgo, users, currentUser} = this.props;
+    let { video, timeAgo, users, currentUser, nightMode} = this.props;
     if(!video) {
       return null;
     }
@@ -194,8 +194,7 @@ class VideoResultItem extends React.Component {
     }
 
     if(this.state.optionsDropDown) {
-
-      toggleDD = <div className="toggleOptionsDD" id="toggleDD">
+      toggleDD = <div className={nightMode ? "toggleOptionsDD-night" : "toggleOptionsDD"} id="toggleDD">
         <span onClick={this.editVideo} id = "edit-vid" className={video.author_id === currentUser ? "" : "hidden"}>Edit</span>
         <span onClick={this.deleteVideo} id = "delete-vid" className={video.author_id === currentUser ? "" : "hidden"}>Delete</span>
         <span onClick={this.hide}id="watch-later">Watch Later</span>
@@ -225,7 +224,7 @@ class VideoResultItem extends React.Component {
           <div className="video-result-info">
             <div className="result-content">
               <div className="result-top-row">
-                <span className="video-result-title">{video.title}</span>
+                <span className={nightMode ? "video-result-title-night" : "video-result-title"}>{video.title}</span>
 
                   <div className="result-options">
                     <span onClick={(e) => this.toggleOptions(e, video)} className={this.state.preview ? "video-index-options-dd" : "video-index-options-dd-hidden"}>
@@ -236,7 +235,7 @@ class VideoResultItem extends React.Component {
               </div>
 
                 <div className="video-result-stats">
-                  <Link to={`/channel/${video.author_id}`}><span className="video-result-author">{users[video.author_id] ? users[video.author_id].username : ""}</span></Link>
+                  <Link to={`/channel/${video.author_id}`}><span className={nightMode ? "video-result-author-night" : "video-result-author"}>{users[video.author_id] ? users[video.author_id].username : ""}</span></Link>
                     <span className="result-dot-seperator">
                       <i className="fas fa-circle"></i>
                     </span>

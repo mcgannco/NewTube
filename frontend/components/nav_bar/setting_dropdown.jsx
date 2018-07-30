@@ -37,7 +37,7 @@ class SettingDropDown extends React.Component {
       <div id="night-mode" className="setting-drop-down-container">
         <ul id="night-mode" onClick={this.handleClick} className={nightMode ? "setting-drop-down-night" : "setting-drop-down"}>
 
-            <li id="night-mode" className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
+            <li onClick={this.toggleNightMode} id="night-mode" className={nightMode ? "drop-down-list-item-night" : "drop-down-list-item"}>
               <div id="night-mode">
                 <section className={this.state.nightMode ? "night-mode-icon" : "hidden"}id="night-mode">
                   <i id="night-mode" className="fas fa-moon"></i>
@@ -51,7 +51,7 @@ class SettingDropDown extends React.Component {
               </div>
 
 
-              <button onClick={this.toggleNightMode} className="night-mode-bttn" id="night-mode">
+              <button className="night-mode-bttn" id="night-mode">
                 <p id="night-mode" className={this.state.nightMode ? "" : "hidden"}>
                   ON
                 </p>

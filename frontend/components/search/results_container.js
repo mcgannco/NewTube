@@ -6,6 +6,7 @@ import Results from './results';
 import { openVidModal  } from '../../actions/video_modal_actions';
 
 const msp = (state) => {
+  debugger
   return({
     currentUser: state.session.id,
     users: state.entities.users,
@@ -15,7 +16,8 @@ const msp = (state) => {
     user_arr: state.ui.search.searchedResultUsers,
     button: state.ui.watchLaterBttn,
     tags: state.ui.search.searchedResultTags,
-    searchErrors: state.errors.search
+    searchErrors: state.errors.search,
+    nightMode: state.session.night_mode
   })
 };
 

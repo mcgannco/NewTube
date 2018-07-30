@@ -47,7 +47,7 @@ class RecentlyAdded extends React.Component {
 
   render() {
     let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
-    watchLaterButton, trendingVideoIds } = this.props;
+    watchLaterButton, trendingVideoIds, nightMode } = this.props;
 
     let search_result_list;
     if(videos) {
@@ -55,7 +55,7 @@ class RecentlyAdded extends React.Component {
                 {this.sortVideos(videos).slice(0,10).map((video,idx) => <li>
                   <VideoResultItem
                   key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
-                  watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}
+                  nightMode={nightMode} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}
                   timeAgo={video.timestamp} video={video}>}</VideoResultItem></li>)}
               </ul>
     }

@@ -14,7 +14,8 @@ const msp = (state, ownProps) => {
     button: state.ui.watchLaterBttn,
     historyIds: state.ui.filteredVideos["history"]["ids"],
     historyLength: state.ui.filteredVideos["history"]["length"],
-    subVideoLoader: state.ui.loading.subVideos
+    subVideoLoader: state.ui.loading.subVideos,
+    nightMode: state.session.night_mode
   })
 };
 

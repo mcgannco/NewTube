@@ -198,7 +198,6 @@ class VideoIndexItem extends React.Component {
 
   render() {
     let { video, idx, author, timeAgo, currentUserID, users, nightMode} = this.props;
-    debugger
     let date = new Date(timeAgo);
     let toggleDD;
     if(this.state.optionsDropDown) {
@@ -246,8 +245,8 @@ class VideoIndexItem extends React.Component {
             </span>
             {toggleDD}
           </div>
-          <nav className="video-author-views">
-            <Link to={`/channel/${video.author_id}`}><span className="video-index-author">{author}</span></Link>
+          <nav className={nightMode ? "video-author-views-night" : "video-author-views"}>
+            <Link to={`/channel/${video.author_id}`}><span className={nightMode ? "video-index-author-night" : "video-index-author"}>{author}</span></Link>
 
             <div>
               <span>{this.formatNumber(video.view_count)} views</span>

@@ -111,7 +111,9 @@ class Results extends React.Component {
   }
 
   render() {
-    let {user_arr, openVidModal, video_arr, users, videos, currentUser, createSub, deleteSub, createWatch, deleteWatch, watchLaterButton, tags, searchErrors, query } = this.props
+    let {user_arr, openVidModal, video_arr, users, videos, currentUser,
+      createSub, deleteSub, createWatch, deleteWatch, watchLaterButton,
+      tags, searchErrors, query, nightMode } = this.props
     let users_searched = [];
       for (let i = 0; i < user_arr.length; i++) {
         users_searched.push(users[user_arr[i]])
@@ -129,11 +131,11 @@ class Results extends React.Component {
 
       {this.props.query ? this.rankSearch(all_searched_results).map((el,idx) => {
           if(el.username){
-              return <li><UserResultItem key={idx} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem></li>
+              return <li><UserResultItem key={idx} nightMode={nightMode} currentUser={currentUser} createSub={createSub} deleteSub={deleteSub} timeAgo={el.timestamp} users={users} user={el}>{el.username}</UserResultItem></li>
           } else if (el.title) {
-            return <li><VideoResultItem key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem></li>
+            return <li><VideoResultItem key={idx} nightMode={nightMode} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch} watchLaterButton={watchLaterButton} currentUser={currentUser} users={users} timeAgo={el.timestamp} video={el}>{el.title}</VideoResultItem></li>
           } else if (el.name) {
-            return <li><TagResultItem key={idx} tag={el}>{el.name}</TagResultItem></li>
+            return <li><TagResultItem key={idx} nightMode={nightMode} tag={el}>{el.name}</TagResultItem></li>
           } else {
             return ""
           }

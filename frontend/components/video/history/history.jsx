@@ -64,8 +64,9 @@ class History extends React.Component {
   };
 
   render() {
-    let {users, videos, currentUser, openVidModal, createWatch, deleteWatch, videoHash,
-    watchLaterButton, historyIds } = this.props;
+    let {users, videos, currentUser, openVidModal, createWatch,
+      deleteWatch, videoHash,
+    watchLaterButton, historyIds, nightMode } = this.props;
     let search_result_list;
 
     if(historyIds && historyIds.length > 0) {
@@ -78,7 +79,7 @@ class History extends React.Component {
       search_result_list = <ul>
                 {historyVideos.map((video,idx) => <li>
                   <VideoResultItem
-                  key={idx} openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}
+                  key={idx} openVidModal={openVidModal} nightMode={nightMode} createWatch={createWatch} deleteWatch={deleteWatch}
                   watchLaterButton={watchLaterButton} currentUser={currentUser} users={users}
                   timeAgo={video.timestamp} video={video}>}</VideoResultItem></li>)}
               </ul>

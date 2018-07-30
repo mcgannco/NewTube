@@ -9,7 +9,8 @@ const msp = (state, ownProps) => {
     videos: selectAllVideos(state),
     users: state.entities.users,
     currentUser: state.session.id,
-    button: state.ui.watchLaterBttn
+    button: state.ui.watchLaterBttn,
+    nightMode: state.session.night_mode
   })
 };
 
