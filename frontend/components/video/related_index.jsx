@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RelatedVideoIndexItem from './related_video_index_item';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class RelatedIndex extends React.Component {
   constructor(props) {
@@ -56,9 +57,9 @@ class RelatedIndex extends React.Component {
             <span className="side-bar-queue-toggle-container">
               <h1 className= "side-bar-queue-auto">AUTOPLAY</h1>
 
-                <label class="switch">
+                <label className="switch">
                   <input onClick={this.toggleAutoPlay} type="checkbox" checked={this.state.autoplay}/>
-                  <span class="slider round">
+                  <span className="slider round">
                   </span>
                 </label>
 
@@ -76,4 +77,4 @@ class RelatedIndex extends React.Component {
   }
 
 
-export default RelatedIndex;
+export default withRouter(RelatedIndex);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RelatedVideoIndexContainer from './related_index_container';
 import CommentsIndexContainer from './comments_index_container';
+import ReactPlayer from 'react-player'
 import { Route, Redirect, withRouter } from 'react-router-dom';
 
 class VideoShow extends React.Component {
@@ -14,7 +15,8 @@ class VideoShow extends React.Component {
       views: "",
       editStatus: false,
       title: "",
-      description: ""
+      isPlay: true,
+      currentTime:
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
@@ -31,6 +33,9 @@ class VideoShow extends React.Component {
     this.updateTitle = this.updateTitle.bind(this);
     this.updateDescription = this.updateDescription.bind(this);
     this.submit = this.submit.bind(this);
+    this.nextVideo = this.nextVideo.bind(this);
+    this.previousVideo = this.previousVideo.bind(this);
+    this.toggleVolume = this.toggleVolume.bind(this);
   }
 
   componentWillMount() {
@@ -203,6 +208,30 @@ class VideoShow extends React.Component {
     )
   }
 
+  nextVideo() {
+    let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
+    let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) + 1) > (this.props.videoQueue.length - 1) ? 0 : (this.props.videoQueue.indexOf(this.props.video.id) + 1)
+    let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+    this.props.history.push(`/video/${nextVidId}`)
+  }
+
+  previousVideo() {
+    let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
+    let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) - 1) < 0 ? (this.props.videoQueue.length - 1) : (this.props.videoQueue.indexOf(this.props.video.id) - 1)
+    let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+    this.props.history.push(`/video/${nextVidId}`)
+  }
+
+  toggleVolume() {
+    debugger
+  }
+
+  setTime(e){
+    if (this.props.video) {
+      this.audio.currentTime = (e.currentTarget.value)
+    }
+  }
+
   render() {
     let {video,users, currentUser, nightMode} = this.props;
     let commentContainer;
@@ -308,7 +337,7 @@ class VideoShow extends React.Component {
             <nav className="video-container"
               id='vid-player-container'>
               <video
-                controls
+
                 autoPlay
                 preload='metadata'
                 onLoadedMetadata={this.videoSetup}
@@ -318,6 +347,57 @@ class VideoShow extends React.Component {
                 id="vid-player"
                 src={video.video_url}
                 />
+
+              <section className="vid-controls">
+                <section className="playbar-timeline">
+                  <div className="progress-background"></div>
+                  <div className="progress-bar"></div>
+                  <div className="progress-handle"></div>
+                </section>
+
+                <div className="playbar-buttons">
+
+                  <div className="buttons-left">
+
+                    <nav onClick={this.previousVideo} className="backward">
+                      <i className="fas fa-step-backward"></i>
+                    </nav>
+
+                    <nav onClick={this.togglePlay} className={!this.props.vidPlaying ? "play-play-button" : 'hidden'}>
+                      <i className="fas fa-play"></i>
+                    </nav>
+
+                    <nav onClick={this.togglePlay} className={this.props.vidPlaying ? "play-play-button" : 'hidden'}>
+                      <i className="fas fa-pause"></i>
+                    </nav>
+
+                    <nav onClick={this.nextVideo} className="forward">
+                      <i className="fas fa-step-forward"></i>
+                    </nav>
+
+                    <nav className="video-volume"
+                      onMouseEnter={this.toggleVolume}>
+                      <i class="fas fa-volume-up"></i>
+                    </nav>
+
+                    <nav>
+                      <input
+                        className="Duration"
+                        type="text" readOnly
+                        value={}
+                        onChange={this.setTime}
+                      />
+                    </nav>
+
+                    <input>
+                    </input>
+                    </div>
+
+
+
+                </div>
+              </section>
+
             </nav>
 
               <h1 className={videoTiteClass}>{video.title}</h1>
