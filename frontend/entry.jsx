@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let store;
   if (window.currentUser) {
     const preloadedState = {
-      session: { id: window.currentUser.id, night_mode: window.currentUser.night_mode },
+      session: { id: window.currentUser.id, night_mode: window.currentUser.night_mode,  autoplay: window.currentUser.autoplay},
       entities: {
         users: { [window.currentUser.id]: window.currentUser }
       }

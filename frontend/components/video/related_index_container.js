@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {requestAllVideos, watchLaterButton } from '../../actions/video_actions';
-import { requestAllUsers, createWatch, deleteWatch  } from '../../actions/user_actions';
+import { requestAllUsers, createWatch, deleteWatch,toggleAutoPlay  } from '../../actions/user_actions';
 import { selectAllVideos  } from '../../reducers/selectors';
 import { openVidModal  } from '../../actions/video_modal_actions';
 import RelatedIndex from './related_index';
@@ -12,7 +12,8 @@ const msp = (state, ownProps) => {
     currentUserID: state.session.id,
     button: state.ui.watchLaterBttn,
     nightMode: state.session.night_mode,
-    videoQueue: state.ui.vidPlaying.videoQueue
+    videoQueue: state.ui.vidPlaying.videoQueue,
+    autoplay: state.session.autoplay
   })
 };
 
@@ -24,6 +25,7 @@ const mdp = dispatch => {
     createWatch: (vidId) => dispatch(createWatch(vidId)),
     deleteWatch: (vidId) => dispatch(deleteWatch(vidId)),
     watchLaterButton: (status) => dispatch(watchLaterButton(status)),
+    toggleAutoPlay: (id, data) => dispatch(toggleAutoPlay(id, data))
   })
 };
 

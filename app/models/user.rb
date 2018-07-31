@@ -18,6 +18,7 @@
 #  banner_updated_at   :datetime
 #  description         :text
 #  night_mode          :boolean          default(FALSE)
+#  autoplay            :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
@@ -25,6 +26,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :night_mode, inclusion: { in: [true, false] }
+  validates :autoplay, inclusion: { in: [true, false] }
 
   has_attached_file :banner
   has_attached_file :avatar, styles: {

@@ -103,7 +103,12 @@ class VideoShow extends React.Component {
   }
 
   handleEnd(e) {
-
+    if(this.props.autoplay) {
+      let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
+      let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) + 1) > (this.props.videoQueue.length - 1) ? 0 : (this.props.videoQueue.indexOf(this.props.video.id) + 1)
+      let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+      this.props.history.push(`/video/${nextVidId}`)
+    }
   }
 
   editVid(e, video) {

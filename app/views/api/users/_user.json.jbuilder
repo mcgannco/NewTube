@@ -1,4 +1,5 @@
-json.extract! user, :id, :username, :description, :night_mode
+json.extract! user, :id, :username, :description, :night_mode, :autoplay
+
 formatted_time  = user.created_at.to_f * 1000
 json.timestamp formatted_time
 

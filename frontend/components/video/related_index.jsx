@@ -6,8 +6,11 @@ class RelatedIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      videoQueueLength: 10
+      videoQueueLength: 10,
+      autoplay: this.props.autoplay
     }
+    this.createVideoQueue  = this.createVideoQueue.bind(this);
+    this.toggleAutoPlay  = this.toggleAutoPlay.bind(this);
   }
   componentDidMount() {
     this.props.requestAllVideos().then(this.props.requestAllUsers())
@@ -19,12 +22,21 @@ class RelatedIndex extends React.Component {
     let endIdx = startIdx+count
     let length = this.props.videos.length;
     let {videos} = this.props
-
     let sideBarQueue = videos.slice(startIdx,  endIdx>length?length: endIdx)
     .concat(videos.slice(0,  endIdx>length?endIdx-length: 0));
-
     return sideBarQueue
+  }
 
+  toggleAutoPlay() {
+    if(this.props.currentUserID) {
+      const formData = new FormData();
+      formData.append("user[autoplay]", !this.state.autoplay);
+      this.props.toggleAutoPlay(this.props.currentUserID, formData).then(
+        this.setState({autoplay: !this.state.autoplay})
+      );
+    } else {
+      this.props.history.push('/signin')
+    }
   }
 
   render() {
@@ -45,7 +57,7 @@ class RelatedIndex extends React.Component {
               <h1 className= "side-bar-queue-auto">AUTOPLAY</h1>
 
                 <label class="switch">
-                  <input type="checkbox" />
+                  <input onClick={this.toggleAutoPlay} type="checkbox" checked={this.state.autoplay}/>
                   <span class="slider round">
                   </span>
                 </label>

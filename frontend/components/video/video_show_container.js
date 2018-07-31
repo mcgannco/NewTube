@@ -12,13 +12,16 @@ import VideoShow from './video_show';
 const msp = (state, ownProps) => {
   return({
     videos: selectAllVideos(state),
+    videoHash: state.entities.videos,
     users: state.entities.users,
     video: state.entities.videos[ownProps.match.params.id],
     comments: state.entities.comments,
     vidPlaying: state.ui.vidPlaying.vidPlaying,
     currentUser: state.entities.users[state.session.id],
     button: state.ui.watchLaterBttn,
-    nightMode: state.session.night_mode
+    nightMode: state.session.night_mode,
+    autoplay: state.session.autoplay,
+    videoQueue: state.ui.vidPlaying.videoQueue
   })
 };
 

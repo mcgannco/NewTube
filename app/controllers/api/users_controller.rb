@@ -26,7 +26,6 @@ class Api::UsersController < ApplicationController
   end
 
     @user = User.find_by(id: params[:id])
-
     if @user.update(user_params)
       render "api/users/show"
     else
@@ -76,6 +75,6 @@ class Api::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :avatar, :banner, :description, :night_mode)
+    params.require(:user).permit(:username, :password, :avatar, :banner, :description, :night_mode, :autoplay)
   end
 end
