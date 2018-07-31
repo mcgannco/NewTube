@@ -14,7 +14,7 @@ class RelatedIndex extends React.Component {
   }
 
   createVideoQueue() {
-    let startIdx = this.props.videoQueue.indexOf(this.props.video.id);
+    let startIdx = this.props.videoQueue.indexOf(this.props.video.id) + 1 > this.props.videos.length ? 0 : this.props.videoQueue.indexOf(this.props.video.id) + 1;
     let count = this.state.videoQueueLength;
     let endIdx = startIdx+count
     let length = this.props.videos.length;
@@ -38,12 +38,27 @@ class RelatedIndex extends React.Component {
       }
 
       return(
-        <ul>
-        {sideBarQueue.map((video,idx) => <RelatedVideoIndexItem idx={idx} vid={vid} key={video.id}
-        openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}watchLaterButton={watchLaterButton}
-        timeAgo= {video.timestamp} nightMode={nightMode} users={users} currentUserID={currentUserID}
-        video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
-        </ul>
+        <div>
+          <div className="side-bar-queue-container">
+            <h1 className={nightMode ? "side-bar-queue-h1-night" : "side-bar-queue-h1"}>Up Next</h1>
+            <span className="side-bar-queue-toggle-container">
+              <h1 className= "side-bar-queue-auto">AUTOPLAY</h1>
+
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round">
+                  </span>
+                </label>
+
+            </span>
+          </div>
+          <ul>
+          {sideBarQueue.map((video,idx) => <RelatedVideoIndexItem idx={idx} vid={vid} key={video.id}
+          openVidModal={openVidModal} createWatch={createWatch} deleteWatch={deleteWatch}watchLaterButton={watchLaterButton}
+          timeAgo= {video.timestamp} nightMode={nightMode} users={users} currentUserID={currentUserID}
+          video={video} author={users[video.author_id] ? users[video.author_id].username : ""}/>)}
+          </ul>
+        </div>
       )
     }
   }
