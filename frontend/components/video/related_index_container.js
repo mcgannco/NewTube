@@ -11,7 +11,8 @@ const msp = (state, ownProps) => {
     users: state.entities.users,
     currentUserID: state.session.id,
     button: state.ui.watchLaterBttn,
-    nightMode: state.session.night_mode
+    nightMode: state.session.night_mode,
+    videoQueue: state.ui.vidPlaying.videoQueue
   })
 };
 

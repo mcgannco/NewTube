@@ -1,10 +1,12 @@
 import {
-  VID_STATUS,RECEIVE_VIDEO
+  VID_STATUS,RECEIVE_VIDEO, RECEIVE_ALL_VIDEOS
 } from '../actions/video_actions';
+import values from 'lodash/values';
 
 const initialState = {
   vid: null,
-  vidPlaying: true
+  vidPlaying: true,
+  videoQueue: []
 };
 
 const vidPlayingReducer = (state = initialState, action) => {
@@ -14,6 +16,8 @@ const vidPlayingReducer = (state = initialState, action) => {
       return Object.assign({}, state, { vid: action.video });
     case VID_STATUS:
       return Object.assign({}, state, { vidPlaying: action.bool });
+    case RECEIVE_ALL_VIDEOS:
+      return Object.assign({}, state, { videoQueue: values(action.videos).map(vid => vid.id) });
     default:
       return state;
   }
