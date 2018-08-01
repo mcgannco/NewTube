@@ -20,7 +20,6 @@ NewTube, inspired by Youtube, is a single page video streaming web application. 
 * [Watch Later](#watch-later)
 * [Filters](#filters)
 * [Channels](#channels)
-* [Tags](#tags)
 * [N + 1 Query Prevention](#n--1-query-prevention)
 
 ## Project Information
