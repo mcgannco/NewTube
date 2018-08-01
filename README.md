@@ -1,6 +1,5 @@
 # NewTube
 URL: [Live Link]()
-![Optional Text](./app/assets/images/mainpic.png)
 NewTube, inspired by Youtube, is a single page video streaming web application. Functionality of NewTube includes uploading and watching videos, customizing your channel, searching for content, and interacting with the NewTubes content through comments, likes, subscriptions and more.
 
 ## Table of Contents
@@ -20,6 +19,7 @@ NewTube, inspired by Youtube, is a single page video streaming web application. 
 * [Watch Later](#watch-later)
 * [Filters](#filters)
 * [Channels](#channels)
+* [Tags](#tags)
 * [N + 1 Query Prevention](#n--1-query-prevention)
 
 ## Project Information
@@ -30,9 +30,9 @@ On the back-end, an encrypted, hashed password is stored in the database (passwo
 
 ## Fluid Grid System
 ## Night Mode
+## Navigation
 ## Search
 ## Video Index / Show / Upload
-## Custom Video Player / Video Preview
 ## Custom Video Player / Video Preview
 ## Video Queue / Autoplay
 ## Recursive Comments
