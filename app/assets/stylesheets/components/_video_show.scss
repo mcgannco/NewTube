@@ -113,7 +113,7 @@
 }
 
 .playbar-timeline {
-    width: 252px;
+    // width: 252px;
 }
 
 .progress-background {
@@ -122,34 +122,56 @@
   height: 2.5px;
   width: 98%;
   background-color: #cecece;
+  cursor: pointer;
 }
 
 .progress-bar {
     height: 2.5px;
-    background-color: #f50;
+    background-color: #0099ff;
     transition: width 50ms;
     position: absolute;
     top: 0;
+    cursor: pointer;
 }
 
 .progress-handle {
-    font: 0/0 a;
-    position: absolute;
-    top: 0;
-    text-shadow: none;
-    color: transparent;
-    border: 1px solid #f50;
-    border-radius: 100%;
-    height: 8px;
-    width: 8px;
-    background-color: #f50;
-    box-sizing: border-box;
-    margin-top: -4px;
-    margin-left: -4px;
-    opacity: 0;
-    transition: opacity 150ms, left 1800ms;
-    left: 0;
-    transform: translate(1px, 0);
+  font: 0/0 a;
+  position: absolute;
+  top: -1px;
+  text-shadow: none;
+  color: transparent;
+  border: 1px solid #0099ff;
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: #0099ff;
+  box-sizing: border-box;
+  margin-top: -4px;
+  opacity: 1;
+  transition: opacity 150ms, left 1800ms;
+  left: 0;
+  transform: translate(1px, 0);
+  cursor: pointer;
+}
+
+.hidden-handle {
+  font: 0/0 a;
+  position: absolute;
+  top: -1px;
+  text-shadow: none;
+  color: transparent;
+  border: 1px solid #0099ff;
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: #0099ff;
+  box-sizing: border-box;
+  margin-top: -4px;
+  opacity: 0;
+  transition: opacity 150ms, left 1800ms;
+  left: 0;
+  transform: translate(1px, 0);
+  cursor: pointer;
 }
 
 .playbar-buttons {
@@ -204,6 +226,7 @@
   margin-left: 20px;
   cursor: pointer;
   margin-right: 20px;
+  width: 20px;
 }
 
 //

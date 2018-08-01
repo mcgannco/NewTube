@@ -18,7 +18,12 @@ class VideoShow extends React.Component {
       isPlay: true,
       currentTime: "0:00",
       videoPlaying: true,
-      videoLength: ""
+      videoLength: "",
+      currentTimeNum: "",
+      durationNum: "",
+      showHandle: false,
+      videoControls: false,
+      volume: true
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
@@ -40,6 +45,15 @@ class VideoShow extends React.Component {
     this.toggleVolume = this.toggleVolume.bind(this);
     this.tick = this.tick.bind(this);
     this.getCurrentTime = this.getCurrentTime.bind(this);
+    this.getDuration = this.getDuration.bind(this);
+    this.getProgressWidth = this.getProgressWidth.bind(this);
+    this.getHandlePos = this.getHandlePos.bind(this);
+    this.toggleNewVideo = this.toggleNewVideo.bind(this);
+    this.toggleHandle = this.toggleHandle.bind(this);
+    this.hideHandle = this.hideHandle.bind(this);
+    this.showVideoControls = this.showVideoControls.bind(this);
+    this.hideVideoControls = this.hideVideoControls.bind(this);
+    this.setNewTime = this.setNewTime.bind(this);
   }
 
   componentWillMount() {
@@ -64,7 +78,7 @@ class VideoShow extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.video && (this.props.video.id != nextProps.match.params.id)) {
       this.props.requestSingleVideo(nextProps.match.params.id).then($('#app').animate({ scrollTop: top }, 0)).then(
-        this.props.createView(nextProps.match.params.id).then(this.props.recordView(nextProps.match.params.id))
+        this.props.createView(nextProps.match.params.id).then(this.props.recordView(nextProps.match.params.id)).then(this.toggleNewVideo)
       );
     }
     $('.watch-later-bttn')
@@ -132,7 +146,7 @@ class VideoShow extends React.Component {
       let t = new Date(1970,0,1);
       t.setSeconds(currentTime);
       var s = t.toTimeString().substr(0,8);
-      if(duration > 86399) {
+      if(currentTime > 86399) {
         s = Math.floor((t - Date.parse("1/1/70")) / 3600000) + s.substr(2);
       }
         this.setState({currentTime: s})
@@ -156,6 +170,13 @@ class VideoShow extends React.Component {
       this.props.vPlaying(true);
       this.setState({videoPlaying: true})
       video.play();
+   }
+  }
+
+  toggleNewVideo() {
+    if (!this.props.vidPlaying) {
+      this.props.vPlaying(true);
+      this.setState({videoPlaying: true})
    }
   }
 
@@ -277,12 +298,52 @@ class VideoShow extends React.Component {
   }
 
   toggleVolume() {
-
+  let vid =  document.getElementsByClassName("video-player")[0]
+    if(this.state.volume) {
+      this.setState({volume: false})
+      vid.muted = true;
+    } else {
+      this.setState({volume: true})
+      vid.muted = false
+    }
   }
 
   tick(e){
-    this.setState({currentTime: this.getCurrentTime(e)})
+    this.getCurrentTime(e)
+    this.setState({currentTimeNum: e.currentTarget.currentTime, durationNum: e.currentTarget.duration})
   }
+
+  getProgressWidth() {
+    return 98 * (this.state.currentTimeNum) / this.state.durationNum;
+  }
+
+  getHandlePos() {
+   return 98 * (this.state.currentTimeNum) / this.state.durationNum;
+ }
+
+ toggleHandle() {
+   this.setState({showHandle: true})
+ }
+
+ hideHandle() {
+   this.setState({showHandle: false})
+ }
+
+ showVideoControls() {
+   this.setState({videoControls: true})
+ }
+
+ hideVideoControls() {
+   this.setState({videoControls: false})
+ }
+
+ setNewTime(e) {
+   let xCoord = e.clientX - 35;
+   let barWidth = document.getElementsByClassName("progress-background")[0].offsetWidth
+   let newTime = (xCoord / barWidth) * this.state.durationNum
+   document.getElementById('vid-player').currentTime = newTime
+   this.setState({currentTimeNum: newTime })
+ }
 
   render() {
     let {video,users, currentUser, nightMode} = this.props;
@@ -383,11 +444,15 @@ class VideoShow extends React.Component {
       }
     }
 
+    const progressWidth = { width: `${this.getProgressWidth()}%` };
+     const handleLeftDist = { left: `calc(${this.getHandlePos()}% - 12px)` };
       return(
         <section className="video-show-container" id='body'>
         	<section className="video-player-container col col-2-3">
             <nav className="video-container"
-              id='vid-player-container'>
+              id='vid-player-container'
+              onMouseEnter={this.showVideoControls}
+              onMouseLeave={this.hideVideoControls}>
               <video
                 autoPlay
                 preload='metadata'
@@ -400,11 +465,16 @@ class VideoShow extends React.Component {
                 src={video.video_url}
                 />
 
-              <section className="vid-controls">
+              <section className={this.state.videoControls ? "vid-controls" : "hidden"}
+                onMouseEnter={this.toggleHandle}
+                onMouseLeave={this.hideHandle}>
                 <section className="playbar-timeline">
-                  <div className="progress-background"></div>
-                  <div className="progress-bar"></div>
-                  <div className="progress-handle"></div>
+                  <div className="progress-background"
+                    onClick={this.setNewTime}></div>
+                  <div className="progress-bar" style={progressWidth}
+                    onClick={this.setNewTime}></div>
+                  <div className={this.state.showHandle ? "progress-handle" : "hidden-handle"} style={handleLeftDist}>
+                  </div>
                 </section>
 
                 <div className="playbar-buttons">
@@ -427,17 +497,21 @@ class VideoShow extends React.Component {
                       <i className="fas fa-step-forward"></i>
                     </nav>
 
-                    <nav className="video-volume"
-                      onMouseEnter={this.toggleVolume}>
+                    <nav className={this.state.volume ? "video-volume" : "hidden"}
+                      onClick={this.toggleVolume}>
                       <i className="fas fa-volume-up"></i>
                     </nav>
 
-                    <nav className="video-time-summary">
-                      <p>{this.state.currentTime} </p>
+                    <nav className={!this.state.volume ? "video-volume" : "hidden"}
+                      onClick={this.toggleVolume}>
+                      <i class="fas fa-volume-off"></i>
                     </nav>
 
-                    <input>
-                    </input>
+                    <nav className="video-time-summary">
+                      <p>{this.state.currentTime } / {this.state.videoLength} </p>
+                    </nav>
+
+
                     </div>
 
 
