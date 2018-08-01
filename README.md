@@ -1,5 +1,6 @@
 # NewTube
 URL: [Live Link]()
+![Optional Text](./app/assets/images/readmemainpic.png)
 NewTube, inspired by Youtube, is a single page video streaming web application. Functionality of NewTube includes uploading and watching videos, customizing your channel, searching for content, and interacting with the NewTubes content through comments, likes, subscriptions and more.
 
 ## Table of Contents
@@ -21,6 +22,7 @@ NewTube, inspired by Youtube, is a single page video streaming web application. 
 * [Channels](#channels)
 * [Tags](#tags)
 * [N + 1 Query Prevention](#n--1-query-prevention)
+* [Future Features](#n--1-query-prevention)
 
 ## Project Information
 NewTube was developed utilizing Ruby on Rails, React.js with Redux, SASS, and AWS S3.
