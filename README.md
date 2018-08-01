@@ -1,24 +1,30 @@
-# README
+# NewTube
+URL: [Live Link]()
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+NewTube, inspired by Youtube, is a single page video streaming web application. Functionality of NewTube includes uploading and watching videos, customizing your channel, searching for content, and interacting with the NewTubes content through comments, likes, subscriptions and more.
 
-Things you may want to cover:
+## Table of Contents
+**Features**
 
-* Ruby version
+* [User Authentication](#user-authentication)
+* [Fluid Grid System](#fluid-grid)
+* [Night Mode](#night-mode)
+* [Navigation](#navigation)
+* [Search](#search)
+* [Video Index / Show / Upload](#video)
+* [Custom Video Player / Video Preview](#custom-video-player)
+* [Video Queue / Autoplay](#video-queue)
+* [Recursive Comments](#comments)
+* [Likes(Polymorphic Association)](#likes)
+* [Subscriptions)](#subscriptions)
+* [Watch Later)](#watch-later)
+* [Filters](#filter)
+* [Channels](#channels)
+* [Tags](#tags)
+* [N + 1 Query Prevention](#query)
 
-* System dependencies
+## Project Information
+NewTube was developed utilizing Ruby on Rails, React.js with Redux, SASS, and AWS S3.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## User Authentication
+On the back-end, an encrypted, hashed password is stored in the database (passwords are never saved to the database). On log-in, the provided password is rehashed and compared to the encrypted password in order to verify the log-in.
