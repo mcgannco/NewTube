@@ -3,7 +3,7 @@ class Api::VideosController < ApplicationController
   NUM_VIDEOS = 10
   FEED_LIMIT = 16
   def index
-    @videos = Video.all.includes(:likes, :comments, :likers, :uploader, :watchlaters, :views)
+    @videos = Video.all.includes(:likes, :comments, :likers, :uploader, :watchlaters, :views, :tags)
   end
 
   def show
