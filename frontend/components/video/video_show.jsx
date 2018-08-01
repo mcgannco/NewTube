@@ -16,7 +16,9 @@ class VideoShow extends React.Component {
       editStatus: false,
       title: "",
       isPlay: true,
-      currentTime:
+      currentTime: "0:00",
+      videoPlaying: true,
+      videoLength: ""
     }
     this.updateWindowSize = this.updateWindowSize.bind(this);
     this.showMore = this.showMore.bind(this);
@@ -36,6 +38,8 @@ class VideoShow extends React.Component {
     this.nextVideo = this.nextVideo.bind(this);
     this.previousVideo = this.previousVideo.bind(this);
     this.toggleVolume = this.toggleVolume.bind(this);
+    this.tick = this.tick.bind(this);
+    this.getCurrentTime = this.getCurrentTime.bind(this);
   }
 
   componentWillMount() {
@@ -84,6 +88,7 @@ class VideoShow extends React.Component {
   }
 
   videoSetup(e) {
+    this.getDuration(e)
     let video = e.currentTarget;
     let playPromise = video.play();
     if (playPromise !== undefined) {
@@ -96,14 +101,61 @@ class VideoShow extends React.Component {
     }
   }
 
+  getDuration(e) {
+    let duration = e.currentTarget.duration;
+    let hours  = Math.floor(duration / 3600);
+    let minutes = Math.floor(duration/60)
+    let seconds = Math.round(duration%60)
+    if (hours > 0) {
+      let t = new Date(1970,0,1);
+      t.setSeconds(duration);
+      var s = t.toTimeString().substr(0,8);
+      if(duration > 86399) {
+        s = Math.floor((t - Date.parse("1/1/70")) / 3600000) + s.substr(2);
+      }
+        this.setState({videoLength: s})
+    } else {
+      if(seconds < 10){
+         this.setState({videoLength: `${minutes}:0${seconds}`})
+      } else{
+        this.setState({videoLength: `${minutes}:${seconds}`})
+      }
+    }
+  }
+
+  getCurrentTime(e) {
+    let currentTime = e.currentTarget.currentTime;
+    let hours  = Math.floor(currentTime / 3600);
+    let minutes = Math.floor(currentTime/60)
+    let seconds = Math.round(currentTime%60)
+    if (hours > 0) {
+      let t = new Date(1970,0,1);
+      t.setSeconds(currentTime);
+      var s = t.toTimeString().substr(0,8);
+      if(duration > 86399) {
+        s = Math.floor((t - Date.parse("1/1/70")) / 3600000) + s.substr(2);
+      }
+        this.setState({currentTime: s})
+    } else {
+      if(seconds < 10){
+         this.setState({currentTime: `${minutes}:0${seconds}`})
+      } else{
+        this.setState({currentTime: `${minutes}:${seconds}`})
+      }
+    }
+  }
+
+
   togglePlay(e) {
     let video = document.getElementById('vid-player')
     if (this.props.vidPlaying) {
-     this.props.vPlaying(false);
-     video.pause();
+      this.setState({videoPlaying: false})
+      this.props.vPlaying(false);
+      video.pause();
    } else {
-     this.props.vPlaying(true);
-     video.play();
+      this.props.vPlaying(true);
+      this.setState({videoPlaying: true})
+      video.play();
    }
   }
 
@@ -212,6 +264,7 @@ class VideoShow extends React.Component {
     let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
     let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) + 1) > (this.props.videoQueue.length - 1) ? 0 : (this.props.videoQueue.indexOf(this.props.video.id) + 1)
     let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+    this.setState({videoPlaying: true})
     this.props.history.push(`/video/${nextVidId}`)
   }
 
@@ -219,17 +272,16 @@ class VideoShow extends React.Component {
     let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
     let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) - 1) < 0 ? (this.props.videoQueue.length - 1) : (this.props.videoQueue.indexOf(this.props.video.id) - 1)
     let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+    this.setState({videoPlaying: true})
     this.props.history.push(`/video/${nextVidId}`)
   }
 
   toggleVolume() {
-    debugger
+
   }
 
-  setTime(e){
-    if (this.props.video) {
-      this.audio.currentTime = (e.currentTarget.value)
-    }
+  tick(e){
+    this.setState({currentTime: this.getCurrentTime(e)})
   }
 
   render() {
@@ -337,10 +389,10 @@ class VideoShow extends React.Component {
             <nav className="video-container"
               id='vid-player-container'>
               <video
-
                 autoPlay
                 preload='metadata'
                 onLoadedMetadata={this.videoSetup}
+                onTimeUpdate={this.tick}
                 onEnded={this.handleEnd}
                 className="video-player"
                 onClick={this.togglePlay}
@@ -363,11 +415,11 @@ class VideoShow extends React.Component {
                       <i className="fas fa-step-backward"></i>
                     </nav>
 
-                    <nav onClick={this.togglePlay} className={!this.props.vidPlaying ? "play-play-button" : 'hidden'}>
+                    <nav onClick={this.togglePlay} className={!this.state.videoPlaying ? "play-play-button" : 'hidden'}>
                       <i className="fas fa-play"></i>
                     </nav>
 
-                    <nav onClick={this.togglePlay} className={this.props.vidPlaying ? "play-play-button" : 'hidden'}>
+                    <nav onClick={this.togglePlay} className={this.state.videoPlaying ? "play-play-button" : 'hidden'}>
                       <i className="fas fa-pause"></i>
                     </nav>
 
@@ -377,16 +429,11 @@ class VideoShow extends React.Component {
 
                     <nav className="video-volume"
                       onMouseEnter={this.toggleVolume}>
-                      <i class="fas fa-volume-up"></i>
+                      <i className="fas fa-volume-up"></i>
                     </nav>
 
-                    <nav>
-                      <input
-                        className="Duration"
-                        type="text" readOnly
-                        value={}
-                        onChange={this.setTime}
-                      />
+                    <nav className="video-time-summary">
+                      <p>{this.state.currentTime} </p>
                     </nav>
 
                     <input>
