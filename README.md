@@ -2,8 +2,9 @@
 URL: [Live Link]()
 <img src="/app/assets/images/readmemainpic.png" width="425"/> <img src="image2.png" width="425"/>
 <img src="/app/assets/images/readmemainpic.png" width="425"/> <img src="image2.png" width="425"/>
+<img src="/app/assets/images/readmemainpic.png" width="425"/> <img src="image2.png" width="425"/>
+<img src="/app/assets/images/readmemainpic.png" width="425"/> <img src="image2.png" width="425"/>
 
-![Optional Text](./app/assets/images/readmemainpic.png)
 NewTube, inspired by Youtube, is a single page video streaming web application. Functionality of NewTube includes uploading and watching videos, customizing your channel, searching for content, and interacting with the NewTubes content through comments, likes, subscriptions and more.
 
 ## Table of Contents
