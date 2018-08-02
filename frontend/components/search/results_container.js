@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import { fetchResultSearch, clearResultSearchTerm } from '../../actions/search_actions';
-import { createSub, deleteSub, createWatch, deleteWatch } from '../../actions/user_actions';
-import { watchLaterButton } from '../../actions/video_actions';
+import { createSub, deleteSub, createWatch, deleteWatch, requestAllUsers } from '../../actions/user_actions';
+import { watchLaterButton, requestAllVideos } from '../../actions/video_actions';
 import Results from './results';
 import { openVidModal  } from '../../actions/video_modal_actions';
 
