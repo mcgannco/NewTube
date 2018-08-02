@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { requestAllVideos,clearAllVideoErrors } from '../../actions/video_actions';
+import { requestAllVideos,clearAllVideoErrors, createVideo } from '../../actions/video_actions';
 import UploadVideo from './upload_video';
 
 const msp = state => {
