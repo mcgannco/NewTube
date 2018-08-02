@@ -1,6 +1,11 @@
 {
   "name": "NewTube",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -14,38 +19,19 @@
     "react-router-dom": "^4.2.2",
     "react-timeago": "^4.1.9",
     "redux": "^4.0.0",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "string-similarity": "^1.2.0",
     "webpack": "^4.8.3"
   },
-  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
-  "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "engines": {
-    "node": "6.10.1",
-    "npm": "3.10.10"
+  "devDependencies": {
+    "redux-logger": "^3.0.6",
+    "serviceworker-webpack-plugin": "^1.0.0-alpha02"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "webpack",
-    "start": "webpack --mode=development --watch"
+    "webpack": "webpack --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mcgannco/NewTube.git"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mcgannco/NewTube/issues"
-  },
-  "homepage": "https://github.com/mcgannco/NewTube#readme",
-  "devDependencies": {
-    "webpack-cli": "^2.1.4"
-  }
+  "license": "ISC"
 }
