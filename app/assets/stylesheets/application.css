@@ -14,5 +14,117 @@
  *= require_self
  */
 
- @import "base/reset.scss";
- @import "base/layout.scss";
+ html, body, header, nav, h1, a,
+ ul, li, strong, main, button, i,
+ section, img, div, h2, p, form,
+ fieldset, label, input, textarea,
+ span, article, footer, time, small {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font: inherit;
+   color: inherit;
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   box-sizing: inherit;
+   background: transparent;
+ }
+
+ ul {
+   list-style: none;
+ }
+
+ img {
+   display: block;
+   width: 100%;
+   height: auto;
+ }
+
+ input[type="password"],
+ input[type="email"],
+ input[type="text"],
+ input[type="submit"],
+ textarea,
+ button {
+
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+ }
+
+ button,
+ input[type="submit"] {
+   cursor: pointer;
+ }
+
+
+ .group:after {
+   content: "";
+   display: block;
+   clear: both;
+ }
+
+
+ html {
+ 	background: #fafafa;
+ 	min-height: 100% !important;
+   height: 100%;
+ }
+
+ body {
+ 	width: 100%;
+ 	margin: 0 auto;
+ 	font-family: serif;
+ 	font-size: 12px;
+ 	height: 100%;
+ 	overflow-x: hidden;
+ 	min-height: 100% !important;
+   height: 100%;
+ }
+
+ img {
+ 	width: 30px;
+ 	height: 20px;
+ }
+
+ header {
+ 	background: #FFFFFF;
+ }
+
+ #root {
+ 	height: 100%;
+ }
+
+ #app {
+ 	height: 100%;
+ 	overflow: auto;
+ 	margin-bottom: 10px;
+ }
+
+ .fontawesome-i2svg-active {
+ 	height: 100%;
+ }
+
+ .fontawesome-i2svg-complete {
+ 	background: 100%;
+ }
+
+ .watch-later-bttn{
+ 	background: black;
+   position: absolute;
+   bottom: 5px;
+   left: 14px;
+   color: white;
+   font-family: 'Roboto', 'Noto', sans-serif;
+   font-size: 15px;
+   padding: 10px;
+   border-radius: 2px;
+   width: 200px;
+   display: flex;
+   justify-content: center;
+ 	opacity: 0.8;
+ 	text-shadow: 2px 2px black;
+ 	z-index: 200;
+ }
