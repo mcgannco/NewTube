@@ -1,8 +1,8 @@
 import {connect} from 'react-redux';
 import { selectAllVideos  } from '../../reducers/selectors';
 import { requestTrendingVideos  } from '../../actions/filtered_video_actions';
-import { createSub, deleteSub, createWatch, deleteWatch } from '../../actions/user_actions';
-import { watchLaterButton } from '../../actions/video_actions';
+import { createSub, deleteSub, createWatch, deleteWatch, requestAllUsers } from '../../actions/user_actions';
+import { watchLaterButton, requestAllVideos } from '../../actions/video_actions';
 import { openVidModal  } from '../../actions/video_modal_actions';
 
 import Trending from './trending';

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { createSub, deleteSub, createWatch, deleteWatch } from '../../../actions/user_actions';
+import { createSub, deleteSub, createWatch, deleteWatch, requestAllUsers } from '../../../actions/user_actions';
 import { openVidModal  } from '../../../actions/video_modal_actions';
 import {requestAllVideos, watchLaterButton } from '../../../actions/video_actions';
 import {selectAllVideos } from '../../../reducers/selectors';
