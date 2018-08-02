@@ -63,7 +63,27 @@ processInput() {
 ```
 
 ## Fluid Grid System
+NewTube was designed to be fluid and viewable on all screen sizes, to allow for a clean interface and positive user experience.  This was accomplished using SASS, media queries as well as a fluid grid system.
 ## Night Mode
+![Optional Text](./app/assets/images/nightmode.png)
+
+Every user has the option to change their viewing settings to night mode.  All channels start out with the traditional light colored UI, while a simple click will toggle to night mode, a dark themed UI perfect for viewing at night.  View settings are saved on the backend in the users database (resulting in changes persisting on refresh).  An onClick event listener is added to the settings <li> tag.  User view settings are passed down into the redux global state.  When the onClick event is fired, an edit user action is dispatched with the opposite view setting that the user currently possesses.  An AJAX request is then fired and changes the users view settings at the model level.
+
+```javascript
+toggleNightMode(e) {
+  if(this.props.currentUser) {
+    const formData = new FormData();
+    formData.append("user[night_mode]", !this.state.nightMode);
+    this.props.toggleNightMode(this.props.currentUser.id, formData).then(
+      this.setState({nightMode: !this.state.nightMode})
+    );
+  } else {
+    this.props.history.push('/signin')
+  }
+
+}
+```
+
 ## Navigation
 ## Search
 ## Video Index / Show / Upload
