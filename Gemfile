@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", '~> 5.0.0'
 gem 'figaro'
 gem 'paperclip-av-transcoder'
+gem "paperclip-ffmpeg", "~> 1.2.0"
 gem 'bcrypt'
 gem 'jquery-rails'
 gem 'pry-rails'
