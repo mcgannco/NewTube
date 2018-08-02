@@ -86,7 +86,6 @@ class SessionForm extends React.Component {
         processForm({username: this.state.username, password: this.state.password})
       }
     }
-
   }
 
   otherForm() {
