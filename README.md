@@ -371,7 +371,7 @@ merge(left, right) {
 ## Likes(Polymorphic Association)
 Users have the ability to like both videos and comments (including nested comments).  To accomplish this NewTube uses a polymorphic one-to-many association on the backend that uses only one likes table.
 
-###Likes
+### Likes
 | id | user_id | like_value | likeable_type | likeable_id |
 |----|---------|------------|---------------|-------------|
 | 1  | 33      | True       | Comment       | 1           |
