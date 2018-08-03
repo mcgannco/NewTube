@@ -169,11 +169,84 @@ switch (modal) {
 
 ### Right Nav
 ![Optional Text](./app/assets/images/rightnav.png)
-The right nav features four main options (upload, apps, settings, and profile).  The camera button allows users to be upload videos / tags to NewTube through a form.  The apps icon displays a drop down menu list of the top five most popular apps (aka tags) on the application.  Settings allows users to toggle night mode, while the users avatar icon allows users to sign in, sign up, sign out and view their channel.
+The right nav features four main options (upload, apps, settings, and profile).  The camera button allows users to upload videos / tags to NewTube through a form.  The apps icon displays a drop down menu list of the top five most popular apps (aka tags) on the application.  Settings allows users to toggle night mode, while the users avatar icon allows users to sign in, sign up, sign out and view their channel.
 
 The drop down menu lists were implemented through a combination of local react state, as well as applying document event listeners.  When users clicked on the given icons, the event listener on the respective icon would call for the open app function to be called.  This function would set the local state of the component to display the drop down items, while also giving the entire document an onClick event to listen for.  Once the user clicks anywhere outside of the dropdown, the drop down list closes and the even is listener is removed from the document.
 
+```javascript
+appDropDown(e) {
+  e.preventDefault();
+  this.setState({ appsDropDown: true }, () => {
+  document.addEventListener('click', this.closeApp);
+  });
+}
+
+closeApp(e) {
+  e.preventDefault();
+  this.setState({ appsDropDown: false }, () => {
+    document.removeEventListener('click', this.closeApp);
+  });
+}
+```
+
 ## Search
+![Optional Text](./app/assets/images/searchshot.png)
+Users have the ability to search for videos, channels and tags through NewTubes custom search feature.  The search feature was developed using both the frontend and backend working together.  On the front end, users type in their input.  To keep the search fast and minimize unnecessary database queries, the component makes use of debouncing to only send AJAX requests after no letters have been typed for 300 milliseconds.  
+
+Once the AJAX request has been fired, it hits the search controller.  Videos, users and tags are searched for in each respective database that meet the params requirements of including the search input.  The found items are then sent back down the redux state into the search component.  Each item is then ranked based on similarity to the users input using the Levenshtein distance.  Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other).
+
+```ruby
+class Api::SearchController < ApplicationController
+  def index
+    @videos = Video.where("lower(title) LIKE ?", "%#{params[:query].downcase}%" )
+    @users  = User.where("lower(username) LIKE ?", "%#{params[:query].downcase}%")
+    @tags  = Tag.where("lower(name) LIKE ?", "%#{params[:query].downcase}%")
+    if params[:query] === ""
+      render json: ["Invalid search"], status: 401
+    else
+      if @videos || @users || @tags
+        render 'api/search/index'
+      else
+        render json: ["Invalid search"], status: 401
+      end
+    end
+  end
+end
+```
+```javascript
+similarity(a, b) {
+  if(a.length == 0) return b.length;
+  if(b.length == 0) return a.length;
+
+  var matrix = [];
+
+  var i;
+  for(i = 0; i <= b.length; i++){
+    matrix[i] = [i];
+  }
+
+  var j;
+  for(j = 0; j <= a.length; j++){
+    matrix[0][j] = j;
+  }
+
+  for(i = 1; i <= b.length; i++){
+    for(j = 1; j <= a.length; j++){
+      if(b.charAt(i-1) == a.charAt(j-1)){
+        matrix[i][j] = matrix[i-1][j-1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i-1][j-1] + 1,
+                                Math.min(matrix[i][j-1] + 1,
+                                         matrix[i-1][j] + 1));
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+
+}
+```
+
 ## Video Index / Show / Upload
 ## Custom Video Player / Video Preview
 ## Video Queue / Autoplay
