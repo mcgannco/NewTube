@@ -372,11 +372,11 @@ merge(left, right) {
 Users have the ability to like both videos and comments (including nested comments).  To accomplish this NewTube uses a polymorphic one-to-many association on the backend that uses only one likes table.
 
 ###Likes
-| like_id | likeable_id | likeable_type |
-|---------|-------------|---------------|
-| 1       | 2           | Comment       |
-| 1       | 3           | Video         |
-| 2       | 5           | Video         |
+| id | user_id | like_value | likeable_type | likeable_id |
+|----|---------|------------|---------------|-------------|
+| 1  | 33      | True       | Comment       | 1           |
+| 2  | 2       | False      | Video         | 4           |
+| 3  | 5       | True       | Video         | 19          |
 
 ## Subscriptions
 NewTube allows users to subscribe / unsubscribe to other channels.
