@@ -139,6 +139,11 @@ toggleNightMode(e) {
 ```
 
 ## Navigation
+There are three ways to navigate through NewTube:
+1. Left Nav Side Bar Modal
+2. [Search](#search)
+3. Right Nav
+
 ## Search
 ## Video Index / Show / Upload
 ## Custom Video Player / Video Preview
