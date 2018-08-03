@@ -339,15 +339,47 @@ Users have the ability to comment on videos, as well as reply to other comments 
 
 When rendering the comments, all top level comments are first fetched.  I then iterate over the top level comments, recursively passing in the comment component for all of its children.
 
-```html
+```javascript
 <ul className={this.state.showReplies ? "" : "hidden"}>
   {child_comments.length > 0 ? child_comments.reverse().map((child,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[child.author_id]} users={users} comment={child}/>) : null}
 </ul>
  ```
 
-Comments can be sorted based on most recent or by like count.  This is implemented using mergesort.   
+Comments can be sorted based on most recent or by like count.  This is implemented using mergesort.
+
+ ```javascript
+topComment(comments) {
+  if (comments.length < 2) {
+    return comments;
+  } else {
+    const middle = Math.floor(comments.length / 2);
+    const left = this.topComment(comments.slice(0, middle));
+    const right = this.topComment(comments.slice(middle));
+    return this.merge(left, right);
+  }
+}
+
+merge(left, right) {
+  const merged = [];
+  while (left.length > 0 && right.length > 0) {
+    let nextItem = ((left[0].likes - left[0].dislikes) > (right[0].likes - right[0].dislikes)) ? left.shift() : right.shift();
+    merged.push(nextItem);
+  }
+  return merged.concat(left, right);
+}
+ ```  
 ## Likes(Polymorphic Association)
+Users have the ability to like both videos and comments (including nested comments).  To accomplish this NewTube uses a polymorphic one-to-many association on the backend that uses only one likes table.
+
+###Likes
+| like_id | likeable_id | likeable_type |
+|---------|-------------|---------------|
+| 1       | 2           | Comment       |
+| 1       | 3           | Video         |
+| 2       | 5           | Video         |
+
 ## Subscriptions
+NewTube allows users to subscribe / unsubscribe to other channels.
 ## Watch Later
 ## Filters
 ## Channels
