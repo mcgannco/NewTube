@@ -35,7 +35,7 @@ On the back-end, an encrypted, hashed password is stored in the database (passwo
 
 NewTubes User Auth UI is implemented in a two step process.  Users first enter usernames.  An AJAX call is subsequently made, querying the users database for a user with the provided input.  Once the user is retrieved, users are greeted and asked for their password.  Finally, another AJAX call is made to the users table, where the hashed password is fetched given user input.
 
-![filter-map](/app/assets/images/auth2.gif)
+![auth-demo](/app/assets/images/auth2.gif)
 
 ```javascript
 processInput() {
@@ -66,6 +66,7 @@ processInput() {
 
 ## Fluid Grid System
 NewTube was designed to be fluid and viewable on all screen sizes, to allow for a clean interface and positive user experience.  This was accomplished using SASS, media queries as well as a fluid grid system.
+![grid-demo](/app/assets/images/griddemo.gif)
 
 ```css
 .col {
