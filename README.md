@@ -148,9 +148,11 @@ There are three ways to navigate through NewTube:
 ### Left Nav Side Bar Modal
 The left nav features two main buttons (NewTubes logo, as well as a menu icon).  The NewTube logo button serves as a way to get back to the homepage.  Simply click the icon on any page within the app to return to the main index page.
 
-The menu icon has more extensive functionality.  Once clicked, the menu icon dispatches an action to show or hide the side bar modal.  The side bar modal features four sub sections, each with different options for the user to use to explore NewTube.  The first section features a home, trending and subscription links.  The second section (also known as the library), tracks the users viewing activity.  Users can look at their history, liked videos, uploads and watch laters.  The third section features all the channels the user is subscribed to. And finally, the last section (More from NewTube), includes additional filters for finding videos based on specific qualities.
+The menu icon has more extensive functionality.  Once clicked, the menu icon dispatches an action to show or hide the side bar modal.  The side bar modal features four sub sections, each with different options for the user to use to explore NewTube.  The first section features home, trending and subscription links.  The second section (also known as the library), tracks the users viewing activity.  Users can look at their history, liked videos, uploads and watch laters.  The third section features all the channels the user is subscribed to. And finally, the last section (More from NewTube), includes additional filters for finding videos based on specific qualities.
 
-The sidebar modal implementation was designed to be flexible and simple.  The modal component is available no matter what route the user is currently at.  The component has a switch statement to check the global redux state.  If the redux state indicates that the side bar should be shown (triggered by a user clicking on the menu icon and a subsequent action dispatch), then the component will be returned (null be returned otherwise.)
+![leftnav-demo](/app/assets/images/leftnav.gif)
+
+The sidebar modal implementation was designed to be flexible and simple.  The modal component is available no matter what route the user is currently at.  The component has a switch statement to check the global redux state.  If the redux state indicates that the side bar should be shown (triggered by a user clicking on the menu icon and a subsequent action dispatch), then the component will be returned (null will be returned otherwise.)
 
 ```javascript
 switch (modal) {
@@ -166,7 +168,10 @@ switch (modal) {
 ```
 
 ### Right Nav
+![Optional Text](./app/assets/images/rightnav.png)
+The right nav features four main options (upload, apps, settings, and profile).  The camera button allows users to be upload videos / tags to NewTube through a form.  The apps icon displays a drop down menu list of the top five most popular apps (aka tags) on the application.  Settings allows users to toggle night mode, while the users avatar icon allows users to sign in, sign up, sign out and view their channel.
 
+The drop down menu lists were implemented through a combination of local react state, as well as applying document event listeners.  When users clicked on the given icons, the event listener on the respective icon would call for the open app function to be called.  This function would set the local state of the component to display the drop down items, while also giving the entire document an onClick event to listen for.  Once the user clicks anywhere outside of the dropdown, the drop down list closes and the even is listener is removed from the document.
 
 ## Search
 ## Video Index / Show / Upload
