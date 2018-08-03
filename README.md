@@ -259,7 +259,7 @@ Video upload allows users to upload content to NewTube.  Each video can be uploa
 ## Custom Video Player / Video Preview
 NewTubes video show page features a custom built video player, built using the HTML5 video API.  The video player has the ability to play and pause videos, select the previous and next videos, as well as toggle volume.  
 
-![upload-demo](/app/assets/images/vidloader.gif)
+![upload-demo](/app/assets/images/player.gif)
 
 The video player waits for the video to be loaded into the video HTML tag.  Once loaded, the player listens for clicks and pauses or plays the video depending on the global redux state.  Volume is implemented the same way.  Time is implemented by having an onTimeUpdate listener attached to the video tag.  Each time this listener is called the local states currentTime variable is set to the videos currentTime.  This allows for the seconds to tick as the video is played.
 
@@ -334,6 +334,18 @@ handleEnd(e) {
 ```
 
 ## Recursive Comments
+![Optional Text](./app/assets/images/reccomment.png)
+Users have the ability to comment on videos, as well as reply to other comments recursively, allowing for deep nested comments.  Users can then hide or expand comment replies if they so choose.  Additionally, all authored comments can be updated or deleted.  Implementing recursive comments was done by setting up the schema of comments to include parent_id.  All top level comments have parent_id of null, while all nested comments have a parent_id.
+
+When rendering the comments, all top level comments are first fetched.  I then iterate over the top level comments, recursively passing in the comment component for all of its children.
+
+```html
+<ul className={this.state.showReplies ? "" : "hidden"}>
+  {child_comments.length > 0 ? child_comments.reverse().map((child,idx) => <CommentIndexItemContainer key={idx} createComment={createComment} currentUser={currentUser} user={users[child.author_id]} users={users} comment={child}/>) : null}
+</ul>
+ ```
+
+Comments can be sorted based on most recent or by like count.  This is implemented using mergesort.   
 ## Likes(Polymorphic Association)
 ## Subscriptions
 ## Watch Later
