@@ -171,7 +171,7 @@ switch (modal) {
 ![Optional Text](./app/assets/images/rightnav.png)
 The right nav features four main options (upload, apps, settings, and profile).  The camera button allows users to upload videos / tags to NewTube through a form.  The apps icon displays a drop down menu list of the top five most popular apps (aka tags) on the application.  Settings allows users to toggle night mode, while the users avatar icon allows users to sign in, sign up, sign out and view their channel.
 
-The drop down menu lists were implemented through a combination of local react state, as well as applying document event listeners.  When users clicked on the given icons, the event listener on the respective icon would call for the open app function to be called.  This function would set the local state of the component to display the drop down items, while also giving the entire document an onClick event to listen for.  Once the user clicks anywhere outside of the dropdown, the drop down list closes and the even is listener is removed from the document.
+The drop down menu lists were implemented through a combination of local react state, as well as applying document event listeners.  When users click on the given icons, the event listener on the respective icon will call for the open app function to be called.  This function will set the local state of the component to display the drop down items, while also giving the entire document an onClick event to listen for.  Once the user clicks anywhere outside of the dropdown, the drop down list closes and the event listener is removed from the document.
 
 ```javascript
 appDropDown(e) {
@@ -252,12 +252,40 @@ NewTube features a video index (homepage), video show (individual video page), a
 
 ![Optional Text](./app/assets/images/vidoptions.png)
 
-Video upload allow users to upload content to NewTube.  Each video can be uploaded with a title, description and tag.  Once the user publishes the video, a spinner loader is dispatched to let the user know there publish is being processed.
+Video upload allows users to upload content to NewTube.  Each video can be uploaded with a title, description and tag.  Once the user publishes the video, a spinner loader is dispatched to let the user know their publish is being processed.
 ![upload-demo](/app/assets/images/vidloader.gif)
 ![Optional Text](./app/assets/images/uploadvid.png)
 
 ## Custom Video Player / Video Preview
+NewTubes video show page features a custom built video player, built using the HTML5 video API.  The video player has the ability to play and pause videos, select the previous and next videos, as well as toggle volume.  
+
+![upload-demo](/app/assets/images/vidloader.gif)
+
+The video player waits for the video to be loaded into the video HTML tag.  Once loaded, the player listens for clicks and pauses or plays the video depending on the global redux state.  Volume is implemented the same way.  Time is implemented by having an onTimeUpdate listener attached to the video tag.  Each time this listener is called the local states currentTime variable is set to the videos currentTime.  This allows for the seconds to tick as the video is played.
+
+```javascript
+togglePlay(e) {
+  let video = document.getElementById('vid-player')
+  if (this.props.vidPlaying) {
+    this.setState({videoPlaying: false})
+    this.props.vPlaying(false);
+    video.pause();
+ } else {
+    this.props.vPlaying(true);
+    this.setState({videoPlaying: true})
+    video.play();
+ }
+}
+
+tick(e){
+  this.getCurrentTime(e)
+  this.setState({currentTimeNum: e.currentTarget.currentTime, durationNum: e.currentTarget.duration})
+}
+```
+
 Every video outside of the main video show player, allows a hover preview of the respective video.  This was implemented through having a mouse enter event listener that then triggers the video to play for four seconds.  Once four seconds is up, the current time of the video is reset to 0 and the video is paused.  
+
+![upload-demo](/app/assets/images/vidpre.gif)
 
 ```javascript
 preview(e) {
@@ -290,6 +318,21 @@ tick(e) {
 }
 ```
 ## Video Queue / Autoplay
+NewTubes autoplay allows users to lazily watch content without having to select videos on play end.  Users can simply toggle the autoplay button at the top right of the video show page above the related video side bar section.  Each user has an autoplay column in the users model.  Similar to night mode, autoplay is toggled through the use of event listeners and AJAX calls, to allow autoplay to persist on refresh.
+
+The global redux state keeps an array of the current video queue.  Once a video ends, the video queue indexes the next video to be played, and pushes the history to that respective video show page.
+
+```javascript
+handleEnd(e) {
+  if(this.props.autoplay) {
+    let currentIdx = this.props.videoQueue.indexOf(this.props.video.id)
+    let nextIdx = (this.props.videoQueue.indexOf(this.props.video.id) + 1) > (this.props.videoQueue.length - 1) ? 0 : (this.props.videoQueue.indexOf(this.props.video.id) + 1)
+    let nextVidId = this.props.videoHash[this.props.videoQueue[nextIdx]].id
+    this.props.history.push(`/video/${nextVidId}`)
+  }
+}
+```
+
 ## Recursive Comments
 ## Likes(Polymorphic Association)
 ## Subscriptions
