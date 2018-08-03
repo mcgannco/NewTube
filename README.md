@@ -23,7 +23,7 @@ NewTube, inspired by Youtube, is a single page video streaming web application. 
 * [Channels](#channels)
 * [Tags](#tags)
 * [N + 1 Query Prevention](#n--1-query-prevention)
-* [Future Features](#n--1-query-prevention)
+* [Future Features](#future-features)
 
 ## Project Information
 NewTube was developed utilizing Ruby on Rails, React.js with Redux, SASS, and AWS S3.
@@ -259,7 +259,7 @@ Video upload allows users to upload content to NewTube.  Each video can be uploa
 ## Custom Video Player / Video Preview
 NewTubes video show page features a custom built video player, built using the HTML5 video API.  The video player has the ability to play and pause videos, select the previous and next videos, as well as toggle volume.  
 
-![upload-demo](/app/assets/images/player.gif)
+![player-demo](/app/assets/images/player.gif)
 
 The video player waits for the video to be loaded into the video HTML tag.  Once loaded, the player listens for clicks and pauses or plays the video depending on the global redux state.  Volume is implemented the same way.  Time is implemented by having an onTimeUpdate listener attached to the video tag.  Each time this listener is called the local states currentTime variable is set to the videos currentTime.  This allows for the seconds to tick as the video is played.
 
@@ -285,7 +285,7 @@ tick(e){
 
 Every video outside of the main video show player, allows a hover preview of the respective video.  This was implemented through having a mouse enter event listener that then triggers the video to play for four seconds.  Once four seconds is up, the current time of the video is reset to 0 and the video is paused.  
 
-![upload-demo](/app/assets/images/vidpre.gif)
+![vidpreview-demo](/app/assets/images/vidpre.gif)
 
 ```javascript
 preview(e) {
@@ -379,9 +379,70 @@ Users have the ability to like both videos and comments (including nested commen
 | 3  | 5       | True       | Video         | 19          |
 
 ## Subscriptions
-NewTube allows users to subscribe / unsubscribe to other channels.
+NewTube allows users to subscribe / unsubscribe to other channels.  There is a has_many / belongs_to association between users and subscriptions, and a through association for user subscribers / subscribed channels.  These association ids are passed down from the view to the global redux state.  To toggle the subscribe button, the toggleSubscribe function checks if the current user is already subscribed to the given channel.  If it is, then the deleteSub action is dispatched, and if not then the createSub action is dispatched.
+
+```javascript
+toggleSubscribe(e) {
+  e.preventDefault()
+  const { currentUser, user, users, createSub, deleteSub } = this.props;
+  if (!user) {
+    return;
+  }
+  let subscribee_id = user.id
+  if (!currentUser) {
+    this.props.history.push('/signin');
+    return;
+  }
+
+  if (users[currentUser].subscriberIds.includes(subscribee_id)) {
+    deleteSub(subscribee_id);
+  } else {
+    createSub(subscribee_id);
+  }
+}
+```
 ## Watch Later
+![watchlater-demo](/app/assets/images/later.gif)
+Videos can be added to your watch later section of your channel.  The watch later section is simply all videos you want to watch in the future, but can't right now.  By hovering on a sub video player, a small clock appears.  When clicked it toggles the watch later function (adding or removing).  Notification alerts then appear in the bottom left of the screen, and fade out over a few seconds.
+
 ## Filters
+There are several ways to filter videos on NewTube.  These include Trending, History, Most Viewed, Most Liked, Oldest and Most Recent.
 ## Channels
+![channel-demo](/app/assets/images/channel.gif)
+All users have their own personal channels.  Channels include a users uploaded videos, watchlist, channels subscribed to, likes, and an about section.  Users can personalize their channel by clicking the Customize Channel button.  This allows you to update your banner, avatar, and description.
+
 ## Tags
+Videos can be tagged by users on upload.  Tags can be searched in the main search bar, viewed on their tag show page and the top five most popular tags are displayed in the apps section of the nav bar.  To implement, I created a tags table, which has a name and id. Finally, I created a taggings join table with tag_id and video_id.
+
+### Tags
+| id | name   |
+|----|--------|
+| 1  | Music  |
+| 2  | Movies |
+| 3  | Nature |
+
+### Taggings
+| id | tag_id | video_id |
+|----|--------|----------|
+| 1  | 3      | 19       |
+| 2  | 3      | 11       |
+| 3  | 2      | 9        |
+
 ## N + 1 Query Prevention
+N+1 queries are an inefficient way to query a database.
+
+Active Record allows eager loading of all the associations with a single Model. This is possible by specifying the includes method. With this method, Active Record ensures that all of the specified associations are loaded using the minimum possible number of queries.  Below are some of the implementations of such queries.
+
+```ruby
+def index
+  @videos = Video.all.includes(:likes, :comments, :likers, :uploader, :watchlaters, :views, :tags)
+end
+
+def index
+  @users = User.all.includes(:subscriptions, :subscribers, :videos,:comments, :likes, :subscribed_channels, :subsciber_channels, :watchlaters, :vidwatchlaters, :watched_videos)
+end
+```
+## Future Features
+* Improved Video Player (draggable play bar, volume bar, fullscreen)
+* Playlists
+* Notification / Messages
