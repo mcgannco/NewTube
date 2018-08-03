@@ -248,7 +248,47 @@ similarity(a, b) {
 ```
 
 ## Video Index / Show / Upload
+NewTube features a video index (homepage), video show (individual video page), and upload option to users.  Any video that you upload, you will have the option to edit, delete, or watch later from any player within the application. If you did not upload the video, you will only have to ability to watch later, or like the video.
+
+![Optional Text](./app/assets/images/vidoptions.png)
+
+Video upload allow users to upload content to NewTube.  Each video can be uploaded with a title, description and tag.  Once the user publishes the video, a spinner loader is dispatched to let the user know there publish is being processed.
+![upload-demo](/app/assets/images/vidloader.gif)
+![Optional Text](./app/assets/images/uploadvid.png)
+
 ## Custom Video Player / Video Preview
+Every video outside of the main video show player, allows a hover preview of the respective video.  This was implemented through having a mouse enter event listener that then triggers the video to play for four seconds.  Once four seconds is up, the current time of the video is reset to 0 and the video is paused.  
+
+```javascript
+preview(e) {
+  let video = e.currentTarget.children[0].children['video']
+  video.muted = true;
+  let playPromise = video.play();
+  if (playPromise !== undefined) {
+  playPromise.then(_ => {
+    this.setState({preview: true, showTime: false})
+  })
+  .catch(error => {
+    return null
+  });
+}
+}
+
+closePreview(e) {
+  let video = e.currentTarget.children[0].children['video']
+  video.pause()
+  this.setState({preview: false, currentTime: 0, playButton: false, showTime: true})
+  video.currentTime = 0
+}
+
+tick(e) {
+  let video = e.currentTarget;
+  this.setState({currentTime: video.currentTime})
+  if(this.state.currentTime >= 4) {
+    this.resetPreview(e);
+  }
+}
+```
 ## Video Queue / Autoplay
 ## Recursive Comments
 ## Likes(Polymorphic Association)
