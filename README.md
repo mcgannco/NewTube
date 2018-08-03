@@ -35,7 +35,7 @@ On the back-end, an encrypted, hashed password is stored in the database (passwo
 
 NewTubes User Auth UI is implemented in a two step process.  Users first enter usernames.  An AJAX call is subsequently made, querying the users database for a user with the provided input.  Once the user is retrieved, users are greeted and asked for their password.  Finally, another AJAX call is made to the users table, where the hashed password is fetched given user input.
 
-![filter-map](/app/assets/images/auth.gif)
+![filter-map](/app/assets/images/auth2.gif)
 
 ```javascript
 processInput() {
