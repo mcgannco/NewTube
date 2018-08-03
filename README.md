@@ -1,7 +1,7 @@
 # NewTube
-[Live Link](https://newtubeapp.herokuapp.com/)
+[Live Link](http://newtubeapp.herokuapp.com/)
 
-![Optional Text](./app/assets/images/readmemainpic.png)
+![Optional Text](./app/assets/images/videoindex.png)
 NewTube, inspired by Youtube, is a single page video streaming web application. Functionality of NewTube includes uploading and watching videos, customizing your channel, searching for content, and interacting with the NewTubes content through comments, likes, subscriptions and more.
 
 ## Table of Contents
