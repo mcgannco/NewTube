@@ -369,7 +369,7 @@ merge(left, right) {
 }
  ```  
 ## Likes(Polymorphic Association)
-Users have the ability to like both videos and comments (including nested comments).  To accomplish this NewTube uses a polymorphic one-to-many association on the backend that uses only one likes table.
+Users have the ability to like both videos and comments (including nested comments).  To accomplish this NewTube uses a polymorphic association on the backend that uses only one likes table.
 
 ### Likes
 | id | user_id | like_value | likeable_type | likeable_id |
@@ -407,6 +407,57 @@ Videos can be added to your watch later section of your channel.  The watch late
 
 ## Filters
 There are several ways to filter videos on NewTube.  These include Trending, History, Most Viewed, Most Liked, Oldest and Most Recent.
+
+Trending videos are the top ten most viewed videos in the past week.  To get such videos, I wrote the active record query below.
+```ruby
+def self.trending_videos
+  Video
+  .left_joins(:views)
+  .where(views: { created_at: (1.week.ago.in_time_zone)..Time.zone.now })
+  .group(:id)
+  .order('COUNT(views.id) DESC')
+  .limit(10)
+end
+```
+
+History includes all the videos you have ever viewed in the correct order.  Implementing this requires first using the association between users and views.  The view model schema includes a user_id, video_id and created_at.  Therefore, I was able to find all users view_videos through this association.  After building this association I knew it would get taxing to query for all views at once, so I figured ten at a time would be appropriate.
+
+My active record query  uses offset, to query the next ten videos once a user scrolls to the bottom of the page.
+
+![history-demo](/app/assets/images/history.gif)
+
+```ruby
+def history
+  offset_idx = (params[:request_counter].to_i - 1)
+  @history_video_count = current_user.watched_videos.count
+  @next_videos = current_user.watched_videos
+    .order('views.created_at DESC')
+    .offset(offset_idx)
+    .limit(NUM_VIDEOS)
+
+  if @next_videos
+    render "api/videos/history"
+  else
+    render json: { users: {}, videos: {} }
+  end
+end
+```
+```javascript
+trackScrolling() {
+  const wrappedElement = document.getElementsByClassName('results-container')[0];
+  if (this.isBottom(wrappedElement)) {
+    if(this.props.historyIds.length < this.props.historyLength) {
+      if(!this.props.subVideoLoader) {
+        this.props.startSubVideoLoader()
+        this.props.fetchHistory(this.props.historyIds.length)
+      }
+    } else {
+      this.props.clearSubVideoLoader()
+    }
+  }
+};
+```
+
 ## Channels
 ![channel-demo](/app/assets/images/channel.gif)
 All users have their own personal channels.  Channels include a users uploaded videos, watchlist, channels subscribed to, likes, and an about section.  Users can personalize their channel by clicking the Customize Channel button.  This allows you to update your banner, avatar, and description.
