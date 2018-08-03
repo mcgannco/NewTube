@@ -66,6 +66,56 @@ processInput() {
 
 ## Fluid Grid System
 NewTube was designed to be fluid and viewable on all screen sizes, to allow for a clean interface and positive user experience.  This was accomplished using SASS, media queries as well as a fluid grid system.
+
+```css
+.col {
+  float: left;
+  box-sizing: border-box;
+}
+
+[class*='col-'] {
+  padding-right: 20px;
+  margin-top: 1.5rem;
+}
+
+[class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+
+.col-2-3 {
+  width: 66.6666%;
+  padding-left: 20px;
+}
+
+.col-1-3 {
+  width: 33.3333%;
+}
+
+.col-1-2 {
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.col-1-2-1 {
+  width: 50%;
+  margin-top: 0px;
+}
+
+@media all and (max-width: 1000px) {
+  [class*='col-'] {
+    width: 100%;
+  }
+
+  [class*='col-']:last-of-type {
+    padding-left: 20px;
+  }
+}
+```
+Other CSS features includes tooltips, which allows users to hover over icons and get text info on functionality available to them.
+
+![Optional Text](./app/assets/images/tooltip.png)
+
 ## Night Mode
 ![Optional Text](./app/assets/images/nightmode.png)
 
